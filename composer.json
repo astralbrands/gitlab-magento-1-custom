@@ -1,0 +1,25 @@
+{
+    "name": "astral/magento1custom",
+    "description": "Magento custom build for Astral Brands",
+    "require-dev": {
+
+    },
+    "require": {
+        
+    },
+    "authors": [
+        {
+            "name": "Ralph Smith",
+            "email": "rsmith@astralbrands.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@git.astralbrands.com:AstralBrands/magento-1-custom.git"
+        }
+    ],
+    "extra": {
+        "magento-root-dir": "public"
+    }
+}
