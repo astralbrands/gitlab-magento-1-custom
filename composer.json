@@ -26,14 +26,16 @@
             "url": "git@git.astralbrands.com:AstralBrands/magento-1-custom.git"
         }
     ],
-"extra": {
-        "installer-paths": {
-            "../APP/{$name}": ["astral/magento1custom"]
-        }
-    },
-	{
-        "installer-paths": {
-            "../APP/{$name}": ["astral/magento1custom"]
-        }
-    }	
+	"extra": [
+		{
+			"installer-paths": {
+				"../APP/{$name}": ["astral/magento1custom"]
+			}
+		},
+		{
+			"installer-paths": {
+				"../APP/{$name}": ["astral/magento1custom"]
+			}
+		}
+	]	
 }
