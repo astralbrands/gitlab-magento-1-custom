@@ -1,0 +1,137 @@
+<?php $customer = $this->getCustomer();?>
+<?php if ($customer): ?>
+<div id="my-info" class="my-info">
+	<h3 class="name-label"><?php echo $this->__('Name') . ': ' ?>	
+		<span class="name-content"><?php echo $customer->getFirstname() . ' ' . $customer->getLastname() ?></span>
+	</h3>
+		<h3 class="email-label"><?php echo $this->__('Email') . ': ' ?>	
+		<span class="email-content"><?php echo $customer->getEmail() ?></span>
+	</h3>
+		<h3 class="password-label"><?php echo $this->__('Password') . ': ' ?>	
+		<span class="password-content"><?php echo '********' ?></span>
+	</h3>
+</div>
+<div id="myinfo-edit-section" class="customer-account-edit" style="display:none;">
+    <form name="myinfo-ajax-edit" id="myinfo-ajax-edit" action="#">
+                                    <div class="fieldset">
+                                        <ul class="form-list">
+                                            <li class="fields">
+                                                <div class="customer-name-middlename">
+                                                    <div class="input-box name-firstname _filled">
+                                                        <input style="display:none" />
+                                                        <input class="input-text required-entry" type="text" id="firstname" name="firstname" value="<?php echo $customer->getFirstname() ?>" title="<?php echo $this->__('First Name') ?>" maxlength="255" />
+                                                        <label class="label-text required" for="firstname"><em>*</em><?php echo $this->__('First Name') ?></label>
+                                                    </div>
+                                            </li>
+
+                                            <li class="fields">
+                                                    <div class="input-box name-lastname _filled">
+                                                        <input style="display:none" />
+                                                        <input class="input-text required-entry" type="text" id="lastname" name="lastname" value="<?php echo $customer->getLastname() ?>" title="<?php echo $this->__('Last Name') ?>" maxlength="255" />
+                                                        <label class="label-text required" for="lastname"><em>*</em><?php echo $this->__('Last Name') ?></label>
+                                                    </div>
+                                            </li>
+
+
+                                            <li class="fields">
+                                                    <div class="input-box name-middlename _filled">
+                                                        <input type="email" autocapitalize="off" autocorrect="off" spellcheck="false" name="email" id="email" value="<?php echo $customer->getEmail() ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text required-entry validate-email" data-emailcapturepoint="Validate Email" />
+                                                        <label for="email" class="label-text required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+                                                   </div>
+                                            </li>
+
+                                            <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
+                                            <?php if ($_dob->isEnabled()): ?>
+                                                <li><?php echo $_dob->setDate($this->getCustomer()->getDob())->toHtml() ?></li>
+                                                <?php $_customerDob = $this->getCustomer()->getDob();?>
+                                            <?php endif ?>
+
+                                            <li class="fields">
+                                                    <div class="input-box">
+                                                       <input type="password" title="<?php echo $this->__('Current Password') ?>" class="input-text" name="current_password" id="current_password" />
+                                                        <label for="current_password" class="label-text required __web-inspector-hide-shortcut__"><em>*</em><?php echo $this->__('Current Password') ?></label>
+                                                    </div>
+                                            </li>
+                                        </ul>
+</div>
+                                                <div class="fieldset">
+                                                    <h2 class="legend"><?php echo $this->__('Change Password') ?></h2>
+                                                    <ul>
+                                            <li class="fields">
+                                                    <div class="input-box">
+                                                        <input type="password" title="<?php echo $this->__('New Password') ?>" class="input-text validate-password" name="password" id="password" />
+                                                        <label for="current_password" class="label-text required __web-inspector-hide-shortcut__"><em>*</em><?php echo $this->__('New Password') ?></label>
+                                                    </div>
+                                            </li>
+                                            <li class="fields">
+                                                    <div class="input-box">
+                                                        <input type="password" title="<?php echo $this->__('Confirm New Password') ?>" class="input-text validate-cpassword" name="confirmation" id="confirmation" />
+                                                        <label for="current_password" class="label-text required __web-inspector-hide-shortcut__"><em>*</em><?php echo $this->__('Confirm New Password') ?></label>
+                                                   </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="buttons-set">
+                                        <input type="hidden" name="customer_id" value="<?php echo $customer->getId() ?>" />
+                                        <a id="myinfo-cancel-link" class="cancel-link" href="javascript:void(0);" id=""><?php echo $this->__('Cancel') ?></a>
+                                        <button id="myinfo-ajax-submit" type="button" title="<?php echo $this->__('Save') ?>" class="button"><span><span><?php echo $this->__('Save') ?></span></span></button>
+                                        <br  /><br /><span id="processing-msg" style="display:none;"><strong><?php echo $this->__('Saving customer data...') ?></strong></span>
+                                    </div>
+                                </form>
+                                <script type="text/javascript">
+                                var  myinfoEdit = new VarienForm('myinfo-ajax-edit');
+                                var  myinfoUpdateTemplate = '<h3 class="name-label"><?php echo $this->__('Name') . ': ' ?><span class="name-content">{{name}}</span></h3><h3 class="name-label"><?php echo $this->__('Email') . ': ' ?><span class="name-content">{{email}}</span></h3><h3 class="name-label"><?php echo $this->__('Password') . ': ' ?><span class="name-content">{{password}}</span></h3>';
+                                if(typeof $('myinfo-container') != 'undefined'){
+                                    Event.observe($('myinfo-edit-action'), 'click', function(){
+                                          
+                                          $('my-info').hide();
+                                          $('myinfo-edit-section').show();
+                                          $('myinfo-edit-action').hide();
+
+                                    });
+                                 }
+                                 if(typeof $('myinfo-cancel-link') != 'undefined'){
+                                    Event.observe($('myinfo-cancel-link'), 'click', function(){
+                                        $('my-info').show();
+                                        $('myinfo-edit-action').show();
+                                        $('myinfo-edit-section').hide();
+                                    });
+                                 }
+                                 if(typeof $('myinfo-ajax-submit') != 'undefined')
+                                 {
+                                     Event.observe($('myinfo-ajax-submit'), 'click', function(){
+                                         if (myinfoEdit.validator.validate()) {
+                                             new Ajax.Request('<?php echo $this->getUrl('bornajax/customer_account/myinfoSave', array('_secure'=>true)) ?>', {
+                                                parameters: $('myinfo-ajax-edit').serialize(true),
+                                                requestHeaders: {ContentType: 'application/json'},
+                                                onSuccess: function(transport){
+                                                    $('processing-msg').hide();
+                                                    var jsonResponse = transport.responseText.evalJSON(true);
+                                                    if(!jsonResponse.error){
+                                                        var updateTemplate = new Template(myinfoUpdateTemplate, /(^|.|\r|\n)({{(\w+)}})/);
+                                                        $('my-info').update(updateTemplate.evaluate(jsonResponse.response_data));
+                                                        $('my-info').show();
+                                                        $('myinfo-edit-action').show();
+                                                        $('myinfo-edit-section').hide();
+                                                        return false;
+                                                    }else{
+                                                        $('my-info').hide();
+                                                        $('myinfo-edit-action').hide();
+                                                        $('myinfo-edit-section').show();
+                                                        alert(jsonResponse.error_description);
+                                                        return  false;
+                                                    }
+                                                },
+                                                onLoading: function(transport){
+                                                   $('processing-msg').show();  
+                                                },
+                                                onComplete: function(){
+                                                   $('processing-msg').hide(); 
+                                                }
+                                             });
+                                         }
+                                     });
+                                 }
+                                </script>
+</div>
+ <?php endif ?>

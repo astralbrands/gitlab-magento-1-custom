@@ -1,0 +1,5 @@
+<?php
+class Born_Package_Model_Adminhtml_System_Config_Backend_Design_Columns extends Mage_Adminhtml_Model_System_Config_Backend_Serialized_Array
+{
+
+}

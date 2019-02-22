@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <name>Lib_Unserialize</name>
+    <version>1.14.3.10</version>
+    <stability>stable</stability>
+    <license uri="http://www.magentocommerce.com/license/enterprise-edition">Magento Enterprise Edition</license>
+    <channel>enterprise</channel>
+    <extends/>
+    <summary>Magento Library</summary>
+    <description>Magento Library</description>
+    <notes>1.14.3.10</notes>
+    <authors><author><name>Magento Enterprise Team</name><user>core</user><email>core@magentocommerce.com</email></author></authors>
+    <date>2018-08-17</date>
+    <time>10:58:11</time>
+    <contents><target name="magelib"><dir name="Unserialize"><file name="Parser.php" hash="466143387fdf67ea81b3608cc5857744"/><dir name="Reader"><file name="Arr.php" hash="13ae876af8814041110a1ec44b83f606"/><file name="ArrKey.php" hash="0bf2b03daaa44de5250611b6feadb52e"/><file name="ArrValue.php" hash="85067029fdc7c770531fb533d7526e8e"/><file name="Bool.php" hash="e0ef8f147a9d88e5761f974d68cb2ea4"/><file name="Dbl.php" hash="d6636199039ef30bfa14567d563b730e"/><file name="Int.php" hash="c229efa62bfd402ffb6c3b2c36625185"/><file name="Null.php" hash="8d47e72ded8fd63b53c28f5e229a8f3e"/><file name="Str.php" hash="5d143013c2f0a3df47968225afdd251c"/></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.2.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

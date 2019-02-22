@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Astral_Shipping>
+            <version>0.0.1</version>
+        </Astral_Shipping>
+    </modules>
+    <frontend>
+    <events>
+        <sales_quote_collect_totals_before>
+            <observers>
+                <frontend_shipping_rates_sales_quote_collect_totals_before>
+					<type>singleton</type>
+                    <class>astral_shipping/observer</class>
+                    <method>hideShippingMethods</method>
+                </frontend_shipping_rates_sales_quote_collect_totals_before>
+            </observers>
+        </sales_quote_collect_totals_before>
+    </events>
+    </frontend>
+    <global>
+        <models>
+            <astral_shipping>
+                <class>Astral_Shipping_Model</class>
+            </astral_shipping>
+        </models>
+    </global>	
+</config>

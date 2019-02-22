@@ -1,0 +1,29 @@
+.account-dropdown {
+  &__main-link {
+    line-height: 9.2rem;
+    &:after {
+      content: "\e904";
+    }
+  }
+}
+.account-cart-wrapper {
+  max-height: 94px;
+}
+
+@media only screen and (max-width: $desktop-pro-l){
+  .cos-b2b {
+    .wishlist-link,
+    .sign-in {
+      padding: 0 9px;
+    }
+  }
+}
+
+@media only screen and (max-width: $desktop-custom-3){
+  .cos-b2b {
+    .wishlist-link,
+    .sign-in {
+      padding: 0 9px;
+    }
+  }
+}

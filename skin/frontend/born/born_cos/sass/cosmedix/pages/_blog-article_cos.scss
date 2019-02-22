@@ -1,0 +1,199 @@
+.single {
+  /*Comments*/
+  #wc-comment-header {
+    font-size: 1.8rem;
+    letter-spacing: 0.07rem;
+  }
+  #wpcomm .wc-blog-post_author > .wc-comment-right .wc-comment-author,
+  #wpcomm .wc-blog-post_author > .wc-comment-right .wc-comment-author a {
+    font-size: 1.3rem;
+  }
+  #wpcomm .wc-comment-text p {
+    @include gotham;
+    @include setFont(1.6rem, 2.4rem, 200);
+  }
+  a.link-main-feed {
+    @include whitneyBook;
+    @include setFont(2rem, 3rem, 400);
+    font-style: italic;
+    &:before {
+      content: '\e911';
+    }
+  }
+  .navigation {
+    margin-bottom: 60px;
+    display: block;
+    position: relative;
+    @include clearfix;
+    &.mobile-only {
+      display: none;
+    }
+  }
+  .related {
+    background: $white;
+    border: 1px solid $block-border-color;
+    .block-title {
+      color: $black;
+      font-size: 1.8rem;
+      letter-spacing: 0.15rem;
+    }
+  }
+  .related-title,
+  .related-description,
+  .btn-read-more {
+    color: $black;
+  }
+  .related-title {
+    @include whitneyLight;
+    @include setFont(1.8rem, 2.4rem, 200);
+    font-style: italic;
+    margin-bottom: 5px;
+  }
+  .related-main-title {
+    color: $black;
+    @include gotham;
+    @include setFont(1.6rem, 2.5rem, 500);
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .related-description {
+    @include gotham;
+    @include setFont(1.4rem, 2.1rem, 200);
+    font-style: normal;
+    max-width: 78%;
+    margin-bottom: 15px;
+  }
+  .btn-read-more{
+    border-color: $black;
+    border-width: 2px;
+    &:hover {
+      background: $black;
+      color: $white;
+    }
+  }
+  .block-title {
+    font-size: 1.8rem;
+    letter-spacing: 0.15rem;
+  }
+  .category-products {
+    margin-top: 30px;
+  }
+
+}
+.blog-page {
+  .link-nav-prev,
+  .link-nav-next {
+    letter-spacing: 0.15rem;
+  }
+  .link-nav-prev:before,
+  .link-nav-next:after {
+    width: 7px;
+    height: 7px;
+    border-width: 1px;
+  }
+}
+
+@media only screen and  (max-width: $mobile) {
+  .single {
+    .products-section {
+      margin-bottom: 75px;
+    }
+    .category-products {
+      margin-bottom: 0;
+      margin-top: 15px;
+    }
+    .block-title {
+      font-size: 1.6rem;
+    }
+    .grid-slider {
+      .product-name {
+        @include gotham;
+        @include setFont(1.25rem, 2rem, 700);
+        letter-spacing: 0.15rem;
+        text-transform: uppercase;
+      }
+      .product-subtitle {
+        @include gothamBook;
+        @include setFont(1.2rem, 2rem, 400);
+        letter-spacing: 0.15rem;
+        text-transform: uppercase;
+        padding: 0 19px;
+      }
+      .price {
+        @include whitneyBook;
+        @include setFont(1.6rem, 2.4rem, 400);
+        font-style: italic;
+      }
+    }
+    .comments-section {
+      margin-bottom: 0;
+    }
+    #wc-comment-header {
+      font-size: 1.6rem;
+      padding: 15px 0 0;
+    }
+    .comments-header .wc-comment-title {
+      width: 200px !important;
+    }
+    .related {
+      margin-bottom: 100px;
+      padding-top: 12px;
+      .block-title {
+        font-size: 1.6rem;
+      }
+    }
+    .related-posts li{
+      img {
+        margin-bottom: 20px;
+      }
+      .btn-read-more {
+        margin-bottom: 28px;
+      }
+    }
+    .related-title {
+      @include whitneyBook;
+    }
+  }
+}
+
+@media only screen and  (max-width: $mobile-s) {
+  .single {
+    .navigation {
+      margin-bottom: 110px;
+      display: none;
+      &.mobile-only {
+        display: block;
+      }
+    }
+    .link-main-feed {
+      @include position(absolute, 80px 0 null 0);
+    }
+    a.link-main-feed {
+      font-size: 1.8rem;
+    }
+    .article-content {
+      padding: 0;
+    }
+  }
+}
+
+@media only screen and  (max-width: $mobile-xs) {
+  .single {
+    .article-content {
+      padding: 0;
+      p {
+        padding: 0 20px;
+      }
+    }
+    .alignnone {
+      width: calc(50% + 20px);
+      &:first-child {
+        margin-left: -20px;
+      }
+      &:last-child {
+        margin-right: -20px;
+      }
+    }
+  }
+}

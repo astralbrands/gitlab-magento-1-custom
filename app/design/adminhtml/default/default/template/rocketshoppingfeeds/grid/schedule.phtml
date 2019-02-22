@@ -1,0 +1,173 @@
+<?php
+/**
+ * RocketWeb
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category  RocketWeb
+ * @package   RocketWeb_ShoppingFeeds
+ * @copyright Copyright (c) 2012 RocketWeb (http://rocketweb.com)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author    RocketWeb
+ */
+
+/** @var RocketWeb_ShoppingFeeds_Block_Adminhtml_Feed_Edit_Tab_Schedule $this */
+?>
+<?php $helper = Mage::helper('core'); ?>
+<div>
+    <ul class="messages">
+        <li class="notice-msg">
+            <ul>
+                <li><?php echo $this->__('Generating feed takes time. Make sure you allow enough between the schedules.') ?></li>
+                <li><?php echo $this->__('First schedule Batch Mode setting will be used when using the <strong style="color:green;">Run now</strong> button.') ?></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="entity-edit" id="matage-options-panel">
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Manage Schedules') ?></h4>
+    </div>
+    <div class="box">
+
+        <p>
+            <?php
+            $feed = Mage::registry('rocketshoppingfeeds_feed');
+            $tz = Mage::getStoreConfig('general/locale/timezone', $feed->getStoreId());
+            ?>
+            The schedule is set according to the <strong style="color:green;"><?php echo $tz?></strong> timezone (the current timezone setting at the Admin level)
+        </p>
+
+        <div class="hor-scroll">
+            <table class="dynamic-grid" cellspacing="0"  cellpadding="0">
+                <tr class="schedule-row">
+                    <th><?php echo $this->__('Start At') ?></th>
+                    <th><?php echo $this->__('Batch Mode') ?></th>
+                    <th><?php echo $this->__('Batch Limit') ?></th>
+                    <th>&nbsp;</th>
+                </tr>
+                <?php foreach ($this->getSchedules() as $_schedule): ?>
+                    <tr class="schedule-row">
+                        <?php $id = $_schedule->getId(); ?>
+                        <td><?php echo $this->getStartAtHtml($id, $_schedule->getStartAt()); ?></td>
+                        <td><?php echo $this->getBatchModeHtml($id, $_schedule->getBatchMode()); ?></td>
+                        <td><?php echo $this->getBatchLimitHtml($id, $_schedule->getBatchLimit(), $_schedule->getBatchMode()); ?></td>
+                        <td class="a-left">
+                            <?php echo $this->getDeleteHiddenHtml($id) ?>
+                            <?php echo $this->getDeleteButtonHtml() ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                <tr>
+                    <td colspan="4"><?php echo $this->getAddNewButtonHtml() ?></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+// IE removes quotes from element.innerHTML whenever it thinks they're not needed, which breaks html.
+var batchModeChange = function(element){
+    var id = element.id;
+    var inputId = id.replace('schedule_batch_mode', 'schedule_batch_limit');
+    if (element.value == 1) {
+        $(inputId).disabled = false;
+        $(inputId).show();
+    } else {
+        $(inputId).disabled = 'disabled';
+        $(inputId).hide();
+    }
+};
+
+$$('.delete-option').each(function(element){
+    Event.observe(element, 'click', element.setHasChanges.bind(element));
+});
+
+var scheduleTemplateText =
+        '<tr class="schedule-row">'+
+            '<td><?php echo $helper->jsQuoteEscape($this->getStartAtHtml()); ?><\/td>' +
+            '<td><?php echo $helper->jsQuoteEscape($this->getBatchModeHtml()); ?><\/td>' +
+            '<td><?php echo $helper->jsQuoteEscape($this->getBatchLimitHtml()); ?><\/td>' +
+            '<td class="a-left">' +
+                '<?php echo $helper->jsQuoteEscape($this->getDeleteHiddenHtml()) ?>' +
+                '<?php echo $helper->jsQuoteEscape($this->getDeleteButtonHtml()) ?>' +
+           ' <\/td>'
+        '<\/tr>';
+
+var schedule = {
+    templateSyntax : /(^|.|\r|\n)({{(\w+)}})/,
+    templateText : scheduleTemplateText,
+    isReadOnly: false,
+    add : function(data) {
+        this.template = new Template(this.templateText, this.templateSyntax);
+        var isNewOption = false;
+        if(!data.id){
+            data = {};
+            data.id  = 'new_' + Math.floor(Math.random()*10000000000);
+            isNewOption = true;
+        }
+        Element.insert($$('.schedule-row').last(), {after: this.template.evaluate(data)});
+        if (isNewOption && !this.isReadOnly) {
+            this.enableNewRowDeleteButton(data.id);
+        }
+        this.bindRemoveButtons();
+    },
+    remove : function(event){
+        var element = $(Event.findElement(event, 'tr')); // !!! Button already
+                                                               // have table parent in safari
+        // Safari workaround
+        element.ancestors().each(function(parentItem){
+           if (parentItem.hasClassName('schedule-row')) {
+               element = parentItem;
+               throw $break;
+           } else if (parentItem.hasClassName('box')) {
+               throw $break;
+           }
+        });
+
+
+        if(element){
+            var elementFlags = element.getElementsByClassName('delete-flag');
+            if(elementFlags[0]){
+                elementFlags[0].value=1;
+            }
+
+            element.addClassName('no-display');
+            element.addClassName('template');
+            element.hide();
+        }
+    },
+    enableNewRowDeleteButton: function(id) {
+        $$('#delete_button_container_' + id + ' button').each(function(button) {
+            button.enable();
+            button.removeClassName('disabled');
+        });
+    },
+    bindRemoveButtons : function(){
+        var buttons = $$('.delete-option');
+        for(var i=0;i<buttons.length;i++){
+            if(!$(buttons[i]).binded){
+                $(buttons[i]).binded = true;
+                Event.observe(buttons[i], 'click', this.remove.bind(this));
+            }
+        }
+    }
+
+}
+
+schedule.bindRemoveButtons();
+
+if($('add_new_option_button')){
+    Event.observe('add_new_option_button', 'click', schedule.add.bind(schedule));
+    Event.observe('add_new_option_button', 'click', $('add_new_option_button').setHasChanges.bind($('add_new_option_button')));
+}
+
+//]]>
+</script>

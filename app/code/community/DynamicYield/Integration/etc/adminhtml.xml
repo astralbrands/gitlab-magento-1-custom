@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+ * DynamicYield_Integration
+ *
+ * @category     DynamicYield
+ * @package      DynamicYield_Integration
+ * @author       Dynamic Yield Ltd <support@dynamicyield.com.com>
+ * @copyright    Copyright (c) 2017 Dynamic Yield (https://www.dynamicyield.com)
+ -->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <dyi_config translate="title" module="dynamicyield_integration">
+                                        <title>Dynamic Field Integration</title>
+                                    </dyi_config>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,26 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Ogrid
+ */
+?>
+<script type="text/javascript">
+    LightboxOptions = Object.extend({
+        fileLoadingImage:        '<?php echo Mage::getBaseUrl('js') . 'amasty/amogrid/lightbox/images/loading.gif'?>',
+        fileBottomNavCloseImage: '<?php echo Mage::getBaseUrl('js') . 'amasty/amogrid/lightbox/images/closelabel.gif'?>',
+
+        overlayOpacity: 0.8,   // controls transparency of shadow overlay
+
+        animate: true,         // toggles resizing animations
+        resizeSpeed: 10,        // controls the speed of the image resizing animations (1=slowest and 10=fastest)
+
+        borderSize: 10,         //if you adjust the padding in the CSS, you will need to update this variable
+
+        // When grouping images this is used to write: Image # of #.
+        // Change it for non-english localization
+        labelImage: "Image",
+        labelOf: "of"
+    }, window.LightboxOptions || {});
+
+</script>

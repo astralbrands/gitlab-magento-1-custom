@@ -1,0 +1,42 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoRichData
+ */
+?>
+<div class="block block-list block-amseorichdata" itemscope="" itemtype="<?php echo $this->getProductSchema()?>">
+    <div class="block-title">
+        <strong><span itemprop="name"><?php echo $this->getName()?></span></strong>
+    </div>
+    <div class="block-content">
+        <?php if ($this->getReviewsCount()): ?>
+            <div class="ratings" itemscope="" itemprop="aggregateRating" itemtype="<?php echo $this->getReviewsSchema() ?>">
+                <meta itemprop="ratingValue" content="<?php echo round(($this->getRatingSummary() * 5) / 100, 2) ?>">
+                <meta itemprop="reviewCount" content="<?php echo $this->getReviewsCount()?>">
+                <meta itemprop="ratingCount" content="<?php echo $this->getVotesCount()?>">
+
+                <?php if ($this->getRatingSummary()):?>
+                    <div class="rating-box">
+                        <div class="rating" style="width:<?php echo $this->getRatingSummary() ?>%"></div>
+                    </div>
+                <?php endif;?>
+                <p class="rating-links">
+                    <?php echo $this->__('%d Review(s)', $this->getReviewsCount()) ?>
+                </p>
+            </div>
+        <?php endif; ?>
+
+        <div class="price-box" itemscope="" itemtype="<?php echo $this->getOfferSchema()?>" itemprop="offers">
+            <p class="minimal-price">
+                <span class="price-label"><?php echo $this->__('Minimal Price:')?></span>
+                <span class="price">
+                    <span itemprop="priceCurrency" content="<?php echo $_currency = Mage::app()->getStore()->getCurrentCurrencyCode(); ?>"><?php echo Mage::app()->getLocale()->currency($_currency)->getSymbol(); ?></span>
+                    <span><?php echo $this->getMinimalPrice()?></span>
+                    <span style="display: none" itemprop="lowPrice"><?php echo $this->getMinimalPrice(false)?></span>
+                </span>
+            </p>
+        </div>
+    </div>
+</div>
+

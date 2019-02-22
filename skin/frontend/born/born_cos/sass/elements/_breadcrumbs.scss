@@ -1,0 +1,27 @@
+// \app\design\frontend\born\born\template\page\html\breadcrumbs.phtml
+
+.breadcrumbs {
+  overflow: visible;
+  padding: 15px 27px;
+  margin-top: 0;
+  li {
+    text-transform: none;
+    float: none;
+    vertical-align: middle;
+    display: inline-block;
+    a, span {
+      float: none;
+      @include gotham();
+      @include setFont(1.2rem, 2.4rem, 400);
+      color: $black;
+    }
+    a:hover {
+      color: $black;
+    }
+    .last {
+      color: $light-text-color;
+      padding: 0;
+    }
+
+  }
+}

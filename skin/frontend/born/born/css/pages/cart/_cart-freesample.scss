@@ -1,0 +1,142 @@
+// \app\design\frontend\born\born\template\custom\amasty\ampromo\items.phtml
+
+#ampromo-items {
+  width: 100%;
+  border: 1px solid $block-border-color;
+  &.amcarousel {
+    width: 100%;
+  }
+  .ampromo-title {
+    @include gotham;
+    @include setFont(3rem,4.2rem, 200);
+    text-align: center;
+    text-transform: none;
+  }
+  .ampromo-item {
+    border: none !important;
+    max-width: 215px;
+  }
+  .ampromo-item-image {
+    max-width: 105px;
+    max-height: 105px;
+  }
+  .ampromo-item-title {
+    text-align: center;
+    h4 a,
+    h4 {
+      @include gothamBook;
+      @include setFont( 1.4rem, 2.1rem, 400);
+      text-align: center;
+      text-transform: none;
+      &:hover {
+        color: $light-text-color;
+      }
+    }
+  }
+  .input-box  {
+    height: 30px;
+    .label-text {
+      left: 50%;
+      margin-left: -15px;
+      top: -10px;
+    }
+  }
+  .ampromo-item-options {
+    .jq-selectbox {
+      display: flex !important;
+      @include flex-direction(column);
+    }
+  }
+  #ampromo-carousel-wrapper {
+    position: relative;
+  }
+  .bx-wrapper {
+    .jq-selectbox__dropdown {
+      max-height: 150px;
+      overflow-y: auto;
+    }
+    .jq-selectbox.opened .jq-selectbox__select {
+      border-bottom: 2px solid $block-border-color;
+      border-top: none;
+    }
+  }
+  .bx-controls-direction {
+    @include position(absolute, 50% null null 0);
+    margin-top: -14px;
+    width: 100%;
+    a {
+      text-indent: -9999px;
+    }
+  }
+  .bx-wrapper .bx-controls-direction a.disabled {
+    display: none;
+  }
+  .bx-prev, .bx-next {
+    width: 40px;
+    height: 40px;
+    @include position(absolute, -20px null null null);
+    &:before {
+      @include hvrp();
+      width: 22px;
+      height: 22px;
+      border-left: 6px solid rgba(237, 237, 237, 0.7);
+      border-bottom: 6px solid rgba(237, 237, 237, 0.7);
+      transform-origin:center;
+    }
+  }
+  .bx-prev {
+    left: 10px;
+    &:before {
+      @include transform(rotate(45deg));
+    }
+  }
+  .bx-next {
+    right: 10px;
+    &:before {
+      @include transform(rotate(-135deg));
+    }
+  }
+  .bx-pager {
+    @include position(absolute, null null -35px 0);
+    width: 100%;
+    text-align: center;
+    font-size: 0;
+  }
+}
+
+
+.checkout-cart-index {
+  #ampromo-items.amcarousel {
+    width: 100%;
+    .bx-viewport {
+      overflow-y: visible;
+    }
+  }
+  .amcarousel .ampromo-carousel-control {
+    display: none;
+  }
+}
+
+@media only screen and  (max-width: $mobile){
+  #ampromo-items {
+    .ampromo-title {
+      font-size: 2.2rem;
+    }
+    .ampromo-item {
+      width: 100% !important;
+      max-width: 100%;
+    }
+    .ampromo_items_form h4 {
+      text-align: center;
+      a {
+        max-width: 170px;
+      }
+    }
+    #ampromo-carousel-wrapper {
+      height: 275px;
+    }
+    .jq-selectbox {
+      width: 100%;
+    }
+  }
+}

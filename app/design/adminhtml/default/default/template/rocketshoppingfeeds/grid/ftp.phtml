@@ -1,0 +1,293 @@
+<?php
+/**
+ * RocketWeb
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category  RocketWeb
+ * @package   RocketWeb_ShoppingFeeds
+ * @copyright Copyright (c) 2012 RocketWeb (http://rocketweb.com)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author    RocketWeb
+ */
+?>
+<?php $helper = Mage::helper('core'); ?>
+<div>
+    <ul class="messages">
+        <li class="notice-msg">
+            <ul>
+                <li><?php echo $this->__('After feed file generates, it will be uploaded on each of the accounts defined here.');?></li>
+                <li><?php echo $this->__('This happens according to the <strong style="color:green;">Run Schedule</strong> and with each manual generation, using <strong style="color:green;">Run now</strong> button.');?></li>
+            </ul>
+        </li>
+        <?php if (!function_exists('gzopen')): ?>
+            <li class="warning-msg">
+                <ul>
+                    <li><?php echo $this->__('<a href="http://php.net/manual/en/intro.zlib.php" target="_blank">Zlib</a> is not found in your php configuration. Gzip option will not work.');?></li>
+                </ul>
+            </li>
+        <?php endif; ?>
+    </ul>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+$$('.delete-option').each(function(element){
+    Event.observe(element, 'click', element.setHasChanges.bind(element));
+});
+<?php $auxiliaryFields = $this->getAuxiliaryFields(); ?>
+var ftpTemplateText =
+        '<tr class="ftp-row" id="row_{{id}}">'+
+            <?php if (in_array('Mode', $auxiliaryFields)): ?>
+                '<td><?php echo $helper->jsQuoteEscape($this->getModeHtml()); ?><\/td>' +
+                <?php unset($auxiliaryFields[array_search('Mode', $auxiliaryFields)]); ?>
+            <?php endif; ?>
+            '<td><?php echo $helper->jsQuoteEscape($this->getHostHtml()); ?><\/td>' +
+            '<td><?php echo $helper->jsQuoteEscape($this->getPortHtml()); ?><\/td>' +
+            '<td><?php echo $helper->jsQuoteEscape($this->getUsernameHtml()); ?><\/td>' +
+            '<td><?php echo $helper->jsQuoteEscape($this->getPasswordHtml()); ?><\/td>' +
+            <?php foreach ($auxiliaryFields as $_auxiliaryField): ?>
+                '<td>' +
+                    '<?php echo $helper->jsQuoteEscape($this->getAuxiliaryFieldHtml($_auxiliaryField)); ?>' + 
+                '<\/td>' +
+            <?php endforeach; ?>
+            '<td>' +
+                '<span class="success" style="display:none" id="success_{{id}}"><?php echo $this->__('Active'); ?><\/span>' +
+                '<input type="hidden" id="validated_{{id}}" value="0"><\/input>' +
+                '<?php echo $helper->jsQuoteEscape($this->getTestButtonHtml()); ?>' + 
+            '<\/td>' +
+            '<td class="a-left">' +
+                '<?php echo $helper->jsQuoteEscape($this->getDeleteHiddenHtml()) ?>' +
+                '<?php echo $helper->jsQuoteEscape($this->getDeleteButtonHtml()) ?>' +
+           ' <\/td>'
+        '<\/tr>';
+
+var ftpAccount = {
+    templateSyntax : /(^|.|\r|\n)({{(\w+)}})/,
+    templateText : ftpTemplateText,
+    isReadOnly: false,
+    add : function(data) {
+        this.template = new Template(this.templateText, this.templateSyntax);
+        var isNewOption = false;
+        if(!data.id){
+            data = {};
+            data.id  = 'new_' + Math.floor(Math.random()*10000000000);
+            isNewOption = true;
+        }
+        Element.insert($$('.ftp-row').last(), {after: this.template.evaluate(data)});
+        if (isNewOption && !this.isReadOnly) {
+            this.enableNewRowDeleteButton(data.id);
+        }
+        var dataElements = $$('#row_' + data.id + ' .break-ftp-validation');
+        for(var i=0; i<dataElements.length;i++){
+            Event.observe(dataElements[i], 'change', ftpAccount.markRowInvalid.bind(this, data.id));
+        }
+        this.bindRemoveButtons();
+        EnableCheck();
+    },
+    remove : function(event){
+        var element = $(Event.findElement(event, 'tr')); 
+        // !!! Button already has table parent in safari
+        // Safari workaround
+        element.ancestors().each(function(parentItem){
+           if (parentItem.hasClassName('ftp-row')) {
+               element = parentItem;
+               throw $break;
+           } else if (parentItem.hasClassName('box')) {
+               throw $break;
+           }
+        });
+
+
+        if(element){
+            var elementFlags = element.getElementsByClassName('delete-flag');
+            if(elementFlags[0]){
+                elementFlags[0].value=1;
+            }
+
+            element.addClassName('no-display');
+            element.addClassName('template');
+            element.hide();
+        }
+    },
+    enableNewRowDeleteButton: function(id) {
+        $$('#delete_button_container_' + id + ' button').each(function(button) {
+            button.enable();
+            button.removeClassName('disabled');
+        });
+    },
+    bindRemoveButtons : function(){
+        var buttons = $$('.delete-option');
+        for(var i=0;i<buttons.length;i++){
+            if(!$(buttons[i]).binded){
+                $(buttons[i]).binded = true;
+                Event.observe(buttons[i], 'click', this.remove.bind(this));
+            }
+        }
+    },
+    testConnection : function(rowId) {
+        var params = {
+            host: $('ftp_host_' + rowId).value,
+            port: $('ftp_port_' + rowId).value,
+            username: $('ftp_username_' + rowId).value,
+            password: $('ftp_password_' + rowId).value,
+            id: rowId,
+        };
+        if ($('ftp_mode_' + rowId)) {
+            params['mode'] = $('ftp_mode_' + rowId).value;
+        }
+        new Ajax.Request(
+            '<?php echo $this->getTestConnectionUrl() ?>',
+            {
+                method: 'POST',
+                parameters: params,
+                onSuccess: function(transport){
+                    if (transport.responseText == 1) {
+                        ftpAccount.markRowValid(rowId);
+                        if($('ftp_host_' + rowId).next()){
+                            $('ftp_host_' + rowId).next().remove();
+                            $('ftp_host_' + rowId).removeClassName('validation-failed');
+                        }
+                        if($('ftp_port_' + rowId).next()){
+                            $('ftp_port_' + rowId).next().remove();
+                            $('ftp_port_' + rowId).removeClassName('validation-failed');
+                        }
+                        if($('ftp_username_' + rowId).next()){
+                            $('ftp_username_' + rowId).next().remove();
+                            $('ftp_username_' + rowId).removeClassName('validation-failed');
+                        }
+                        if($('ftp_password_' + rowId).next()){
+                            $('ftp_password_' + rowId).next().remove();
+                            $('ftp_password_' + rowId).removeClassName('validation-failed');
+                        }
+                    } else {
+                        ftpAccount.markRowInvalid(rowId);
+                        alert(transport.responseText.evalJSON());
+                    }
+                },
+                onError: function(){
+                    ftpAccount.markRowInvalid(rowId);
+                    alert('<?php $this->__("Unexpected error occured. Please try again")?>');
+                }
+            }
+        );
+    },
+    markRowInvalid : function(rowId) {
+        $('ftp_test_' + rowId).show();
+        $('success_' + rowId).hide();
+        $('validated_' + rowId).value = 0;
+    },
+    markRowValid : function (rowId) {
+        $('ftp_test_' + rowId).hide();
+        $('success_' + rowId).show();
+        $('validated_' + rowId).value = 1;
+    }
+}
+//]]>
+</script>
+<div class="entity-edit" id="matage-options-panel">
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Manage FTP Accounts') ?></h4>
+    </div>
+    <div class="box">
+        <div class="hor-scroll">
+            <table class="dynamic-grid" cellspacing="0"  cellpadding="0">
+                <tr class="ftp-row">
+                    <?php $auxiliaryFields = $this->getAuxiliaryFields(); ?>
+                    <?php if (in_array('Mode', $auxiliaryFields)): ?>
+                        <th style="width: 65px;"><?php echo $this->__('Mode') ?><sup>*</sup></th>
+                        <?php unset($auxiliaryFields[array_search('Mode', $auxiliaryFields)]); ?>
+                    <?php endif; ?>
+                    <th style="width: 146px;"><?php echo $this->__('Host') ?><sup>*</sup></th>
+                    <th style="width: 66px;"><?php echo $this->__('Port') ?><sup>*</sup></th>
+                    <th style="width: 146px;"><?php echo $this->__('Username') ?><sup>*</sup></th>
+                    <th style="width: 100px;"><?php echo $this->__('Password') ?><sup>*</sup></th>
+                    <?php foreach ($auxiliaryFields as $_auxiliaryField): ?>
+                        <th style="width: auto;"><?php echo $this->getAuxiliaryFieldName($_auxiliaryField); ?><sup>&nbsp;</sup></th>
+                    <?php endforeach; ?>
+                    <th style="width:auto;">&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+                <?php foreach ($this->getAccounts() as $_account): ?>
+                    <?php $id = $_account->getId(); ?>
+                    <tr class="ftp-row" id="row_<?php echo $id; ?>">
+                        <?php $auxiliaryFields = $this->getAuxiliaryFields(); ?>
+                        <?php if (in_array('Mode', $auxiliaryFields)): ?>
+                            <td><?php echo $this->getModeHtml($id, $_account->getmode()); ?></td>
+                            <?php unset($auxiliaryFields[array_search('Mode', $auxiliaryFields)]); ?>
+                        <?php endif; ?>
+                        <td><?php echo $this->getHostHtml($id, $_account->getHost()); ?></td>
+                        <td><?php echo $this->getPortHtml($id, $_account->getPort()); ?></td>
+                        <td><?php echo $this->getUsernameHtml($id, $_account->getUsername()); ?></td>
+                        <td><?php echo $this->getPasswordHtml($id, $_account->getPassword()); ?></td>
+                        <?php foreach ($auxiliaryFields as $_auxiliaryField): ?>
+                            <td><?php echo $this->getAuxiliaryFieldHtml($_auxiliaryField, $id, $_account); ?></td>
+                        <?php endforeach; ?>
+                        <td class="buttons-cell">
+                            <span class="success" id="success_<?php echo $id; ?>"><?php echo $this->__('Active'); ?></span>
+                            <input type="hidden" id="validated_<?php echo $id; ?>" value="1"></input>
+                            <?php echo $this->getTestButtonHtml($id, true); ?>
+                        </td>
+                        <td  class="buttons-cell a-left">
+                            <?php echo $this->getDeleteHiddenHtml($id) ?>
+                            <?php echo $this->getDeleteButtonHtml() ?>
+                        </td>
+                    </tr>
+                    <script type="text/javascript">
+                    //<![CDATA[
+                    var dataElements = $$('#row_<?php echo $id; ?> .break-ftp-validation');
+                    for(var i=0; i<dataElements.length;i++){
+                        Event.observe(dataElements[i], 'change', ftpAccount.markRowInvalid.bind(this, '<?php echo $id; ?>'));
+                    }
+                    //]]>
+                    </script>
+                <?php endforeach; ?>
+                <tr>
+                    <td colspan="<?php echo $this->getColumnsNumber()?>"><?php echo $this->getAddNewButtonHtml() ?></td>
+                </tr>
+            </table>
+            <p class="form-info">All inputs marked with <sup>*</sup> are required.</p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+ftpAccount.bindRemoveButtons();
+
+if($('add_new_ftp_button')){
+    Event.observe('add_new_ftp_button', 'click', ftpAccount.add.bind(ftpAccount));
+    Event.observe('add_new_ftp_button', 'click', $('add_new_ftp_button').setHasChanges.bind($('add_new_ftp_button')));
+}
+Validation.addAllThese([
+    ['validate-ftp-connection', '<?php echo Mage::helper('core')->jsQuoteEscape($this->__('FTP credentials are invalid or were not validated yet')) ?>', function(v, elm) {
+        var rowId = elm.id.replace('ftp_host_', '');
+        if ($('validated_' + rowId).value == 1) {
+            return true;
+        }
+        return false;
+}]]);
+var EnableCheck = function(){
+    $$('.ftp-row td input').forEach(function(ftpRowElement) {
+        ftpRowElement.stopObserving('blur').observe('blur', function() {
+            var currentRow = ftpRowElement.up(1),
+                currentRowInputs = currentRow.select('td input[type="text"], td input[type="password"]'),
+                addClass;
+
+            for(var i = 0; i < currentRowInputs.length; i++){
+                if(currentRowInputs[i].value){
+                    currentRow.down('.scalable.save').addClassName('transparent');
+                }else{
+                    currentRow.down('.scalable.save').removeClassName('transparent');
+                    break;
+                }
+            }
+        });
+    });
+};
+EnableCheck();
+//]]>
+</script>

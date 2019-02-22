@@ -1,0 +1,44 @@
+<?php if(Mage::getStoreConfig('weltpixel_selector/customization_settings/freeshipping_calculator')) : ?>
+<div class="cart-promo2">
+    <?php echo  $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_shopping_cart_promo')->toHtml() ?><br>
+</div>
+<?php endif; ?>
+<form id="discount-coupon-form" action="<?php echo $this->getUrl('checkout/cart/couponPost') ?>" method="post">
+    <div class="discount">
+		<div class="toggle">
+			<div class="togglet"><i class="toggle-closed icon-line-circle-plus"></i><i class="toggle-open icon-remove-circle"></i>
+				<h2><?php echo $this->__('Discount Codes') ?></h2>
+			</div>
+			<div class="togglec">
+				<div class="discount-form input-box">
+					<input type="hidden" name="remove" id="remove-coupone" value="0" />
+					<div class="field-wrapper">
+						<input class="input-text" type="text" id="coupon_code" name="coupon_code" value="<?php echo $this->escapeHtml($this->getCouponCode()) ?>" />                
+					</div>
+				</div>
+				<div class="input-box">
+					<button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Apply')) ?>" class="button" onclick="discountForm.submit(false)" value="<?php echo $this->__('Apply') ?>"><span><span><?php echo $this->__('Apply') ?></span></span></button>
+					<?php if(strlen($this->getCouponCode())): ?>
+						<button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Cancel')) ?>" class="button cancel-coupon" onclick="discountForm.submit(true)" value="<?php echo $this->__('Cancel') ?>"><span><span><?php echo $this->__('Cancel') ?></span></span>
+						</button>
+					<?php endif;?>
+				</div>
+			</div>
+		</div>
+    </div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+var discountForm = new VarienForm('discount-coupon-form');
+discountForm.submit = function (isRemove) {
+    if (isRemove) {
+        $('coupon_code').removeClassName('required-entry');
+        $('remove-coupone').value = "1";
+    } else {
+        $('coupon_code').addClassName('required-entry');
+        $('remove-coupone').value = "0";
+    }
+    return VarienForm.prototype.submit.bind(discountForm)();
+}
+//]]>
+</script>

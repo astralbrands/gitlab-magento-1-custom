@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <WeltPixel_Cleo>
+            <version>0.1.0</version>
+        </WeltPixel_Cleo>
+    </modules>
+     <global>
+         <blocks>
+            <checkout>
+                <rewrite>
+                    <cart_crosssell>WeltPixel_Cleo_Checkout_Block_Cart_Crosssell</cart_crosssell>
+                </rewrite>
+            </checkout>
+        </blocks>
+        <models>
+            <catalog_resource>
+                <rewrite>
+                    <product_type_configurable_attribute_collection>WeltPixel_Cleo_Model_Catalog_Resource_Product_Type_Configurable_Attribute_Collection</product_type_configurable_attribute_collection>
+                </rewrite>
+            </catalog_resource>
+        </models>
+    </global>
+</config>

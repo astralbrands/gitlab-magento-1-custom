@@ -1,0 +1,176 @@
+.cms-generic {
+  .hero {
+    .hero-title-wrap {
+      max-width: 420px;
+      margin: 0 auto;
+      &.left {
+        text-align: left;
+        margin-left: 20px;
+      }
+      &.right {
+        text-align: right;
+        margin-right: 20px;
+      }
+      &.center {
+        text-align: center;
+      }
+      .icon-img {
+        display: inline-block;
+      }
+      &.black {
+        .subtitle, .description {
+          color: $black;
+        }
+      }
+      &.white {
+        .subtitle, .description {
+          color: $white;
+        }
+      }
+
+      width: 100%;
+      @include position(absolute, 0 0 0 0);
+      @include display(flex);
+      @include flex-direction(column);
+      @include justify-content(center);
+    }
+    .subtitle {
+      color: $white;
+      font-size: 3.6rem;
+      line-height: 4.2rem;
+      margin-bottom: 18px;
+    }
+    .description {
+      @include gothamBook;
+      @include setFont(1.6rem, 3.0rem, 400);
+      color: $white;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .svg-file {
+      max-width: 420px;
+      max-height: 100px;
+    }
+    .icon-PUR_logo {
+      color: $white;
+      font-size: 7rem;
+      margin-bottom: 15px;
+    }
+    .mobile-background {
+      display: none;
+    }
+    .background-img-mobile {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-custom-1) {
+  .cms-generic {
+    .hero .hero-background .background-img {
+      width: 100%;
+    }
+    .hero-title-wrap {
+      max-width: 420px;
+      margin: 0 auto;
+      &.left {
+        text-align: center;
+        margin-left: 0;
+      }
+      &.right {
+        text-align: center;
+        margin-right: 0;
+      }
+      &.center {
+        text-align: center;
+      }
+      .icon-img {
+        display: inline-block;
+      }
+      &.white {
+        .subtitle, .description {
+          color: $black;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile){
+  .cms-generic {
+    .hero {
+      .hero-title-wrap {
+        &.left {
+          text-align: center;
+          margin: 0 auto;
+        }
+        &.right {
+          text-align: center;
+          margin: 0 auto;
+        }
+        &.center {
+          text-align: center;
+        }
+        .icon-img {
+          display: inline-block;
+        }
+        &.white {
+          .subtitle, .description {
+            color: $black;
+          }
+        }
+
+        padding: 30px 19px 50px;
+        position: relative;
+        border-bottom: 1px solid $block-border-color;
+      }
+      .icon-PUR_logo {
+        color: $black;
+        display: block;
+        font-size: 6rem;
+      }
+      .subtitle {
+        color: $black;
+        font-size: 2.6rem;
+        line-height:3.3rem;
+      }
+      .description {
+        color: $black;
+        font-size: 1.4rem;
+        line-height:2.4rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-s) {
+  .cms-generic {
+    .hero {
+      .hero-background > .background-img {
+        display: none;
+      }
+      .mobile-background {
+        display: block;
+      }
+      .hero-title-wrap {
+        max-width: 420px;
+        margin: 0 auto;
+        &.left {
+          text-align: center;
+          margin-left: 0;
+        }
+        &.right {
+          text-align: center;
+          margin-right: 0;
+        }
+        &.center {
+          text-align: center;
+        }
+        .icon-img {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+.wishlist-shared-index {
+  .col-main {
+    padding: 40px 28px;
+  }
+  .my-wishlist {
+    .page-title {
+      border-bottom: 4px solid $black;
+      padding: 15px 0;
+      margin-bottom: 15px;
+    }
+    h1 {
+      display: inline-block;
+      color: $black;
+      @include setFont(1.25rem, 2rem, 700);
+      letter-spacing: 3px;
+      margin: 0;
+      vertical-align: middle;
+      text-transform: uppercase;
+    }
+    .data-table {
+      tbody {
+        td {
+          width: 33%;
+        }
+      }
+    }
+    .buttons-set {
+      border-top: none;
+    }
+    .button,
+    .btn-cart,
+    .btn-add-all-to-cart {
+      @include transparentButton(5rem, 1.4rem, $white, $black);
+      @include gotham;
+      background: $black;
+      color: $white;
+      border: 2px solid $black;
+      margin-bottom: 10px;
+      &:focus,
+      &:hover,
+      &:active {
+        box-shadow: none;
+      }
+    }
+    .link-wishlist,
+    .back-link a {
+      @include gotham;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: $light-text-color;
+      text-decoration: underline;
+      text-transform: none;
+      display: block;
+    }
+  }
+  #wishlist-table .price-box .price {
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+  }
+}
+
+@media only screen and (max-width: $mobile-m) {
+  .wishlist-shared-index {
+    .col-main {
+      padding: 40px 15px;
+    }
+    .my-wishlist {
+      .product-image {
+        width: 90px;
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+      .button,
+      .btn-cart,
+      .btn-add-all-to-cart {
+        min-width: 115px;
+        line-height: 3.4rem;
+        font-size: 1.2rem;
+        padding: 0;
+      }
+    }
+    #wishlist-table .product-name a {
+      font-size: 1.5rem;
+    }
+  }
+}

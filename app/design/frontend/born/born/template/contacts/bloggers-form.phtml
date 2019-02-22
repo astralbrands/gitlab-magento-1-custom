@@ -1,0 +1,263 @@
+<?php
+/**
+ * Astal Brand
+ *
+ * @category    Astal Brand
+ * @package     Born_Package
+ * @description  Blogger-form creation
+ */
+?>
+<pre class="press">
+	<div class="pro-artist-form" id="pro-registration2">
+        <form action="<?php echo $this->getSubmitAction(); ?>" id="blogger-signup" enctype="multipart/form-data"
+              method="post" class="scaffold-form">
+            <div class="fieldset">
+                <h2 class="legend">Registration Form</h2>
+                <div class="fieldset fieldset-0">
+                    <div class="group-name">general</div>
+                    <ul>
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="email_address" id="email_address" title="email_address" value=""
+                                           class="input-text required-entry validate-email" type="email">
+                                    <label class="label-text" for="email_address">Email</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="first_name" id="first_name" title="first_name" value=""
+                                           class="input-text required-entry" type="text">
+                                    <label class="label-text" for="first_name">Your Full Name</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="website_url" id="website_url" title="website_url" value=""
+                                           class="input-text validate-clean-url" type="text">
+                                    <label class="label-text" for="website_url">Website URL - www.example.com</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="facebook_page" id="facebook_page" title="facebook_page" value=""
+                                           class="input-text " type="url">
+                                    <label class="label-text" for="facebook_page">Facebook URL -www.facebook.com/example</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="twitter_page" id="twitter_page" title="twitter_page" value=""
+                                           class="input-text " pattern="^@[A-Za-z0-9_]{1,15}$" type="text">
+                                    <label class="label-text" for="twitter_page">Twitter Handle -@ExampleHandle</label>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="instagram_page" id="instagram_page" title="instagram_page" value=""
+                                           class="input-text" pattern="^@[A-Za-z0-9_]{1,15}$" type="text">
+                                    <label class="label-text"  for="instagram_page">Instagram Handle-@ExampleHandle</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="youtube_channel" id="youtube_channel" title="youtube_channel" value=""
+                                           class="input-text " type="url">
+                                    <label class="label-text" for="youtube_channel">Youtube Channel URL-www.youtube.com/user/example</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="pinterest_page" id="pinterest_page" title="pinterest_page" value=""
+                                           class="input-text " type="url">
+                                    <label class="label-text" for="pinterest_page">Pinterest Handle-www.pinterest.com/example</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="address_1" id="address_1" title="address_1" value=""
+                                           class="input-text required-entry" type="text">
+                                    <label class="label-text" for="address_1">Street Address</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="address_2" id="address_2" title="address_2" value=""
+                                           class="input-text " type="text">
+                                    <label class="label-text" for="address_2">Apt., Suite, etc</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="city" id="city" title="city" value="" class="input-text required-entry"
+                                           type="text">
+                                    <label class="label-text" for="city">City/Town</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="state_territory" id="state_territory" title="state_territory" value=""
+                                           class="input-text required-entry " type="text">
+                                    <label class="label-text" for="state_territory">State / Province</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="zip_postal_code" id="zip_postal_code" title="zip_postal_code" value=""
+                                           class="input-text required-entry validate-zip" type="text">
+                                    <label class="label-text" for="zip_postal_code">Zip / Postal Code</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="country" id="country" title="country" value=""
+                                           class="input-text required-entry" type="text">
+                                    <label class="label-text" for="country">Country</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="biggest_concern" id="biggest_concern" title="biggest_concern" value=""
+                                           class="input-text required-entry" type="text">
+                                    <label class="label-text" for="biggest_concern">Biggest Skin Concern</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="phone_number" id="phone_number" title="phone_number" value=""
+                                           class="input-text required-entry validate-phoneLax" type="tel">
+                                    <label class="label-text" for="phone_number">Phone number</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-general">
+                                <div class="input-box">
+                                    <input name="awards_won" id="awards_won" title="awards_won" value=""
+                                           class="input-text " type="text">
+                                    <label class="label-text" for="awards_won">Awards Won</label>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="fieldset fieldset-1 required-entry">
+                    <div class="group-name">How Did You Here About Us?</div>
+                    <ul>
+                        <li>
+                            <div class=" field-expertise">
+                                <div class="check-box">
+                                    <input name="here_about_us[]" id="trade_magazine" title="here_about_us"
+                                           value="Trade Magazine" class="validate-one-required-by-name" type="checkbox">
+                                    <label for="trade_magazine">Trade Magazine</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-expertise">
+                                <div class="check-box">
+                                    <input name="here_about_us[]" id="publication" title="here_about_us"
+                                           value="Publication" class=" " type="checkbox">
+                                    <label for="publication">Publication</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-expertise">
+                                <div class="check-box">
+                                    <input name="here_about_us[]" id="internet_search" title="here_about_us"
+                                           value="Internet Search" class=" " type="checkbox">
+                                    <label for="internet_search">Internet Search</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-expertise">
+                                <div class="check-box">
+                                    <input name="here_about_us[]" id="linkedin" title="here_about_us" value="LinkedIn"
+                                           class=" " type="checkbox">
+                                    <label for="linkedin">LinkedIn</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-expertise">
+                                <div class="check-box">
+                                    <input name="here_about_us[]" id="instagram" title="here_about_us" value="Instagram"
+                                           class=" " type="checkbox">
+                                    <label for="instagram">Instagram</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-expertise">
+                                <div class="check-box">
+                                    <input name="here_about_us[]" id="facebook" title="here_about_us" value="Facebook"
+                                           class=" " type="checkbox">
+                                    <label for="facebook">Facebook</label>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class=" field-expertise">
+                                <div class="check-box">
+                                    <input name="here_about_us[]" id="friends_coworkers" title="here_about_us"
+                                           value="Friends/Coworkers" class=" " type="checkbox">
+                                    <label for="friends_coworkers">Friends/Coworkers</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" field-expertise">
+                                <div class="check-box">
+                                    <input name="here_about_us[]" id="other" title="here_about_us" value="other"
+                                           class=" " type="checkbox">
+                                    <label for="other">Other. Please Specify</label>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="buttons-set">
+                    <input type="text" name="hideit" id="hideit" value="" style="display:none !important;">
+                    <button type="submit" title="Submit" class="button"><span><span>Submit Application</span></span>
+                    </button>
+                </div>
+        </form>
+        <script type="text/javascript">
+            var proArtistForm = new VarienForm('pro-artist-signup', true);
+        </script>
+    </div>
+</pre>

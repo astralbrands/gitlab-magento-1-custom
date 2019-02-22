@@ -1,0 +1,12 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0">   
+  <storeduplicator_index_index>   
+    <reference name="root">   
+      <action method="setTemplate"><template>page/1column.phtml</template></action>   
+    </reference>   
+    <reference name="content">   
+      <block type="storeduplicator/index" name="storeduplicator_index" template="storeduplicator/index.phtml"/>   
+    </reference>   
+  </storeduplicator_index_index>   
+</layout>   
+	

@@ -1,0 +1,16 @@
+<?php
+$_product = $this->getProduct();
+$_wishlistUrl = $this->helper('wishlist')->getAddUrl($_product);
+$_compareUrl = $this->helper('catalog/product_compare')->getAddUrl($_product);
+$_wishlistIsAllow = $this->helper('wishlist')->isAllow();
+$disableCompare = Mage::getStoreConfig('weltpixel_selector/productpageoptions/disable_compare');
+?>
+
+<ul class="add-to-links">
+    <?php if ($_wishlistIsAllow) : ?>
+        <li><a class="wp-add-to-wishlist" href="<?php echo $_wishlistUrl; ?>" data-rwd-label="<?php echo $this->__('Wishlist'); ?>"><i class="icon icon-heart3"></i><span><?php echo $this->__('Add to Wishlist'); ?></span></a></li>
+    <?php endif; ?>
+    <?php if (!$disableCompare && $_compareUrl) : ?>
+        <li><a class=" wp-add-to-compare" href="<?php echo $_compareUrl; ?>" data-rwd-label="<?php echo $this->__('Compare'); ?>"><i class="icon icon-checkmark"></i><span><?php echo $this->__('Add to Compare'); ?></span></a></li>
+    <?php endif; ?>
+</ul>

@@ -1,0 +1,51 @@
+<?php
+/*
+Proartist Field Attributes
+- Image - image
+- Description - WYSIWYG Editor
+ */
+$hooks_helper = Mage::helper('borncmshooks');
+$object_collection = $this->getFooterlinksObjectCollection();
+$object_collection = Mage::helper('borncmshooks/sort')->sortCollection($object_collection);
+
+$_storeId = Mage::app()->getStore()->getStoreId();
+$_professionalSignupText = Mage::getStoreConfig('customer/startup/professional_signup_text', $_storeId);
+$_professionalAnchorTag = Mage::getStoreConfig('customer/startup/professional_signup_anchor_tag', $_storeId);
+$_professionalLoginText = Mage::getStoreConfig('customer/startup/login_text', $_storeId);
+$_professionalLoginUrl = Mage::getStoreConfig('customer/startup/login_url', $_storeId);
+
+?>
+<?php foreach ($object_collection as $block): ?>
+    <?php if ($block->getImage()): ?>
+        <img class="image" src="<?php echo $hooks_helper->getImageUrl($block->getImage()); ?>">
+    <?php endif ?>
+    <?php if ($block->getDisplayProfessionalBlock()): ?>
+        <div class="professional-block">
+        <?php if ($_professionalSignupText && $_professionalAnchorTag): ?>
+            <div class="professional-signup">
+                <a class="btn" href="#<?php echo $_professionalAnchorTag ?>"><?php echo $_professionalSignupText ?></a>
+            </div>
+        <?php endif ?>
+
+        <?php if ($_professionalLoginText && $_professionalLoginUrl): ?>
+            <div class="professional-login">
+                <a class="btn" href="<?php echo $_professionalLoginUrl ?>"><?php echo $_professionalLoginText ?></a>
+            </div>
+        <?php endif ?>
+
+        </div>
+    <?php endif ?>
+	<?php if ($block->getTitle()): ?>
+		<h2 class="title"><?php echo $block->getTitle() ?></h2>
+	<?php endif ?>
+    <?php if ($block->getDescription()): ?>
+    	<div class="body">
+    		<?php echo $block->getDescription() ?>
+    	</div>
+    <?php endif ?>
+<?php endforeach ?>
+<?php
+if($this->getChildHtml('zen-signup')){
+     echo $this->getChildHtml('zen-signup');
+}
+?>

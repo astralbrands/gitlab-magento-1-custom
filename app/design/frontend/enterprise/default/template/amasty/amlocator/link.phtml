@@ -1,0 +1,19 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Locator
+ */
+?>
+<?php
+if (Mage::registry('current_product')):
+    if (!$this->getRequest()->getParam("product"))
+    {
+        $productId = Mage::registry('current_product')->getId();
+    }
+    $locationCollection = $this->getLocationCollection($productId);
+    $target = $this->getTarget();
+    if ( count($locationCollection) >0 ){
+        echo '<div style="clear: both"><a href="'.$this->getLinkToMap($productId).'"' . $target . '>'.Mage::getStoreConfig('amlocator/locator/linktext').'</a></div>' ;
+    }
+endif;

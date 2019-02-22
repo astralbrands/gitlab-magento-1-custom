@@ -1,0 +1,139 @@
+<?php 
+//Commission Junction
+$cjId = Mage::helper('astral_integrations_helper')->getCommissionJunctionId();
+$merchant_type = Mage::getStoreConfig('astral_integrations_admin/commission_junction/comission_merchant_type');
+$container_id = Mage::getStoreConfig('astral_integrations_admin/commission_junction/comission_container_id');
+if(isset($cjId) && !empty($cjId) 
+    && isset($merchant_type) && !empty($merchant_type) 
+    && isset($container_id) && !empty($container_id)): 
+    
+    if(!isset($_order) || empty($_order)) {
+        $_orderId = Mage::getSingleton('checkout/session')->getLastOrderId(); 
+        $_order = Mage::getModel('sales/order')->load($_orderId);        
+    }
+
+    $cjEvent = http_build_query(Mage::helper('astral_integrations_helper/orderDecorator')->getCommissionJunctionOrderEvent($_order, $cjId, $merchant_type, $container_id));
+
+    ?>
+
+<iframe height="1" width="1" frameborder="0" scrolling="no" src="#" name="cj_conversion" id="cj_conversion"></iframe>
+
+<script type="text/javascript">
+    var cjevent;
+    var cjIframeSrc = "https://www.emjcd.com/tags/c?<?php echo $cjEvent; ?>";
+    if (typeof getCJEvent === 'function') {
+        cjevent = getCJEvent();
+    }
+    if (cjevent) {
+        cjIframeSrc += '&CJEVENT=' + cjevent;
+    }
+    document.getElementById('cj_conversion').src = cjIframeSrc
+</script>
+<?php endif; ?>
+
+<?php
+//Criteo Tracking
+$criteoId = Mage::helper('astral_integrations_helper')->getCriteoId();
+if(isset($criteoId) && !empty($criteoId)): 
+    if(!isset($_order) || empty($_order)) {
+        $_orderId = Mage::getSingleton('checkout/session')->getLastOrderId(); 
+        $_order = Mage::getModel('sales/order')->load($_orderId);        
+    }
+    $criteoOrderEvent = Mage::helper('astral_integrations_helper/orderDecorator')->getCriteoOrderEventArray($_order); ?>
+
+    <script type="text/javascript">
+        if(typeof siteType === 'undefined') {
+            var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+
+            if (windowWidth > 768) {
+                var siteType = 'd';
+            } else if (windowWidth > 480) {
+                var siteType = 't';
+            } else {
+                var siteType = 'm';
+            }
+        }
+
+        var criteoOrderObj = <?php echo json_encode($criteoOrderEvent); ?>;
+        window.criteo_q = window.criteo_q || []; 
+        window.criteo_q.push(
+            { event: "setAccount", account: "<?php echo $criteoId; ?>"},
+            { event: "setSiteType", type: siteType },
+            criteoOrderObj);
+    </script>
+<?php endif; ?>
+
+<?php 
+//Mavrck
+$mavrckId =  Mage::helper('astral_integrations_helper')->getMavrckId();
+if(isset($mavrckId) && !empty($mavrckId)):
+    if(!isset($_order) || empty($_order)) {
+        $_orderId = Mage::getSingleton('checkout/session')->getLastOrderId(); 
+        $_order = Mage::getModel('sales/order')->load($_orderId);
+    } 
+
+    $mvkEvent = Mage::helper('astral_integrations_helper/orderDecorator')->getMavrckOrderEvent($_order);
+
+    ?>
+    <script type="text/javascript">
+
+    if (window.addEventListener)
+        window.addEventListener("load", function() {
+            <?php echo $mvkEvent; ?>
+        }, false);
+    else if (window.attachEvent)
+        window.attachEvent("onload", function() {
+            <?php echo $mvkEvent; ?>
+        });
+    else window.onload = function() {
+        <?php echo $mvkEvent; ?>
+    };
+
+    </script>
+<?php endif; ?>
+
+<?php 
+//Pixel
+$pixelId = Mage::helper('astral_integrations_helper')->getFacebookPixelId();
+if(isset($pixelId) && !empty($pixelId)): ?>
+    <?php 
+    if(!isset($_order) || empty($_order)) {
+        $_orderId = Mage::getSingleton('checkout/session')->getLastOrderId(); 
+        $_order = Mage::getModel('sales/order')->load($_orderId);
+    }
+
+    $pixelOrderEvent;
+    $pixelOrderEvent = Mage::helper('astral_integrations_helper/orderDecorator')->getPixelOrderEvent($_order);
+
+    if (isset($pixelOrderEvent) && !empty($pixelOrderEvent)): ?>
+        <script type="text/javascript">
+            var pixelEvent = <?php echo json_encode($pixelOrderEvent) ?>;
+            fbq('track', 'Purchase', pixelEvent);
+        </script>
+    <?php endif; ?>
+
+<?php endif; ?>
+
+<?php 
+//SteelHouse
+$steelhouseId = Mage::helper('astral_integrations_helper')->getSteelhouseId();
+if(isset($steelhouseId) && !empty($steelhouseId)): ?>
+    <?php 
+        if(!isset($_order) || empty($_order)) {
+            $_orderId = Mage::getSingleton('checkout/session')->getLastOrderId(); 
+            $_order = Mage::getModel('sales/order')->load($_orderId);
+        } ?>
+    <script type="text/javascript">
+        (function(){var x=null,p,q,m,
+        o="<?php echo $steelhouseId; ?>",
+        l="<?php echo $_order->getOrderId; ?>",
+        i="<?php echo $_order->getGrandTotal(); ?>",
+        c="",
+        k="",
+        g="",
+        j="",
+        u="",
+        shadditional="";
+        try{p=top.document.referer!==""?encodeURIComponent(top.document.referrer.substring(0,512)):""}catch(n){p=document.referrer!==null?document.referrer.toString().substring(0,512):""}try{q=window&&window.top&&document.location&&window.top.location===document.location?document.location:window&&window.top&&window.top.location&&""!==window.top.location?window.top.location:document.location}catch(b){q=document.location}try{m=parent.location.href!==""?encodeURIComponent(parent.location.href.toString().substring(0,512)):""}catch(z){try{m=q!==null?encodeURIComponent(q.toString().substring(0,512)):""}catch(h){m=""}}var A,y=document.createElement("script"),w=null,v=document.getElementsByTagName("script"),t=Number(v.length)-1,r=document.getElementsByTagName("script")[t];if(typeof A==="undefined"){A=Math.floor(Math.random()*100000000000000000)}w="dx.steelhousemedia.com/spx?conv=1&shaid="+o+"&tdr="+p+"&plh="+m+"&cb="+A+"&shoid="+l+"&shoamt="+i+"&shocur="+c+"&shopid="+k+"&shoq="+g+"&shoup="+j+"&shpil="+u+shadditional;y.type="text/javascript";y.src=("https:"===document.location.protocol?"https://":"http://")+w;r.parentNode.insertBefore(y,r)}());
+    </script>
+<?php endif; ?>

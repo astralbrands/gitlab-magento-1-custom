@@ -1,0 +1,55 @@
+<div class="header-language-background">
+    <div class="header-language-container">
+        <?php echo $this->getChildHtml('currency_switcher') ?>
+        <?php if (Mage::getSingleton('customer/session')->isLoggedIn() && $this->getChildHtml('one-page-button')): ?>
+            <div class="left-message">
+                <?php echo $this->getChildHtml('one-page-button') ?>
+            </div>
+        <?php endif ?>
+        <?php if ($this->getChildHtml('main-message')): ?>
+            <div class="main-message">
+                <a class="message" href="#"><?php echo $this->getChildHtml('main-message') ?></a>
+            </div>
+        <?php endif ?>
+
+        <?php if ($this->getChildHtml('spa-button')): ?>
+            <div class="spa-finder">
+                <p><a href="<?php echo Mage::getUrl('store-locator') ?>">spa finder</a></p>
+            </div>
+        <?php endif ?>
+    </div>
+</div>
+<header id="header" class="page-header">
+    <div class="page-header-container">
+        <a class="logo" href="<?php echo $this->getUrl('') ?>">
+            <span class="COS_logo_desktop"></span>
+            <span class="COS_logo_mobile"></span>
+        </a>
+
+        <?php // In order for the language switcher to display next to logo on smaller viewports, it will be moved here.
+              // See app.js for details ?>
+        <!-- Navigation -->
+
+        <div id="header-nav" class="skip-content">
+            <div class="skip-content__mobile-title">Menu</div>
+            <?php echo $this->getChildHtml('topMenu') ?>
+        </div>
+        <!-- Skip Links -->
+        <div class="skip-links">
+            <a href="#header-nav" class="skip-link skip-nav">
+                <span class="skip-nav-row"></span>
+            </a>
+            <div class="account-cart-wrapper">
+                <?php echo $this->getChildHtml('login-toggle', false); ?>
+            </div>
+        </div>
+        <!-- Search -->
+        <div id="header-search" class="skip-content form-search-wrap">
+            <?php echo $this->getChildHtml('topSearch') ?>
+        </div>
+        <!-- Cart -->
+        <?php echo $this->getChildHtml('minicart_head'); ?>
+    </div>
+</header>
+<div class="menu-overlay-element"></div>
+<?php echo $this->getChildHtml('topContainer'); ?>

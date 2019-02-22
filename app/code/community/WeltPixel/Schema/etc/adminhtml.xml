@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <weltpixel translate="title">
+            <title>WeltPixel</title>
+            <sort_order>300</sort_order>
+            <children>
+                <schema translate="title" module="weltpixel_schema">
+                    <title>Schema</title>
+                    <action>adminhtml/system_config/edit/section/weltpixel_schema</action>
+                    <sort_order>20</sort_order>
+                </schema>
+            </children>
+        </weltpixel>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <weltpixel_schema translate="title" module="weltpixel_schema">
+                                        <title>WeltPixel Schema</title>
+                                        <sort_order>1100</sort_order>
+                                    </weltpixel_schema>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

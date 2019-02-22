@@ -1,0 +1,94 @@
+.logo {
+  float: none;
+  height: 70px;
+  vertical-align: middle;
+  display: inline-block;
+  padding: 0;
+  width: auto;
+  min-height: inherit;
+  min-width: inherit;
+  line-height: 7rem;
+  font-size: 0;
+  &:hover {
+    text-decoration: none;
+    opacity: 1;
+  }
+  &:focus {
+    outline: none;
+  }
+  .COS_logo_desktop {
+    font-size: 5rem;
+    line-height: 7rem;
+    vertical-align: middle;
+    display: inline-block;
+  }
+  .COS_logo_mobile {
+    display: none;
+    font-size: 3.8rem;
+    line-height: 4.5rem;
+    vertical-align: middle;
+  }
+}
+._fixed-header {
+  .logo {
+    height: 60px;
+    line-height: 6rem;
+  }
+  .logo .COS_logo_desktop {
+    font-size: 4rem;
+    line-height: 6rem;
+  }
+}
+
+@media only screen and (max-width: $desktop-custom-5) {
+  .logo {
+    height: 70px;
+    .COS_logo_desktop {
+      font-size: 3.8rem;
+      line-height: 7rem;
+    }
+  }
+  ._fixed-header {
+    .logo .COS_logo_desktop {
+      line-height: 6rem;
+    }
+  }
+}
+@media only screen and (max-width: $desktop-xs) {
+  .logo {
+    .COS_logo_desktop {
+      font-size: 3.5rem;
+      line-height: 7rem;
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet-m) {
+  .logo {
+    height: 45px;
+    .COS_logo_desktop {
+      line-height: 4.5rem;
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet-m) {
+  .logo {
+    height: 45px;
+    .COS_logo_desktop {
+      font-size: 3.5rem;
+      line-height: 4.5rem;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .logo {
+    .COS_logo_mobile {
+      display: inline-block;
+    }
+    .COS_logo_desktop {
+      display: none;
+    }
+  }
+}

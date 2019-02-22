@@ -1,0 +1,31 @@
+<?php
+/*
+ *
+ *
+ *
+ */
+$_customCategory = $this->getCustomCategory();
+$_categories = null;
+    if ($_customCategory) {
+    $_categories = $_customCategory->getChildrenCategories();
+    }
+
+    if (isset($_categories) && sizeof($_categories)): ?>
+    <div class="category-select">
+        <label class="title"><?php echo $this->__('Categories') ?></label>
+        <select  onchange="setLocation(this.value)" id="category-select" data-placeholder="All Products">
+            <?php if ($_firstCategory = $this->getFirstCategory($_customCategory)): ?>
+                <option <?php if ($this->isCategoryActive($_firstCategory)): ?> selected="selected"<?php endif; ?> value="<?php echo $this->getCategoryUrl($_firstCategory) ?>">
+                    <?php echo $this->escapeHtml($_firstCategory->getName()) ?>
+                </option>
+            <?php endif ?>
+            <?php foreach ($_categories as $_category): ?>
+                <?php if($_category->getIsActive() && $_category->getProductCount() > 0): ?>
+                    <option <?php if ($this->isCategoryActive($_category)): ?> selected="selected" <?php endif; ?> value="<?php echo $this->getCategoryUrl($_category) ?>">
+                        <?php echo $this->escapeHtml($_category->getName()) ?>
+                    </option>
+                <?php endif; ?>
+            <?php endforeach ?>
+        </select>
+    </div>
+    <?php endif ?>

@@ -1,0 +1,34 @@
+<layout>
+    <!-- This overwrites the shipping options/totals portion of admin order creation before we call for the quote -->
+    <adminhtml_sales_order_create_index>
+        <reference name="shipping_method">
+            <block type="adminhtml/sales_order_create_shipping_method_form"
+                   template="tgcommerce/sales/order/create/shipping/method/form.phtml" name="form"/>
+        </reference>
+    </adminhtml_sales_order_create_index>
+    <!-- This overwrites the shipping options portion of admin order creation after call for the quote -->
+    <!-- <adminhtml_sales_order_create_load_block_shipping_method>
+        <reference name="shipping_method">
+            <block type="adminhtml/sales_order_create_shipping_method_form"
+                   template="tgcommerce/sales/order/create/shipping/method/form.phtml" name="form"/>
+        </reference>
+    </adminhtml_sales_order_create_load_block_shipping_method>-->
+    <!-- This overwrites the admin order display template so we can show shipping details -->
+    <!-- But we are also overwriting the underlying block in /etc/config.xml, and so we could just change the template -->
+    <!-- name called out in the block.  We usually only go this route when we just want to change template and not the -->
+    <!-- underlying block, but since it's working, we'll leave it as is for now -->
+    <adminhtml_sales_order_view>
+        <reference name="order_tab_info">
+            <action method="setTemplate"><template>tgcommerce/sales/order/view/tab/info.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_view>
+    <!-- This doesn't appear to be necessary right now.  But we'll leave it in case we need it. -->
+    <!--
+    <adminhtml_sales_order_create_load_block_data>
+        <reference name="shipping_method">
+            <block type="adminhtml/sales_order_create_shipping_method_form"
+                   template="tgcommerce/sales/order/create/shipping/method/form.phtml" name="form"/>
+        </reference>
+    </adminhtml_sales_order_create_load_block_data>
+    -->
+</layout>

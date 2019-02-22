@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Born_Shipping>
+            <version>1.0.0</version>
+        </Born_Shipping>
+    </modules>
+    <frontend>
+        <translate>
+            <modules>
+                <Born_Shipping>
+                    <files>
+                        <default>Born_Shipping.csv</default>
+                    </files>
+                </Born_Shipping>
+            </modules>
+        </translate>
+    </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Born_Shipping>
+                    <files>
+                        <default>Born_Shipping.csv</default>
+                    </files>
+                </Born_Shipping>
+            </modules>
+        </translate>
+    </adminhtml>
+    <global>
+        <helpers>
+            <born_shipping>
+                <class>Born_Shipping_Helper</class>
+            </born_shipping>
+        </helpers>
+        <blocks>
+            <born_shipping>
+                <class>Born_Shipping_Block</class>
+            </born_shipping>
+        </blocks>
+        <models>
+            <born_shipping>
+                <class>Born_Shipping_Model</class>
+            </born_shipping>
+        </models>
+    </global>
+    <default>
+            <carriers>
+                <employee_shipping>
+                    <active>1</active>
+                    <sallowspecific>0</sallowspecific>
+                    <model>born_shipping/carrier_handcarry</model>
+                    <price>4.95</price>
+                    <handling_fee>0</handling_fee>
+                    <specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
+                    <title>Hand Carry</title>
+                    <free_shipping_name>Hand Carry</free_shipping_name>
+                    <paid_shipping_carrier>United States Postal Service</paid_shipping_carrier>
+                    <paid_shipping_method>Ground</paid_shipping_method>
+                </employee_shipping>
+            </carriers>
+    </default>
+</config>

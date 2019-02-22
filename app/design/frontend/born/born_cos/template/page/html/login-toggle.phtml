@@ -1,0 +1,21 @@
+
+<?php $isLoggedIn = Mage::getSingleton('customer/session')->isLoggedIn(); ?>
+
+<?php if($isLoggedIn) : ?>
+	<div class="account-dropdown">
+		<a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" class="account-dropdown__main-link"><?php echo $this->__('My Account'); ?></a>
+		<div class="account-dropdown__drop">
+			<a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" class="account-dropdown__link"><?php echo $this->__('My Profile') ?></a>
+			<a href="<?php echo Mage::getUrl('sales/order/history/') ?>" class="account-dropdown__link"><?php echo $this->__('Order History') ?></a>
+			<a href="<?php echo Mage::getUrl('zendesk/customer_tickets/index') ?>" class="account-dropdown__link"><?php echo $this->__('My Tickets') ?></a>
+			<a href="<?php echo Mage::getUrl('newsletter') ?>" class="account-dropdown__link"><?php echo $this->__('Email Preference') ?></a>
+			<a href="<?php echo Mage::getUrl('customer/account/logout') ?>" class="account-dropdown__link"><?php echo $this->__('Sign Out') ?></a>
+		</div>
+	</div>
+<?php else : ?>
+	<a class="sign-in" href="<?php echo $this->helper('customer')->getAccountUrl(); ?>">
+		<span class="icon"></span>
+	    <span class="label"><?php echo $this->__('Sign In'); ?></span>
+    </a>
+<?php endif; ?>
+

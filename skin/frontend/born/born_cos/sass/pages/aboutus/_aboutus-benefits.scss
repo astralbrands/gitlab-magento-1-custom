@@ -1,0 +1,168 @@
+// app\design\frontend\born\born\template\borncmshooks\blocks\benefits.phtml
+.cms-about-us {
+  .benefits {
+    @include display(flex);
+    @include flex-wrap(wrap);
+    border-top: 0;
+    .title-block {
+      @include flex-basis(100%);
+      border-bottom: 1px solid $block-border-color;
+      padding: 50px;
+    }
+    .icon-block {
+      @include flex-basis(33.33%);
+      position: relative;
+      &:nth-of-type(3n-1) {
+        .icon-block-inner {
+          border-left: 1px solid $block-border-color;
+        }
+      }
+      &-inner {
+        padding-top: 100%;
+        &-moz {
+          position: absolute;
+          top: 0;
+          right: 0;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          padding: 30px;
+          border-bottom: 1px solid $block-border-color;
+          border-right: 1px solid $block-border-color;
+          text-align: center;
+          @include display(flex);
+          @include flex-direction(column);
+          @include align-items(center);
+          @include justify-content(center);
+        }
+        .benefits-icon {
+          display: inline-block;
+          margin: 0 auto 25px;
+          &:before {
+            font-family: $icomoon;
+            color: $black;
+            font-size: 5.1rem;
+          }
+        }
+        .benefits-description {
+          font-size: 1.6rem;
+          line-height: 2.1rem;
+          font-weight: 200;
+          max-width: 100%;
+          @include gotham();
+        }
+      }
+      &:nth-child(2) {
+        .benefits-icon:before {
+          content: "\e92f";
+        }
+      }
+      &:nth-child(3) {
+        .benefits-icon:before {
+          content: "\e92e";
+        }
+      }
+      &:nth-child(4) {
+        .benefits-icon:before {
+          content: "\e943";
+        }
+      }
+      &:nth-child(5) {
+        .benefits-icon:before {
+          content: "\e949";
+        }
+      }
+      &:nth-child(6) {
+        .benefits-icon:before {
+          content: "\e901";
+        }
+      }
+    }
+
+    .text-block {
+      @include flex-basis(33.33%);
+      position: relative;
+      &-inner {
+        padding-top: 100%;
+        &-moz {
+          position: absolute;
+          top: 0;
+          right: 0;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          padding: 30px;
+          border-bottom: 1px solid $block-border-color;
+          border-right: 1px solid $block-border-color;
+          text-align: center;
+          @include display(flex);
+          @include flex-direction(column);
+          @include align-items(center);
+          @include justify-content(center);
+        }
+      }
+      .benefits-text {
+        @include chronic();
+        @include setFont(2.6rem, 4rem, 400);
+        font-style: italic;
+        text-transform: none;
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+
+
+@media only screen and (max-width: $tablet) {
+  .about-us-template {
+    .benefits {
+      max-width: 936px;
+      .icon-block {
+        @include flex-basis(50%);
+        &:nth-of-type(3n-1) {
+          .icon-block-inner {
+            border-left: 0;
+          }
+        }
+        &:nth-of-type(2n) {
+          .icon-block-inner {
+            border-left: 1px solid $block-border-color;
+          }
+        }
+      }
+      .text-block {
+        @include flex-basis(50%);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .about-us-template {
+    .benefits {
+      max-width: 420px;
+      .icon-block {
+        @include flex-basis(100%);
+        &:nth-of-type(3n-1) {
+          .icon-block-inner {
+            border-left: 1px solid $block-border-color;
+          }
+        }
+        &-inner {
+          border-left: 1px solid $block-border-color;
+          .benefits-icon {
+            &:before {
+              font-size: 4rem;
+            }
+          }
+        }
+      }
+      .text-block {
+        display: none;
+      }
+    }
+  }
+}

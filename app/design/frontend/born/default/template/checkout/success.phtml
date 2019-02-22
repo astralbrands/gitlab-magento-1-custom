@@ -1,0 +1,223 @@
+<!-- born/success -->
+<div class="page-title">
+    <h1><?php echo $this->__('Your order has been received.') ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
+<?php if ($this->getOrderId()):?>
+<?php if ($this->getCanViewOrder()) :?>
+    <p><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></p>
+<?php  else :?>
+    <p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?></p>
+<?php endif;?>
+    <p><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.') ?></p>
+<?php if ($this->getCanViewOrder() && $this->getCanPrintOrder()) :?>
+    <p>
+        <?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $this->getPrintUrl()) ?>
+        <?php echo $this->getChildHtml() ?>
+    </p>
+<?php endif;?>
+<?php endif;?>
+<?php if ($this->getAgreementRefId()): ?>
+    <p><?php echo $this->__('Your billing agreement # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getAgreementUrl()), $this->escapeHtml($this->getAgreementRefId())))?></p>
+<?php endif;?>
+<?php if ($profiles = $this->getRecurringProfiles()):?>
+<p><?php echo $this->__('Your recurring payment profiles:'); ?></p>
+<ul class="disc">
+<?php foreach($profiles as $profile):?>
+<?php $profileIdHtml = ($this->getCanViewProfiles() ? sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getProfileUrl($profile)), $this->escapeHtml($this->getObjectData($profile, 'reference_id'))) : $this->escapeHtml($this->getObjectData($profile, 'reference_id')));?>
+    <li><?php echo $this->__('Payment profile # %s: "%s".', $profileIdHtml, $this->escapeHtml($this->getObjectData($profile, 'schedule_description')))?></li>
+<?php endforeach;?>
+</ul>
+<?php endif;?>
+<div class="buttons-set">
+    <button type="button" class="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Continue Shopping')) ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+</div>
+<div id="mavrck-points-for-purchase" style="margin:10px auto;max-width:800px;width:100%;height:300px"></div>
+<?php 
+/*********************************
+****Common Order Object For tracking
+**********************************/
+$order = Mage::getModel('sales/order')->loadByIncrementId(Mage::getSingleton('checkout/session')->getLastRealOrderId());
+$orderId = $this->getOrderId();
+$ip = $_SERVER['REMOTE_ADDR'];
+$amount = number_format($order->subtotal,2);
+$storeId = Mage::app()->getStore()->getId();
+$mavId = '';
+?>
+<!-- Comission Junction Tracking Code -->
+<?php
+
+if (Mage::getStoreConfig('born_affiliate/cj_tracking/enable', $storeId)):
+    $merchant_id = Mage::getStoreConfig('born_affiliate/cj_tracking/merchant_id', $storeId);
+    $merchant_type = Mage::getStoreConfig('born_affiliate/cj_tracking/merchant_type', $storeId); ;
+    $container_id = Mage::getStoreConfig('born_affiliate/cj_tracking/container_id', $storeId);
+
+    $currency = $order->getOrderCurrencyCode();
+    $items = $order->getAllVisibleItems();
+    $couponCode = $order->getCouponCode();
+    $discount = str_replace('-', '', $order->getDiscountAmount());
+    $count=1;
+    $cjParams='';
+    $itemsList = array();
+    $total = 0;
+    $idevItems = '';
+    $ic = 0;
+    foreach($items as $item){
+        if($ic == 0){
+        $idevItems .= $item->getSku();    
+        }else{
+        $idevItems .= '|'.$item->getSku();    
+        }        
+    $itemObject = new stdClass();
+    $itemObject->id = $item->getSku();
+    $itemObject->price = intval($item->getQtyOrdered());
+    $itemObject->quantity = round($item->getPrice(), 2);
+    $sku=$item->getSku();
+    $qty=intval($item->getQtyOrdered());
+    $amt=round($item->getPrice(), 2);
+    $total = $total + $item->getPrice();
+    
+    $cjParams.='&ITEM'.$count.'='.$sku.'&AMT'.$count.'='.$amt.'&QTY'.$count.'='.$qty;
+    $count++;
+    $itemsList[] = $itemObject;   
+    $ic++;
+    }
+    $total = round($total, 2);
+    
+    $applied_total = $total - $discount;
+    
+    $itemsListEnc = json_encode($itemsList);
+    $cjParams .= ($discount)?'&DISCOUNT='.round($discount,2):'';
+    $cjParams .= ($couponCode)?'&COUPON='.$couponCode:'';
+    ?>
+
+<?php endif; ?>
+<!-- End Comission Junction Tracking Code -->
+
+<?php
+$url = $_SERVER['HTTP_HOST'];
+    if($url === 'www.cosmedix.com' || $url === 'cosmedix.com'|| $url === 'development.cosmedix.com'|| $url === 'uat.cosmedix.com'|| $url === 'staging.cosmedix.com'){
+    $mavId = 'F48339D1AEE4495B92730427B333D0D0';
+    
+    // Prod loop if($url === 'www.cosmedix.com' || $url === 'cosmedix.com'|| $url === 'staging.cosmedix.com'){
+        $tracking_url = Mage::getStoreConfig('idevaffiliate/idevaffiliate/idev_tracking_url') . 'sale.php';
+        $tracking_fields = 'profile=54';
+        $stop = false;
+        if(!isset($ip)){
+            $stop = true;
+        }
+        if(!isset($total)){
+            $stop = true;
+        }
+        if(!isset($orderId)){
+            $stop = true;
+        }
+        if(!isset($idevItems)){
+            $stop = true;
+        }
+        if(!isset($couponCode)){
+            $couponCode = '';
+        }        
+        
+        if(!$stop){
+?>        
+<!-- iDev trigger -->
+<script>
+jQuery( document ).ready(function() {
+    var obj = {};
+    obj.config = {};
+    obj.data = {};
+    var idev = {};
+    obj.config.url = '<?php echo $tracking_url; ?>';
+    obj.config.dataType = 'json';
+    
+    obj.data.profile = 54;
+    obj.data.ip_address = '<?php echo $ip; ?>';
+    obj.data.idev_saleamt = '<?php echo $total; ?>';
+    obj.data.idev_ordernum = '<?php $this->escapeHtml($this->getOrderId()); ?>';
+    obj.data.products_purchased = '<?php echo $idevItems; ?>';
+    obj.data.coupon_code = <?php echo $couponCode; ?>;
+
+    var poststatus = idev.post(obj);
+    
+    idev.post = function(obj){
+        jQuery.ajax({
+        type: "POST",
+        url: obj.config.url,
+        data: obj.data.data,
+        success: this.success,
+        dataType: obj.config.dataType
+        });        
+    };
+    idev.success = function(){
+        console.log('kaplaa');
+        return true;
+    }
+    
+});
+</script>
+<!-- /iDev trigger -->
+<?php
+        }
+    // Prodloop }
+    }elseif($url === 'www.purcosmetics.com' || $url === 'purcosmetics.com'|| $url === 'development.purcosmetics.com'|| $url === 'uat.purcosmetics.com'|| $url === 'staging.purcosmetics.com'){
+    $mavId = '48AC2B392DC345288E4BCBE478FF95BC';
+    }
+?>
+
+
+
+<?php 
+
+$appliedRules = array();
+
+if (strlen($order->getAppliedRuleIds()) > 0) {
+    foreach(explode(",",$order->getAppliedRuleIds()) as $ruleId){       
+        $rule = Mage::getModel('salesrule/rule')->load($ruleId);
+        $couponCode = $rule->getCouponCode(); 
+        if (isset($couponCode) && !empty($couponCode) && $couponCode != 'null') {
+            array_push($appliedRules, $rule->getCouponCode());
+        }
+    }
+}
+$couponCodes = json_encode($appliedRules);
+?>
+
+<!-- Mavrck Conversion trigger -->
+<script>  
+    mvk('fireConversion', '<?php echo $mavId; ?>', '<?php echo $applied_total ?>','0.0','', '<?php echo $order->getIncrementId(); ?>', '<?php echo $couponCodes; ?>');
+</script>
+
+<!-- /Mavrck Conversion trigger -->
+<!-- GA EC Conversion trigger -->
+<?php
+    if($storeId == 1){
+       $affiliation = 'Pur Cosmetics'; 
+    }else if($storeId == 2){
+        $affiliation = 'Cosmedix';
+    }else if($storeId == 3){
+        $affiliation = 'Cosmedix';
+    }else{
+        $affiliation = '';
+    }
+$subtotal = $order->getSubtotal();
+$grandTotal = $order->getGrandTotal(); 
+$tax_amount = $order->getTaxAmount();
+$tax_canceled = $order->getTaxCanceled();
+$tax = $tax_amount - $tax_canceled;
+$shipping_amount = $order->getShippingAmount();
+$shipping_canceled = $order->getShippingCanceled();
+$shipping = $shipping_amount - $shipping_canceled;
+?>
+<script>
+ga('ec:setAction', 'purchase', {
+  'id': '<?php echo $this->escapeHtml($this->getOrderId()); ?>',
+  'affiliation': '<?php echo $affiliation; ?>',
+  'revenue': '<?php if(isset($grandTotal)&&!empty($grandTotal)){ echo $grandTotal; } ?>',
+  'tax': '<?php if(isset($tax)&&!empty($tax)){ echo $tax; } ?>',
+  'shipping': '<?php if(isset($shipping)&&!empty($shipping)){ echo $shipping; } ?>',
+  'coupon': '<?php if(isset($couponCode)&&!empty($couponCode)){ echo $couponCode; } ?>'    // User added a coupon at checkout.
+});     
+</script>
+<!-- /GA EC Conversion trigger -->

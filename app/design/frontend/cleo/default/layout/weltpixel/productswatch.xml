@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+    <PRODUCT_TYPE_configurable>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/productswatch.js</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="weltpixel_productswatch/catalog_product_view_type_configurable_additional" template="weltpixel/catalog/product/view/type/configurable/additional.phtml" />
+        </reference>
+    </PRODUCT_TYPE_configurable>
+</layout>

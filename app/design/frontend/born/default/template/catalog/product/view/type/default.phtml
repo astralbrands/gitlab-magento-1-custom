@@ -1,0 +1,7 @@
+<?php
+        if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) { 
+        //Mage::log(__FILE__, false, 'OptionSwatch.log');
+        }
+?>
+<?php $_product = $this->getProduct() ?>
+<?php echo $this->getChildHtml('product_type_data_extra') ?>

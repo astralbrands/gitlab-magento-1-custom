@@ -1,0 +1,112 @@
+<?php
+$_helper = $this->helper('weltpixel_layerednavigation');
+$showCategoryCount = $_helper->showProductCountOnCategories();
+$showAttributesCount = $_helper->showProductCountOnAttributes();
+$requestVar = $this->getFilter()->getRequestVar();
+$attributeDisplayOption = $_helper->getAttributeDisplay($requestVar);
+
+$itemsDisplay = $_helper->getItemsDisplay();
+$itemLimit = $_helper->getItemLimit();
+
+$swatchWidth = $_helper->getSwatchWidth();
+$swatchHeight = $_helper->getSwatchHeight();
+
+$index = 0;
+$showMoreLess = false;
+?>
+<ol>
+    <?php
+    switch ($attributeDisplayOption) {
+        case 1:
+            ?>
+            <?php foreach ($this->getItems() as $_item): ?>
+                    <?php $index += 1; ?>
+                <li class="checkbox-filter <?php if ($itemsDisplay && $itemLimit && ($index > $itemLimit)) : $showMoreLess = true;
+                        echo 'attribute_more_less';
+                    endif; ?>" >
+                    <?php if ($_item->getCount() > 0): ?>
+                        <input class="filter_checkbox" type="checkbox" value="" <?php if ($_item->getChecked()) echo 'CHECKED="CHECKED"' ?>  onclick="setLocation('<?php echo $this->urlEscape($_item->getUrl()); ?>');">
+                        <label><a class="filter_checkbox_a" href="<?php echo $this->urlEscape($_item->getUrl()); ?>" >
+                        	<?php echo $_item->getLabel() ?>
+                        	<?php if ($showAttributesCount): ?>
+			                        (<?php echo $_item->getCount() ?>)
+			                <?php endif; ?>
+			                <i class="icon-checkmark"></i>
+                        </a>
+						</label>
+                    <?php else: echo $_item->getLabel() ?>
+                    <?php endif; ?>
+                    <?php if (($this instanceof Mage_Catalog_Block_Layer_Filter_Category) && !$showCategoryCount): ?>
+                        <?php continue; ?>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach ?>
+            <?php if(!$_helper->isMobileOrTablet()):?>
+                <?php if ($showMoreLess) : ?>
+                    <li class="show_more"><span> <?php echo $this->__('More'); ?> &nbsp; <i class="icon-chevron-down"></i></span></li>
+                    <li class="show_less"><span> <?php echo $this->__('Less'); ?> &nbsp; <i class="icon-chevron-up"></i></span></li>
+                <?php endif; ?>
+            <?php endif; ?>
+        <?php break; ?>
+
+            <?php case 2: ?>
+            <li>
+            <select onchange="if (this.value) setLocation(this.value)" class="weltpixel-layered-select">
+                <option value=""></option>
+            <?php foreach ($this->getItems() as $_item): ?>
+                    <option  value="<?php echo $this->urlEscape($_item->getUrl()) ?>"><?php echo $_item->getLabel() ?> <?php if ($showAttributesCount) : ?> (<?php echo $_item->getCount() ?>) <?php endif; ?></option>
+            <?php endforeach ?>
+            </select>
+            </li>
+                <?php break; ?>
+
+            <?php case 3: ?>
+            <li class="swatches" >
+        <?php foreach ($this->getItems() as $_item): ?>
+
+                    <?php if ($_item->getCount() > 0): ?>
+                        <a href="<?php echo $this->urlEscape($_item->getUrl()); ?>" class="filter_checkbox <?php if ($_item->getChecked()) echo 'active_swatch' ?>"  onclick="setLocation('<?php echo $this->urlEscape($_item->getUrl()); ?>');" >
+                            <span class="swatch-container wp-ai-<?php  echo $_item->getValue()?>" ></span>
+                        	<i class="icon-checkmark"></i>
+                        </a>
+                <?php endif; ?>
+            <?php endforeach ?>
+            </li>
+            <?php break; ?>
+
+        <?php default: ?>
+
+                <?php foreach ($this->getItems() as $_item): ?>
+                    <?php $index += 1; ?>
+                <li class=" <?php if ($itemsDisplay && $itemLimit && ($index > $itemLimit)) : $showMoreLess = true;
+                        echo 'attribute_more_less';
+                    endif; ?>" >
+                    <?php if ($_item->getCount() > 0): ?>
+                        <a href="<?php echo $this->urlEscape($_item->getUrl()) ?>"><?php echo $_item->getLabel() ?>
+                        <?php if ($showAttributesCount): ?>
+                            (<?php echo $_item->getCount() ?>)
+                        <?php endif; ?>
+                        </a>
+                    <?php else: echo $_item->getLabel() ?>
+                    <?php endif; ?>
+                    <?php if (($this instanceof Mage_Catalog_Block_Layer_Filter_Category) && !$showCategoryCount): ?>
+                    <?php continue; ?>
+                <?php endif; ?>
+                </li>
+            <?php endforeach ?>
+            <?php if(!$_helper->isMobileOrTablet()):?>
+            <?php if ($showMoreLess) : ?>
+                <li class="show_more"><span> <?php echo $this->__('More'); ?> &nbsp; <i class="icon-chevron-down"></i></span></li>
+                <li class="show_less"><span> <?php echo $this->__('Less'); ?> &nbsp; <i class="icon-chevron-up"></i></span></li>
+            <?php endif; ?>
+            <?php endif; ?>
+
+        <?php
+        break;
+}
+?>
+
+
+
+
+</ol>

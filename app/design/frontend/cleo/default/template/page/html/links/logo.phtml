@@ -1,0 +1,16 @@
+<?php
+$_isHomepage = $this->getIsHomePage();
+$_logoAlt = $this->getLogoAlt();
+$_logoUrl = $this->getUrl('');
+$_logoSrc = $this->getLogoSrc();
+?>
+
+<?php if ($_isHomepage) { ?>
+    <div id="logo">
+        <span><img src="<?php echo $_logoSrc; ?>" alt="<?php echo $_logoAlt; ?>" /></span>
+    </div>
+<?php } else { ?>
+    <div id="logo">
+        <a href="<?php echo $_logoUrl; ?>"><img src="<?php echo $_logoSrc; ?>" alt="<?php echo $_logoAlt; ?>" /></a>
+    </div>
+<?php } ?>

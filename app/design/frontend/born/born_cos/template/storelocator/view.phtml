@@ -1,0 +1,69 @@
+<?php
+
+$apiKey = Mage::getStoreConfig('storelocator/storelocator/google_api_key');?>
+<div class="storelocator">
+<?php if (isset($apiKey) && !empty($apiKey)): ?>
+
+    <div class="map-container">
+        <div class="mobile-search-result">
+            <a href="#" class="link-edit-search"><?php echo $this->__('Edit Search'); ?></a>
+            <div class="button-set">
+                <a class="btn btn-map current" href="">Map</a>
+                <a class="btn btn-stores-list" href="">List</a>
+            </div>
+
+        </div>
+        <div id="map-canvas" style="height: 100%; margin: 0px; padding: 0px;">
+        </div>
+    </div>
+
+            <form id="storelocator-form" name="storelocator-form" class="style-fast store-locator-form" method="get">
+                <h1 class="store-locator-form-title"><?php echo $this->__('Spa Finder') ?></h1>
+
+                <div class="form-content">
+                    <div class="input-box">
+                        <input type="text" name="postal_code" id="inputzipcode" class="input-text <?php echo isset($_POST["postal_code"]); ?>" value="<?php echo isset($_POST["postal_code"]); ?>">
+                        <label for="inputzipcode" class="label-text">City & State or Zip Code</label>
+                    </div>
+
+                    <div class="squaredOne">
+                        <select name="distance">
+                            <option value="0"><?php echo $this->__('Distance'); ?></option>
+                            <option value="5"><?php echo $this->__('5 Miles'); ?></option>
+                            <option value="10"><?php echo $this->__('10 Miles'); ?></option>
+                            <option value="25"><?php echo $this->__('25 Miles'); ?></option>
+                            <option value="50"><?php echo $this->__('50 Miles'); ?></option>
+                            <option value="100"><?php echo $this->__('100 Miles'); ?></option>
+                        </select>
+                    </div>
+
+                    <input onclick="doRealSearch()" type="submit" class="store-locator-form-submit-btn button fontBtM12" value="<?php echo $this->__('Find Location'); ?>">
+
+                    <script>
+                        var input = jQuery("<input>")
+                            .attr("type", "hidden")
+                            .attr("name", "isRealSearch").val(false)
+                            .attr("id", "isRealSearch-store");
+                        jQuery('#storelocator-form').append(jQuery(input));
+
+                        function doFakeSearch() {
+                            jQuery('#isRealSearch-store').val(false);
+
+                        }
+
+                        function doRealSearch() {
+                            jQuery('#isRealSearch-store').val(true);
+
+                        }
+                    </script>
+                </div>
+
+            </form>
+<?php endif;?>
+    <div class="stores wrapper">
+        <?php if (Mage::getModel('cms/block')->load('spa_of_the_month')->getIsActive()) {
+                echo $this->getChildHtml('spa_of_the_month');
+            } ?>
+    </div>
+</div>
+

@@ -1,0 +1,50 @@
+<?php 
+$hooks_helper = Mage::helper('borncmshooks');
+$benefits_object_collection = $this->getBenefitsObjectCollection();
+
+$benefits_object_collection = Mage::helper('borncmshooks/sort')->sortCollection($benefits_object_collection);
+
+/*
+Benefits Field Attributes
+- BenefitTitle - text
+- BenefitDescription - text
+- IconImage - image
+- IconDescription - text
+- BenefitText - text
+ */ 
+?>
+
+<?php foreach ($benefits_object_collection as $index => $block): ?>
+	<?php if ($block->getBenefitTitle() || $block->getBenefitDescription()): ?>
+		<div class="title-block">
+			<?php if ($block->getBenefitTitle() ): ?>
+				<h2 class="benefits-title"><?php echo $block->getBenefitTitle()  ?></h2>
+			<?php endif ?>
+			<?php if ($block->getBenefitDescription()): ?>
+				<p class="benefits-description"><?php echo $block->getBenefitDescription() ?></p>
+			<?php endif ?>
+		</div>
+	<?php elseif ($block->getIconImage() || $block->getIconDescription()): ?>
+		<div class="icon-block">
+			<div class="icon-block-inner">
+				<div class="icon-block-inner-moz">
+<!--					--><?php //if ($block->getIconImage()): ?>
+<!--						<img class="benefits-icon" src="--><?php //echo $hooks_helper->getImageUrl($block->getIconImage()); ?><!--">-->
+<!--					--><?php //endif ?>
+					<p class="benefits-icon"></p>
+					<?php if ($block->getIconDescription()): ?>
+						<p class="benefits-description"><?php echo $block->getIconDescription() ?></p>
+					<?php endif ?>
+				</div>
+			</div>
+		</div>
+	<?php elseif ($block->getBenefitText()): ?>
+		<div class="text-block">
+			<div class="text-block-inner">
+				<div class="text-block-inner-moz">
+					<h2 class="benefits-text"><?php echo $block->getBenefitText() ?></h2>
+				</div>
+			</div>
+		</div>
+	<?php endif ?>
+<?php endforeach ?>

@@ -1,0 +1,337 @@
+@font-face {
+  font-family: 'icomoon';
+  src:    url('fonts/icomoon.eot?t2r720');
+  src:    url('fonts/icomoon.eot?t2r720#iefix') format('embedded-opentype'),
+  url('fonts/icomoon.ttf?t2r720') format('truetype'),
+  url('fonts/icomoon.woff?t2r720') format('woff'),
+  url('fonts/icomoon.svg?t2r720#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-person:before {
+  content: "\e94b";
+}
+.icon-COS_logo:before {
+  content: "\e900";
+}
+.icon-COS_logo_with_icon:before {
+  content: "\e901";
+}
+.icon-add_friend:before {
+  content: "\e902";
+}
+.icon-aloe:before {
+  content: "\e903";
+}
+.icon-arrow__down_small:before {
+  content: "\e904";
+}
+.icon-badge_new_filled:before {
+  content: "\e905";
+}
+.icon-badge_new_outline:before {
+  content: "\e906";
+}
+.icon-calendar_view:before {
+  content: "\e907";
+}
+.icon-checkbox_selected:before {
+  content: "\e908";
+}
+.icon-checkbox_unselected:before {
+  content: "\e909";
+}
+.icon-cruelty_free_one_color:before {
+  content: "\e90a";
+}
+.icon-ex:before {
+  content: "\e90b";
+}
+.icon-facebook:before {
+  content: "\e90c";
+}
+.icon-favorite:before {
+  content: "\e90d";
+}
+.icon-favorite_selected:before {
+  content: "\e90e";
+}
+.icon-gentle:before {
+  content: "\e90f";
+}
+.icon-google:before {
+  content: "\e910";
+}
+.icon-hamburger_or_list:before {
+  content: "\e911";
+}
+.icon-hydration:before {
+  content: "\e912";
+}
+.icon-info:before {
+  content: "\e913";
+}
+.icon-instagram:before {
+  content: "\e914";
+}
+.icon-map_pin_1:before {
+  content: "\e915";
+}
+.icon-map_pin_10:before {
+  content: "\e916";
+}
+.icon-map_pin_10_filled:before {
+  content: "\e917";
+}
+.icon-map_pin_11:before {
+  content: "\e918";
+}
+.icon-map_pin_11_filled:before {
+  content: "\e919";
+}
+.icon-map_pin_12:before {
+  content: "\e91a";
+}
+.icon-map_pin_12_filled:before {
+  content: "\e91b";
+}
+.icon-map_pin_1_filled:before {
+  content: "\e91c";
+}
+.icon-map_pin_2:before {
+  content: "\e91d";
+}
+.icon-map_pin_2_filled:before {
+  content: "\e91e";
+}
+.icon-map_pin_3:before {
+  content: "\e91f";
+}
+.icon-map_pin_3_filled:before {
+  content: "\e920";
+}
+.icon-map_pin_4:before {
+  content: "\e921";
+}
+.icon-map_pin_4_filled:before {
+  content: "\e922";
+}
+.icon-map_pin_5:before {
+  content: "\e923";
+}
+.icon-map_pin_5_filled:before {
+  content: "\e924";
+}
+.icon-map_pin_6:before {
+  content: "\e925";
+}
+.icon-map_pin_6_filled:before {
+  content: "\e926";
+}
+.icon-map_pin_7:before {
+  content: "\e927";
+}
+.icon-map_pin_7_filled:before {
+  content: "\e928";
+}
+.icon-map_pin_8:before {
+  content: "\e929";
+}
+.icon-map_pin_8_filled:before {
+  content: "\e92a";
+}
+.icon-map_pin_9:before {
+  content: "\e92b";
+}
+.icon-map_pin_9_filled:before {
+  content: "\e92c";
+}
+.icon-minus:before {
+  content: "\e92d";
+}
+.icon-molecule:before {
+  content: "\e92e";
+}
+.icon-one_page_order_form:before {
+  content: "\e92f";
+}
+.icon-pagination_dot:before {
+  content: "\e930";
+}
+.icon-pagination_dot_filled:before {
+  content: "\e931";
+}
+.icon-perscription:before {
+  content: "\e932";
+}
+.icon-pinterest:before {
+  content: "\e933";
+}
+.icon-playbutton:before {
+  content: "\e934";
+}
+.icon-playbutton_hover:before {
+  content: "\e935";
+}
+.icon-plus:before {
+  content: "\e936";
+}
+.icon-radio_selected .path1:before {
+  content: "\e937";
+  color: rgb(151, 151, 151);
+}
+.icon-radio_selected .path2:before {
+  content: "\e938";
+  margin-left: -1em;
+  color: rgb(0, 0, 0);
+}
+.icon-radio_unselected:before {
+  content: "\e939";
+}
+.icon-search:before {
+  content: "\e93a";
+}
+.icon-shopping_bag:before {
+  content: "\e93b";
+}
+.icon-spa_finder:before {
+  content: "\e93c";
+}
+.icon-spa_finder_elite_badge:before {
+  content: "\e93d";
+}
+.icon-sun_exposure:before {
+  content: "\e93e";
+}
+.icon-sun_spots:before {
+  content: "\e93f";
+}
+.icon-texture_plumping:before {
+  content: "\e940";
+}
+.icon-twitter:before {
+  content: "\e941";
+}
+.am-icon .path1:before {
+  content: "\e942";
+  color: rgb(37, 39, 43);
+}
+.am-icon .path2:before {
+  content: "\e943";
+  margin-left: -2.6845703125em;
+  color: rgb(37, 39, 43);
+}
+.am-icon .path3:before {
+  content: "\e944";
+  margin-left: -2.6845703125em;
+  color: rgb(216, 216, 213);
+}
+.am-icon .path4:before {
+  content: "\e945";
+  margin-left: -2.6845703125em;
+  color: rgb(216, 216, 213);
+}
+.am-icon .path5:before {
+  content: "\e948";
+  margin-left: -2.6845703125em;
+  color: rgb(216, 216, 213);
+}
+.ampm-icon:before {
+  content: "\e949";
+}
+.pm-icon .path1:before {
+  content: "\e94a";
+  color: rgb(216, 216, 213);
+}
+.pm-icon .path2:before {
+  content: "\e951";
+  margin-left: -2.6845703125em;
+  color: rgb(216, 216, 213);
+}
+.pm-icon .path3:before {
+  content: "\e952";
+  margin-left: -2.6845703125em;
+  color: rgb(216, 216, 213);
+}
+.pm-icon .path4:before {
+  content: "\e953";
+  margin-left: -2.6845703125em;
+  color: rgb(37, 39, 43);
+}
+.pm-icon .path5:before {
+  content: "\e954";
+  margin-left: -2.6845703125em;
+  color: rgb(37, 39, 43);
+}
+.icon-vitamin_C:before {
+  content: "\e94d";
+}
+.icon-wrinkle_reducing:before {
+  content: "\e94e";
+}
+.icon-youtube:before {
+  content: "\e94f";
+}
+.icon-tiny_arrow_left:before {
+  content: "\e946";
+}
+.icon-tiny_arrow_right:before {
+  content: "\e947";
+}
+
+	.product-subtitle{
+		color: #25272b;
+		font-family: "Gotham A","Gotham B",sans-serif;
+		font-size: 1.4rem;
+		font-syle: normal;
+	}
+	h2.slot-title{
+		font-size: 3.6rem;
+		line-height: 4.2rem;	
+	}
+
+	p.slot-text {
+		color: #25272b;
+		max-width: 220px;
+		margin: 0 auto;
+		font-size: 1.6rem;
+		line-height: 3rem;
+		font-weight: 200;
+	}
+	
+	.cms-page-view .std h2, .cms-no-route .std h2 {
+		color: #000000;
+	}
+	
+	@media only screen and (max-width: 640px){
+		.one-third.font-black.bg-white {
+			display: none;
+		}
+		.one-third-vertical.font-black.bg-white{
+			display: none;
+		}
+		.team{
+			display: none;
+		}
+		.videocarousel{
+			display: none;
+		}		
+	}
+	
+	

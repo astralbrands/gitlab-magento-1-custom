@@ -1,0 +1,115 @@
+<?php
+/**
+ * Copyright 2014 Zendesk.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+?>
+<pre class="press">
+<?php 
+	$form_fields=$this->getFieldsets();
+	$_storeId = Mage::app()->getStore()->getStoreId();
+	$_professionalAnchorTag = Mage::getStoreConfig('customer/startup/professional_signup_anchor_tag', $_storeId);
+        $insertedId = array();
+?>
+<?php if ($_professionalAnchorTag): ?>
+	<a name="<?php echo $_professionalAnchorTag ?>"></a>
+<?php endif ?>
+<div class="pro-artist-form" id="pro-registration">
+<form action="<?php echo $this->getSubmitAction(); ?>" id="pro-artist-signup"  enctype="multipart/form-data" method="post" class="scaffold-form">
+    <div class="fieldset">
+        <h2 class="legend">Registration Form</h2>
+		<?php $i = 0; ?>
+		<?php foreach($form_fields as $group => $fields): ?>
+			
+			<?php $_elementGroupId = $fields['groupId']; unset($fields['groupId'])?>
+			<?php $_styleGroupHtml = $this->getStyleHtml($_elementGroupId); ?>
+			<?php $_elementGroupIdHtml =  $_elementGroupId ? 'id="'.$_elementGroupId . '"': ''; ?>
+			<div class="fieldset fieldset-<?php echo $i ?>" <?php echo $_styleGroupHtml ?> <?php echo $_elementGroupIdHtml ?>>
+				<div class='group-name'><?php echo $group ?></div>
+				<ul>
+					<?php $childId = ''; ?>
+					<?php $index = 0; ?>
+					<?php foreach ($fields as $field): ?>
+					<?php $code=$this->getCode($field['name'])?>
+                    <?php $customOptionId = $this->getCode($field['custom_options']); ?>
+						<li >
+						<?php $_requiredHtml = $field['required'] ? 'required-entry' : '' ?>
+						<?php $_elementId =  $field['id'] ? 'id="'.$field['id'] . '"': ''; ?>
+						<?php $_targetId  = $field['target_id'] ? 'data-target-id="' . $field['target_id'] .'"' : ''?>
+						<?php $this->addTargetId($field['target_id']) ?>
+						<?php $_styleHtml = $this->getStyleHtml($field['id']); ?>
+						<?php $codeValue = $customOptionId ? $customOptionId : $code ?>
+						<?php $_id = $codeValue ?>
+						<?php $_id = strtolower($_id) ?>
+                                                <?php $_id = (in_array($_id, $insertedId)) ? $_id.'_'.$field['sort_order']: $_id; ?>
+                                                    <?php $customOptionId = (in_array($_id, $insertedId)) ? $customOptionId.'_'.$field['sort_order']: $customOptionId; ?>
+                                                <?php $insertedId[] = $_id ?>
+	                    
+							<?php
+							$type = $field['type'];
+							$_fieldLabel = $field['name_label'] ? $field['name_label'] : $field['name'];
+							if( $type != 'checkbox' && $type != 'file' && $type !='radio'):?>
+							<div class="field-general fields" <?php echo $_styleHtml ?> <?php echo $_elementId . $_targetId ?> >
+								<div class="input-box">
+									<input name="<?php  echo $code . '[]'; ?>" id="<?php echo $_id ?>" title="<?php  echo $code; ?>" value="" class="input-text <?php echo $_requiredHtml ?>" type="<?php echo $field['type']; ?>">
+									<label class="label-text" for="<?php echo $_id ?>" ><?php  echo $_fieldLabel; ?></label>
+								</div>
+							</div>
+							<?php elseif( $type == 'file'): ?>
+							<div class="field-credentials fields" <?php echo $_styleHtml ?> <?php echo $_elementId . $_targetId ?>>
+								<label class="label-text-up" for="<?php  echo $code; ?>" ><?php  echo $_fieldLabel; ?></label>
+								<div class="file-box">
+									<input name="<?php  echo $code; ?>" id="<?php echo $_id ?>" title="<?php  echo $code; ?>" value="" class="input-text input-field <?php echo $_requiredHtml ?>" type="<?php echo $field['type']; ?>" data-caption="file selected">
+									<label class="label-file" for="<?php  echo $code; ?>" >Choose file</label>
+									<span class="label-file-right">No File Chosen</span>
+								</div>
+							</div>
+						<?php elseif($type == 'radio'): ?>
+							<?php if ($field['name_label']): ?>
+									<h3 class="<?php echo $type .'-title' ?>" for="<?php  echo $code; ?>" <?php echo $_styleHtml ?> ><?php  echo $field['name_label']; ?></h3>
+							<?php endif ?>
+							<div class=" field-radio fields" <?php echo $_styleHtml ?> <?php echo $_elementId . $_targetId ?>>
+								<div class="radio-box">
+									<input name="<?php  echo $code . '[]'; ?>" id="<?php echo $_id ?>" title="<?php  echo $code; ?>" value="<?php echo $field['custom_options'] ?>" class=" <?php echo $_requiredHtml ?>" type="<?php echo $field['type']; ?>">
+									<label for="<?php echo $_id ?>" ><?php  echo $field['custom_options']; ?></label>
+								</div>
+							</div>
+						<?php else: ?>
+							<?php if ($field['name_label']): ?>
+								<h3 class="<?php echo $type .'-title' ?>" for="<?php  echo $code; ?>" <?php echo $_styleHtml ?> ><?php  echo $field['name_label']; ?></h3>
+							<?php endif ?>
+							<div class="field-expertise fields" <?php echo $_styleHtml ?> <?php echo $_elementId . $_targetId ?>>
+								<div class="check-box">
+									<input name="<?php echo $code . '[]'; ?>" id="<?php echo $_id ?>" title="<?php  echo $code; ?>" value="<?php echo $field['custom_options'] ?>" class=" <?php echo $_requiredHtml ?>" type="<?php echo $field['type']; ?>">
+									<label for="<?php echo $_id ?>" ><?php  echo $field['custom_options']; ?></label>
+								</div>
+							</div>
+						</li>
+					<?php endif ?>
+					<?php $childId = $field['child_id'] ?>
+					<?php endforeach ?>
+				</ul>
+			</div>
+			<?php $i++; ?>
+			<?php endforeach; ?>
+    </div>
+    <div class="buttons-set">
+        <input type="text" name="hideit" id="hideit" value="" style="display:none !important;">
+        <button type="submit" title="Submit" class="button"><span><span>Submit Application</span></span></button>
+    </div>
+</form>
+    <script type="text/javascript">
+        var proArtistForm = new VarienForm('pro-artist-signup', true);
+    </script>
+</div>

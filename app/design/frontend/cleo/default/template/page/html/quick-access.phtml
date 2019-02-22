@@ -1,0 +1,16 @@
+<?php
+$disableCompare = Mage::getStoreConfig('weltpixel_selector/headeroptions/disable_compare');
+?>
+<ul id="quick-access">
+    <li class="first">
+        <?php echo $this->getChildHtml('search'); ?>
+    </li>
+    <li class="mini-cart first">
+        <?php echo $this->getChildHtml('cart'); ?>
+    </li>  
+    <?php if (!$disableCompare): ?>
+    <li class="mini-compare last">
+        <?php echo $this->getChildHtml('product_compare_block'); ?>
+    </li>    
+    <?php endif; ?>                                          
+</ul>

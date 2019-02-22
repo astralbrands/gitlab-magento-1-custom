@@ -1,0 +1,78 @@
+<div class="importexport_content_container" id="import_export_setting_container">
+    <div class="content-header"><h3>WeltPixel Settings Import/Export</h1></div>
+    <div class="content">
+        <table cellspacing="10" cellpadding="10" class="form-edit">
+            <tbody>
+                <tr>
+                    <td width="50%" >
+                        <div class="entry-edit" >
+                            <div>
+                                <div class="entry-edit-head">
+                                    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Export Settings') ?></h4>
+                                </div>
+                                <div class="fieldset ">
+                                    <div class="hor-scroll hor-scroll-simple">
+                                        <form  name="export_settings" action="<?php echo Mage::helper("adminhtml")->getUrl("adminhtml/wpsetup/exportentity"); ?>" method="post" >
+                                            <?php echo $this->getBlockHtml('formkey') ?>
+                                            <input type="hidden" name="export_entity" value="setting" />
+                                            <table cellspacing="10" cellpadding="10" >
+                                                <tr>
+                                                    <td ><?php echo $this->__('Select Store') ?>: </td>
+                                                    <td>
+                                                        <?php
+                                                        $options = array('id' => 'export_store', 'name' => 'export_store', 'size' => '13', 'style' => 'width: 280px');
+                                                        echo Mage::helper('weltpixel_setup')->getStoreOptions($options);
+                                                        ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2"> <input type="submit"  class="form-button" value="<?php echo $this->__('Export') ?>"/></td>
+                                                </tr>
+                                            </table>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td width="50%">
+                        <div class="entry-edit">
+                            <div>
+                                <div class="entry-edit-head">
+                                    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Import Settings') ?></h4>
+                                </div>
+                                <div class="fieldset ">
+                                    <div class="hor-scroll hor-scroll-simple">
+                                        <form name="import_settings"  action="<?php echo Mage::helper("adminhtml")->getUrl("adminhtml/wpsetup/importentity"); ?>" method="post" enctype="multipart/form-data">
+                                            <?php echo $this->getBlockHtml('formkey') ?>
+                                            <input type="hidden" name="import_entity" value="setting" />
+                                            <table cellspacing="10" cellpadding="10" >
+                                                <tr>
+                                                    <td ><?php echo $this->__('Select Store') ?>: </td>
+                                                    <td>
+                                                        <?php
+                                                        $options = array('id' => 'import_store', 'name' => 'import_store[]', 'size' => '13', 'style' => 'width: 280px', 'multiple' => true);
+                                                        echo Mage::helper('weltpixel_setup')->getStoreOptions($options, true);
+                                                        ?>
+                                                    </td>
+                                                </tr>                                                
+                                                <tr>
+                                                    <td><?php echo $this->__('Select a file') ?>: </td>
+                                                    <td><input type="file" name="import_file" /> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2"> <input type="submit"  class="form-button add" value="<?php echo $this->__('Import') ?>"/></td>
+                                                </tr>
+                                            </table>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

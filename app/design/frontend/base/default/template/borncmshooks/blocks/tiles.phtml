@@ -1,0 +1,101 @@
+<?php
+/**
+ * Description of sliders
+ *
+ * @author Alex
+ */
+
+    $hooks_helper = Mage::helper('borncmshooks');
+    $tiles_object_collection = $this->getTilesObjectCollection();
+?>
+    <section class="modules">
+        <ul>
+<?php foreach($tiles_object_collection as $row): ?>
+            <?php if($row->getLayout()): ?>
+                <?php #do two columns ?>
+                <?php if($row->getLayout() == '1_column_sticky'): ?>
+                    <li class="row wide">
+                        <a href="<?php echo $row->getCenterContentLink(); ?>">
+                            <div class="block <?php echo ($row->getCenterContentColor() == '0' ? 'dark' : $row->getCenterContentColor()); ?>">
+                                <span class="images">
+                                    <img class="right" src="<?php echo $hooks_helper->getImageUrl($row->getRightContentImage()); ?>" />
+                                    <img class="left" src="<?php echo $hooks_helper->getImageUrl($row->getLeftContentImage()); ?>"/>
+                                </span>
+                                <div class="content-container">
+                                    <div class="content-wrapper">
+                                        <span>
+                                            <?php if($row->getCenterContentTitle() != null): ?>
+                                                <h3 class="stand-out"><?php echo $row->getCenterContentTitle(); ?></h3>
+                                            <?php endif;?>
+                                            <p><?php echo $row->getCenterContentCopy(); ?></p>
+
+                                            <?php if ($row->getCenterContentCta() != null): ?>
+                                                <button class="button"><?php echo $row->getCenterContentCta(); ?></button>
+                                            <?php endif; ?>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                <!-- Videos must use 2_column or 1_column layout -->
+                <?php elseif($row->getLayout() == '2_columns'): ?>
+                        <!-- 2 cols -->
+                        <li class="row" <?php if (($row->getVideoSrc() != null) && ($row->getVideoSrc() != '')) :?>data-src="<?php echo $row->getVideoSrc(); ?>"<?php endif; ?> >
+                            <div class="block <?php echo ($row->getLeftContentColor() == '0' ? 'dark' : $row->getLeftContentColor()); ?>" style="background-image: url(<?php echo $hooks_helper->getImageUrl($row->getLeftContentImage()); ?>);">
+                                <div class="content-container">
+                                    <div class="content-wrapper">
+                                        <?php if(($row->getLeftContentTitle() != null) && ($row->getLeftContentTitle() != '')): ?>
+                                            <h3 class="stand-out"><?php echo $row->getLeftContentTitle(); ?></h3>
+                                        <?php endif; ?>
+                                        <?php if(($row->getLeftContentCopy() != null) && ($row->getLeftContentCopy() != '')): ?>
+                                            <p><?php echo $row->getLeftContentCopy(); ?></p>
+                                        <?php endif; ?>
+                                        <?php if((($row->getLeftContentLink() != null) && ($row->getLeftContentLink() != '')) && (($row->getLeftContentCta() != null) && ($row->getLeftContentCta() != ''))): ?>
+                                            <a class="button" href="<?php echo $row->getLeftContentLink(); ?>"><?php echo $row->getLeftContentCta(); ?></a>
+                                        <?php endif; ?> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block <?php echo ($row->getRightContentColor() == '0' ? 'dark' : $row->getRightContentColor()); ?>" style="background-image: url(<?php echo $hooks_helper->getImageUrl($row->getRightContentImage()); ?>);">
+                                <div class="content-container">
+                                    <div class="content-wrapper">
+                                        <?php if(($row->getRightContentTitle() != null) && ($row->getRightContentTitle() != '')): ?>
+                                            <h3 class="stand-out"><?php echo $row->getRightContentTitle(); ?></h3>
+                                        <?php endif; ?>
+                                        <?php if(($row->getRightContentCopy() != null) && ($row->getRightContentCopy() != '')): ?>
+                                            <p><?php echo $row->getRightContentCopy(); ?></p>
+                                        <?php endif; ?>
+                                        <?php if((($row->getRightContentLink() != null) && ($row->getRightContentLink() != '')) && (($row->getRightContentCta() != null) && ($row->getRightContentCta() != ''))): ?>
+                                            <a class="button" href="<?php echo $row->getRightContentLink(); ?>"><?php echo $row->getRightContentCta(); ?></a>
+                                        <?php endif; ?> 
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    <?php elseif($row->getLayout() == '1_column'): ?>
+                        <li class="row wide" <?php if (($row->getVideoSrc() != null) && ($row->getVideoSrc() != '')) :?>data-src="<?php echo $row->getVideoSrc(); ?>"<?php endif; ?> >
+                            <a href="<?php echo $row->getCenterContentLink(); ?>">
+                                <div class="block <?php echo ($row->getCenterContentColor() == '0' ? 'dark' : $row->getCenterContentColor()); ?>" style="background-image: url(<?php echo $hooks_helper->getImageUrl($row->getCenterContentImage()); ?>);">
+                                    <div class="content-container">
+                                        <div class="content-wrapper">
+                                            <span>
+                                                <?php if($row->getCenterContentTitle() != null): ?>
+                                                    <h3 class="stand-out"><?php echo $row->getCenterContentTitle(); ?></h3>
+                                                <?php endif; ?>
+                                                <p><?php echo $row->getCenterContentCopy(); ?></p>
+                                                <?php if ($row->getCenterContentCta()): ?>
+                                                    <button class="button"><?php echo $row->getCenterContentCta(); ?></button>
+                                                <?php endif ?>
+                                            </span>                                                
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+            <?php endif; ?>
+<?php endforeach; ?>
+        </ul>
+    </section>

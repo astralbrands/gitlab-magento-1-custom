@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <weltpixel translate="title">
+            <title>WeltPixel</title>
+            <sort_order>300</sort_order>
+            <children>                
+                <attributeimages translate="title" module="weltpixel_attributeimages">
+                    <title>Attribute Images</title>
+                    <action>adminhtml/attributeimages</action>
+                    <sort_order>10</sort_order>
+                </attributeimages>
+            </children>
+        </weltpixel>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <weltpixel>
+                        <children>
+                            <attributeimages translate="title" module="weltpixel_attributeimages">
+                                <title>AttributeImages</title>
+                                <sort_order>100</sort_order> 
+                            </attributeimages>
+                        </children>
+                    </weltpixel>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

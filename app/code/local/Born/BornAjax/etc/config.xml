@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Born_BornAjax>
+            <version>1.0.0.0</version>
+        </Born_BornAjax>
+    </modules>
+    <frontend>
+        <routers>
+            <bornajax>
+                <use>standard</use>
+                <args>
+                    <module>Born_BornAjax</module>
+                    <frontName>bornajax</frontName>
+                </args>
+            </bornajax>							
+        </routers>
+        <layout>
+            <updates>
+                <bornajax>
+                    <file>bornajax.xml</file>
+                </bornajax>
+            </updates>
+        </layout>
+		<translate>
+            <modules>
+                <Born_BornAjax>
+                    <files>
+                        <default>Born_BornAjax.csv</default>
+                    </files>
+                </Born_BornAjax>
+            </modules>
+        </translate>
+	</frontend>
+</config>

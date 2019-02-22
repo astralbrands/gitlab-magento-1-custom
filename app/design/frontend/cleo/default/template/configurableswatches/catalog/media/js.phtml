@@ -1,0 +1,18 @@
+<?php
+    /* @var $this Mage_ConfigurableSwatches_Block_Catalog_Media_Js_Abstract */
+?>
+<?php if (Mage::getStoreConfig("weltpixel_selector/categoryoptions/activate")) : ?>
+<script type="text/javascript">
+    <?php  if (!Mage::app()->getRequest()->isXmlHttpRequest() ) : ?>
+    $j(document).on('product-media-loaded', function() {
+    <?php endif; ?>
+        ConfigurableMediaImages.init('<?php echo $this->getImageType(); ?>');
+        <?php foreach ($this->getProductImageFallbacks() as $imageFallback): ?>
+        ConfigurableMediaImages.setImageFallback(<?php echo $imageFallback['product']->getId(); ?>, $j.parseJSON('<?php echo $imageFallback['image_fallback']; ?>'));
+        <?php endforeach; ?>
+        $j(document).trigger('configurable-media-images-init', ConfigurableMediaImages);
+        <?php  if (!Mage::app()->getRequest()->isXmlHttpRequest() ) : ?>
+    });
+    <?php endif; ?>
+</script>
+<?php endif; ?>

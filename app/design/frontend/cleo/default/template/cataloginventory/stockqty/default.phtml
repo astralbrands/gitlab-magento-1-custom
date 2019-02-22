@@ -1,0 +1,12 @@
+<?php
+/**
+ * @see Mage_CatalogInventory_Block_Stockqty_Default
+ */
+
+$_stockQty = $this->getStockQty();
+$_isMsgVisible = $this->isMsgVisible();
+?>
+
+<?php if ($_isMsgVisible): ?>
+    <div class="availability-only"><i class="icon-line-clock"></i><span><?php echo $this->__('Only %s left', $_stockQty); ?></span></div>
+<?php endif; ?>

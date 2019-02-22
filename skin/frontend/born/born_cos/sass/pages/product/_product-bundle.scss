@@ -1,0 +1,102 @@
+// \app\design\frontend\born\born\template\bundle\catalog\product\view\type\bundle\option\radio.phtml
+
+.product-bundle-view {
+  #product-options-wrapper {
+    display: none !important;
+  }
+  .bundle-list-wrapper {
+    display: block;
+    margin-bottom: 15px;
+    .shade-checked-text {
+      text-align: left;
+      padding-left: 0;
+    }
+  }
+  .bundle-list-inner {
+    border: 1px solid $block-border-color;
+    .bundle-item {
+      border-bottom: 1px solid $block-border-color;
+      padding: 15px;
+      text-align: left;
+      &:last-child {
+        border-bottom: none;
+      }
+      .img {
+        float: left;
+        max-width: 100px;
+        margin-right: 15px;
+      }
+      .right-block {
+        overflow: hidden;
+        .title {
+          @include setFont(1.5rem, 2.4rem, normal);
+        }
+        .shade {
+          margin-bottom: 0;
+          margin-top: 10px;
+        }
+      }
+      .shade-sku {
+        padding-right: 15px;
+      }
+      .shade-label {
+        display: block;
+      }
+    }
+  }
+  #product-options-wrapper {
+    display: none !important;
+  }
+  .form-add-to-cart {
+    .product-options {
+      display: block;
+      border-color: $block-border-color;
+      margin-bottom: 15px;
+      .qty-holder {
+        display: none;
+      }
+      p.required {
+        display: none;
+      }
+      dt label {
+        @include gothamBook;
+        @include setFont(1.6rem, 1.8rem, 400);
+        em {
+          display: none;
+        }
+        &:after {
+          content: '';
+        }
+      }
+      .small-image {
+        width: 100px;
+        height: 100px;
+        float: left;
+        margin-right: 15px;
+      }
+      .options-list {
+        li {
+          display: inline-block;
+        }
+      }
+    }
+  }
+  .add-to-cart-buttons {
+    .button {
+      float: right;
+    }
+  }
+}
+
+//Internet Explorer
+.ie {
+  .product-bundle-view {
+    .bundle-list-wrapper {
+      .shade {
+        .checked:after {
+          top: 33px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,100 @@
+.search-result h2 {
+	color:#1E7EC8;
+	float:left;
+	font-family:Arial;
+	font-size:18px;
+	padding-bottom:5px;
+	text-transform:uppercase;
+	width:100%;
+	font-weight:bold;
+}
+.faq-content .description .note-msg {clear:both;}
+.faq-content .box-head{float:left; width:100%; margin-bottom:20px;border-bottom:1px solid #e2e2e2}
+.faq-content .box-title{float:left; width:100%;padding-bottom:5px;}
+.faq-content .box-title h3{
+	color: #FF7F50;
+    text-transform: uppercase;
+	font-size: 20px;
+}
+.faq-search{float:left;margin-bottom: 20px;}
+.faq-search input.input-text{width:300px;}
+.formsearch label {
+	color:#FF7F50;
+	float:left;
+	font-family:Arial;
+	font-size:16px;
+	padding-bottom:5px;
+	text-transform:uppercase;
+	width:100%;
+	font-weight:bold;
+
+}
+
+.formsearch h4 {
+	color:#1E7EC8;
+	float:left;
+	font-family:Arial;
+	font-size:12px;
+	padding-bottom:5px;
+	text-transform:uppercase;
+	width:100%;
+	padding-bottom:2px;
+	padding-top:20px;
+	font-weight:normal;
+}
+
+.description ul  {
+	color:#FF7F50;
+	font-size:14px;
+	font-weight:bold;
+	margin-bottom:0;
+	padding-bottom:10px;
+	padding-top:20px;
+	text-transform:uppercase;
+	overflow: hidden;
+	clear: both;
+}
+.description ul li {  
+	color:#737373;
+	font-size:12px;
+	text-decoration:none;
+	text-transform:capitalize;
+	font-weight:normal;
+	line-height:20px;
+	margin-bottom:5px;
+	width:45%;
+}
+.faq-search-result .description ul li{width:100%;}
+.faq-search-result .description ul li a{ text-decoration:none; font-size:13px; font-weight:normal;background:url(../../magebuzz/faq/images/bullet.png) center left no-repeat;padding-left:20px; color:#363636;}
+.faq-search-result .search-no-result{float:left; width:100%; font-size:13px; font-weight:normal; padding:5px 0;}
+.description ul h3{text-transform:uppercase; color:#1E7EC8;border-bottom:1px dotted #e2e2e2; }
+.description ul li h3{text-transform:uppercase; color:#1E7EC8;border-bottom:1px dotted #e2e2e2; }
+.description ul li.left{clear:both;}
+.description ul li ul{width:100%}
+.description ul li ul li { 
+	color:#737373;
+	font-size:12px;
+	text-decoration:none;
+	text-transform:capitalize;
+	font-weight:normal;
+	line-height:20px;
+	padding-bottom:5px;
+	margin-bottom:0;
+	width:90%;
+
+}
+.description ul li a{ text-decoration:none; font-size:13px; font-weight:normal;}
+.description ul li ul li a{ text-decoration:none; font-size:13px; font-weight:normal;background:url(../../magebuzz/faq/images/bullet.png) center left no-repeat;padding-left:20px; color:#363636;}
+
+.faq_answer {padding:5px 0 5px 25px;color:#1E7EC8;}
+.faq-view-more {float:right; margin-right:40px;}
+
+.faq-category .faq-questions {clear:both;}
+.faq-category .faq-questions .faq-detail .faq-title a{text-decoration:none;}
+.faq-category .faq-questions .faq-detail .faq_answer {color:#2F2F2F;}
+.faq-detail-answer {clear:both;}
+.other-questions {margin-top:20px; border-top:1px dotted #CCCCCC; padding-top:5px;}
+.block-faq .faq-categories {padding-left:10px;}
+.block-faq .block-content ul li {margin-bottom:5px;}
+
+.faq-search-result .description .note-msg{clear:both;}

@@ -1,0 +1,26 @@
+<?php
+    $_helper    = $this->helper('catalog/output');
+    $_category  = $this->getCurrentCategory();
+    $_imgHtml   = '';
+?>
+ <style>
+#ratelinks {display:none;}
+</style>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<div class="category-view">
+    <?php if($this->isContentMode()): ?>
+    <div class="level-a"></div>
+		<div class="content-mode">
+        <?php echo $this->getCmsBlockHtml() ?>
+		</div>
+    <?php elseif($this->isMixedMode()): ?>
+        <div class="level-b"></div>
+		<div class="product-list-mode">
+        <?php echo $this->getCmsBlockHtml() ?>
+        <?php echo $this->getProductListHtml() ?>
+		</div>
+    <?php else: ?>
+        <div class="level-c"></div>
+        <?php echo $this->getProductListHtml() ?>
+    <?php endif; ?>
+</div>

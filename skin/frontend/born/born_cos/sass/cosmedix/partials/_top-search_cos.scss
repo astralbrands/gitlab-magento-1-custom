@@ -1,0 +1,57 @@
+/*Search*/
+.form-search {
+  background: $search-background;
+  top: 95px;
+  &:after {
+    content: "\e93a";
+  }
+  .form-search__input {
+    @include placeholder {
+      color: $white;
+    }
+    &:focus {
+      @include placeholder {
+        color: $white;
+        opacity: 0.5;
+      }
+    }
+  }
+  .search-button {
+    outline: none;
+    box-shadow: none;
+    &:focus,
+    &:active {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+}
+.form-search__close-btn {
+  background: $search-background;
+  &:hover {
+    text-decoration: none ;
+  }
+}
+
+
+@mixin mobile-top-search() {
+  .form-search {
+    top: 45px;
+  }
+  #search_mini_form .search-button {
+    height: 45px;
+    right: 40px;
+  }
+}
+
+@media only screen and (max-width: $b2b-mobile-menu){
+  .cos-b2b {
+    @include mobile-top-search;
+  }
+}
+
+@media only screen and (max-width: $b2c-mobile-menu){
+  .cos-b2c {
+    @include mobile-top-search;
+  }
+}

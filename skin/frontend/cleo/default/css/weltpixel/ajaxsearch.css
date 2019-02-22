@@ -1,0 +1,65 @@
+/*! ----------------------------------------------------------------------------
+    Filename:       ajaxsearch.css
+    Version:        1.0
+    Description:    -
+    ------------------------------------------------------------------------- */
+
+
+#wpas-loupe {
+    float: right;
+}
+#wpas-form {
+    display: none;
+    position: absolute;
+    right: 100%;
+    top: 0;
+    margin: -3px 10px 0 0;
+}
+
+
+
+#wpas-ajax {
+    display: none;
+    position: absolute;
+    top: 37px;
+    right: 0;
+    width: 300px;
+    z-index: 16777273;
+}
+
+#wpas-loader {
+    background: url("../../images/loader-a1.gif") no-repeat scroll 50% 50% / 12px 12px rgba(0, 0, 0, 0);
+    display: none;
+    position: absolute;
+    right: 6px;
+    top: 0;
+    width: 28px;
+    height: 27px;
+}
+#wpas-ajax {
+    padding: 10px;
+    background: #fff;
+    border: 0 none;
+}
+#wpas-items .search_item .item_name, #wpas-items .search_item .short_descr, #wpas-items .search_item .show_price {
+    margin: 0px;
+    text-align: left;
+    font-size: 12px;
+    display: block;
+    width: 100%;
+}
+
+#wpas-items .search_item .item_name { font-weight: bolder; }
+
+#wpas-items .search_item img {
+    margin-left: 2px;
+    margin-right: 7px;
+    float: left;
+}
+#wpas-items .search_item {
+    clear: left;
+    padding: 5px 0;
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.45);
+}

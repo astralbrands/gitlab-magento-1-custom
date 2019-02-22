@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <weltpixel translate="title">
+            <title>WeltPixel</title>
+            <sort_order>300</sort_order>
+            <children>
+                <shadeguide translate="title" module="shadeguide">
+                    <title>Shade Guide</title>
+                    <action>adminhtml/system_config/edit/section/shadeguide</action>
+                    <sort_order>10</sort_order>
+                </shadeguide>
+            </children>
+        </weltpixel>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <shadeguide translate="title" module="shadeguide">
+                                        <title>Shade Guide</title>
+                                        <sort_order>1000</sort_order>
+                                    </shadeguide>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

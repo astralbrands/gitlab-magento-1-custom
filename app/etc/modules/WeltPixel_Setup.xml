@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <WeltPixel_Setup>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Cms/>
+            </depends>
+        </WeltPixel_Setup>
+    </modules>
+</config>

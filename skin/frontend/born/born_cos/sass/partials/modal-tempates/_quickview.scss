@@ -1,0 +1,258 @@
+// \skin\frontend\born\Born\js\app\modals\quickview.html
+
+.quickveiw-modal {
+  font-size: 4rem;
+  max-width: 1163px;
+  padding: 40px;
+  text-align: left;
+  &.quickveiw-loaded {
+    min-width: 60%;
+  }
+
+  .product-view {
+    min-width: 100%;
+  }
+  #product-options-wrapper.show-it {
+    border: 1px solid $block-border-color;
+    padding: 16px;
+    margin-bottom: 20px;
+    dt {
+      label.required {
+        em,
+        &:after {
+          display: none;
+        }
+      }
+      label {
+        @include gothamBook;
+      }
+    }
+    .last dd {
+      border-bottom: 1px solid $block-border-color;
+    }
+  }
+  #container {
+    display: none !important;
+    #bv-curations-cleanslate {
+      display: none !important;
+    }
+  }
+
+  .price-box .price-label {
+    font-size: 1.8rem;
+  }
+
+  .size-attribute {
+    .jq-selectbox {
+      margin-left: 0;
+    }
+  }
+
+  .short-description {
+    display: none;
+    font-size: 1.6rem;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .tabs-to-accordion-bazaar {
+    display: none !important;
+  }
+  .product-options-bottom {
+    margin-bottom: 75px;
+    left: 0;
+    bottom: 0;
+    .product-pricing,
+    .tier-prices {
+      display: none;
+    }
+  }
+  .product-view .product-options {
+    dd {
+      border-bottom: none;
+    }
+    dl.last > dd.last:last-child .jq-selectbox {
+      max-width: 100%;
+    }
+    #attribute183-styler {
+      display: none !important;
+    }
+    #attribute184-styler {
+      width: 100%;
+    }
+    .product-options dd .input-box {
+      width: 100%;
+    }
+  }
+
+  .form-add-to-cart-row {
+    position: relative;
+  }
+  .add-to-cart {
+    position: absolute;
+    bottom: -10px;
+    max-width: 505px;
+    width: 100%;
+    margin: 0;
+    font-size: 0;
+    border-bottom: 0;
+    @include display(flex);
+    &:after {
+      display: none;
+    }
+  }
+  .form-add-to-cart .add-to-cart {
+    margin-bottom: 0;
+  }
+  .label-text-up {
+    text-align: left;
+  }
+  #qty-styler {
+    display: inline-block;
+    position: relative;
+    z-index: 100;
+    margin-left: 0;
+  }
+  .temp-content {
+    visibility: hidden;
+  }
+  &-inner {
+    @include display(flex);
+  }
+  .left-side {
+    @include flex-basis(50%);
+  }
+  .right-side {
+    @include flex-basis(50%);
+    text-align: left;
+  }
+  .product-image-gallery {
+    padding-left: 0;
+  }
+  h2 {
+    font-size: 2.4rem;
+    line-height: 3.6rem;
+    text-transform: none;
+    font-weight: 300;
+  }
+  .price {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: $black;
+  }
+  .add-to-cart-buttons {
+    vertical-align: middle;
+    display: inline-block;
+    float: none;
+    margin-left: 20px;
+    flex-grow: 2;
+    margin-right: 0;
+  }
+
+  .add-to-links {
+    @include display(flex);
+    @include flex-direction(row-reverse);
+    @include justify-content(flex-end);
+    @include position(absolute, null 0 -20px 0);
+    width: 100%;
+    &:after {
+      display: none;
+    }
+
+    li {
+      vertical-align: middle;
+    }
+    .link-wishlist {
+      margin-right: 20px;
+      margin-left: 0;
+    }
+  }
+  .form-add-to-cart .add-to-links {
+    width: 50%;
+    li {
+      margin-left: 0;
+    }
+  }
+  .jq-selectbox {
+    margin-left: 20px;
+  }
+  .add-to-cart-buttons .button {
+    @include transparentButton(4.4rem, 1.3rem, $black, $white);
+    @include gotham();
+    background: transparent;
+    width: 100%;
+    margin: 0;
+    max-width: none;
+  }
+  .jq-selectbox__select {
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid $block-border-color;
+  }
+  .jq-selectbox__dropdown {
+    border-color: $block-border-color;
+  }
+  .label {
+    font-size: 2rem;
+  }
+  .availability {
+    text-transform: none;
+  }
+  p.required {
+    display: none;
+  }
+  .product-options-bottom {
+    .qty-attribute,
+    .size-attribute {
+      .label-text-up {
+        margin-bottom: 5px;
+      }
+    }
+    .add-to-cart-buttons {
+      margin-top: 5px;
+    }
+  }
+  #product-options-wrapper {
+    padding-left: 0;
+    border: 0;
+  }
+  .giftcard-form {
+    #giftcard_amount-styler {
+      margin: 0;
+      width: 100%;
+    }
+  }
+  .form-add-to-cart {
+    min-width: 800px;
+  }
+}
+
+
+@media only screen and (max-width: $mobile) {
+  .quickveiw-modal {
+    padding: 40px 20px 20px;
+    .tier-prices {
+      order: 2;
+    }
+    .add-to-links {
+      order: 3;
+      position: static;
+    }
+    .form-add-to-cart .add-to-links li:last-child {
+      width: 50%;
+    }
+    .close-btn {
+      top: 0px;
+      right: 0px;
+    }
+    .add-to-links {
+      padding: 0;
+    }
+    .product-options-bottom {
+      #attribute184-styler {
+        float: left;
+        max-width: 100%;
+      }
+    }
+  }
+}

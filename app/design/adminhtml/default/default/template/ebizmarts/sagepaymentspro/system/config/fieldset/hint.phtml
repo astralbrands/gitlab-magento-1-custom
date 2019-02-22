@@ -1,0 +1,15 @@
+<div style="background:#EAF0EE;border:1px solid #CCCCCC;margin-bottom:10px;padding:11px 0 0 10px;">
+    <h4>
+        <img src="https://ebizmarts-website.s3.amazonaws.com/Logo_Ebizmarts.png" width="300" /><br>
+        <?php echo Mage::helper('ebizmarts_sagepaymentspro')->__('<strong style="color:#EA7601;">Sage Payment Solutions PRO v%s </strong> <br>Need help? Got feedback? <a href="mailto:info@ebizmarts.com?Subject=Support SagePaymentsPro">Email us</a>', $this->getVersion())?>
+    </h4>
+</div>
+<?php
+    if($this->warning()) {
+?>
+<div style="background:#EAF0EE;border:1px solid #CCCCCC;margin-bottom:10px;padding:11px 0 0 10px;">
+    <strong style="color:red">IMPORTANT: Please note that you are using ebizmarts' merchant account (362472731013), you must switch to your own Sage Payments merchant account as soon as possible.<br><br></strong>
+</div>
+<?php
+    }
+?>

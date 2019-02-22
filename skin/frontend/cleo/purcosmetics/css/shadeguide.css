@@ -1,0 +1,324 @@
+/* FoundationFinder styles goes here */
+.shadeguide .shadeguide-overlay {
+    background: rgba(255,255,255,0.3);
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.shadeguide .wp-button,
+.shadeguide .test {
+    background: #ffffff !important;
+    border-radius: 0;
+    border: 3px solid #000000;
+    color: #000000;
+    height: 50px;
+    line-height: 48px;
+    text-shadow: 0 0 0 transparent;
+}
+.shadeguide .wp-button:hover,
+.shadeguide .test:hover {
+    background: #000000 !important;
+    color: #ffffff !important
+}
+.shadeguide .shadeguide-step {
+    position: relative;
+    overflow: hidden;
+    display: none;
+    visibility: hidden;
+}
+/*.shadeguide .shadeguide-step.image_carousel {*/
+/*display: block;*/
+/*visibility: visible;*/
+/*height: 0;*/
+/*opacity: 0;*/
+/*}*/
+/*.shadeguide .shadeguide-step.image_carousel.real-height {*/
+/*height: 100%;*/
+/*opacity: 1;*/
+/*}*/
+.shadeguide .shadeguide-step:first-child {
+    display: block;
+    visibility: visible;
+}
+.shadeguide .background-image {
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.shadeguide .background-image img {
+    width: 100%;
+}
+.shadeguide .step-wrapper {
+    padding: 80px 20px 40px;
+}
+.shadeguide .step-wrapper .message {
+    height: 25px;
+}
+.shadeguide .step-wrapper .message.error {
+    color: #ff0000;
+}
+.shadeguide .step-wrapper p {
+    font-size: 16px;
+}
+.shadeguide .full-screen {
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+.shadeguide .slider-caption h2,
+.shadeguide .slider-caption  {
+    font-family: "Gotham A", "Gotham B", sans-serif;
+    font-weight: 400;
+    color: #000000 !important;
+    letter-spacing: 0;
+    text-transform: none;
+}
+.shadeguide .slider-caption p {
+    font-size: 24px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+.shadeguide .step-title {
+    font-family: "Gotham A", "Gotham B", sans-serif;
+    letter-spacing: 0;
+    color: #000000 !important;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+.shadeguide .cms-top {
+    padding: 40px 0 0;
+}
+.shadeguide .cms-bottom {
+    padding: 0 0 20px;
+}
+.shadeguide .options-wrapper {
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+}
+.shadeguide .options-wrapper .fieldset {
+    display: inline-block;
+    position: relative;
+    padding: 10px;
+}
+.shadeguide .options-wrapper .fieldset .disabled,
+.shadeguide .options-wrapper .fieldset input:disabled {
+    cursor: default;
+    opacity: 0.7;
+}
+.shadeguide .options-wrapper .fieldset .option-image.disabled {
+    opacity: 0.2;
+}
+.shadeguide .options-wrapper .field {
+    padding: 0 20px;
+}
+.shadeguide .options-wrapper .field label,
+.shadeguide .options-wrapper .field input {
+    font-family: "Gotham A", "Gotham B", sans-serif;
+    font-size: 16px;
+    color: #000000 !important;
+    cursor: pointer;
+}
+.shadeguide .options-wrapper:not(.owl-carousel) .option-image {
+    margin: 20px auto;
+    cursor: pointer;
+    width: 300px;
+}
+.shadeguide .options-wrapper.owl-carousel .owl-item .item {
+    margin: 0 auto;
+}
+.shadeguide .options-wrapper.owl-carousel .owl-item .option-image {
+    margin: 0 auto;
+    width: auto;
+    max-width: 300px;
+}
+.shadeguide .options-wrapper .option-image.selected {
+    padding: 5px;
+    border: 1px solid #cccccc;
+}
+
+.shadeguide .options-wrapper .label.selected {
+    font-weight: 600;
+}
+.shadeguide .options-wrapper .option-image img {
+    width: 100%;
+    cursor: pointer;
+}
+.shadeguide .options-wrapper .field-wrapper {
+    position: relative;
+}
+.shadeguide .options-wrapper .additional-cms.option-cms {
+    position: absolute;
+    top: 0;
+    padding: 20px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 200px;
+    max-height: 200px;
+}
+.shadeguide .options-wrapper .additional-cms {
+    text-align: left;
+}
+.shadeguide .actions {
+    width: 100%;
+    text-align: center;
+}
+.shadeguide .prev-step,
+.shadeguide .next-step,
+.shadeguide .skip,
+.shadeguide .start-over {
+    font-family: "Gotham A", "Gotham B", sans-serif;
+    color: #000000 !important;
+    font-size: 16px;
+    display: inline-block;
+    letter-spacing: 0;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+}
+.shadeguide .skip.animated {
+    line-height: 28px;
+    padding: 10px 20px;
+}
+.shadeguide .skip.animated:hover {
+    color: #ffffff !important;
+    background: #000000 !important;
+}
+.shadeguide .back .icon {
+    font-size: 20px;
+    position: relative;
+    top: 2px;
+    left: 0;
+}
+.shadeguide .skip .icon,
+.shadeguide .start-over .icon {
+    font-size: 20px;
+    position: relative;
+    top: 2px;
+    right: 0;
+}
+.shadeguide-foundationfinder-index #lightbox-loader {
+    top: calc(50% - 50px);
+    left: calc(50% - 50px);
+}
+.shadeguide .product-results {
+    padding: 40px 0;
+}
+.shadeguide .owl-carousel .owl-wrapper-outer {
+    width: 100%;
+    margin: 0 auto;
+    z-index: 1;
+}
+.shadeguide .owl-controls {
+    margin-top: -15px;
+    top: 50%;
+    z-index: 0;
+}
+.shadeguide .image_carousel {
+    position: relative;
+}
+.shadeguide .label_only input,
+.shadeguide .image_label input {
+    display: none;
+}
+.shadeguide .image_carousel .field,
+.shadeguide .image_only .field {
+    display: none;
+}
+.shadeguide .label_only {
+    max-width: 40%;
+    margin: 0 auto;
+    text-align: left;
+}
+.shadeguide .label_only .fieldset {
+    display: block;
+    position: relative;
+    padding: 20px 0 0;
+}
+.owl-controls .owl-buttons > .owl-prev {
+    left: -40px;
+    position: relative;
+}
+.owl-controls .owl-buttons > .owl-next {
+    right: -40px;
+    position: relative;
+}
+.shadeguide .image_carousel .owl-stage-outer {
+    z-index: 0;
+    /*max-width: 96%;*/
+    margin: 0 auto;
+}
+.shadeguide .image_carousel .owl-nav {
+    position: absolute;
+    width: 100%;
+    top: 35%;
+    z-index: 0;
+}
+.shadeguide .image_carousel .owl-prev,
+.shadeguide .image_carousel .owl-next {
+    background: rgba(255,255,255, 0);
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+    line-height: 40px;
+    position: absolute;
+    top: 0;
+}
+.shadeguide .image_carousel .owl-prev:hover,
+.shadeguide .image_carousel .owl-next:hover {
+    background: rgba(255,255,255,0.8);
+}
+.shadeguide .image_carousel .owl-prev {
+    left: -15px;
+}
+.shadeguide .image_carousel .owl-next {
+    right: -15px;
+}
+.shadeguide .image_carousel .owl-carousel .owl-dots.disabled,
+.shadeguide .image_carousel .owl-carousel .owl-nav.disabled {
+    display: block !important;
+}
+@media only screen and (max-width: 1700px) {
+    .shadeguide .image_carousel .owl-prev,
+    .shadeguide .image_carousel .owl-next {
+        background: rgba(255,255,255, 0.8);
+    }
+}
+@media only screen and (max-width: 768px) {
+    .swiper_wrapper .swiper-slide {
+        background-position: 80% center;
+    }
+    .slider-caption p {
+        display: inherit !important;
+        font-size: 22px !important;
+        margin-top: 20px;
+    }
+    .owl-controls .owl-buttons > .owl-prev {
+        left: -35px;
+        position: relative;
+    }
+    .owl-controls .owl-buttons > .owl-next {
+        right: -35px;
+        position: relative;
+    }
+    .shadeguide .options-wrapper .fieldset {
+        display: block;
+    }
+    .shadeguide .options-wrapper .option-image {
+        max-width: 90%;
+        margin: 20px auto;
+    }
+    .shadeguide.options-wrapper .image_carousel {
+        margin: 20px 0;
+    }
+    .shadeguide .options-wrapper.image_carousel .option-image {
+        max-width: inherit;
+        margin: 0 auto;
+    }
+}

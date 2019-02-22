@@ -1,0 +1,17 @@
+<?php
+/** @var RocketWeb_ShoppingFeeds_Block_Adminhtml_Catalog_Taxonomy_Category_Outer $this */
+$innerHtml = $this->getHtml();
+$values = $this->getValues();
+$level = $this->getLevel();
+$enabled = $this->getEnabled();
+$disabled = $level > 0; //$enabled ? !$enabled : ($values['disabled'] && $level > 0);
+// Disabled for now, so it will always open only 1-level category
+
+if (!empty($innerHtml)): ?>
+    <ul class="category_list <?php echo ($level == 0 ? 'top-categ' : 'child-categ') ?> <?php echo (Mage::registry('taxonomy_enabled') ? 'w-autocomplete' : 'no-autocomplete')?>"
+        <?php if ($disabled): ?>
+        style="display:none"
+        <?php endif; ?>>
+        <?php echo $innerHtml; ?>
+    </ul>
+<?php endif; ?>

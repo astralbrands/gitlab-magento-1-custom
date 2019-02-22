@@ -1,0 +1,118 @@
+<div class="storelocator">
+
+
+    <div class="map-container">
+        <div class="mobile-search-result">
+            <a href="#" class="link-edit-search"><?php echo $this->__('Edit Search'); ?></a>
+        </div>
+        <div id="map-canvas" style="height: 100%; margin: 0px; padding: 0px;">
+
+        </div>
+    </div>
+
+
+<!--            <div class="locator-title">-->
+<!--                <h1>--><?php //echo $this->__('Find a Location'); ?><!--</h1>-->
+<!--                <hr/>-->
+<!--            </div>-->
+            <form id="storelocator-form" name="storelocator-form" class="style-fast store-locator-form" method="get">
+                <h1 class="store-locator-form-title">Find A Store</h1>
+
+                <div class="form-content">
+                    <div class="input-box">
+                        <input type="text" name="postal_code" id="inputzipcode" class="input-text <?php if(isset($zip_val_str)){ echo $zip_val_str; } ?>" value="<?php echo isset($_POST["postal_code"]) ?>">
+                        <label for="inputzipcode" class="label-text">City & State or Zip Code</label>
+                    </div>
+
+                    <!--<div class="squaredOne">
+                        <select name="product">
+                            <option value="0"><?php echo $this->__('Product Title'); ?></option>
+                            <option value="test"><?php echo $this->__('Test'); ?></option>
+                            <option value="spa"><?php echo $this->__('Store'); ?></option>
+                        </select>
+                    </div>-->
+
+                    <div class="squaredOne">
+                        <select name="distance">
+                            <option value="0"><?php echo $this->__('Distance'); ?></option>
+                            <option value="5"><?php echo $this->__('5 Miles'); ?></option>
+                            <option value="10"><?php echo $this->__('10 Miles'); ?></option>
+                            <option value="25"><?php echo $this->__('25 Miles'); ?></option>
+                            <option value="50"><?php echo $this->__('50 Miles'); ?></option>
+                        </select>
+                    </div>
+
+<!--                    <input onclick="doFakeSearch()" type="submit" id="btnSubmit" name="btnSubmit" class="store-locator-form-submit-btn button fontBtM12" value="--><?php //echo $this->__('Find Location (test)'); ?><!--">-->
+
+                    <input onclick="doRealSearch()" type="submit" class="store-locator-form-submit-btn button fontBtM12" value="<?php echo $this->__('Find Location'); ?>">
+
+                    <script>
+                        var input = jQuery("<input>")
+                            .attr("type", "hidden")
+                            .attr("name", "isRealSearch").val(false)
+                            .attr("id", "isRealSearch-store");
+                        jQuery('#storelocator-form').append(jQuery(input));
+
+                        function doFakeSearch() {
+                            jQuery('#isRealSearch-store').val(false);
+
+                        }
+
+                        function doRealSearch() {
+                            jQuery('#isRealSearch-store').val(true);
+
+                        }
+                    </script>
+                </div>
+
+
+
+
+
+
+
+<!--                <table class="input-table">-->
+<!--                    <tr class="style-fast">-->
+<!--                        <td colspan="2" class="fontBtB12 error-msg">--><?php //echo $this->__('Please enter a valid zip code or city/state'); ?><!--</td>-->
+<!--                    </tr>-->
+<!--                    <tr class="style-fast">-->
+<!--                        <td colspan="2" class="fontBtB12 loading">--><?php //echo $this->__('Please wait for your results to be shown...')?><!--</td>-->
+<!--                    </tr>-->
+<!---->
+<!--                    <tr class="style-fast">-->
+<!--                        <td><span class="fontBtB12">--><?php //echo $this->__("Zip Code/Postal Code") ?><!--</span></td>-->
+<!--                        <td><input type="text" name="postal_code" id="inputzipcode" class="input-text --><?php //echo $zip_val_str ?><!--" value="--><?php //echo isset($_POST["postal_code"]) ?><!--"></td>-->
+<!--                    </tr>                   -->
+<!--                </table>-->
+<!---->
+<!--                <table id='location-offerings'>-->
+<!--                    <tr id='offerings-list'>-->
+<!--                        <td class="hair_box">-->
+<!--                            <div class="squaredOne">-->
+<!--                                <select name="product">-->
+<!--                                	<option value="0">--><?php //echo $this->__('Product Title'); ?><!--</option>-->
+<!--                                	<option value="test">--><?php //echo $this->__('Test'); ?><!--</option>-->
+<!--                                	<option value="spa">--><?php //echo $this->__('Store'); ?><!--</option>-->
+<!--                                </select>-->
+<!--                                <label for="squaredOneHair"><span class="fontBtB14 line-label"></span></label>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <div class="squaredOne">-->
+<!--                                <select name="distance">-->
+<!--                                	<option value="0">--><?php //echo $this->__('Distance'); ?><!--</option>-->
+<!--                                	<option value="5">--><?php //echo $this->__('5 Miles'); ?><!--</option>-->
+<!--                                	<option value="10">--><?php //echo $this->__('10 Miles'); ?><!--</option>-->
+<!--                                	<option value="25">--><?php //echo $this->__('25 Miles'); ?><!--</option>-->
+<!--                                	<option value="50">--><?php //echo $this->__('50 Miles'); ?><!--</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                    <tr id='locator-submit'>-->
+<!--                        <td colspan="2" ><input id="btnSubmit" name="btnSubmit" type="submit" class="button fontBtM12" value="--><?php //echo $this->__('Find a Location'); ?><!--"></td>-->
+<!--                    </tr>-->
+<!--                </table>-->
+            </form>
+
+    <div class="stores wrapper"></div>

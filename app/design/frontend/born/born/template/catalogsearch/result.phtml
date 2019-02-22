@@ -1,0 +1,71 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition End User License Agreement
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magento.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     born_default
+ * @copyright Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license http://www.magento.com/license/enterprise-edition
+ */
+$catalogSearchHelper =  $this->helper('catalogsearch');
+
+?>
+<?php if($this->getResultCount()): ?>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+
+
+    <?php if ($messages = $this->getNoteMessages()):?>
+    <p class="note-msg">
+        <?php foreach ($messages as $message):?>
+            <?php echo $message?><br />
+        <?php endforeach;?>
+    </p>
+    <?php endif; ?>
+    <?php echo $this->getProductListHtml() ?>
+
+<?php else: ?>
+<div class="page-title no-result-title">
+    <h1><?php echo ($this->getHeaderText() || $this->getHeaderText() === false) ? $this->getHeaderText() : $this->__("0 Results found for '%s'", $this->helper('catalogsearch')->getEscapedQueryText()) ?></h1>
+</div>
+
+<p class="note-msg">
+<!--    --><?php //echo ($this->getNoResultText()) ? $this->getNoResultText() : $this->__('Try again?') ?>
+
+<form id="search_mini_form" class="form-search-page" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
+    <input type="search"
+    name="<?php echo $catalogSearchHelper->getQueryParamName() ?>"
+    class="form-search-page-input"
+    maxlength="<?php echo $catalogSearchHelper->getMaxQueryLength();?>"
+    autocomplete="off"
+    value="<?php echo $this->helper('catalogsearch')->getEscapedQueryText() ?>" />
+    <button type="submit" title="<?php echo $this->quoteEscape($this->__('Search')) ?>" class="form-search-page-btn"></button>
+</form>
+    
+    <h2 class="best-seller-title" ><?php echo $this->__('Shop Our Best Sellers') ?></h2>
+    <div class="best-sellers">
+        <?php echo $this->getChildHtml('best.seller') ?>
+    </div>
+    <?php echo $this->getAdditionalHtml() ?>
+    <?php if ($messages = $this->getNoteMessages()):?>
+        <?php foreach ($messages as $message):?>
+        <br /><?php echo $message?>
+        <?php endforeach;?>
+    <?php endif; ?>
+</p>
+<?php endif; ?>

@@ -1,0 +1,11 @@
+button.sign-in-btn.mail {
+  color: #fff !important;
+  background: #000 !important;
+}
+
+@media screen and (max-width: 768px) {
+  button.sign-in-btn,
+  input.mail-login {
+    max-width: 100%;
+  }
+}

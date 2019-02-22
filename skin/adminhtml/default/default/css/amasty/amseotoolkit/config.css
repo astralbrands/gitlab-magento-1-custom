@@ -1,0 +1,80 @@
+#hreflang-preview {
+    width: 452px;
+    margin: 25px 0 6px 0;
+}
+#row_amseotoolkit_hreflang_preview .table {
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    border-collapse: collapse;
+}
+#row_amseotoolkit_hreflang_preview .value{
+    position: relative;
+    float: left;
+}
+#row_amseotoolkit_hreflang_preview .row {
+    text-align: left;
+}
+#row_amseotoolkit_hreflang_preview .row .right-align {
+    text-align: right;
+}
+#row_amseotoolkit_hreflang_preview .row:nth-of-type(odd) {
+    background: #e9e9e9;
+}
+#row_amseotoolkit_hreflang_preview .row.header {
+    font-weight: 900;
+    color: #ffffff;
+    background: #ea6153;
+    text-align: center;
+}
+#row_amseotoolkit_hreflang_preview .row.blue {
+    background: #2980b9;
+}
+#row_amseotoolkit_hreflang_preview .row.light {
+    background: #49a0d9;
+}
+#row_amseotoolkit_hreflang_preview .legend {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding-left: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+#row_amseotoolkit_hreflang_preview .cell {
+    border: 1px solid rgba(255,255,255,0.4);
+}
+#row_amseotoolkit_hreflang_preview .seositemap {
+    color: #2980b9;
+}
+#row_amseotoolkit_hreflang_preview .cell {
+    width: 25%;
+    padding: 6px 0;
+    text-align: center;
+}
+#row_amseotoolkit_hreflang_preview .cell.excluded, #row_amseotoolkit_hreflang_preview .legend .excluded {
+    color: #ea6153;
+}
+#row_amseotoolkit_hreflang_preview .cell.included, #row_amseotoolkit_hreflang_preview .legend .included {
+    color: #27ae60;
+}
+#row_amseotoolkit_hreflang_preview .header.light .cell:not(:first-child) {
+    border: none;
+}
+p.note.rotate{
+    background: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px 7px;
+}
+.note.rotate > span{
+    padding-left: 3px;
+}
+.note.rotate:before{
+    content: "";
+    background: url(../../../images/note_bg.gif)no-repeat center;
+    width: 8px;
+    height: 6px;
+    transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    float: left;
+    padding: 7px 0;
+}
+

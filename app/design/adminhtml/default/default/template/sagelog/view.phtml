@@ -1,0 +1,16 @@
+<div id="customer_info_tabs_customer_edit_tab_view_content">
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+			<h4 class="icon-head head-customer-view">Error log details</h4>
+			<p class="form-buttons">
+				<button id="back_button" title="Back" type="button" class="scalable back" onclick="setLocation('<?php echo $this->getUrl('admin_sagelog/adminhtml_sageerrorlog') ?>')" style=""><span><span><span>Back</span></span></span></button>
+			</p>
+		</div>
+        <fieldset>
+            <p><?php echo $this->__('Error Type:') ?></p>
+			<?php echo $this->getErrorType() ?>
+            <p><?php echo $this->__('Error Message:') ?></p>
+			<?php echo $this->getErrorMessage() ?>
+        </fieldset>
+    </div>
+</div>

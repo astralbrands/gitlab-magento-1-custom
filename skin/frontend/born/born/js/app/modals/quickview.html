@@ -1,0 +1,110 @@
+<div class="modal quickveiw-modal">
+    <div class="quickveiw-modal-inner">
+        <div class="left-side">
+
+            <div class="product-image product-image-zoom">
+
+                <div class="product-image-gallery">
+
+                    <div class="product-image-gallery-thumbs" id="bx-pager-{{Modal.id}}">
+                        [[ _.forEach(images, function(imageUrl, index) { ]]
+                        <a data-slide-index="{{ index }}" href="">
+                            <img src="{{-imageUrl}}">
+                        </a>
+                        [[ }); ]]
+                    </div>
+                    <div class="product-image-gallery-images">
+                        <ul class="product-image-gallery-images-slider">
+                            [[ _.forEach(images, function(imageUrl, index) { ]]
+                            <li class="product-image-gallery-images-img">
+                                <img src="{{-imageUrl}}">
+                            </li>
+                            [[ }); ]]
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-side">
+
+            <div class="product-shop">
+                <div class="product-name">
+                    <h2>{{ productName }}</h2>
+                    <h4></h4>
+                </div>
+
+                <div class="price-info">
+
+                    <div class="price-box">
+                        <span class="regular-price" id="product-price-16">
+                            <span class="price">$39.00</span>
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="short-description">
+                    <div class="std">Everything you need for a picture-perfect look</div>
+                </div>
+
+
+                <div class="form-add-to-cart-radio-group">
+                    <div class="form-add-to-cart-radio">
+                        <input id="rd1" type="radio" name="delivery" checked="">
+                        <label for="rd1">{One-time Delivery}</label>
+                    </div>
+                    <div class="form-add-to-cart-radio">
+                        <input id="rd2" type="radio" name="delivery">
+                        <label for="rd2">{Auto-Replenishment:
+                            <span class="_marked">Save 20% + Complimentary Shipping}</span>
+                            <span class="icon-info"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="add-to-cart-wrapper">
+
+                <div class="add-to-box">
+                    <div class="add-to-cart">
+                        <select class="qty">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <select>
+                            <option value="0">0.34 oz</option>
+                            <option value="1">0.34 oz</option>
+                            <option value="2">0.34 oz</option>
+                            <option value="3">0.34 oz</option>
+                        </select>
+                        <div class="add-to-cart-buttons">
+                            <button type="button" title="Add to Cart" class="button btn-cart" onclick="productAddToCartForm.submit(this)">
+                                Add to Cart            </button>
+                        </div>
+                    </div>
+                    <span class="or">OR</span>
+                    <ul class="add-to-links">
+                        <li>
+                            <a href="#">
+                                <span class="icon-add_friend"></span>
+                                {REFER A FRIEND AND GET A FREE LIP GLOSS!}
+                            </a>
+                        </li>
+</ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <span class="close-btn icon-ex"></span>
+</div>

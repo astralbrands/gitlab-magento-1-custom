@@ -1,0 +1,67 @@
+@mixin gotham() {
+  font-family: "Gotham A", "Gotham B", sans-serif;
+  //font-family: "Gotham SSm A", "Gotham SSm B", sans-serif;
+}
+@mixin chronic() {
+  font-family: "Chronicle Display A", "Chronicle Display B", sans-serif;
+}
+@mixin gothamBook() {
+  font-family: "Gotham-Book", "GothamBook", sans-serif;
+}
+
+@mixin transparentButton($lineHeight, $fontSize, $color, $hoverColor) {
+  min-width: 144px;
+  line-height: $lineHeight;
+  font-size: $fontSize;
+  border: 3px solid $color;
+  padding: 0 20px;
+  font-weight: 500;
+  color: $color;
+  text-align: center;
+  text-transform: uppercase;
+  display: table;
+  margin: 0 auto;
+  transition: background-color $fast ease-out, color $fast ease-out;
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+    background: $color;
+    color: $hoverColor;
+  }
+}
+
+@mixin hvrp() {
+  display: block;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  content: '';
+  position: absolute;
+}
+
+@mixin setFont($size, $lineHeight, $weight) {
+  font-size: $size;
+  line-height: $lineHeight;
+  font-weight: $weight;
+}
+
+@mixin vrp() {
+  display: block;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  content: '';
+  position: absolute;
+}
+
+@mixin hrp() {
+  display: block;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  content: '';
+  position: absolute;
+}

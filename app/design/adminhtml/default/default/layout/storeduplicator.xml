@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <storeduplicator_adminhtml_storeduplicatorbackend_index>
+	<reference name="content">
+	  <block type="storeduplicator/adminhtml_storeduplicatorbackend" name="storeduplicatorbackend" template="storeduplicator/storeduplicatorbackend.phtml"/>
+	</reference>
+  </storeduplicator_adminhtml_storeduplicatorbackend_index>
+</layout>

@@ -1,0 +1,121 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition End User License Agreement
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magento.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license http://www.magento.com/license/enterprise-edition
+ */
+?>
+<?php 
+$_order = $this->getOrder();
+if ($_extOrderId = $_order->getExtOrderId()) {
+            $_extOrderId = '[' . $_extOrderId . '] ';
+        } else {
+            $_extOrderId = '';
+        }
+?>
+
+<div class="content-header">
+    <h3 class="icon-head head-sales-order"><?php echo $this->__('Order # %s %s | %s', $_order->getRealOrderId(), $_extOrderId, $this->formatDate($_order->getCreatedAtDate(), 'medium', true)) ?></h3>
+    <p class="form-buttons">
+        <button class="scalable back" type="button" onclick="setLocation('<?php echo $this->getUrl('adminhtml/sales_order/view', array('order_id'=> $_order->getId())) ?>')"><span><span><span><?php echo $this->__('Back') ?></span></span></span></button>
+        <button class="scalable save" type="button" onclick="editForm.submit();"><span><span><span><?php echo $this->__('Save') ?></span></span></span></button>
+    </p>
+</div>
+<form action="<?php echo  $this->getUrl('born_orderedit/adminhtml_order/save', array('order_id'=>$_order->getId())) ?>" name="order_edit_form" id="order_edit_form">
+<div class="grid np">
+  <div class="hor-scroll">
+    <table cellspacing="0" class="data order-tables">
+        <col />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <thead>
+            <tr class="headings">
+                <th><?php echo $this->helper('sales')->__('Product') ?></th>
+                <th><span class="nobr"><?php echo $this->helper('sales')->__('Item Status') ?></span></th>
+                <th><span class="nobr"><?php echo $this->helper('sales')->__('Original Price') ?></span></th>
+                <th><?php echo $this->helper('sales')->__('Price') ?></th>
+                <th class="a-center"><?php echo $this->helper('sales')->__('Qty') ?></th>
+                <!--<th><?php echo $this->helper('sales')->__('Subtotal') ?></th>
+                <th><span class="nobr"><?php echo $this->helper('sales')->__('Tax Amount') ?></span></th>-->
+                <th><span class="nobr"><?php echo $this->helper('sales')->__('Tax Percent') ?></span></th>
+                <!--<th><span class="nobr"><?php echo $this->helper('sales')->__('Discount Amount') ?></span></th>
+                <th><span class="nobr"><?php echo $this->helper('sales')->__('Row Total') ?></span></th>-->
+                <th class="last"><span class="nobr"><?php echo $this->__('Remove') ?></span></th>
+            </tr>
+        </thead>
+        <?php $_items = $this->getItemsCollection() ?>
+        <?php $i=0;foreach ($_items as $_item):?>
+            <?php if ($_item->getParentItem()) continue; else $i++;?>
+            <tbody class="<?php echo $i%2?'even':'odd' ?>">
+                <?php echo $this->getItemHtml($_item) ?>
+                <?php echo $this->getItemExtraInfoHtml($_item) ?>
+            </tbody>
+        <?php endforeach; ?>
+    </table>
+  </div>
+</div>
+<br />
+<div id="order-methods">
+    <div id="order-shipping_method">
+        <div>
+            <div class="entry-edit">
+                <div class="entry-edit-head">
+                    <h4 class="fieldset-legend head-shipping-method icon-head"><?php echo $this->__('Shipping Method') ?></h4>
+                </div>
+                <div class="fieldset">
+                    <?php echo $this->getLayout()->createBlock('born_orderedit/adminhtml_sales_order_edit_shipping_method_form')->setOrder($_order)->setTemplate('born/orderedit/sales/order/edit/shipping/method/form.phtml')->toHtml() ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<script type="text/javascript">
+    var editForm = new varienForm('order_edit_form');
+    function toggleCustomPrice(checkboxElement, inputElementId)
+    {
+        if(typeof inputElementId == 'undefined'){
+            return false;
+        }
+        
+        if(checkboxElement.checked == true){
+            $(inputElementId).show();
+            $(inputElementId).disabled = false;
+            
+            $(inputElementId).addClassName('required-entry');
+            $(inputElementId).addClassName('validate-greater-than-zero');
+        }else{
+            $(inputElementId).hide();
+            $(inputElementId).disabled = true;
+            $(inputElementId).removeClassName('required-entry');
+            $(inputElementId).removeClassName('validate-greater-than-zero');
+        }
+        return false;
+    }
+</script>

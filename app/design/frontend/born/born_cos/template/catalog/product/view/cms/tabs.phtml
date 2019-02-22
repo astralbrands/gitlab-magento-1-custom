@@ -1,0 +1,190 @@
+
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+
+<?php $_cmsHelper = Mage::helper('cms'); ?>
+
+<ul class="tabs">
+
+    <?php if ($this->getBenefits()): ?>
+            <li class="active" rel="tab1"><span><?php echo $this->__('Benefits'); ?></span></li>
+    <?php endif ?>
+
+    <li rel="tab2" <?php if (!$this->getBenefits()): ?>class="active"<?php endif ?>><span><?php echo $this->__('Application'); ?></span></li>
+
+
+    <?php if ($_product->getIngredients()): ?>
+            <li rel="tab3"><span><?php echo $this->__('Ingredients'); ?></span></li>
+    <?php endif ?>
+
+</ul>
+<div class="tab-container">
+
+    <!--    Tab-1    -->
+    <?php $benefits = $this->getBenefits(); ?>
+
+    <?php if ($benefits): ?>
+        <h3 class="tab-drawer-heading" rel="tab1"><?php echo $this->__('Benefits'); ?></h3>
+        <div id="tab-benefits" class="tab-content tab1 benefits">
+            <?php foreach($benefits as $benefit) : ?>
+                <div class="benefit">
+                    <div class="benefit-outer">
+                        <div class="benefit-inner">
+                            <div class="benefit-inner-middle">
+                                <?php if (strpos($benefit['image'], '.svg')): ?>
+                                    <img class="benefit-img" src="<?php echo $benefit['image']; ?>" width="45px"/>
+                                <?php else: ?>
+                                    <img class="benefit-img" src="<?php echo $benefit['image']; ?>"/>
+                                <?php endif ?>
+                                <p class="benefit-description"><?php echo $benefit['description']; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+            <!-- Study Results -->
+            <?php $_studyResultsCollection = $this->getStudyResultsCollection() ?>
+            <?php if (isset($_studyResultsCollection) && $_studyResultsCollection->count()): ?>
+                <div class="study-results">
+                    <div class="study-results-outer" style="color:#<?php echo $this->getCmsStudyResultsColor(); ?>">
+                        <div class="study-results-inner">
+                            <?php $index =0; ?>
+                            <?php foreach ($_studyResultsCollection as $_studyResult): ?>
+                                <div class="study-results-block index-<?php echo $index++ ?>">
+                                    <?php if ($_studyResult->getTitle()): ?>
+                                        <h3><?php echo $_studyResult->getTitle() ?></h3>
+                                    <?php endif ?>
+                                    <?php if ($_studyResult->getDescription()): ?>
+                                        <p><?php echo $_studyResult->getDescription() ?></p>
+                                    <?php endif ?>
+                                </div>
+                            <?php endforeach ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif ?>
+            <!-- End Study Results -->
+
+            <div class="visual-results">
+                <div class="visual-results-outer">
+                    <?php if ($_product->getVisualResultsTitle()): ?>
+                        <h3 class="visual-results-title"><?php echo $_product->getVisualResultsTitle() ?></h3>
+                    <?php endif ?>
+                    <div class="visual-results-inner">
+                        <?php $index = 0; ?>
+                        <?php $_visualResults = $this->getVisualResultsArray(); ?>
+						<?php if(isset($_visualResults) && !empty($_visualResults)): ?>
+                        <?php foreach ($_visualResults as $_result): ?>
+                            <div class="visual-result-block index-<?php echo $index++?>">
+                                <?php if($_product->getData($_result['image']) && $_product->getData($_result['image']) != 'no_selection') : ?>
+                                    <img class="visual-image index-<?php echo $index?>" src="<?php echo $this->helper('catalog/image')->init($_product, $_result['image']); ?>"/>
+                                    <?php if ($_product->getData($_result['description'])): ?>
+                                        <p class="visual-result-description"><?php echo $_product->getData($_result['description']) ?></p>
+                                    <?php endif ?>
+                                <?php endif ?>
+                            </div>
+                        <?php endforeach ?>
+						<?php endif ?>
+                    </div>
+                </div>
+            </div>
+			
+        </div>
+    <?php endif ?>
+
+    <!--    Tab-2    -->
+    <h3 class="tab-drawer-heading" rel="tab2"><?php echo $this->__('Application'); ?></h3>
+    <div id="tab-application" class="tab-content tab2 application">
+
+        <div class="application-container">
+            <?php $index = 1; ?>
+            <?php
+            $maxApplicationBlocks = $this->getMaxApplicationBlocks();
+            $maxApplicationBlocks = 2;
+            ?>
+            <?php while($index <= $maxApplicationBlocks): ?>
+                <?php $_applicationColors = $this->getApplicationColors($index) ?>
+                <div class="application index-<?php echo $index?>" style="color:#<?php echo $_applicationColors['background_color']?>">
+                    <div class="application-outer">
+                        <div class="application-inner">
+                            <div class="application-inner-middle">
+                            <?php if ($_applicationImage = $this->getApplicationBackgroundImage($index)): ?>
+                                <img class="application__background" src="<?php echo $_applicationImage; ?>"/>
+                            <?php else: ?>
+                                <?php if ($_applicationIcon = $this->getApplicationIcon($index)): ?>    
+                                    <?php if (strpos($_applicationIcon, '.svg')): ?>
+                                        <img class="application-img" src="<?php echo $_applicationIcon; ?>" width="45px"/>
+                                    <?php else: ?>
+                                        <img class="application-img" src="<?php echo $_applicationIcon; ?>"/>
+                                    <?php endif ?>
+                                <?php endif ?>
+                                <div class="application-text" style="color:<?php echo $_applicationColors['text_color'] ?>">
+                                    <?php if ($_applicationTitle = $this->getApplicationTitle($index)): ?>
+                                        <h3 class="application-title"><?php echo $_applicationTitle ?></h3>
+                                    <?php endif ?>
+                                    <?php if ($_applicationDescription = $this->getApplicationDescription($index)): ?>
+                                        <p class="application-description"><?php echo $_applicationDescription; ?></p>
+                                    <?php endif ?>
+                                </div>
+                            <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php $index++ ?>
+            <?php endwhile; ?>
+        </div>
+
+        <?php if($_product->getProTip() && $_product->getData('pro_tip_image') && $_product->getData('pro_tip_image') != 'no_selection') : ?>
+            <div class="pro-tip-container">
+                <div class="pro-tip" >
+                    <div class="pro-tip__outer">
+                        <div class="pro-tip__image" style="background-image: url(<?php echo $this->helper('catalog/image')->init($_product, 'pro_tip_image'); ?>)">
+                        </div>
+                    </div>
+                </div>
+                <div class="pro-tip">
+                    <div class="pro-tip__outer">
+                        <div class="pro-tip__inner">
+                            <?php echo $_product->getProTip(); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+    <!--    Tab-3    -->
+    <?php if ($_product->getIngredients()): ?>
+       <h3 class="tab-drawer-heading" rel="tab3"><?php echo $this->__('Ingredients'); ?></h3>
+       <div id="tab-ingredients" class="tab-content tab3 ingredients">
+           <div class="ingredients-wrapper">
+               <?php if($_product->getData('ingredient_image') && $_product->getData('ingredient_image') != 'no_selection') : ?>
+               <div class="ingredients-image-container left ingredient-block">
+                   <div class="pro-ingredients-image-outer">
+                       <div class="pro-ingredients-image" style="background-image: url(<?php echo $this->helper('catalog/image')->init($_product, 'ingredient_image'); ?>)">
+                           <div class="pro-ingredients-image-inner">
+                               <?php echo $_cmsHelper->getPageTemplateProcessor()->filter($_product->getIngredientImageText());?>
+                           </div>
+                       </div>
+                       <?php if($_product->getData('ingredient_swatch_image') && $_product->getData('ingredient_swatch_image') != 'no_selection') : ?>
+                           <div class="pro-ingredients-swatch-image" style="background-image: url(<?php echo $this->helper('catalog/image')->init($_product, 'ingredient_swatch_image'); ?>)"></div>
+                        <?php endif; ?>
+                   </div>
+
+               </div>
+               <div class="ingredients-text-container right ingredient-block">
+                   <?php else: ?>
+                   <div class="ingredients-text-container right ingredient-block-full">
+                       <?php endif; ?>
+                       <h2><?php echo $this->__('All Ingredients') ?></h2>
+                       <p><?php echo $_product->getIngredients(); ?></p>
+                   </div>
+           </div>
+        </div>
+    <?php endif ?>
+   
+</div>
+
+
+

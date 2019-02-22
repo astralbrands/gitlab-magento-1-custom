@@ -1,0 +1,66 @@
+//  \app\design\frontend\born\born\template\checkout\success.phtml
+
+.checkout-onepage-success {
+  .col-main {
+    margin: 50px 20px;
+  }
+  .page-title {
+    h1 {
+      @include gotham;
+      @include setFont(3rem, 4.2rem, 200);
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+  }
+  .sub-title {
+    @include gotham;
+    @include setFont(1.8rem, 4.2rem, 500);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+  p {
+    @include gothamBook;
+    @include setFont(1.6rem, 3rem, 400);
+  }
+
+  .buttons-set  {
+    margin-top: 40px;
+    border-top: none;
+    .button {
+      box-sizing: border-box;
+      background: $black;
+      height: 50px;
+      width: 180px;
+      @include gotham;
+      @include setFont(1.3rem, 2rem, 500);
+      &:hover {
+        background: $white;
+        color: $black;
+        border: 3px solid $black;
+        @include transition(all, 0$slow ease);
+      }
+    }
+  }
+}
+
+.checkout-onepage-index .opc-firststep-login {
+  .col-2 {
+    .buttons-set .button:hover {
+      border: none;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .checkout-onepage-success {
+    .col-main {
+      margin-top: 80px;
+    }
+    .page-title h1 {
+      font-size: 2.2rem;
+    }
+    .sub-title {
+      font-size: 1.6rem;
+    }
+  }
+}

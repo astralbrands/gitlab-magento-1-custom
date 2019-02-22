@@ -1,0 +1,224 @@
+// \blog\wp-content\themes\pur\single-event.php
+
+.blog {
+  .modal {
+    overflow: auto;
+    .wg-size {
+      position: relative;
+      top: -15px;
+    }
+  }
+}
+
+.blog-modal {
+  @include display(flex);
+  .modal-image {
+    @include flex-basis(40%);
+    padding-right: 38px;
+    img {
+      max-width: 100%;
+      height: auto
+    }
+  }
+  .modal-content {
+    @include flex-basis(60%);
+    &.full-content {
+      @include flex-basis(100%);
+      min-width: 500px;
+    }
+  }
+  .modal-title {
+    @include gotham;
+    @include setFont(2.9rem, 4.2rem, 200);
+    margin-bottom: 50px;
+  }
+  .caption {
+    @include flex-basis(91px);
+    height: 20px;
+    background: $black;
+    color: $white;
+    @include gotham;
+    @include setFont(0.99rem, 2rem, 400);
+    font-style: normal;
+    text-align: right;
+    text-transform: uppercase;
+    padding: 0 10px;
+    margin: 5px 20px 0 0;
+  }
+  .description {
+    @include flex-basis(calc(100% - 91px));
+    @include gothamBook;
+    font-size: 1.6rem;
+  }
+  .modal-time,
+  .modal-location,
+  .modal-details {
+    margin-bottom: 30px;
+    @include display(flex);
+  }
+  .modal-location {
+    line-height: 2rem;
+  }
+  .modal-details {
+    line-height: 3rem;
+  }
+  #phone {
+    margin-top: 20px;
+  }
+  .modal-footer {
+    padding-left: 101px;
+    @include display(flex);
+    @include justify-content(space-between);
+    .attending,
+    .share-link,
+    .rsvp {
+      display: inline-block;
+      @include gotham;
+      @include setFont(1.3rem, 2.4rem, 500);
+    }
+    .attending {
+      line-height: 5rem;
+    }
+    .icon-add_friend {
+      font-size: 2.7rem;
+      vertical-align: middle;
+    }
+    .share-link {
+      line-height: 5rem;
+      color: $light-text-color;
+      text-decoration: underline;
+      &:hover {
+        color: $black;
+      }
+      .share-buttons {
+        top: -30px;
+      }
+    }
+    .rsvp {
+      box-sizing: border-box;
+      width: 180px;
+      height: 50px;
+      line-height: 4.6rem;
+      vertical-align: middle;
+      .icon-checkbox_selected {
+        display: none;
+      }
+      &:hover {
+        background: $black;
+        color: $white;
+        text-decoration: none;
+      }
+    }
+    .rsvp-success{
+      background: $black;
+      color: $white;
+      pointer-events: none;
+      .icon-checkbox_selected {
+        display: inline-block;
+        color: $white;
+        font-size: 2.5rem;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+@media only screen and  (max-width: $tablet-s) {
+  .blog-modal {
+    .modal-footer {
+      padding-left: 0;
+    }
+  }
+}
+
+@media only screen and  (max-width: $mobile) {
+  .blog-modal {
+    .modal-image {
+      display: none;
+    }
+    .modal-content {
+      @include flex-basis(100%);
+      padding-left: 0;
+    }
+    .modal-title {
+      font-size: 2rem;
+      line-height: 3rem;
+      margin-bottom: 20px
+    }
+    .modal-time,
+    .modal-location,
+    .modal-details {
+      display: block;
+    }
+    .caption {
+      width: 91px;
+      background: $white;
+      color: $black;
+      padding-left: 0;
+      text-align: left;
+      text-decoration: underline;
+    }
+    .description {
+      font-size: 1.3rem;
+    }
+    .modal-footer {
+      text-align: center;
+      .share-link {
+        @include transparentButton(4rem , 1.3rem, $black, $white);
+        text-decoration: none;
+        width: 180px;
+        margin: 0 auto 19px;
+        &:hover {
+          margin-bottom: 50px;
+          .share-buttons {
+            top: 50px;
+            left: 50%;
+            margin-left: -48px;
+            background: transparent !important;
+            &:before {
+              display: none;
+            }
+          }
+          .share-buttons-panel .social-icon {
+            color: silver !important;
+            background: transparent !important;
+          }
+        }
+        .wg-size {
+          padding-top: 10px;
+        }
+      }
+      .rsvp {
+        height: 46px;
+        line-height: 4rem;
+        margin: 0 auto 19px;
+      }
+    }
+  }
+  .blog .quickveiw-modal .close-btn {
+    right: 14px;
+  }
+}
+
+@media only screen and  (max-width: $mobile-s) {
+  .blog-modal {
+    .modal {
+      padding: 20px;
+    }
+    .modal-content {
+      &.full-content {
+        min-width: initial;
+      }
+    }
+    .modal-footer {
+      @include flex-direction(column);
+      .attending {
+        order: 3;
+        .attending {
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}
+

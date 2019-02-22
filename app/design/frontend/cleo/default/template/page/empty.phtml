@@ -1,0 +1,24 @@
+<?php
+    $_bodyClass = $this->getBodyClass() ? ' class="'.trim($this->getBodyClass()).' no-transition"' : 'class="no-transition"';
+?>
+<!DOCTYPE HTML>
+<!--[if lt IE 7 ]>  <html class="ie ie6 lt-ie9 lt-ie8 lt-ie7">  <![endif]-->
+<!--[if IE 7 ]>     <html class="ie ie7 lt-ie9 lt-ie8">         <![endif]-->
+<!--[if IE 8 ]>     <html class="ie ie8 lt-ie9">                <![endif]-->
+<!--[if IE 9 ]>     <html class="ie ie9">                       <![endif]-->
+<!--[if gt IE 9]>   <html class="ie">                           <![endif]-->
+<!--!(IE)]><!-->    <html>                                      <!--<![endif]-->
+    <head>
+        <?php echo $this->getChildHtml('head'); ?>
+    </head>
+    <body<?php echo $_bodyClass; ?>>
+        <?php echo $this->getChildHtml('after_body_start'); ?>
+        <div id="wrapper">
+        <a id="top"></a>
+        <?php echo $this->getChildHtml('global_messages'); ?>
+        <?php echo $this->getChildHtml('content'); ?>
+        </div>
+        <?php echo $this->getChildHtml('before_body_end'); ?>
+        <?php echo $this->getAbsoluteFooter(); ?>
+    </body>
+</html>

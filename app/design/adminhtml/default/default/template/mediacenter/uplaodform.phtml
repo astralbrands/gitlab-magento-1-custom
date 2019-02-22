@@ -1,0 +1,112 @@
+<script> var _mediacenter_counter,filenames = new Array(); </script>
+<?php $htmlId = "mediaupload"; ?>
+ <div id="<?php echo $htmlId ?>" class="uploader">
+     <div class="buttons">
+        <div id="<?php echo $htmlId ?>-install-flash" style="display:none">
+            <?php echo Mage::helper('media')->__('This content requires last version of Adobe Flash Player. <a href="%s">Get Flash</a>', 'http://www.adobe.com/go/getflash/') ?>
+        </div>
+     </div>
+     <div class="clear"></div>
+     <div id="<?php echo $htmlId ?>-template" class="no-display">
+         <div id="{{id}}" class="file-row">
+             <span class="file-info">{{name}} ({{size}})</span> 
+             <span class="delete-button"><button id="{{id}}-delete" title="<?php echo $this->__("Delete")?>" type="button" class="scalable delete" onclick="uploader.removeFile('{{fileId}}')" style=""><span><span><span><?php echo $this->__("Delete") ?></span></span></span></button></span>
+             <span class="progress-text"></span>
+             <div class="clear"></div>
+         </div>
+     </div>
+     <div id="<?php echo $htmlId ?>-template-progress" class="no-display">
+         {{percent}}% {{uploaded}} / {{total}}
+     </div>
+ </div>
+<?php 
+$_htmlId      = $this->getElement()->getHtmlId();
+$_htmlClass   = $this->getElement()->getClass();
+$_htmlName    = $this->getElement()->getName();
+$_readonly    = $this->getElement()->getReadonly();
+$customerGroupOptions = Mage::helper('mediacenter')->getCustomerGroupSelect();
+$_counter = 0;
+?>
+
+        <table id="attribute-options-table" class="dynamic-grid mediacenter-uploadform" cellspacing="0" cellpadding="0"><tbody>
+            <tr class="option-row">
+                <th><?php echo $this->__('Media Name') ?></th>
+				<th><?php echo $this->__('Uplaod Media') ?></th>
+				<th><?php echo $this->__('Description') ?></th>
+				<th><?php echo $this->__('Customer Groups') ?></th>
+                <!--<th><button id="add_new_option_button" title="Add Option" type="button" class="scalable add"><span><span><span><?php echo $this->__('Add Option') ?></span></span></span></button></th>-->
+            </tr>
+</tbody></table>
+
+<script type="text/javascript">//<![CDATA[
+
+var _form_html_row = '<tr class="option-row mediacenter-uploadform-dayrow" id="media-row-{{id}}"> \
+<td><input name="name[]" value="" class="input-text" type="text"></td> \
+<td> <span class="file_name_label"></span> \
+<input name="file_name[]" value="" class="file_name input-text" type="hidden" id="mediaupload_{{id}}"></td> \
+<td><textarea name="description[]" ></textarea></td> \
+<td><select multiple name="media_customer_group[{{id}}][]" id="media_customer_group"><?php echo $customerGroupOptions ?></select></td> \
+<td class="a-left" id="delete_button_container_option_{{id}}"> \
+	<input name="<?php echo $_htmlName; ?>[value][option_{{id}}][id]" value="" type="hidden" /> \
+	<input id="delete-row-{{id}}" type="hidden" class="delete-flag" name="<?php echo $_htmlName; ?>[delete][option_{{id}}]" value=""/> \
+	<button onclick="$(\'media-row-{{id}}\').remove(); filenames[{{id}}]=\'\'; console.log(filenames);" title="Delete" type="button" class="scalable delete delete-option"> \
+		<span> \
+			<span> \
+				<span>Delete</span> \
+			</span> \
+		</span> \
+	</button> \
+		</td></tr>';
+
+_mediacenter_counter = <?php echo $_counter ?>;
+
+/* $('add_new_option_button').observe('click', function(){
+    $('attribute-options-table').insert(_form_html_row.replace(/\{\{id\}\}/ig, _mediacenter_counter));
+    _mediacenter_counter++;
+}); */
+
+//]]></script>
+ <script>
+ var uploader = new Flex.Uploader('<?php echo $htmlId ?>', '<?php echo $this->getSkinUrl('media/uploader.swf') ?>', <?php echo $this->getConfigJson('name') ?>);
+    uploader.onFilesComplete = function(completedFiles)
+    {
+        completedFiles.each(function(file)
+            {
+				filenames.push(file.response.replace(/^"(.*)"$/, '$1'));
+                uploader.removeFile(file.id);
+				$('attribute-options-table').insert(_form_html_row.replace(/\{\{id\}\}/ig, _mediacenter_counter));
+				_mediacenter_counter++;
+            }
+        );
+		console.log(filenames);
+
+		i=0;
+		filterFilenames = filenames.filter(function(n){ return n != '' }); 
+        $$('.file_name_label').each(
+			function(index) {
+					index.update(filterFilenames[i]);
+					console.log(filterFilenames[i]+" "+i);
+					i++;
+			}
+		) 
+		i=0;
+		$$('.file_name').each(
+			function(index) {
+					index.setValue(filterFilenames[i]);
+					i++; 
+			}
+		)
+
+		MediabrowserInstance.handleUploadComplete();
+		
+
+    }
+    // hide flash buttons
+    if ($('<?php echo $htmlId ?>-flash') != undefined)
+    {
+        $('<?php echo $htmlId ?>-flash').setStyle({float:'left'});
+    }
+//specify maximum file upload size (very important!)
+    var maxUploadFileSizeInBytes = 200 * 1024 * 1024;
+    var maxUploadFileSize = '200M';
+ </script>

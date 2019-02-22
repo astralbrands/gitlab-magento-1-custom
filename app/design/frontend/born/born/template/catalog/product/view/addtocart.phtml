@@ -1,0 +1,57 @@
+<?php
+$_cartMaxSelectQty = Mage::getStoreConfig('checkout/cart/max_select_qty', Mage::app()->getStore());
+$_product = $this->getProduct();
+$buttonTitle = Mage::helper('core')->quoteEscape($this->__('Add to Bag'));
+	if($_product->isSaleable()):
+	$hasSizeAttributeUsed = false;
+	$sizeAttributeId = null;
+	$sizeAttributes = null; 
+    //$configurableAttributes = $_product->getTypeInstance(true)->getConfigurableAttributesAsArray($_product);
+    $configurableAttributes = Born_Package_Block_Catalog_Product_View::getConfigurableAttributesAsArray($_product);    
+        if($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE):
+        $configurableAttributes = $_product->getTypeInstance(true)->getConfigurableAttributesAsArray($_product);
+            foreach($configurableAttributes as $_configurableAttribute){
+                if($_configurableAttribute['attribute_code'] == 'size'){
+                    $sizeAttributes = $_configurableAttribute['values'];
+                    $sizeAttributeId = $_configurableAttribute['attribute_id'];
+                    $hasSizeAttributeUsed = true;
+                }
+            }
+        endif; 
+?>
+    <div class="add-to-cart">
+        <?php if(!$_product->isGrouped()): ?>
+            <div class="qty-attribute">
+                <label class="label-text-up">Qty</label>
+                <select name="qty" id="qty" data-cart-item-id="<?php echo $this->jsQuoteEscape($_product->getSku()) ?>" title="<?php echo $this->__('Qty') ?>">
+                    <?php $_cartMaxSelectQty = $_cartMaxSelectQty ? $_cartMaxSelectQty : 10; ?>
+                    <?php for ($i=1; $i <= $_cartMaxSelectQty; $i++): ?>
+                        <option value="<?php echo $i ?>" <?php /*if($i == $this->getQty()){ echo 'selected="selected"';} */?> ><?php echo $i ?></option>
+                    <?php endfor; ?>
+                </select>
+            </div>
+        <?php endif; ?>
+        <?php if ($this->getSizeValue()): ?>
+            <div class="size-wrapper">
+                <label class="label-text-up">Size</label>
+                <span><?php echo $this->getSizeValue() ?></span>
+            </div>
+        <?php endif ?>
+        <?php if($hasSizeAttributeUsed): ?>
+            <div class="size-attribute">
+                <label class="label-text-up">Size</label>
+                <select name="super_attribute[<?php echo $sizeAttributeId ?>]" id="attribute<?php echo $sizeAttributeId ?>">
+                    <?php foreach($sizeAttributes as $sizeAttribute): ?>
+                        <option value="<?php echo $sizeAttribute['value_index'] ?>"><?php echo $sizeAttribute['label'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        <?php endif; ?>
+        <div class="add-to-cart-buttons">
+            <button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this)">
+                <span><span><?php echo $buttonTitle ?></span></span>
+            </button>
+            <?php echo $this->getChildHtml('', true, true) ?>
+        </div>
+    </div>
+<?php endif; ?>

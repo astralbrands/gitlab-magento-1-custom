@@ -1,0 +1,287 @@
+@import "../_filters_cos";
+
+.category-products {
+  .category-tools {
+    padding-top: 15px;
+    margin-bottom: 17px;
+    label.title {
+      @include whitneyBook;
+      @include setFont(2rem, 4rem, 400);
+      font-style: italic;
+      padding-left: 25px;
+      padding-right: 20px;
+    }
+    .toolbar {
+      margin-top: 0;
+    }
+  }
+  .pager .count-container .amount strong {
+    @include whitneyBook;
+    font-style: italic;
+  }
+  .filters-btn .btnx {
+    border-width: 2px;
+  }
+}
+
+.category-select {
+  .jq-selectbox__select {
+    height: 48px;
+    line-height: 48px;
+    padding: 0 0 0 15px;
+    width: 160px;
+  }
+  .jq-selectbox__select-text {
+    min-width: 80%;
+  }
+}
+
+.products-grid {
+  .item-category-title {
+    position: relative;
+    &:before,
+    &:after {
+      content:'';
+      display: block;
+      position: absolute;
+      right: 0;
+      width: 1px;
+      background: $block-border-color;
+      box-sizing: border-box;
+      z-index: 1;
+    }
+    &:before {
+      top: 0;
+      bottom: calc(50% + 15px);
+    }
+    &:after {
+      bottom: 0;
+      top: calc(50% + 15px);
+    }
+    .background-img-div {
+      width: calc(100% + 15px);
+    }
+    .background-arrow {
+      position: absolute;
+      right: -15px;
+      top: 0;
+      bottom: 0;
+      height: 100%;
+      width: 0;
+      &:before,
+      &:after {
+        content:'';
+        position: absolute;
+        right: 100%;
+        height: 50%;
+        box-sizing: border-box;
+      }
+      &:before {
+        top: 50%;
+        border-right: 15px solid $white;
+        border-top: 15px solid transparent;
+      }
+      &:after {
+        bottom: 50%;
+        border-right: 15px solid white;
+        border-bottom: 15px solid transparent;
+      }
+    }
+    .item-outer:after {
+      content: '';
+      width: 22px;
+      height: 22px;
+      @include transform(rotate(45deg));
+      @include position(absolute, 50% -11px null null);
+      background: transparent;
+      margin-top: -11px;
+      border: 1px solid $block-border-color;
+      border-width: 1px 1px 0 0;
+    }
+    .no-bg.item-outer:after {
+      background: $white;
+    }
+  }
+  .category-title {
+    font-weight: 200;
+    text-transform: none;
+  }
+  .product-count {
+    @include whitneyBook;
+    font-style: italic;
+  }
+  .category-description {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+  }
+  .product-info {
+    width: 95%;
+    margin: 0 auto;
+    .bv-cleanslate {
+      display: block !important;
+    }
+    .tag-new {
+      @include position(absolute, 10px null null 20px);
+      @include display(flex);
+      @include justify-content(center);
+      @include align-items(center);
+      width: 57px;
+      height: 32.91px;
+      background: $white;
+      color: $light-text-color;
+      border-radius: 0;
+      @include setFont(1.2rem, 1.3rem, 500);
+      letter-spacing: -0.07rem;
+      text-transform: uppercase;
+      margin: 16.45px 0;
+      border-left: solid 2px $light-text-color;
+      border-right: solid 2px $light-text-color;
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        width: 40.31px;
+        height: 40.31px;
+        -webkit-transform: scaleY(0.5774) rotate(-45deg);
+        -ms-transform: scaleY(0.5774) rotate(-45deg);
+        transform: scaleY(0.5774) rotate(-45deg);
+        background-color: transparent;
+        left: 6.3475px;
+      }
+      &:before {
+        top: -20.1525px;
+        border-top: solid 2.8284px $light-text-color;
+        border-right: solid 2.8284px $light-text-color;
+      }
+      &:after {
+        bottom: -20.1525px;
+        border-bottom: solid 2.8284px $light-text-color;
+        border-left: solid 2.8284px $light-text-color;
+      }
+    }
+  }
+  .product-name {
+    @include gotham;
+    @include setFont(1.4rem, 2.4rem, 500);
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+  }
+  .product-subtitle {
+    @include gothamBook;
+    @include setFont(1.2rem, 2.4rem, 400);
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+  }
+  .price {
+    @include whitneyBook;
+    @include setFont(1.6rem, 2.4rem, 400);
+    font-style: italic;
+  }
+  .item:hover {
+    .quickview,
+    .wishlist {
+      border: 1px solid $block-border-color;
+      font-size: 1.2rem;
+      position: relative;
+      &:before {
+        color: $icon-color;
+        font-size: 2rem;
+        height: 20px;
+        line-height: 2rem;
+        position: absolute;
+        bottom: 12px;
+      }
+    }
+    .quickview {
+      border-right: none;
+      &:before {
+        content: "\e936";
+      }
+    }
+    .wishlist {
+      &:before {
+        content: "\e90d";
+      }
+      &.favorite {
+        &:before {
+          content: "\e90e";
+          color: $icon-color;
+        }
+        &:hover {
+          &:before {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}
+
+.ie {
+  .products-grid .item:hover  {
+    .quickview:before,
+    .wishlist:before {
+      bottom: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile + 2px){
+  .category-select {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: $mobile-m){
+  .products-grid {
+    margin-bottom: 0;
+    .item-category-title {
+      &:before,
+      &:after {
+        display: none;
+      }
+      .item-outer:after {
+        display: none;
+      }
+    }
+    .background-img-div {
+      width: 100%;
+      background-position: top center;
+    }
+    .background-arrow {
+      display: none;
+    }
+    .item-category-title {
+      .item-outer {
+        border-bottom: 1px solid $block-border-color;
+        overflow: hidden;
+      }
+      .item-inner {
+        border-bottom: none;
+      }
+    }
+  }
+  .catalog-category-view {
+    .products-grid {
+      .category-title {
+        font-size: 2.8rem;
+      }
+      .product-name {
+        font-size: 1.2rem;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-galaxy-s6){
+  .products-grid .alt-img img {
+    max-width: 190px;
+  }
+}
+
+@media only screen and (max-width: $mobile-iphone-5){
+  .products-grid .alt-img img {
+    max-width: 159px;
+  }
+}

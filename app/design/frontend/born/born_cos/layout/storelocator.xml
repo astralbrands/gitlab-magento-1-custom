@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <storelocator_index_index translate="label">
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        
+        <reference name="head">
+            <block type="page/html_head" name="Google.Maps.Api" as="born.google.maps" template="storelocator/google_maps.phtml"/>
+            <!--<block type="core/text" name="markerwithlabel">-->
+                <!--<action method="setText"><text><![CDATA[<script type="text/javascript" src="https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js"></script>]]></text></action>-->
+            <!--</block>-->
+            <action method="addItem"><type>skin_js</type><name>js/infobubble.js</name></action>                        
+            <action method="addItem"><type>external_js</type><name>https://googlemaps.github.io/js-marker-clusterer/src/markerclusterer.js</name><params/></action>
+        </reference>
+        <reference name="content">
+            <block type="storelocator/view" name="storelocator" template="storelocator/view.phtml" />
+            <block type="cms/block" name="spa_of_the_month_block" after="storelocator">
+                <action method="setBlockId"><block_id>spa_of_the_month</block_id></action>
+            </block>
+        </reference>
+        
+    </storelocator_index_index>
+</layout>

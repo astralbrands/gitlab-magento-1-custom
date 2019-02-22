@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Locator
+ */
+-->
+<layout>
+
+    <default>
+        <reference name="footer_links">
+            <action method="addLink" translate="label title" module="amlocator">
+                <label>Location</label>
+                <url helper="amlocator/getUrl" />
+                <title>Location</title>
+            </action>
+        </reference>
+    </default>
+
+    <amlocator_index_index>
+        <reference name="head">
+            <action method="addJs"><script>amasty/amlocator/main.js</script></action>
+            <action method="addJs"><script>amasty/amlocator/cluster.js</script></action>
+            <action method="addItem"><type>skin_css</type><file>css/amasty/amlocator/main.css</file></action>
+        </reference>
+
+        <remove name="tags_popular"/>
+    </amlocator_index_index>
+
+    <amlocator_index_index_noresp>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+
+        <reference  name="left">
+            <block before="-" type="core/template" name="wrapper" template="amasty/amlocator/listwrapper.phtml" >
+                <block type="amlocator/location" name="leftblock" template="amasty/amlocator/leftblock.phtml" />
+            </block>
+        </reference>
+
+        <reference name="content">
+            <block type="amlocator/location" template="amasty/amlocator/center.phtml" />
+        </reference>
+        <remove name="catalog.compare.sidebar"/>
+    </amlocator_index_index_noresp>
+
+    <amlocator_index_index_resp>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+
+        <reference name="content">
+            <block type="amlocator/location" template="amasty/amlocator/responsive.phtml" />
+        </reference>
+        <remove name="catalog.compare.sidebar"/>
+    </amlocator_index_index_resp>
+
+    <amlocator_index_ajax>
+        <block type="amlocator/location" name="root" template="amasty/amlocator/leftblock.phtml" output="toHtml" />
+        <remove name="right"/>
+        <remove name="left"/>
+    </amlocator_index_ajax>
+
+    <catalog_product_view>
+        <reference name="alert.urls">
+            <block type="amlocator/location" name="location.link" before="-"  template="amasty/amlocator/link.phtml" output="toHtml"/>
+        </reference>
+    </catalog_product_view>
+
+</layout>

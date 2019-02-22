@@ -1,0 +1,39 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Xnotif
+ */
+?>
+<?php
+$collection = $this->getCollection();
+if ($collection->getSize()): ?>
+    <table cellpadding="5" cellspacing="2" border="1">
+        <tr>
+            <th><?php echo $this->__('Name')?></th>
+            <th><?php echo $this->__('SKU')?></th>
+            <th><?php echo $this->__('Total Number of Subscriptions')?></th>
+            <th><?php echo $this->__('Last Subscription')?></th>
+        </tr>
+        <?php foreach ($collection as $item): ?>
+
+            <tr>
+                <td>
+                    <?php echo $item->getName();?>
+                </td>
+                <td>
+                    <?php echo $item->getSku();?>
+                </td>
+                <td>
+                    <?php echo $item->getTotalCnt();?>
+                </td>
+                <td>
+                    <?php echo $item->getLastD();?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+    <p><small><a href="<?php echo Mage::helper("adminhtml")->getUrl("adminhtml/amstock/index") ?>"><?php echo $this->__('Click here to see more details') ?></a></small></p>
+<?php else: ?>
+    <p><?php echo $this->__('There are no notifications.') ?></p>
+<?php endif; ?>

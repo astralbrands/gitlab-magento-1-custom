@@ -1,0 +1,612 @@
+// core of html in  app\design\frontend\born\born\template\borncmshooks\blocks\slot.phtml
+// core of html in  app\design\frontend\born\born\template\borncmshooks\blocks\productslot.phtml
+.section-1,
+.section-2,
+.section-3 {
+  padding-top: 53px;
+  .box-outer {
+    position: relative;
+  }
+  .box-inner {
+    @include position(absolute, 0 0 0 0);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 0;
+    &:after {
+      vertical-align: middle;
+      display: inline-block;
+      content: '';
+      width: 0;
+      height: 100%;
+    }
+    &__middle {
+      vertical-align: middle;
+      display: inline-block;
+    }
+  }
+
+  .alt-img {
+    img {
+      width: 320px;
+      margin: 0 auto;
+    }
+  }
+  .product-image-default {
+    width: 100%;
+    height: auto;
+  }
+  .product-image-hover {
+    opacity: 0;
+    height: 0;
+  }
+  .section-title {
+    text-align: center;
+    @include setFont(2.4rem, 4.2rem, 500);
+    margin-bottom: 29px;
+  }
+  .slots {
+    @include display(flex);
+    @include flex-wrap(wrap);
+    @include align-items(stretch);
+    .one-third,
+    .two-third {
+      &:nth-child(-n + 3) {
+        
+      }
+    }
+  }
+  .empty-slot {
+    display: none;
+  }
+  .half, .one-third {
+    &.left {
+      .box-inner__middle {
+        .slot-title, .slot-text, .slot-subtitle, .slot-btn {
+          text-align: left;
+        }
+        .slot-btn {
+          margin: 0;
+        }
+      }
+    }
+    &.right {
+      .box-inner__middle {
+        .slot-title, .slot-text, .slot-subtitle, .slot-btn {
+          text-align: right;
+        }
+        .slot-btn {
+          margin: 0;
+        }
+      }
+    }
+    &.center {
+      .box-inner__middle {
+        .slot-title, .slot-text, .slot-subtitle, .slot-btn {
+          text-align: center;
+        }
+        .slot-btn {
+          margin: 0 auto;
+        }
+      }
+    }
+    &.font-black {
+      .box-inner__middle {
+        .slot-title, .slot-btn {
+          color: $black;
+        }
+        .slot-btn {
+          border-color: $black;
+        }
+      }
+    }
+    &.font-white {
+      .box-inner__middle {
+        .slot-title, .slot-btn {
+          color: $white;
+        }
+        .slot-btn {
+          border-color: $white;
+        }
+      }
+    }
+  }
+  .half {
+    @include flex-basis(50%);
+    position: relative;
+    font-size: 0;
+    &:first-child {
+      .box-inner__middle {
+        border-left: 1px solid $block-border-color;
+        text-align: center;
+      }
+    }
+    .box-inner__middle {
+      padding: 60px 80px;
+      vertical-align: middle;
+      display: inline-block;
+      border-right: 1px solid $block-border-color;
+      border-bottom: 1px solid $block-border-color;
+    }
+    .slot-title {
+      font-size: 2.6rem;
+      line-height: 6rem;
+      @include chronic();
+      text-transform: none;
+      max-width: 345px;
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
+  .two-third {
+    @include flex-basis(66.66%);
+    position: relative;
+    text-align: center;
+    .box-outer {
+      padding-top: 100%;
+      position: relative;
+    }
+  }
+  .one-third {
+    position: relative;
+    
+    @include flex-basis(33.33%);
+    text-align: center;
+    &:nth-child(3n),
+    &:last-child .box-outer {
+      .box-outer {
+        
+      }
+    }
+    .box-outer {
+      padding-top: 100%;
+      position: relative;
+      
+    }
+  }
+  .background-image {
+    background-size: cover;
+    flex-basis: 33.33%;
+    position: relative;
+    .box-outer {
+      padding-top: 100%;
+      position: relative;
+    }
+  }
+  .background-image.two-third {
+    @include flex-basis(66.66%);
+    .box-outer {
+      padding-top: 50%;
+    }
+  }
+  .slot-title {
+    text-transform: uppercase;
+    font-size: 3.6rem;
+    line-height: 4.2rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .slot-text {
+    @include gothamBook();
+    @include setFont(1.6rem, 3rem, 400);
+    margin-bottom: 20px;
+    b {
+      @include gotham();
+      font-weight: 700;
+    }
+  }
+  .slot-subtitle {
+    font-size: 1.6rem;
+    line-height: 3rem;
+    max-width: 340px;
+    padding: 0 10px;
+    text-transform: none;
+    margin: 0 auto 29px;
+    font-weight: 200;
+  }
+  .slot-btn {
+    @include transparentButton(4.4rem, 1.3rem, $black, $white);
+    padding: 0 31px;
+    min-width: 170px;
+  }
+  .product-name {
+    margin-bottom: 10px;
+    @include gotham;
+    a {
+      font-weight: 200;
+      font-size: 1.6rem;
+      text-transform: none;
+      color: $black;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+  .mobile-button {
+    @include transparentButton(4.4rem, 1.3rem, $black, $black);
+    @include setFont(1.2rem, 3.4rem, 500);
+    display: none;
+    max-width: 170px;
+    margin-top: 28px;
+    padding: 0;
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    &:active, &:hover {
+      .btn-text {
+        color: $white;
+      }
+      background: $black;
+    }
+  }
+}
+
+.section-3 .slot-title {
+  font-weight: 200;
+}
+
+.section-1,
+.section-2,
+.section-3{
+  .price-box {
+    .price {
+      font-size: 1.4rem;
+      color: $black;
+      font-weight: 500;
+    }
+    .special-price,
+    .regular-price {
+      .price {
+        @include gotham;
+        font-weight: 500;
+      }
+    }
+
+    .old-price {
+      font-size: 1.8rem;
+      font-style: italic;
+      padding-left: 5px;
+      .price {
+        color: $light-text-color;
+        @include chronic();
+      }
+    }
+  }
+}
+
+.section-1,
+.section-2,
+.section-3,
+.section-4 {
+  .box-outer {
+    .btns {
+      font-size: 0;
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      left: 0;
+    }
+    &:hover {
+      .btns {
+        height: 69px;
+      }
+      .quickview, .wishlist {
+        @include gotham();
+        @include setFont(1.3rem, 2.2rem, 500);
+        border: 1px solid $block-border-color;
+        display: inline-block;
+        width: 114px;
+        height: 100%;
+        padding: 12px 0;
+        text-align: center;
+        text-transform: uppercase;
+        vertical-align: middle;
+        &:before {
+          display: block;
+          width: 100%;
+          font-family: $icomoon;
+          text-align: center;
+          color: $black;
+          height: 25px;
+        }
+        &:hover {
+          @include transition(all $fast ease);
+          text-decoration: none;
+          background: $black;
+          color: $white;
+          &:before {
+            color: $white;
+          }
+        }
+      }
+      .quickview {
+        &:before {
+          content: "\e919";
+          font-size: 3rem;
+        }
+      }
+      .wishlist {
+        border-left: 0;
+        &:before {
+          content: "\e91c";
+          font-size: 2rem;
+        }
+        &.favorite {
+          &:before {
+            content: "\e91b";
+            color: $black;
+          }
+          &:hover {
+            &:before {
+              color: $white;
+            }
+          }
+        }
+      }
+      .product-name,
+      .price-box,
+      .product-info {
+        visibility: hidden;
+      }
+    }
+  }
+}
+
+.section-2 {
+  padding-top: 104px;
+  .slot-title {
+    margin-bottom: 20px;
+  }
+}
+.section-3 {
+  padding-top: 86px;
+  .slot-title {
+    margin-bottom: 25px;
+  }
+  .one-third:last-child {
+    .slot-title {
+      @include setFont(3.0rem, 4.5rem, 200);
+      max-width: 80%;
+      margin: 0 auto;
+      text-transform: none;
+    }
+  }
+}
+
+.cms-index-index {
+  .section-3 {
+    .one-third:first-child {
+      .box-outer{
+        border-color: $black;
+        &:after {
+          border-width: 3px 0 0 3px;
+        }
+        &:before {
+          z-index: 1;
+          border-width: 0 3px 3px 0;
+        }
+      }
+      .box-inner {
+        background: transparent;
+      }
+      .slot-title,
+      .slot-subtitle,
+      .slot-btn {
+        color: $white;
+      }
+      .slot-btn {
+        border-color: $white;
+        &:hover {
+          background: $white;
+          color: $black;
+          @include transition(background $fast ease);
+        }
+      }
+    }
+    .one-third:nth-child(2){
+      .box-outer {
+        border-left: none;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $tablet-m){
+  .section-1,
+  .section-2,
+  .section-3 {
+    .alt-img:hover {
+      .product-image-default {
+        height: 0;
+      }
+      .product-image-hover {
+        opacity: 1;
+        width: 320px;
+        height: auto;
+        -webkit-transition: transform .2s, opacity 0.5s;
+        -o-transition: transform .2s, opacity 0.5s;
+        -moz-transition: transform .2s, opacity 0.5s;
+        transition: transform .2s, opacity 0.5s;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet-m){
+  .cms-home .section-1 {
+    .background-image {
+      display: none;
+    }
+    .one-third:nth-child(5) .box-outer {
+      border-left: 1px solid $block-border-color;
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet) and (min-width: $tablet-s) {
+  .section-1,
+  .section-2,
+  .section-3 {
+    .slot-title {
+      font-size: 3.4rem;
+      line-height: 4rem;
+      margin-bottom: 10px;
+    }
+    .slot-subtitle {
+      line-height: 2.8rem;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet-s) {
+  .section-1,
+  .section-2,
+  .section-3 {
+    .slot-title {
+      font-size: 2.9rem;
+    }
+    .slot-subtitle {
+      font-size: 1.5rem;
+    }
+  }
+
+  .section-1,
+  .section-3 {
+    .one-third {
+      @include flex-basis(50%);
+      &:nth-child(3n) {
+        .box-outer {
+          border-right: 0;
+        }
+      }
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(5) {
+        .box-outer {
+          border-left: 0;
+        }
+      }
+    }
+    .background-image {
+      @include flex-basis(50%);
+    }
+    .slots {
+      .one-third,
+      .two-third{
+        &:nth-child(3) {
+          border-top: none;
+        }
+      }
+    }
+  }
+  .cms-home div.section-2 {
+    .one-third {
+      @include flex-basis(50%);
+      .box-outer {
+        border-left: 1px solid $block-border-color;
+      }
+      &:first-child {
+        .box-outer {
+          border-left: 0;
+        }
+      }
+      &:nth-child(3n) {
+        .box-outer {
+          border-right: 0;
+        }
+      }
+    }
+    .background-image {
+      display: none;
+    }
+  }
+
+}
+
+@media only screen and (max-width: $mobile) {
+  .section-1,
+  .section-2,
+  .section-3 {
+    padding-top: 50px;
+    .section-title {
+      font-size: 1.6rem;
+      line-height: 3rem;
+      margin-bottom: 20px;
+    }
+    .slot-title {
+      font-size: 2.6rem;
+      line-height: 3.4rem;
+      margin-bottom: 10px;
+    }
+    .slot-subtitle {
+      font-size: 1.4rem;
+      line-height: 2.4rem;
+    }
+    .mobile-button {
+      display: block;
+    }
+  }
+  .section-1 {
+    .one-third:nth-child(5) .box-outer {
+      border-left: 1px solid $block-border-color;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-m) {
+
+  .section-1 {
+    .one-third {
+      @include flex-basis(100%);
+      .box-outer {
+        border-left: 0;
+      }
+    }
+    .background-image {
+      display: none;
+    }
+    .slot-btn {
+      display: none;
+    }
+  }
+  .cms-home div.section-2,
+  .section-3 {
+    .one-third {
+      @include flex-basis(100%);
+      .box-outer {
+        border-left: 0;
+      }
+      .slot-btn {
+        display: none;
+      }
+    }
+    .background-image {
+      display: block;
+    }
+    .one-third:last-child {
+      display: none;
+    }
+  }
+  .section-3 {
+    .section-title {
+      display: none;
+    }
+  }
+  /* Commented for ASBI-1080 PUR home page background color in block */
+  /*.cms-index-index .section-3 .one-third:first-child {
+    .box-inner {
+      background: $black;
+    }
+  }*/
+}
+
+/* ASBI-1080 PUR home page background color in block */
+
+@media (max-width: 767px) {
+  .cms-index-index .section-3 .one-third:first-child .box-inner .slot-btn {
+      display: block;
+  }
+}

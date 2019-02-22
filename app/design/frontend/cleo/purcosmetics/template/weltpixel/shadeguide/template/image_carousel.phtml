@@ -1,0 +1,150 @@
+<?php
+$_helper = $this->helper('shadeguide');
+$mediaUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+$placeholderImage = $mediaUrl . 'catalog/product/placeholder/' . $_helper->getPlaceholderImage();
+$currentStepId = $this->getCurrentStepId();
+$currentStep = $this->getCurrentStep();
+$currentStepOptions = $this->getStepOptions($currentStep);
+$owlId = $currentStep['product_attribute'];
+$disabled = $currentStepId == 1 ? false: true;
+?>
+<?php $itemsCount = 0; ?>
+<div id="owl_<?php echo $owlId; ?>" data-animate="fadeIn" data-delay="100" class="w options-wrapper <?php echo $currentStep['template'] ?> owl-carousel" data-attr="<?php echo $currentStep['product_attribute'] ?>">
+    <?php foreach ($currentStepOptions as $option): ?>
+        <?php $optionImageSrc = $this->getOptionImage($option['value']); ?>
+        <?php if ($optionImageSrc): ?>
+            <div class="fieldset">
+                <div class="field-wrapper">
+                    <div class="field">
+                        <?php if (!$currentStep['multiselect']): ?>
+                            <input
+                                    class="input-radio option-<?php echo $option['value']; ?>"
+                                    type="radio"
+                                    name="<?php echo $currentStep['product_attribute']; ?>"
+                                    value="<?php echo $option['value']; ?>"
+                                <?php echo $disabled ? 'disabled="disabled"' : ''; ?>
+                            />
+                        <?php else: ?>
+                            <input
+                                    class="input-checkbox option-<?php echo $option['value']; ?>"
+                                    type="checkbox"
+                                    name="<?php echo $currentStep['product_attribute']; ?>"
+                                    value="<?php echo $option['value']; ?>"
+                                <?php echo $disabled ? 'disabled="disabled"' : ''; ?>
+                            />
+                        <?php endif; ?>
+                        <label for="option-<?php echo $option['value']; ?>" class="option-select label <?php echo $disabled ? 'disabled' : '' ?>">
+                            <?php echo $option['label']; ?>
+                        </label>
+                    </div>
+                    <div class="option-select option-image option-<?php echo $option['value']; ?> <?php echo $disabled ? 'disabled' : '' ?>">
+                        <img src="<?php echo $optionImageSrc ?>" alt="<?php echo $option['label']; ?>" title="<?php echo $option['label']; ?>" />
+                    </div>
+
+                    <?php $cmsIdentifier = $_helper->convertOptionLabel($option['label']); ?>
+                    <?php $optionCms = $_helper->getAdditionalCmsBlock($currentStep, $cmsIdentifier) ?>
+                    <?php if ($optionCms): ?>
+                        <div class="w additional-cms option-cms">
+                            <?php echo $optionCms; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php $itemsCount++ ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</div>
+
+<script type="text/javascript">
+    // <![CDATA[
+    jQuery(document).ready(function($) {
+        setTimeout(
+            function() {
+                var imgContainerWidth = 320,
+                    owl = $('#owl_<?php echo $owlId ?>'),
+                    allItems = parseInt('<?php echo $itemsCount ?>');
+
+                /** do some math */
+                var cWidth = parseInt(owl.closest('.shadeguide-steps').width()),
+                    items = calcItems(allItems, cWidth, imgContainerWidth),
+                    options = getOptions(items),
+                    resizeEnd;
+
+                /** init owlCarousel */
+                owl.owlCarousel(options);
+
+                /** re-init owlCarousel after window resize */
+                jQuery(window).on('resize', function() {
+                    clearTimeout(resizeEnd);
+                    resizeEnd = setTimeout(function() {
+                        reInitOwlCarousel(owl, allItems, imgContainerWidth);
+                    }, 500);
+                });
+            }, 5000
+        );
+
+        function reInitOwlCarousel(owl, allItems, imgContainerWidth){
+            var cWidth = parseInt(owl.closest('.shadeguide-steps').width()),
+                items = calcItems(allItems, cWidth, imgContainerWidth),
+                options = getOptions(items);
+
+            owl.trigger('destroy.owl.carousel');
+            $('#owl_<?php echo $owlId ?>').owlCarousel(options);
+        }
+
+        function calcItems(allItems, cWidth, imgContainerWidth) {
+            var itemsNo = parseInt(cWidth / imgContainerWidth);
+            return allItems < itemsNo ? allItems : itemsNo > 0 ? itemsNo : 1;
+        }
+
+        function getOptions(items) {
+            return {
+                items: items,
+                loop: true,
+                slideTransition: 'linear',
+                center: true,
+                stagePadding: 0,
+                margin: 0,
+                autoWidth: false,
+                nav: true,
+                navText: [
+                    '<i class="icon-angle-left"></i>',
+                    '<i class="icon-angle-right"></i>'
+                ],
+                navElement: 'div',
+                slideBy: 1,
+                dots: false,
+                autoplay: true,
+                autoplayHoverPause: true,
+                responsiveClass:true,
+                responsive:{
+                    0:{
+                        items: items,
+                        nav:true,
+                        slideBy: 1
+                    },
+                    470:{
+                        items: items,
+                        nav:true,
+                        slideBy: 1
+                    },
+                    640:{
+                        items: items,
+                        nav:false,
+                        slideBy: 1
+                    },
+                    768:{
+                        items: items,
+                        nav:true,
+                        slideBy: 1
+                    },
+                    979:{
+                        items: items,
+                        nav:true
+                    }
+                }
+            }
+        }
+    });
+    // ]]>
+</script>

@@ -1,0 +1,30 @@
+<?php
+
+
+$_categories = $this->getChildrenByLevel();
+
+$_levelThreeCategory = $this->getLevelThreeCategory();
+$_categories = $_levelThreeCategory->getChildrenCategories();
+$currentId = $this->getRequest()->getParam('id');
+?>
+<?php if ($this->showCategoryFilters() && sizeof($_categories)): ?>
+    <ul class="category-filters" id="category-filters">
+        <span class="title"><?php echo $this->__('Categories') ?></span>
+        <li class="category">
+            <a href="<?php echo $this->getCategoryUrl($_levelThreeCategory) ?>"
+            <?php if ($currentId == $_levelThreeCategory->getId()): ?> class="current"<?php else: ?> class="category-link"<?php endif; ?>>
+            <?php echo $this->__('All') ?>
+            </a>
+        </li>
+        <?php foreach ($_categories as $_category): ?>
+
+            <?php if($_category->getIsActive() && $_category->getProductCount() > 0): ?>
+            <li class="category">
+                <a class="<?php if ($this->isCategoryActive($_category)): ?>current<?php else: ?>category-link<?php endif; ?>" href="<?php echo $this->getCategoryUrl($_category) ?>" class="current">
+                    <?php echo $this->escapeHtml($_category->getName()) ?>
+                </a>
+            </li>
+            <?php endif; ?>
+        <?php endforeach ?>
+     </ul>
+<?php endif ?>

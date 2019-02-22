@@ -1,0 +1,53 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition End User License Agreement
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magento.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     born_default
+ * @copyright Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license http://www.magento.com/license/enterprise-edition
+ */
+?>
+
+<?php $_product = $this->getProduct(); ?>
+<?php $buttonTitle = $this->__('Update Cart'); ?>
+<?php if ($_product->isSaleable()): ?>
+    <div class="add-to-cart">
+        <?php if (!$_product->isGrouped()): ?>
+            <div class="qty-attribute">
+                <label class="label-text-up">Qty</label>
+                <div class="qty-wrapper">
+                    <button class="qty-minus"><span class="icon-minus"></span> </button>
+                    <input class="qty-input" name="qty" id="qty" type="text" data-cart-item-id="<?php echo $this->jsQuoteEscape($_product->getSku()) ?>" value="1">
+                    <button class="qty-plus"><span class="icon-plus"></span> </button>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if ($this->getSizeValue()): ?>
+            <div class="size-wrapper">
+                <label class="label-text-up">Size</label>
+                <span><?php echo $this->getSizeValue() ?></span>
+            </div>
+        <?php endif ?>
+        <div class="add-to-cart-buttons">
+            <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($buttonTitle) ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
+            <?php echo $this->getChildHtml('', true, true) ?>
+        </div>
+    </div>
+<?php endif; ?>

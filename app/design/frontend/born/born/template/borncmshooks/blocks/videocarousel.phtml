@@ -1,0 +1,48 @@
+<?php 
+$hooks_helper = Mage::helper('borncmshooks');
+$video_object_collection = $this->getVideocarouselObjectCollection();
+
+$video_object_collection = Mage::helper('borncmshooks/sort')->sortCollection($video_object_collection);
+
+#TODO: Add option to set max video count in backend. 
+$maxVideoCount = 6;
+/*
+VideoCarousel Field Attributes
+- SortOrder
+- VideoImage - image
+- VideoLink - text
+- VideoText - text
+- Quote - text
+- CustomerName - text
+ */ 
+?>
+<?php if(!is_null($video_object_collection)) : ?>
+	<?php if ($_sectionTitle = $this->getSectionTitle($video_object_collection)): ?>
+		<h2 class="section-title"><?php echo $_sectionTitle ?></h2>
+	<?php endif ?>
+	<ul class="bxVideoCarousel content overflow">
+	    <?php foreach ($video_object_collection as $index => $_carousel): ?>
+	    	<?php if ($index < $maxVideoCount): ?>
+	    		<li class="carousel-<?php echo $index ?> slide">
+					<a class="video-link" <?php echo $_carousel->getVideoLink() ? '' : 'onclick="return false"' ?> target="_blank" href="<?php echo $_carousel->getVideoLink(); ?>">
+						<img class="video-img" src="<?php echo $hooks_helper->getImageUrl($_carousel->getVideoImage()); ?>">
+						<?php if ($videoText = $_carousel->getVideoText()): ?>
+							<p class="video-text"><?php echo $videoText ?></p>
+						<?php endif ?>
+					</a>
+					<div class="video-about">
+						<div class="video-about-inner">
+							<?php if ($quote = $_carousel->getQuote()): ?>
+								<p class="qoute"><?php echo $quote ?></p>
+								<?php if ($name = $_carousel->getName()): ?>
+									<p class="author-name"><?php echo $name ?></p>
+								<?php endif ?>
+							<?php endif ?>
+						</div>
+					</div>
+
+				</li>
+	    	<?php endif ?>
+	    <?php endforeach ?>
+	</ul>
+<?php endif; ?>

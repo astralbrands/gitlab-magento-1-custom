@@ -1,0 +1,125 @@
+// core of html in  app\design\frontend\born\born\template\borncmshooks\cms\contents\categorylanding.phtml
+
+//story block
+
+
+.category-landing-page {
+
+  .block-layered-nav--no-filters {
+    display: none;
+  }
+  .story {
+    background: $black;
+    margin-bottom: 80px;
+    .section-title {
+      padding-top: 28px;
+      @include gotham();
+      @include setFont(2.4rem, 4.2rem, 500);
+      color: $white;
+      text-align: center;
+    }
+    .stories-list {
+      @include display(flex);
+      @include flex-direction(row);
+      @include justify-content(center);
+      .story-block {
+        display: inline-block;
+        color: $white;
+        max-width: 360px;
+        width: 30%;
+        margin: 15px 1.7%;
+        text-align: center;
+        .img {
+          margin: 0 auto 15px;
+          height: auto;
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+    }
+    .section-link {
+      display: none;
+    }
+    .story-title {
+      @include chronic();
+      @include setFont(2rem, 3rem, 400);
+      color: $white;
+      text-transform: none;
+    }
+    .story-description {
+      @include gothamBook();
+      @include setFont(1.6rem, 2.4rem, 200);
+      font-style: italic;
+      margin: 0 auto 13px;
+      max-width: 90%;
+    }
+    .story-btn {
+      @include transparentButton(3.4rem, 1.2rem, $white, $black);
+      display: block;
+      margin-bottom: 37px;
+      width: 128px;
+    }
+  }
+}
+
+@media only screen and (max-width: 968px) {
+  .category-landing-page {
+    .story {
+      .story-title {
+        font-size: 1.8rem;
+      }
+      .story-description {
+        font-size: 1.4rem;
+        max-width: inherit;
+        @media screen and (max-width: $tablet-custom-3) {
+          min-height: 72px;;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .category-landing-page {
+    .story {
+      padding-top: 20px;
+      margin-bottom: 51px;
+      .stories-list {
+        display: block;
+        .story-block {
+          max-width: inherit;
+          margin: 0 0 15px 0;
+          .img {
+            width: 360px;
+            margin: 0 auto 15px;
+          }
+          .story-btn {
+            margin-bottom: 42px;
+          }
+        }
+      }
+      .section-title {
+        font-size: 1.6rem;
+        line-height: 4rem;
+        margin-bottom: 20px;
+      }
+      .story-description {
+        width: 260px;
+        margin: 0 auto;
+      }
+      .bx-controls-direction {
+        top: 40%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-s) {
+  .category-landing-page {
+    .story {
+      .stories-list .story-block .img {
+        width: 100%;
+      }
+    }
+  }
+}

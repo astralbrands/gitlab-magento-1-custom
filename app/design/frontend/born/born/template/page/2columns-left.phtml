@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<?php echo $this->getChildHtml('head') ?>
+</head>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <div class="page">
+        <?php echo $this->getChildHtml('header') ?>
+        <div class="main-container col2-left-layout">
+        <?php if ($this->getShowOnAccountPage()): ?>
+                <?php echo $this->getChildHtml('hello');?>
+        <?php endif ?>
+            <div class="main">
+                <?php echo $this->getChildHtml('breadcrumbs') ?>
+
+                <?php // This left_first block will display above the main content on smaller viewports ?>
+                <?php if ($_leftContent = $this->getChildHtml('left_first')): ?>
+                <div class="col-left sidebar col-left-first"><?php echo $_leftContent;   ?></div>
+                <?php endif; ?>
+                <div class="col-main">
+                    <?php echo $this->getChildHtml('global_messages') ?>
+                    <?php echo $this->getChildHtml('content') ?>
+                </div>
+            </div>
+        </div>
+        <?php if ($this->getShowOnAccountPage()): ?>
+                <?php echo $this->getChildHtml('customer.bestseller') ?>
+        <?php endif ?>
+        <?php echo $this->getChildHtml('footer_before') ?>
+        <?php echo $this->getChildHtml('footer') ?>
+        <?php echo $this->getChildHtml('global_cookie_notice') ?>
+        <?php echo $this->getChildHtml('before_body_end') ?>
+    </div>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>

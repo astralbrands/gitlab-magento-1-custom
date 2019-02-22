@@ -1,0 +1,93 @@
+// app\design\frontend\born\born\template\ebizmarts\sagepaymentspro\customer\cards.phtml
+// app\design\frontend\born\born\template\ebizmarts\sagepaymentspro\customer\card\form.phtml
+
+.ebizmarts-sagepaymentspro-token-index {
+  .data-table {
+    margin-bottom: 20px;
+    tbody td {
+      vertical-align: middle;
+    }
+    .input-box {
+      height: 100%;
+      text-align: left;
+      .label-text {
+        position: static;
+      }
+    }
+  }
+  #link-regcard {
+    @include transparentButton(5.0rem, 1.4rem, $black, $white);
+  }
+  .sp-methods {
+    margin: 20px 0;
+    max-width: 350px;
+    .input-text {
+      border-width: 1px;
+      &:focus {
+        border-width: 2px;
+      }
+    }
+  }
+  .label-text-up {
+    margin-bottom: 15px;
+    @include gotham;
+    @include setFont(1.3rem, 2.3rem, 400);
+    &:after {
+      display: none;
+    }
+  }
+  .jq-selectbox {
+    width: 100%;
+    //@include display(flex); !important;
+    display: flex !important;
+    @include flex-direction(column);
+  }
+  .jq-selectbox__select {
+    height: 46px;
+    padding: 0 45px 0 15px;
+    border: 1px solid $block-border-color;
+  }
+  .jq-selectbox__select-text {
+    line-height: 44px;
+    font-size: 1.3rem;
+    color: $light-text-color;
+  }
+  .jq-selectbox__trigger-arrow {
+    top: 7px;
+    right: 28px;
+  }
+  .jq-selectbox__dropdown {
+    max-width: 100%;
+    width: 100%;
+  }
+  .input-box {
+    .v-fix {
+      width: 49%;
+      margin-right: 0;
+      &:first-child {
+        margin-right: 2%;
+      }
+    }
+  }
+  #sagepaytoken_cc_post {
+    padding-top: 20px;
+  }
+}
+
+@media only screen and  (max-width: $tablet-xs) {
+  .ebizmarts-sagepaymentspro-token-index {
+    .main {
+      padding-bottom: 40px;
+    }
+  }
+}
+
+
+@media only screen and  (max-width: $mobile) {
+  .ebizmarts-sagepaymentspro-token-index {
+    #link-regcard {
+      font-size: 1.3rem;
+      line-height: 3.4rem;
+    }
+  }
+}

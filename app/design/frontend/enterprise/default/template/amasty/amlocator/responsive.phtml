@@ -1,0 +1,138 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Locator
+ */
+?>
+<?php
+
+$productId = $this->getRequest()->getParam('product');
+$amHelper = Mage::helper('amlocator');
+if ($productId):
+    $product = Mage::getModel('catalog/product')->load($productId);
+
+
+?>
+<h1 style="text-align: center"><?= $product->getName(); ?> can be found at the following stores:&nbsp; <div title="Cancel this search" onclick="AmLocation.goHome()" class="amlocator_default"></div></h1>
+<hr><br />
+<?php
+endif;
+?>
+<div class="amlocator_group">
+
+    <div class="amlocator_mapblock">
+        <div id="amasty_locator_filter" class="block" >
+            <div class="block-title">
+                <strong><span><?= $amHelper->__('Filter')?></span></strong>
+            </div>
+            <div class="block-content">
+                <ul class="form-list">
+                    <li id="current-address">
+                        <label for="address"><?= $amHelper->__('Current Location')?></label>
+                        <div class="input-box">
+                            <input type="text" value="" class="input-text" id="amlocator-search" name="address"
+                                   placeholder="<?= $amHelper->__('Enter a location')?>" autocomplete="off">
+                        </div>
+                    </li>
+                    <li>
+                        <label for="radius"><?= $amHelper->__('Search Radius')?></label>
+                        <div class="input-box">
+                            <select title="" class="select" id="amlocator-radius" name="radius" >
+                                <option value=""><?= $amHelper->__('Everywhere')?></option>
+                                <option value="1">1</option>
+                                <option value="3">3</option><option value="5">5</option><option value="10">10</option>
+                                <option value="15">15</option><option value="25">25</option><option value="50">50</option>
+                                <option value="100">100</option><option value="500">500</option>
+                            </select>
+                        </div>
+                    </li>
+                    <?php if($this->getDistanceConfig()): ?>
+                        <li>
+                            <label for="measurement"><?= $amHelper->__('Search Radius Measurement')?> </label>
+                            <div class="input-box">
+                                <select title="" class="select" id="amlocator-measurement" name="measurement">
+                                    <option value="km"><?= $amHelper->__('km')?></option>
+                                    <option selected="selected" value="mi"><?= $amHelper->__('mi')?></option>
+                                </select>
+                            </div>
+                        </li>
+
+                    <?php endif ?>
+
+                    <li>
+
+                        <button class="button" title="Filter" onclick="AmLocation.sortByFilter()" >
+                            <span><span><?= $amHelper->__('Search')?></span></span>
+                        </button>
+
+                        <button onclick="AmLocation.navigateMe()" class="button" title="Sort" type="button">
+                            <span>
+                                <span><?= $amHelper->__('Locate Nearby')?></span>
+                            </span>
+                        </button>
+                    </li>
+                </ul>
+                <input type="hidden" id="am_lat" >
+                <input type="hidden" id="am_lng" >
+            </div>
+        </div>
+        <div id="amlocator-map-canvas"></div>
+
+        <span id="cancel-please-wait" class="please-wait" style="display:none">
+            <img src="<?= $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="" class="v-middle"/> <?= $this->__('Processing...') ?>
+        </span>
+
+        <script>
+            var baloonTemplate = <?= $this->getBaloonTemplate() ?>;
+            var amMediaUrl = "<?= Mage::helper('amlocator/image')->getStoreUrl() ?>";
+        </script>
+
+        <script language="javascript" type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places<?= $amHelper->getApiKey(); ?>"></script>
+        <script type="text/javascript">
+            window.addEventListener('load', function () {
+                AmLocation = new AmLocator('<?= $this->getUrl('amlocator/index/ajax') . $this->getQueryString() ?>',<?= $this->getGeoUse()?>);
+                AmLocation.Amastyload(<?= $this->getJsonLocations() ?>);
+            }, false);
+        </script>
+    </div>
+
+
+    <div class="amlocator_store_list">
+
+        <h1><?= $this->escapeHtml(Mage::getStoreConfig('amlocator/locator/title')) ?></h1>
+
+        <div id="amlocator_left">
+            <?php
+            $locations = $this->getLocationCollection();
+            $i = 1;
+            ?>
+            <?php foreach ( $locations  as $location): ?>
+                <span onclick="AmLocation.gotoPoint(<?= $i ?>,this)">
+                    <h3><?= $this->escapeHtml($location->getName()); ?></h3>
+                    <?= $this->__('Address')?>: <?= $this->escapeHtml($location->getAddress()); ?>  <br/>
+                    <?= $this->escapeHtml($location->getCity()); ?>, <?= $this->escapeHtml($location->getZip()); ?>
+
+                    <?php if (Mage::getStoreConfig('amlocator/locator/show_attrs')) { ?>
+                        <?php if (trim($location->getPhone())) { ?>
+                            <br/>
+                            <?= $this->__('Phone') ?>: <?= $this->escapeHtml($location->getPhone()); ?>
+                        <?php }?>
+                        <?php if (trim($this->escapeHtml($location->getEmail()))) { ?>
+                            <br/>
+                            <?= $this->__('E-mail') ?>: <?= $this->escapeHtml($location->getEmail()); ?>
+                        <?php }?>
+                        <?php if (trim($this->escapeHtml($location->getWebsite()))) { ?>
+                            <br/>
+                            <?= $this->__('URL') ?>: <?= $this->escapeHtml($location->getWebsite()); ?>
+                        <?php }?>
+                    <?php }?>
+
+                </span>
+                <?php $i++ ?>
+            <?php endforeach; ?>
+        </div>
+
+    </div>
+
+</div>

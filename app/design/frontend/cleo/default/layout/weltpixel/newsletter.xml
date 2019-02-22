@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <wp_newsletter>
+        <reference name="head">
+            <action method="addItem" ifconfig="weltpixel_newsletter/general/enable">
+                <type>skin_js</type>
+                <name>js/weltpixel/newsletterpopup.js</name>
+            </action> 
+             <action method="addItem" ifconfig="weltpixel_newsletter/general/enable">
+                <type>skin_js</type>
+                <name>js/weltpixel/cookiemanager.js</name>
+            </action> 
+            <action method="addCss" ifconfig="weltpixel_newsletter/general/enable">
+                <stylesheet>css/weltpixel/newsletter.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="core/template" name="weltpixel_newsletter_container" as="weltpixel_newsletter_container" template="weltpixel/newsletter/container.phtml" />
+        </reference>
+    </wp_newsletter>
+    <cms_page>
+        <update handle="wp_newsletter" />
+    </cms_page>
+    <catalog_product_view>
+        <update handle="wp_newsletter" />
+    </catalog_product_view>
+    <catalog_category_layered>
+        <update handle="wp_newsletter" />
+    </catalog_category_layered>
+    <catalog_category_default>
+        <update handle="wp_newsletter" />
+    </catalog_category_default>
+    <catalogsearch_result_index>
+        <update handle="wp_newsletter" />
+    </catalogsearch_result_index>
+</layout>

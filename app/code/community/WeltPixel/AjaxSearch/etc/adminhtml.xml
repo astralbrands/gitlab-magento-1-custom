@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <weltpixel translate="title">
+            <title>WeltPixel</title>
+            <sort_order>300</sort_order>
+            <children>
+                <weltpixel_ajaxsearch translate="title" module="weltpixel_ajaxsearch">
+                    <title>AjaxSearch and Autocomplete</title>
+                    <action>adminhtml/system_config/edit/section/weltpixel_ajaxsearch</action>
+                    <sort_order>10</sort_order>
+                </weltpixel_ajaxsearch>
+            </children>
+        </weltpixel>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <weltpixel_ajaxsearch translate="title" module="weltpixel_ajaxsearch">
+                                        <title>WeltPixel Ajaxsearch and Autocomplete</title>
+                                        <sort_order>1100</sort_order> 
+                                    </weltpixel_ajaxsearch>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,156 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Promo
+ */
+?>
+<?php
+$products = $this->getNewItems();
+
+$storeId = Mage::app()->getStore()->getStoreId();
+$_cartTitle = Mage::getStoreConfig('ampromo/general/cart_block_title', $storeId);
+?>
+<?php if (sizeof($products) > 0): ?>
+    <script type="text/javascript">
+        Object.extend(Product.Config.prototype, {
+            reloadOptionLabels: function(){},
+            changeSelection: function(){},
+            reloadPrice: function(){}
+        });
+    </script>
+
+    <!--<div id="ampromo-overlay">-->
+        <div id="ampromo-items" class="<?php echo sizeof($products) > 2 ? 'amcarousel' : ''?>">
+            <h4 class="ampromo-title"><?php echo $_cartTitle ? $_cartTitle : $this->__('Choose a free sample!')?></h4>
+            <!--<button type="button" title="<?php echo $this->__('Add to cart')?>" class="button btn-amcart-item" onclick="amPromoAddToCartForm.submit(this)"><span><span><?php echo $this->__('Add to cart')?></span></span></button>-->
+            <!--<a href="javascript:" class="close"></a>-->
+
+            <?php echo $this->getLayout()->createBlock('core/template')->setTemplate('catalog/product/view/options/js.phtml')->toHtml() ?>
+            <?php echo $this->getLayout()->createBlock('core/html_calendar')->setTemplate('page/js/calendar.phtml')->toHtml() ?>
+
+<!--            <a href="javascript:" class="ampromo-carousel-control prev" rel="prev">Previous slide</a>-->
+<!--            <div id="ampromo-carousel-wrapper">-->
+                <div id="ampromo-carousel-content">
+                    <?php $i=0; ?>
+                    <?php foreach ($products as $product): ?>
+
+                        <div class="ampromo-slide">
+                            <div class="ampromo-item" data-product-id="<?php echo $product->getId()?>" data-product-sku="<?php echo $product->getSku()?>"<?php if($product->getTypeId() == 'amgiftcard'):?>style="width: 400px;"<?php endif;?>>
+                                <form method="POST" action="<?php echo $this->getFormActionUrl()?>" class="ampromo_items_form" id="ampromo_items_form-<?php echo $product->getId() ?>">
+                                    <input type='hidden' name='referer' value='<?php echo $this->_getReferer()?>' />
+                                    <img src="<?php echo $product->getSmallImageUrl(160, 160) ?>" class="ampromo-item-image"/>
+
+                                    <div class="ampromo-item-title">
+                                        <?php if ($product->getVisibility() != Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE):?>
+                                        <h4><a href="<?php echo $product->getProductUrl()?>"><?php echo $product->getName()?></a></h4>
+                                        <?php else: ?>
+                                        <h4><?php echo $product->getName()?></h4>
+                                        <?php endif?>
+                                    </div>
+
+                                    <input type="hidden" value="<?php echo $product->getId(); ?>" name="product_id" />
+                                    <?php
+                                        echo $this->getPriceHtml($product);
+                                    ?>
+                                    <div class="input-box">
+                                        <!--<button type="button" title="<?php echo $this->__('Add to cart')?>" class="button btn-cart add amcart-ignore"><span><span><?php echo $this->__('Add to cart')?></span></span></button>-->
+                                        <input type="checkbox" id="<?php echo 'promo_product_id_' . $product->getId() ?>" name="promo_product_id" value="<?php echo $product->getId(); ?>" onclick="amPromoAddToCartForm<?php echo $product->getId() ?>.submit(this);return false;"/>
+                                        <label class="label-text" for="product_id" onclick="return $('promo_product_id_<?php echo $product->getId() ?>').click();"></label>
+                                    </div>
+                                     <div class="ampromo-item-options" data-smart-positioning="true"  <?php if($product->getTypeId() == 'amgiftcard'):?>style="overflow-y: scroll; max-height: 300px"<?php endif;?>>
+										<?php
+
+                                        if (Mage::registry('current_product'))
+                                            Mage::unregister('current_product');
+
+                                        Mage::register('current_product', $product);
+
+										switch($product->getTypeId()){
+                                            case 'downloadable':
+                                                $_blockOpt = 'downloadable/catalog_product_links';
+                                                $_templateOpt = 'amasty/ampromo/items/downloadable.phtml';
+                                                break;
+                                            case 'configurable':
+												$_blockOpt = 'catalog/product_view_type_configurable';
+												$_templateOpt = 'amasty/ampromo/items/configurable.phtml';
+												break;
+											case 'bundle':
+												$_blockOpt = 'ampromo/items_bundle';
+												$_templateOpt = 'bundle/catalog/product/view/type/bundle/options.phtml';
+												break;
+											case 'amgiftcard':
+												$_blockOpt = 'amgiftcard/catalog_product_view_type_giftCard';
+												$_templateOpt = 'amasty/amgiftcard/catalog/product/view/type/giftcard.phtml';
+												break;
+                                            case 'virtual':
+                                                $_blockOpt = 'catalog/product_view_type_virtual';
+                                                break;
+                                            case 'giftcard':
+                                                $_blockOpt = 'enterprise_giftcard/catalog_product_view_type_giftcard';
+//                                                $_templateOpt = 'giftcard/catalog/product/view/type/giftcard.phtml';
+                                                $_templateOpt = 'amasty/ampromo/items/giftcard.phtml';
+                                                break;
+										}
+										if(!empty($_blockOpt) && !empty($_templateOpt)) {
+
+											$block = $this->getLayout()
+                                                ->createBlock(
+                                                    $_blockOpt,
+                                                    'ampromo_item_' . $product->getId(),
+                                                    array('product' => $product)
+                                                )
+												->setProduct($product)
+												->setTemplate($_templateOpt);
+
+                                            switch($product->getTypeId()){
+                                                case 'giftcard':
+                                                    $child = $this->getLayout()->createBlock('enterprise_giftcard/catalog_product_view_type_giftcard_form', 'product.info.giftcard.form')
+                                                    ->setTemplate('giftcard/catalog/product/view/type/giftcard/form.phtml');
+
+                                                    $block->setChild('product.info.giftcard.form', $child);
+                                                break;
+                                            }
+
+                                            echo $block->toHtml();
+										}
+										?>
+
+                                        <?php echo $this->getLayout()
+                                            ->createBlock('ampromo/items_options', '', array('product' => $product))
+                                            ->toHtml()
+                                        ;?>
+                                    </div>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+        var amPromoAddToCartForm<?php echo $product->getId() ?> = new VarienForm('ampromo_items_form-<?php echo $product->getId() ?>');
+        amPromoAddToCartForm<?php echo $product->getId() ?>.submit = function(button) {
+            if(button.checked){
+            var confirmResult = confirm('<?php echo $this->__('Would you like to add this item as free in to cart?') ?>');
+            if (this.validator.validate() && confirmResult) {
+                var e = null;
+                try {
+                    this.form.submit();
+                }catch(e){
+                    
+                }
+                if (e) {
+                        throw e;
+                    }
+                if (typeof button != 'undefined') {
+                        button.disabled = true;
+                    }
+            }
+        }
+        }.bind(amPromoAddToCartForm<?php echo $product->getId() ?>);
+    </script>
+                    </form>
+                    <?php endforeach ?>
+                        
+                </div>
+<!--            </div>-->
+<!--            <a href="javascript:" class="ampromo-carousel-control next" rel="next">Next slide</a>-->
+        </div>
+    <!--</div>-->
+<?php endif ?>

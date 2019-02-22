@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <wp_quickview>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/weltpixel/lightbox.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/lightbox.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/weltpixel/quickview.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/quickview.js</name>
+            </action>
+            <action method="addItem" ifconfig="weltpixel_selector/productpageoptions/ajax_add_to_compare">
+                <type>skin_js</type>
+                <name>js/weltpixel/ajaxcompare.js</name>
+            </action>
+        </reference>
+    </wp_quickview>
+    <cms_page>
+        <update handle="wp_quickview" />
+    </cms_page>   
+    <catalog_category_layered>
+        <update handle="wp_quickview" />
+    </catalog_category_layered>
+    <catalog_category_default>
+        <update handle="wp_quickview" />
+    </catalog_category_default>
+    <catalogsearch_result_index>
+        <update handle="wp_quickview" />
+    </catalogsearch_result_index>
+    <catalog_product_view>
+        <update handle="wp_quickview" />
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/quickview/product.js</name>
+            </action>
+        </reference>
+    </catalog_product_view>
+    <weltpixel_quickview_ajax_catalog_product_view>
+        <update handle="catalog_product_view" />
+        <reference name="root">
+            <action method="setTemplate"><template>page/empty.phtml</template></action>
+            <action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+        <reference name="head">
+            
+            <!-- remove unnecesary js, css files -->
+            <action method="removeItem"><type>skin_js</type><name>js/weltpixel/ajaxsearch.js</name></action>
+            <action method="removeItem"><type>skin_js</type><name>js/weltpixel/megamenu.js</name></action>
+            <action method="removeItem"><type>skin_js</type><name>js/weltpixel/sticky-header.js</name></action>
+            <action method="removeItem"><type>skin_js</type><name>js/doubletaptogo.js</name></action>
+            <action method="removeItem"><type>skin_js</type><name>js/weltpixel/newsletterpopup.js</name></action>
+            <action method="removeItem"><type>skin_js</type><name>js/weltpixel/cookiemanager.js</name></action>
+            <action method="removeItem"><type>skin_js</type><name>js/jquery.cloud-zoom-1.0.3.js</name></action>
+            <action method="removeItem"><type>skin_js</type><name>js/jquery.magnific-popup-0.9.9.js</name></action>
+            <action method="removeItem"><type>skin_js</type><name>js/weltpixel/jquery.easydropdown.js</name></action>
+            
+            
+            <action method="removeItem"><type>skin_css</type><name>css/weltpixel/ajaxsearch.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/weltpixel/megamenu.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/weltpixel/easydropdown.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/weltpixel/newsletter.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/vendor/cloudzoom/cloudzoom.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/vendor/magnific-popup/magnific-popup.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/weltpixel/megamenu-mobile.css</name></action>
+
+                                 
+            <action method="addItem" ifconfig="weltpixel_selector/productpageoptions/ajax_add_to_compare">
+                <type>skin_js</type>
+                <name>js/weltpixel/ajaxcompare.js</name>
+            </action>
+        </reference>
+        <reference name="product.info">
+            <action method="setTemplate"><template>weltpixel/quickview/catalog/product/view.phtml</template></action>
+        </reference>
+        <reference name="product.info.media">
+            <action method="setTemplate"><template>weltpixel/quickview/catalog/product/view/media.phtml</template></action>
+        </reference>
+        <reference name="product.info.addtocart">
+            <action method="setTemplate"><template>weltpixel/quickview/catalog/product/view/addtocart.phtml</template></action>
+        </reference>
+        <reference name="before_body_end">
+            <remove name="weltpixel_newsletter_container" />
+        </reference>
+    </weltpixel_quickview_ajax_catalog_product_view>
+</layout>

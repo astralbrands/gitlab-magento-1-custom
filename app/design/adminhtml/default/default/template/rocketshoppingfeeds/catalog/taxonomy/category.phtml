@@ -1,0 +1,266 @@
+<?php
+/**
+ * RocketWeb
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category  RocketWeb
+ * @package   RocketWeb_ShoppingFeeds
+ * @copyright Copyright (c) 2012 RocketWeb (http://rocketweb.com)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author    RocketWeb
+ */
+
+/** @var RocketWeb_ShoppingFeeds_Block_Adminhtml_Catalog_Taxonomy_Category  $this */
+$id = $this->getId();
+$element = $this->getElement();
+/** @var RocketWeb_ShoppingFeeds_Helper_Data $helper */
+$helper = Mage::helper('rocketshoppingfeeds');
+$skinUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+$jsonEncodedValues = $this->getJsonValues();
+?>
+<div class="category_taxonomy_category" id="div_<?php echo $id; ?>">
+    <p>
+        * <?php echo $helper->__('Products can be included or excluded from feed by checking the right checkbox on a category row. <br />&nbsp;&nbsp;One enabled category is sufficient to include the a product in the feed which is assigned to multipe categories.'); ?><br />
+        * <?php echo $helper->__('Set priority numbers for categories. The values are used to weight categories when matching products assigned to multiple categories.'); ?><br />
+        * <?php echo $helper->__('Directive <b>Taxonomy By Magento Category</b> uses the <u>taxonomy</u> input below to output a value in the feed using the priority set. Disabled categories are not been matched.'); ?><br />
+        * <?php echo $helper->__('Directive <b>Type By Magento Category</b> uses the <u>type</u> input below to output a value in the feed using the priority set. Disabled categories are not been matched.'); ?></p>
+    <p>
+        <a class="expand category_taxonomy_category_all">Expand all</a>
+        | <?php echo ($jsonEncodedValues == '[]')
+            ?  '<a class="disable category_taxonomy_toggle_all">Disable all</a>'
+            : '<a class="enable category_taxonomy_toggle_all">Enable all</a>'; ?>
+	<strong id="progr">(<span class="start">0</span> of <span class="end"></span>)</strong>
+    </p>
+    <input id="taxonomyAggregatedValues" name="config[taxonomy_json]" type="hidden" value="<?php echo $this->escapeHtml($jsonEncodedValues); ?>" />
+    <script type="text/javascript">
+        Event.observe(window, 'dom:loaded', function () {
+            var taxonomy = new taxonomyCategory();
+            taxonomy.fieldName = '<?php echo $id; ?>';
+            taxonomy.fieldStrings = {
+                <?php foreach ($this->getJsStrings() as $key => $value):?>
+                <?php echo $key; ?>: '<?php echo $value; ?>',
+                <?php endforeach; ?>
+            };
+            $$('.status').each(function (element) {
+                $(element).observe('click', function (e) {
+                    taxonomy.toggleSelect(element);
+                    element.parentNode.querySelector('.el_disabled').click();
+                });
+            });
+            $$('.carrot').each(function(element){
+                $(element).observe('click', function(e) {
+                    taxonomy.toggleShow(element);
+                });
+            });
+            $$('.category_taxonomy_category_all').first().observe('click', function(e) {
+                taxonomy.toggleShowAll(this);
+            });
+
+            $$('.category_taxonomy_toggle_all').first().observe('click', function(e) {
+                taxonomy.toggleSelectAll(this);
+            });
+
+        <?php if ($this->isTaxonomyEnabled()): ?>
+        var ajax = new XMLHttpRequest();
+        ajax.open("GET", "<?php echo $this->getAutocompleteUrl(); ?>", true);
+        ajax.onload = function() {
+            var list = JSON.parse(ajax.responseText).map(function(i) { return i; });
+            $$('.category_list .taxonomy').each(function(el) {
+                new Awesomplete(el, {
+                    minChars: 3,
+                    maxItems: 9999,
+                    list: list,
+                    autoFirst: true
+                });
+                el.addEventListener('awesomplete-selectcomplete', function(evt){
+                    taxonomy.autoFillChildren(el, 'taxonomy');
+                });
+                el.addEventListener('awesomplete-highlight', function(e){
+                    el.addEventListener('keydown',scrollOnKeyDown);
+                });
+            });
+            $$('.category_list .prod_type').each(function(el) {
+                el.addEventListener('change', function(){
+                    taxonomy.autoFillChildren(el, 'prod_type');
+                });
+            });
+        };
+        var scrollOnKeyDown = function(e){
+            var parentAwesome = this.parentNode,
+                ulAwesome = parentAwesome.getElementsByTagName("UL")[0],
+                elHeight;
+                if (e.keyCode == '40') {
+                    elHeight = ulAwesome.querySelector('[aria-selected=true]').previousSibling.offsetHeight;
+                    ulAwesome.scrollTop += elHeight;
+                }
+                else if (e.keyCode == '38') {
+                    elHeight = ulAwesome.querySelector('[aria-selected=true]').nextSibling.offsetHeight;
+                    ulAwesome.scrollTop -= elHeight;
+                }else{
+                    ulAwesome.scrollTop = 0;
+                }
+            };
+        ajax.send();
+        <?php endif; ?>
+        });
+
+        var checkDuplicatePriority = function(el) {
+            if ($('categories_sort_mode').value == 0) {
+                return;
+            }
+            var liTopCateg = document.querySelectorAll('.top-categ > li'),
+                liSubCateg = document.querySelectorAll('.child-categ > li'),
+                parentRow = el.parentNode,
+                counter = 0;
+            if(!((' ' + parentRow.className + ' ').indexOf(' ' + 'disabled' + ' ') > -1)){
+                for (var x = 0; x < liTopCateg.length; x++) {
+                    liTopCateg[x].querySelector('.priority').removeClassName('error');
+                    for (var z = 0; z < liTopCateg.length; z++){
+                        if( z!== x && liTopCateg[x].querySelector('.priority').value == liTopCateg[z].querySelector('.priority').value && liTopCateg[x].querySelector('.priority').value !== '' && liTopCateg[z].querySelector('.priority').value !== ''){
+                            if(!((' ' + liTopCateg[x].querySelector('.category_row').className + ' ').indexOf(' ' + 'disabled' + ' ') > -1) && !((' ' + liTopCateg[z].querySelector('.category_row').className + ' ').indexOf(' ' + 'disabled' + ' ') > -1)){
+                                liTopCateg[x].querySelector('.priority').addClassName('error');
+                            }
+                        }
+                    }
+                }
+
+                for(var s = 0; s< liSubCateg.length; s++){
+                    liSubCateg[s].querySelector('.priority').removeClassName('error');
+                    for (var t = 0; t < liSubCateg.length; t++){
+                        if( t!== s && liSubCateg[s].querySelector('.priority').value == liSubCateg[t].querySelector('.priority').value && liSubCateg[s].querySelector('.priority').value !== '' && liSubCateg[t].querySelector('.priority').value !== ''){
+                            if(!((' ' + liSubCateg[s].querySelector('.category_row').className + ' ').indexOf(' ' + 'disabled' + ' ') > -1) && !((' ' + liSubCateg[t].querySelector('.category_row').className + ' ').indexOf(' ' + 'disabled' + ' ') > -1)){
+                                liSubCateg[s].querySelector('.priority').addClassName('error');
+                            }
+                        }
+                    }
+                }
+            }else{
+                for (var x = 0; x < liTopCateg.length; x++){
+                    if(liTopCateg[x].querySelector('.priority').value == el.value && !((' ' + liTopCateg[x].querySelector('.category_row').className + ' ').indexOf(' ' + 'disabled' + ' ') > -1)){
+                        counter++;
+                    }
+                }
+                for (var z = 0; z < liTopCateg.length; z++){
+                    if(counter > 1){
+                        el.parentNode.querySelector('.priority').removeClassName('error');
+                    }else{
+                        if(liTopCateg[z].querySelector('.priority').value == el.value){
+                            liTopCateg[z].querySelector('.priority').removeClassName('error');
+                            el.parentNode.querySelector('.priority').removeClassName('error');
+                        }
+                    }
+                }
+
+                counter = 0;
+
+                for (var x = 0; x < liSubCateg.length; x++){
+                    if(liSubCateg[x].querySelector('.priority').value == el.value && !((' ' + liSubCateg[x].querySelector('.category_row').className + ' ').indexOf(' ' + 'disabled' + ' ') > -1)){
+                        counter++;
+                    }
+                }
+                for (var z = 0; z < liSubCateg.length; z++){
+                    if(counter > 1){
+                        el.parentNode.querySelector('.priority').removeClassName('error');
+                    }else{
+                        if(liSubCateg[z].querySelector('.priority').value == el.value){
+                            liSubCateg[z].querySelector('.priority').removeClassName('error');
+                            el.parentNode.querySelector('.priority').removeClassName('error');
+                        }
+                    }
+                }
+            }
+
+        };
+
+    </script>
+    <style type="text/css">
+        @font-face {
+            font-family: 'icon_font';
+            src: url('<?php echo $skinUrl; ?>adminhtml/default/default/rocketshoppingfeeds/font/icon_font.eot?81826725');
+            src: url('<?php echo $skinUrl; ?>adminhtml/default/default/rocketshoppingfeeds/font/icon_font.eot?81826725#iefix') format('embedded-opentype'),
+            url('<?php echo $skinUrl; ?>adminhtml/default/default/rocketshoppingfeeds/font/icon_font.svg?81826725#icon_font') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'icon_font';
+            src: url('<?php echo $skinUrl; ?>adminhtml/default/default/rocketshoppingfeeds/font/icon_font.woff') format('woff'),
+            url('<?php echo $skinUrl; ?>adminhtml/default/default/rocketshoppingfeeds/font/icon_font.ttf') format('truetype');
+        }
+    </style>
+    <script type="text/javascript">
+        var allTaxonomyData = [];
+        var isDirty = false;
+        function changeTaxonomyData(category, input_class, element) {
+            switch (input_class) {
+                case 'taxonomy':
+                    type = 'tx';
+                    break;
+                case 'prod_type':
+                    type = 'ty';
+                    break;
+                case 'disabled':
+                    type = 'd';
+                    break;
+                case 'priority':
+                    type = 'p';
+                    break;
+            }
+            allTaxonomyData[category][type] = element.value;
+            isDirty = true;
+            $('form_tabs_rocketshoppingfeeds_categories').addClassName('changed');
+        }
+
+        Event.observe(window,'dom:loaded', function () {
+            function interceptEditFormSubmitAction() {
+                var oldFunction = editForm.submit;
+
+                editForm.submit = function() {
+                    if (isDirty) {
+                        assignAggregatedTaxonomyValue();
+                    }
+                    if($$('.scalable.save')[0].classList.contains('loading')){
+                        alert('You have a process waiting to be finished. Please wait.');
+                        $('form_tabs_rocketshoppingfeeds_categories').click();
+                    }else{
+                        var childrenWrap = $$('.category_list')[0];
+                        if (typeof childrenWrap !== 'undefined') {
+                            var parentWrap = childrenWrap.parentElement;
+                            $$('.category_list')[0].remove();
+                        }
+                        oldFunction.call(editForm);
+                        if (typeof parentWrap !== 'undefined') {
+                            parentWrap.appendChild(childrenWrap);
+                        }
+                    }
+                }
+            }
+
+            function assignAggregatedTaxonomyValue() {
+                var data = {};
+                allTaxonomyData.forEach(function(taxonomyObject, categoryId) {
+                    if (taxonomyObject['tx'] != '' || taxonomyObject['ty'] != '' || taxonomyObject['d'] == 1 || taxonomyObject['p'] > 0) {
+                        data[categoryId] = taxonomyObject;
+                    }
+                });
+
+                $('taxonomyAggregatedValues').value = JSON.stringify(data);
+            }
+            interceptEditFormSubmitAction();
+            var rowLength = $$('.category_taxonomy_category .status').length;
+            $('progr').querySelector('.end').update(rowLength);
+        });
+
+    </script>
+    <div class="priority-wrap">
+        <?php echo $this->getTaxonomyMappings(); ?>
+    </div>
+</div>
+<br />

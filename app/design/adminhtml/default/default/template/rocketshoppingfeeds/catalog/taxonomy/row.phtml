@@ -1,0 +1,53 @@
+<?php
+$category = $this->getCategory();
+$catNames = $this->getNames(); // Not being used yet
+$children = $this->getChildren();
+$catId = $category['entity_id'];
+
+/** @var RocketWeb_ShoppingFeeds_Block_Adminhtml_Catalog_Taxonomy_Category $parent */
+$parent = $this->getParent();
+$fieldName = $parent->getId();
+$value = $parent->getFieldValues($catId);
+$jsStrings = $parent->getJsStrings();
+?>
+<li id="<?php echo $fieldName; ?>_<?php echo $catId; ?>">
+    <div class="category_row">
+        <input type="hidden" class="el_disabled"  onclick="changeTaxonomyData(<?php echo $catId; ?>, 'disabled', this)" value="<?php echo (string)$value['d']; ?>"/>
+        <input type="hidden" class="el_category" value="<?php echo $catId; ?>" />
+
+        <span class="<?php if (!empty($children['html'])): ?>icon-carrot-closed <?php endif; ?>carrot"> </span>
+        <p class="title"><?php echo $category['name']; ?> </p>
+        <div class="product-priority">
+            <span>Priority:</span>
+            <input type="number" name="config[<?php echo $fieldName; ?>][<?php echo $catId; ?>][order]" value="<?php echo $value['p']; ?>"
+                   class="priority" min="0" step="1" onblur="this.value = Math.round(this.value); checkDuplicatePriority(this); changeTaxonomyData(<?php echo $catId; ?>, 'priority', this)" placeholder="Priority">
+        </div>
+        <div class="inputs-wrap">
+            <div class="product-by-category">
+                <span>Taxonomy:</span>
+                <input type="text" class="taxonomy input-text <?php echo $value['d'] ? 'disabled' : ''; ?>"
+                       onblur="changeTaxonomyData(<?php echo $catId; ?>, 'taxonomy', this)"
+                       onchange="$('form_tabs_rocketshoppingfeeds_categories').addClassName('changed')"
+                       value="<?php echo $value['tx']; ?>" placeholder="<?php echo (Mage::registry('taxonomy_enabled') ? 'Type at least 3 characters' : 'Add a taxonomy')?>"/>
+            </div>
+            <div class="product-by-type">
+                <span>Type:</span>
+                <input type="text" class="prod_type input-text <?php echo $value['d'] ? 'disabled' : ''; ?>"
+                       onblur="changeTaxonomyData(<?php echo $catId; ?>, 'prod_type', this)"
+                       onchange="$('form_tabs_rocketshoppingfeeds_categories').addClassName('changed')"
+                       value="<?php echo $value['ty']; ?>">
+            </div>
+        </div>
+        <span class="status"><?php echo $value['d'] ? $jsStrings['row_disabled'] : $jsStrings['row_enabled'] ?></span>
+    </div>
+    <?php echo $children['html']; ?>
+    <script type="text/javascript">
+        allTaxonomyData[<?php echo $catId; ?>] = {
+            id: <?php echo $catId; ?>,
+            tx: '<?php echo $value['tx']; ?>',
+            ty: '<?php echo $value['ty']; ?>',
+            d: '<?php echo $value['d'] ?>',
+            p: '<?php echo $value['p'] ?>'
+        };
+    </script>
+</li>

@@ -1,0 +1,63 @@
+<?php
+/**
+ * Product list toolbar
+ */
+?>
+
+<?php if ($this->getCollection()->getSize()): ?>
+    <div class="toolbar <?php echo Mage::registry('tbp'); ?>">
+        <?php if ($this->isExpanded()): ?>
+        <div class="sorter">
+            <?php if ($this->isEnabledViewSwitcher()): ?>
+            <div class="view-mode">
+                <?php $_modes = $this->getModes(); ?>
+                <?php if ($_modes && count($_modes) > 1): ?>
+                    <label><?php echo $this->__('View as'); ?>:</label>
+                    <?php foreach ($this->getModes() as $_code => $_label): ?>
+                        <?php if ($this->isModeActive($_code)): ?>
+                            <span title="<?php echo $_label; ?>" class="<?php echo strtolower($_code); ?>"><i class="icon-grid"></i><em><?php echo $_label; ?></em></span>
+                        <?php else: ?>
+                            <a href="<?php echo $this->getModeUrl($_code); ?>" title="<?php echo $_label; ?>" class="<?php echo strtolower($_code); ?>"><i class="icon-line2-list"></i><em><?php echo $_label; ?></em></a>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
+            <div class="sort-by">
+                <label><?php echo $this->__('Sort By'); ?></label>
+                <select onchange="setLocation(this.value)">
+                       <option value="<?php echo $this->getOrderUrl('created_at', 'desc') ?>"<?php if($this->isOrderCurrent('created_at') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>
+                            <?php echo $this->__('Newest Items') ?>
+                        </option>
+                        <option value="<?php echo $this->getOrderUrl('position', 'asc') ?>"<?php if($this->isOrderCurrent('position') && $this->getCurrentDirection() == 'asc'): ?> selected="selected"<?php endif; ?>>
+                            <?php echo $this->__('Best Match') ?>
+                        </option>
+                        <option value="<?php echo $this->getOrderUrl('name', 'asc') ?>"<?php if($this->isOrderCurrent('name') && $this->getCurrentDirection() == 'asc'): ?> selected="selected"<?php endif; ?>>
+                            <?php echo $this->__('Alphabetical: A to Z') ?>
+                        </option>
+                        <option value="<?php echo $this->getOrderUrl('name', 'desc') ?>"<?php if($this->isOrderCurrent('name') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>
+                            <?php echo $this->__('Alphabetical: Z to A') ?>
+                        </option>
+                        <option value="<?php echo $this->getOrderUrl('rating_summary', 'desc') ?>"<?php if($this->isOrderCurrent('rating_summary') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>
+                            <?php echo $this->__('Avg. Customer Review') ?>
+                        </option>
+                         <option value="<?php echo $this->getOrderUrl('price', 'asc') ?>"<?php if($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'asc'): ?> selected="selected"<?php endif; ?>>
+                            <?php echo $this->__('Price: Low to High') ?>
+                        </option>
+                        <option value="<?php echo $this->getOrderUrl('price', 'desc') ?>"<?php if($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>
+                            <?php echo $this->__('Price: High to Low') ?>
+                        </option>
+                </select>
+                <!--
+                <?php if ($this->getCurrentDirection() == 'desc'): ?>
+                    <a href="<?php echo $this->getOrderUrl(null, 'asc'); ?>" title="<?php echo $this->__('Set Ascending Direction'); ?>"><i class="icon-chevron-up"></i></a>
+                <?php else: ?>
+                    <a href="<?php echo $this->getOrderUrl(null, 'desc'); ?>" title="<?php echo $this->__('Set Descending Direction'); ?>"><i class="icon-chevron-down"></i></a>
+                <?php endif; ?>
+                -->
+            </div>
+        </div>
+        <?php endif; ?>
+        <?php echo $this->getPagerHtml(); ?>
+    </div>
+<?php endif; ?>

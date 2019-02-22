@@ -1,0 +1,215 @@
+.group-product {
+  .data-table-item {
+    padding: 27px;
+    position: relative;
+  }
+  .form-add-to-cart-row {
+    .product-shop {
+      max-width: 570px;
+    }
+    .product-name h2 {
+      @include setFont(3rem, 4.2rem, 200);
+      text-transform: none;
+      letter-spacing: -0.1rem;
+    }
+  }
+  .product-description {
+    @include gothamBook;
+    @include setFont(1.6rem, 2.4rem, 400);
+    letter-spacing: 0.03rem;
+    margin-bottom: 45px;
+    b {
+      @include gotham;
+      font-weight: 500;
+    }
+  }
+  .form-add-to-cart  {
+    .usage-icon {
+      span {
+        vertical-align: middle;
+      }
+    }
+  }
+  .product-view .product-shop {
+    .extra-info,
+    .price-info {
+      display: none;
+    }
+  }
+  .data-table-item-step {
+    font-weight: 700;
+    padding-right: 5px;
+  }
+  .data-table-item-custom-label {
+    @include whitneyBook;
+    @include setFont(1.8rem, 4.2rem, 400);
+    font-style: italic;
+    padding-right: 55px;
+  }
+  .usage-icon {
+    display: inline;
+  }
+  .data-table-item-text {
+    @include gotham;
+    @include setFont(1.4rem, 2.4rem, 700);
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    &:last-child {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+  }
+  .data-table-item-bottom {
+    //@include align-items(flex-end);
+    display: block;
+    @include clearfix;
+  }
+  .selects-attributes {
+    float: left;
+  }
+  .qty-attribute {
+    margin-right: 20px;
+  }
+  .grouped-items-table .qty-wrapper {
+    width: 120px;
+  }
+  .qty-input {
+    margin: 0 5px;
+  }
+  .label-text-up {
+    width: 100%;
+    padding-left: 35px;
+  }
+  .size-attribute {
+    .label-text-up {
+      padding-left: 0;
+    }
+  }
+  .data-table-item-cart-btn {
+    border-width: 2px;
+    background: $black;
+    color: $white;
+    float: left;
+    margin: 19px 0 0 0;
+    &:hover {
+      color: $black;
+      background: $white;
+    }
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+  .data-table-item-more {
+    float: right;
+    position: absolute;
+    bottom: 27px;
+    right: 27px;
+  }
+  .data-table .label-text-up {
+    font-weight: 500;
+  }
+}
+
+
+@media only screen and (max-width: $tablet) {
+  .group-product {
+    .data-table-item {
+      padding: 20px;
+    }
+    .data-table-item-top {
+      margin-bottom: 10px;
+    }
+    .data-table-item-top-content {
+      @include display(flex);
+      @include flex-wrap(wrap);
+    }
+    .data-table-item-more {
+      position: static;
+    }
+    .data-table-item-step {
+      line-height: 4.2rem;
+    }
+    .usage-icon {
+      @include flex-basis(100%);
+      display: block;
+      order: 5;
+      margin-left: -4px;
+    }
+    .data-table .label-text-up {
+      text-align: left;
+      font-weight: 500;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .group-product {
+    .data-table-item-top-content {
+      text-align: left;
+    }
+    .data-table-item-more {
+      position: absolute;
+    }
+    .form-add-to-cart .product-shop {
+      margin-bottom: 40px;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-s) {
+  .group-product {
+    .product-shop {
+      padding: 0;
+      .product-name {
+        padding: 0 20px;
+      }
+    }
+    .form-add-to-cart-row .product-name {
+      h2 {
+        font-size: 2.2rem;
+        line-height: 2.4rem;
+      }
+      .product-description {
+        font-size: 1.4rem;
+        margin-bottom: 35px;
+      }
+    }
+    .add-to-box {
+      padding: 0 20px;
+    }
+    .data-table-item-step,
+    .data-table-item-custom-label {
+      line-height: 2.2rem;
+    }
+    .data-table-item-step {
+      padding-right: 18px;
+    }
+    .data-table-item-custom-label {
+      padding-right: 0;
+    }
+    .data-table-item-more {
+      position: static;
+    }
+    .data-table-item-text {
+      font-size: 1.3rem;
+      line-height: 1.8rem;
+      margin-bottom: 5px;
+    }
+    .product-view .product-shop .price-box {
+      .special-price .price,
+      .regular-price .price,
+      .full-product-price .price {
+        font-size: 1.8rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-iphone-5) {
+  .group-product {
+    .data-table-item-cart-btn {
+      min-width: calc(100% - 140px);
+    }
+  }
+}

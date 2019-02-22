@@ -1,0 +1,64 @@
+//  app\design\frontend\born\default\template\paypal\express\review.phtml
+.aw-recurring-express-review {
+  .col-main {
+    padding: 25px;
+  }
+  .page-title h1 {
+    @include gotham;
+    @include setFont(3rem, 4.2rem, 200);
+    text-transform: none;
+  }
+  .legend {
+    @include gotham;
+    @include setFont(1.2rem, 4.2rem, 500);
+    border-bottom: 4px solid $black;
+    letter-spacing: 0.4rem;
+    text-transform: uppercase;
+    a {
+      font-weight: 200;
+      color: $light-text-color;
+      font-weight: normal;
+      letter-spacing: normal;
+      text-transform: none;
+      text-decoration: underline;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+  .box-title {
+    h3 {
+      font-weight: 700;
+      color: $black;
+      font-size: 1.4rem;
+      text-transform: none;
+      margin-bottom: 20px;
+      a {
+        font-weight: 200;
+        color: $light-text-color;
+        text-decoration: underline;
+        &:hover {
+          color: $black;
+        }
+      }
+    }
+  }
+  .box-content {
+    address {
+      @include gotham;
+      @include setFont(1.4rem, 2.4rem, 200);
+      font-style: normal;
+      margin-bottom: 15px;
+    }
+  }
+  .btn-checkout span {
+    @include gotham;
+    @include setFont(1.3rem, 2rem, 500);
+    text-transform: uppercase;
+    color: black;
+    &:hover {
+      color: $white;
+    }
+  }
+
+}

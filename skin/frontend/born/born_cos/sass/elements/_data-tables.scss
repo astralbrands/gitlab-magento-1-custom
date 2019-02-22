@@ -1,0 +1,9 @@
+.data-table th {
+  background: transparent;
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  font-weight: 500;
+  color: $black;
+  text-transform: none;
+  @include gotham();
+}

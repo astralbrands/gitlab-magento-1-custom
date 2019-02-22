@@ -1,0 +1,12 @@
+<?php
+$hooks_helper = Mage::helper('borncmshooks');
+$slot = $this->getProductslotObjectCollection();
+$_bornProductListHelper = Mage::helper('born_package/catalog_product_list');
+$_wishlistHelper = Mage::helper('wishlist');
+
+$_productSku = $slot->getProductSku();
+
+$_product = $hooks_helper->getProductBySku($_productSku);
+
+$this->renderProductView($_product, $slot->getTagMessage());
+?>

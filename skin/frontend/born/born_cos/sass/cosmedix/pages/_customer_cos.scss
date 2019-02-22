@@ -1,0 +1,277 @@
+.welcome-banner {
+  .hello strong {
+    font-weight: 200;
+    text-transform: none;
+  }
+}
+
+.customer-account {
+  .col-left {
+    .block-title {
+      border-bottom-width: 2px;
+      span {
+        letter-spacing: 0.15rem;
+      }
+    }
+    .block-content {
+      ul li.last a {
+        font-weight: 500;
+        font-style: italic;
+        text-decoration: underline;
+      }
+    }
+  }
+  .main {
+    .my-account {
+      .page-title {
+        border-bottom-width: 2px;
+        h1 {
+          letter-spacing: 0.15rem;
+        }
+      }
+    }
+  }
+  .dashboard {
+    .box-head {
+      border-bottom-width: 2px;
+      h2 {
+        letter-spacing: 0.15rem;
+      }
+    }
+  }
+   .button {
+     border-width: 2px;
+     line-height: 4.6rem;
+   }
+}
+
+.customer-address-form {
+  .form-list {
+    .jq-selectbox {
+      ul, li {
+        margin: 0;
+      }
+    }
+  }
+  .scaffold-form .fieldset {
+    overflow: visible;
+  }
+}
+
+.bestseller {
+  margin-bottom: 125px;
+  .product-image {
+    max-width: 210px;
+    margin: 0 auto;
+    float: none;
+  }
+  .product {
+    .product-name {
+      margin-bottom: 0;
+      a {
+        @include gotham;
+        font-size: 1.4rem;
+        font-weight: 500;
+        letter-spacing: 0.18rem;
+        text-transform: uppercase;
+      }
+    }
+    .product-subtitle {
+      @include gothamBook;
+      @include setFont(1.2rem, 2.4rem, 400);
+      letter-spacing: 0.15rem;
+      text-transform: uppercase;
+      padding: 0 7px;
+    }
+    .special-price .price,
+    .regular-price .price {
+      @include whitneyBook;
+      font-weight: 400;
+      font-size: 1.6rem;
+      font-style: italic;
+    }
+  }
+}
+
+/*Wishlist*/
+.wishlist-index-index {
+  #wishlist-table {
+    .btn-remove:after {
+      content: "\e90b";
+    }
+    .jq-selectbox__select,
+    .jq-selectbox__dropdown {
+      border-width: 1px;
+    }
+    .product-name a {
+      @include gotham;
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: 0.18rem;
+      text-transform: uppercase;
+    }
+    .price-box .price {
+      @include whitneyBook;
+      font-weight: 400;
+      font-size: 1.6rem;
+      font-style: italic;
+    }
+  }
+}
+
+/*Payment methods*/
+.ebizmarts-sagepaymentspro-token-index {
+  #link-regcard {
+    border-width: 2px;
+    line-height: 4.6rem;
+  }
+}
+
+/*My orders*/
+.sales-order-view {
+  .product-name {
+    color: $black;
+    @include gotham;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.18rem;
+    text-transform: uppercase;
+  }
+  .price {
+    @include whitneyBook;
+    font-weight: 400;
+    font-size: 1.6rem;
+    font-style: italic;
+  }
+  strong .price {
+    font-weight: bold;
+  }
+  td[data-born-label="SKU"] {
+    @include gotham;
+    @include setFont(1.2rem, 1.8rem, 400);
+    color: $light-text-color;
+    font-style: italic;
+    text-transform: none;
+  }
+}
+
+/*Email preferences*/
+.newsletter-manage-index {
+  .my-account .fieldset .legend {
+    display: block;
+    color: $black;
+    @include gotham;
+    font-size: 2rem;
+    border: none;
+  }
+}
+.sidebar .block:not(.block-layered-nav) .block-title {
+  border-bottom-width: 2px;
+}
+
+/*Auto replenishment*/
+.ie .aw-recurring-customer-index {
+  .jq-selectbox__select-text {
+    min-width: 18px;
+  }
+}
+
+@media only screen and (max-width: $tablet) {
+  .bestseller .product-image {
+    max-width: 180px;
+  }
+}
+
+@media only screen and (max-width: $tablet-m) {
+  .bestseller .product-image {
+    max-width: 160px;
+  }
+}
+
+@media only screen and (max-width: $tablet-xs) {
+  .bestseller .product-image {
+    max-width: 120px;
+  }
+}
+
+
+@media only screen and (max-width: $mobile) {
+  .customer-account .block-account {
+    ._open {
+      li.current:before {
+        @include transform(rotate(135deg));
+      }
+    }
+    li.current:before {
+      width: 7px;
+      height: 7px;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-m) {
+  .bestseller {
+    margin-bottom: 40px;
+    .product .product-image-default,
+    .product-image {
+      max-width: 250px;
+    }
+    .mini-products-list .item-outer {
+      border: none;
+    }
+    .bx-wrapper {
+      border: 1px solid $block-border-color;
+    }
+  }
+  .customer-account .button,
+  .ebizmarts-sagepaymentspro-token-index #link-regcard {
+    line-height: 3.6rem;
+  }
+  .customer-account .scaffold-form .buttons-set .button {
+    height: 40px;
+    line-height: 3.6rem;
+  }
+}
+
+@media only screen and (max-width: $mobile-iphone-6-plus) {
+  .aw-recurring-customer-index {
+    .main {
+      padding: 0 15px 40px;
+    }
+    .data-table td,
+    .data-table th {
+      padding: 10px 3px;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-iphone-6) {
+  .ebizmarts-sagepaymentspro-token-index {
+    .main {
+      padding: 0 15px 40px;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-galaxy-s6) {
+  .ebizmarts-sagepaymentspro-token-index {
+    #all-cards .data-table td, #all-cards .data-table th {
+      padding: 10px 3px;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-iphone-5) {
+  .ebizmarts-sagepaymentspro-token-index {
+    #all-cards .data-table td, #all-cards .data-table th {
+      word-break: break-all;
+    }
+  }
+  .aw-recurring-customer-index {
+    .data-table th{
+      word-break: break-all;
+    }
+  }
+}
+

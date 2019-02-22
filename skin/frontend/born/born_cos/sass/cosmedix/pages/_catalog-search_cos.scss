@@ -1,0 +1,22 @@
+.view-mode {
+  display: none;
+}
+
+.form-search-page {
+  .form-search-page-btn:before {
+    content: "\e93a";
+  }
+}
+.catalogsearch-result-index {
+  .note-msg {
+    padding: 0 20px;
+  }
+  .mb-search-result h1 {
+    @include whitneyBook;
+    font-style: italic;
+  }
+  .pager {
+    display: none;
+  }
+}
+

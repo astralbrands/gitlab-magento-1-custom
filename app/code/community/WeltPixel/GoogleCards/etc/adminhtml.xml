@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <weltpixel translate="title">
+            <title>WeltPixel</title>
+            <sort_order>300</sort_order>
+            <children>
+                <googlecards translate="title" module="weltpixel_googlecards">
+                    <title>Google Cards</title>
+                    <action>adminhtml/system_config/edit/section/weltpixel_googlecards</action>
+                    <sort_order>30</sort_order>
+                </googlecards>
+            </children>
+        </weltpixel>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <weltpixel_googlecards translate="title" module="weltpixel_googlecards">
+                                        <title>WeltPixel Google Cards</title>
+                                        <sort_order>1200</sort_order>
+                                    </weltpixel_googlecards>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

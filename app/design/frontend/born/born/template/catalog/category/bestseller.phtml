@@ -1,0 +1,71 @@
+
+<?php 
+$_bestSellerCategory = $this->getBestSellersCategory();
+$_categoryUrl = $_bestSellerCategory->getUrl($_bestSellerCategory);
+
+$_productCollection = $this->getBestSellersProducts($_bestSellerCategory);
+
+$_bornProductListHelper = Mage::helper('born_package/catalog_product_list');
+
+$displayLimit = $this->getDisplayLimit();
+?>
+ <style>
+#ratelinks {display:none;}
+</style>
+<div class="block-content bestseller">
+	<div class="shop-all-button">
+		<a href="<?php echo $_categoryUrl ?>" title="<?php echo $_bestSellerCategory->getName() ?>">
+			<h2> <?php echo $this->__('Shop All Best Sellers') ?></h2>
+		</a>
+	</div>
+	<div class="block-title">
+		<h2><?php echo $this->__('Best Sellers') ?><h2>
+	</div>
+	<ol class="mini-products-list" id="block-bestseller">
+		<?php $index = 0; foreach($_productCollection as $_item): ?>
+			<?php if($index++ < $displayLimit): ?>
+				<li class="item">
+					<div class="item-outer">
+						<div class="item-inner">
+							<div class="product">
+
+								<?php $productImages = $_bornProductListHelper->getProductImages($_item) ?>
+								<a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_item->getName()) ?>" class="product-image <?php if (array_key_exists('alt_image',$productImages) && $productImages['alt_image']) echo 'alt-img' ?>">
+								
+								
+                                                            <?php
+                                                            if(array_key_exists('small_image',$productImages) && isset($productImages['small_image'])){
+                                                            echo "<img src=\"".$productImages['small_image']."\""; 
+								echo " id=\"product-collection-image-".$_item->getId()."\"";
+								$altImage = $this->stripTags($this->getImageLabel($_item, 'small_image'), null, true);
+								if (array_key_exists('alt_image',$_item)&&isset($_item['alt_image'])){
+                                                                echo "alt=\"".$this->stripTags($this->getImageLabel($_item, 'small_image'), null, true)."\"";
+								}
+                                                            echo " />"; 
+                                                            }
+                                                            ?>
+									<?php if (isset($productImages['alt_image'])) { ?>
+										<img class="product-image-hover bg" src="<?php echo $productImages['alt_image'] ?>"/>
+										<?php } else { ?>
+										<img class="product-image-hover bg" id="product-collection-image-<?php echo $_item->getId(); ?>"
+											 src="<?php echo $productImages['small_image'] ?>"
+											 alt="<?php echo $this->stripTags($this->getImageLabel($_item, 'small_image'), null, true) ?>" />
+									<?php } ?>
+								</a>
+								<div class="product-details">
+									<p class="product-name"><a href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->escapeHtml($_item->getName()) ?></a></p>
+									<?php if ($this->getDisplaySubtitle()): ?>
+										<?php if ($_subText = Mage::helper('born_package/catalog_product_list')->getSubText($_item)): ?>
+											<p class="product-subtitle"><?php echo $_subText ?></p>
+										<?php endif ?>
+									<?php endif ?>
+									<?php echo $this->getPriceHtml($_item, true, '-related') ?>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			<?php endif; ?>
+		<?php endforeach ?>
+	</ol>
+</div>

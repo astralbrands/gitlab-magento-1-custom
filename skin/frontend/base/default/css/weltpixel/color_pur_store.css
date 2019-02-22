@@ -1,0 +1,173 @@
+
+
+
+    .product_swatch img { width: 30px; }
+    .product_swatch img { height: 30px; }
+
+    .swatches .filter_checkbox .swatch-container{ width: 30px; }
+    .swatches .filter_checkbox .swatch-container{ height: 30px; }
+
+
+
+    .w, .toolbar, .products-list, #wpmm-nav, .wpmm-nav-content-inner  {max-width: 1600px ; }
+
+
+
+    #wrapper { max-width: 100%; margin:0 auto; }
+
+    body { color: #000000 !important;  }
+
+    .button , .button span { background-color : #FFFFFF !important; }
+    .button , .button span { color : #303030 !important; }
+    .button:hover ,.button:hover span{ background-color : #000000 !important; }
+    .button:hover, .button:hover span { color : #FFFFFF !important; }
+    .button { border : 1px solid #000000 !important; }
+    .button:hover { border : 1px solid #000000 !important; }
+    .add-to-cart .button span { background-color : #FFFFFF !important; }
+    .add-to-cart .button span { color : #000000 !important; }
+    .add-to-cart .button:hover span { background-color : #000000 !important; }
+    .add-to-cart .button:hover span { color : #FFFFFF !important; }
+
+    .tag-new { background-color:  #000000 !important; }
+    .tag-new { color: #FFFFFF !important; }
+    .tag-sale { background-color: #000000 !important; }
+    .tag-sale { color: #FFFFFF !important; }
+
+
+
+
+
+
+
+
+
+    #page-footer-section-02 {background-color: #FFFFFF !important; }
+    #page-footer-section-02 {color: #000000 !important; }
+    #page-footer-section-02 a {color: #000000 !important; }
+    #page-footer-section-02 a:hover {color:  #E6E6E6 !important; }
+    #page-footer-section-02 h4 {color: #000000 !important; }
+    .newsletter-subscribe button { background: #000000 !important; }
+    .newsletter-subscribe button:hover { background: #FFFFFF !important; }
+    .newsletter-subscribe button { color: #FFFFFF !important; }
+    .newsletter-subscribe button:hover { color: #000000 !important; }
+    .newsletter-subscribe button { border: 1px solid #000000 !important; }
+    .newsletter-subscribe button:hover { border:1px solid #000000 !important; }
+    .newsletter-subscribe input { background-color: #FFFFFF !important; }
+    .newsletter-subscribe input { border: 1px solid #E6E6E6 !important; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    .global-notification-wrapper  { background-color: #000000 !important}
+
+    .global-notification-wrapper { color: #FFFFFF !important}
+
+    .section-breadcrumbs  { background: #FFFFFF !important}
+
+    .section-breadcrumbs, .breadcrumbs ul li a  { color: #000000 !important}
+
+
+
+    body, input, select, textarea, th, td, b, strong, caption, th, td,
+    #product-info .product-description,
+    #product-reviews p, #product-reviews label
+    { font-size:  14px !important; }
+
+
+
+
+
+
+
+
+#wpmm-nav li.nav-1 > a {
+}
+li.nav-1 > .wpmm-nav-content {
+    background-size: cover;
+}
+#wpmm-nav li.nav-2 > a {
+}
+li.nav-2 > .wpmm-nav-content {
+    background-size: cover;
+}
+#wpmm-nav li.nav-3 > a {
+}
+li.nav-3 > .wpmm-nav-content {
+    background-size: cover;
+}
+#wpmm-nav li.nav-3-1 > a {
+}
+#wpmm-nav li.nav-3-2 > a {
+}
+#wpmm-nav li.nav-4 > a {
+}
+li.nav-4 > .wpmm-nav-content {
+    background-size: cover;
+}
+#wpmm-nav li.nav-4-1 > a {
+}
+#wpmm-nav li.nav-4-2 > a {
+}
+#wpmm-nav li.nav-4-3 > a {
+}
+#wpmm-nav li.nav-4-4 > a {
+}
+#wpmm-nav li.nav-4-5 > a {
+}
+#wpmm-nav li.nav-4-6 > a {
+}
+#wpmm-nav li.nav-4-7 > a {
+}
+#wpmm-nav li.nav-4-8 > a {
+}
+#wpmm-nav li.nav-4-9 > a {
+}
+#wpmm-nav li.nav-4-10 > a {
+}
+#wpmm-nav li.nav-5 > a {
+}
+li.nav-5 > .wpmm-nav-content {
+    background-size: cover;
+}
+#wpmm-nav li.nav-5-1 > a {
+}
+#wpmm-nav li.nav-5-2 > a {
+}
+#wpmm-nav li.nav-5-3 > a {
+}
+#wpmm-nav li.nav-5-4 > a {
+}
+#wpmm-nav li.nav-5-5 > a {
+}
+#wpmm-nav li.nav-5-6 > a {
+}
+#wpmm-nav li.nav-5-7 > a {
+}
+#wpmm-nav li.nav-5-8 > a {
+}
+#wpmm-nav li.nav-6 > a {
+}
+li.nav-6 > .wpmm-nav-content {
+    background-size: cover;
+}
+#wpmm-nav li.nav-7 > a {
+}
+li.nav-7 > .wpmm-nav-content {
+    background-size: cover;
+}
+#wpmm-nav li.nav-8 > a {
+}
+li.nav-8 > .wpmm-nav-content {
+    background-size: cover;
+}

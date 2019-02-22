@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!--
+    /**
+     * Astral Brands
+     *
+     * @category    design
+     * @author      Josh Adams - Astral Brands <webdeveloper@astralbrands.com>
+     * @package     base_default
+     */
+-->
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <!--Head Scripts Script -->
+            <block type="astral_integrations_block/addToCart"
+                name="Astral_Integrations.Head"
+                template="astral/integrations/head.phtml" />
+            <action method="addJS">
+                <script>astral/cj-integrations.min.js</script>
+            </action>
+        </reference>
+    </default>
+    <!-- Homepage -->
+    <cms_index_index>
+        <reference name="head">
+            <!--Criteo -->
+            <block type="astral_integrations_block/common"
+                name="Astral_Integrations.Criteo.Home"
+                template="astral/integrations/Criteo/homepage.phtml" />
+        </reference>
+    </cms_index_index>
+    <!--Affiliate Block Hooks to be added to checkout success page -->
+    <checkout_onepage_success>
+        <reference name="head">
+            <!--Checkout Events -->
+            <block type="astral_integrations_block/common"
+                name="Astral_Integrations.Checkout"
+                template="astral/integrations/checkout_success.phtml" />
+        </reference>
+        <reference name="content">
+            <!-- Mavrck -->
+            <block type="astral_integrations_block/common"
+                name="Astral_Integrations.Mavrck.Points" as="mvk_points"
+                template="astral/integrations/Mavrck/mavrck_points.phtml" />
+        </reference>
+    </checkout_onepage_success>
+    <!--Affiliate Block Hooks to be added to multishipping checkout success page -->
+    <checkout_multishipping_success>
+        <reference name="head">
+            <!--Checkout Events -->
+            <block type="astral_integrations_block/common"
+                name="Astral_Integrations.Checkout"
+                template="astral/integrations/checkout_success.phtml" />
+        </reference>
+        <reference name="content">
+            <!-- Mavrck -->
+            <block type="astral_integrations_block/common"
+                name="Astral_Integrations.Mavrck.Points" as="mvk_points"
+                template="astral/integrations/Mavrck/mavrck_points.phtml" />
+        </reference>
+    </checkout_multishipping_success>
+    <!-- Affiliate Block Hooks for Product View -->
+    <catalog_product_view translate="label">
+        <reference name="head">
+            <!--Product Page Tracking -->
+            <block type="astral_integrations_block/common"
+                name="Astral_Integrations.ViewItem"
+                template="astral/integrations/product_view.phtml" />
+        </reference>
+    </catalog_product_view>
+    <!-- Affiliate Block Hooks for  Catalog Categories -->
+    <catalog_category_view>
+        <reference name="head">
+            <block type="catalog/product_list"
+                name="Astral_Integrations.Criteo.ViewCategory"
+                template="astral/integrations/Criteo/product_list.phtml" />
+        </reference>
+    </catalog_category_view>
+    <catalogsearch_result_index>
+        <reference name="head">
+            <block type="catalog/product_list"
+                name="Astral_Integrations.Criteo.ViewSearchResults"
+                template="astral/integrations/Criteo/product_list.phtml" />
+        </reference>
+    </catalogsearch_result_index>
+    <catalogsearch_advanced_result>
+        <reference name="head">
+            <block type="catalog/product_list"
+                name="Astral_Integrations.Criteo.ViewSearchResults"
+                template="astral/integrations/Criteo/product_list.phtml" />
+        </reference>
+    </catalogsearch_advanced_result>
+    <!-- Affiliate Block Hooks for Checkout Index -->
+    <checkout_cart_index>
+        <reference name="head">
+            <block type="astral_integrations_block/common"
+                name="Astral_Integrations.Criteo.ViewCartEvent"
+                template="astral/integrations/cart.phtml" />
+        </reference>
+    </checkout_cart_index>
+</layout>    

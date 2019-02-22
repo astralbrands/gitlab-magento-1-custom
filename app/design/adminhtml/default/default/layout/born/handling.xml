@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_sales_order_create_index>
+        <reference name="billing_method">
+            <block type="adminhtml/sales_order_create_billing_method_form" name="form">
+                <action method="setTemplate">
+                    <template>born/handling/order/create/billing/form.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </adminhtml_sales_order_create_index>
+    <adminhtml_sales_order_create_load_block_data>
+        <reference name="billing_method">
+            <block type="adminhtml/sales_order_create_billing_method_form" name="form">
+                <action method="setTemplate">
+                    <template>born/handling/order/create/billing/form.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </adminhtml_sales_order_create_load_block_data>
+    <adminhtml_sales_order_create_load_block_billing_method>
+        <reference name="billing_method">
+            <block type="adminhtml/sales_order_create_billing_method_form" name="form">
+                <action method="setTemplate">
+                    <template>born/handling/order/create/billing/form.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </adminhtml_sales_order_create_load_block_billing_method>
+    
+    
+    
+    <born_handling_add_invoice_total>
+        <reference name="invoice_totals">
+            <block type="handling/adminhtml_sales_order_create_totals_fee" name="total_handling_fee" />
+        </reference>
+    </born_handling_add_invoice_total>
+    
+    <born_handling_add_order_total>
+        <reference name="order_totals">
+            <block type="handling/adminhtml_sales_order_create_totals_fee" name="total_handling_fee" />
+        </reference>
+    </born_handling_add_order_total>
+    <born_handling_add_creditmemo_total>
+        <reference name="creditmemo_totals">
+            <block type="handling/adminhtml_sales_order_create_totals_fee" name="total_custom_surcharge" />
+        </reference>
+    </born_handling_add_creditmemo_total>
+
+    
+    <adminhtml_sales_order_view>
+        <update handle="born_handling_add_order_total" />
+    </adminhtml_sales_order_view>
+    <adminhtml_sales_order_invoice_new>
+        <update handle="born_handling_add_invoice_total" />
+    </adminhtml_sales_order_invoice_new>
+    <adminhtml_sales_order_invoice_updateqty>
+        <update handle="born_handling_add_invoice_total" />
+    </adminhtml_sales_order_invoice_updateqty>
+    <adminhtml_sales_order_invoice_view>
+        <update handle="born_handling_add_invoice_total" />
+    </adminhtml_sales_order_invoice_view>
+    <adminhtml_sales_order_creditmemo_new>
+        <update handle="born_handling_add_creditmemo_total" />
+    </adminhtml_sales_order_creditmemo_new>
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <update handle="born_handling_add_creditmemo_total" />
+    </adminhtml_sales_order_creditmemo_updateqty>
+    <adminhtml_sales_order_creditmemo_view>
+        <update handle="born_handling_add_creditmemo_total" />
+    </adminhtml_sales_order_creditmemo_view>
+    
+    
+</layout>

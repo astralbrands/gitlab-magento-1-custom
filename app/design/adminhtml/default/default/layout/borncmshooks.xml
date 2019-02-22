@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <borncmshooks_adminhtml_borncmshooks_index>
+        <reference name="content">
+            <block type="borncmshooks/adminhtml_borncmshooks" name="borncmshooks" />
+        </reference>
+    </borncmshooks_adminhtml_borncmshooks_index>
+    
+    <borncmshooks_adminhtml_borncmshooks_edit>
+        <reference name="head">
+        	<action method="addItem"><type>skin_js</type><name>borncmshooks/js/borncmshooks.js</name><params/></action>
+		<action method="addCss"><stylesheet>borncmshooks/css/borncmshooks.css</stylesheet></action>
+	</reference>
+    </borncmshooks_adminhtml_borncmshooks_edit>
+    
+    <borncmshooks_adminhtml_borncmshooks_editrow>
+        <update handle='editor'/>
+        <reference name="head">
+        	 <action method="addJs"><script>tiny_mce/tiny_mce.js</script></action>
+        	<action method="addJs"><script>mage/adminhtml/wysiwyg/tiny_mce/setup.js</script></action>
+               
+        	<action method="addItem"><type>skin_js</type><name>borncmshooks/js/borncmshooks.js</name><params/></action>
+		<action method="addCss"><stylesheet>borncmshooks/css/borncmshooks.css</stylesheet></action>
+                
+                <action method="addJs"><script>mage/adminhtml/variables.js</script></action>
+                <action method="addJs"><script>mage/adminhtml/wysiwyg/widget.js</script></action>
+                <action method="addJs"><script>lib/flex.js</script></action>
+                <action method="addJs"><script>mage/adminhtml/flexuploader.js</script></action>
+                <action method="addJs"><script>mage/adminhtml/browser.js</script></action>
+                <action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action> 
+                <action method="addItem"><type>js_css</type><name>prototype/windows/themes/magento.css</name></action> 
+	</reference>
+    </borncmshooks_adminhtml_borncmshooks_editrow>
+    
+    <borncmshooks_adminhtml_borncmshooks_newrow>
+        <update handle='editor'/>
+        <reference name="head">
+        	 <!-- <action method="addJs"><script>tiny_mce/tiny_mce.js</script></action>
+        	  <action method="addJs"><script>mage/adminhtml/wysiwyg/tiny_mce/setup.js</script></action>
+        	<action method="addItem"><type>skin_js</type><name>borncmshooks/js/borncmshooks.js</name><params/></action>-->
+                <action method="addItem"><type>skin_js</type><name>borncmshooks/js/editor.js</name><params/></action> 
+		<action method="addCss"><stylesheet>borncmshooks/css/borncmshooks.css</stylesheet></action>
+               
+               
+                <action method="addJs"><script>mage/adminhtml/variables.js</script></action>
+                <action method="addJs"><script>mage/adminhtml/wysiwyg/widget.js</script></action>
+                <action method="addJs"><script>lib/flex.js</script></action>
+                <action method="addJs"><script>mage/adminhtml/flexuploader.js</script></action>
+                <action method="addJs"><script>mage/adminhtml/browser.js</script></action>
+                <action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action> 
+                <action method="addItem"><type>js_css</type><name>prototype/windows/themes/magento.css</name></action> 
+	</reference>
+    </borncmshooks_adminhtml_borncmshooks_newrow>
+    
+    <borncmshooks_adminhtml_borncmshooks_formgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+           <block type="borncmshooks/adminhtml_borncmshooks_edit_tab_rowsgrid" name="form.grid"/>
+           <block type="adminhtml/widget_grid_serializer" name="grid_serializer">
+               <reference name="grid_serializer">
+                   <action method="initSerializerBlock">
+                       <grid_block_name>form.grid</grid_block_name>
+                       <data_callback>getSelectedForms</data_callback>
+                       <hidden_input_name>links[form]</hidden_input_name>
+                       <reload_param_name>forms</reload_param_name>
+                   </action>
+                   <action method="addColumnInputName">
+                       <input_name>position</input_name>
+                   </action>                  
+               </reference>
+           </block>
+       </block>
+    </borncmshooks_adminhtml_borncmshooks_formgrid>
+
+    <borncmshooks_adminhtml_borncmshooks_filteredformgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="borncmshooks/adminhtml_borncmshooks_edit_tab_rowsgrid" name="form.grid"/>
+       </block>
+    </borncmshooks_adminhtml_borncmshooks_filteredformgrid>
+</layout>

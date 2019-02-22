@@ -1,0 +1,327 @@
+<!-- <?php echo __FILE__; ?> -->
+<?php
+$_helper = $this->helper('catalog/output');
+$_product = $this->getProduct();
+$productObject = Mage::getModel('catalog/product');
+$productItem = $productObject->load($_product->getId());
+$routes[0] = Mage::app()->getRequest()->getRouteName();
+$routes[1] = Mage::app()->getRequest()->getControllerName();
+$routes[2] = Mage::app()->getRequest()->getActionName();
+$fullAction = implode('/',$routes);
+$varienFormId = ($fullAction == 'bornajax/catalog_product/quickviewblock') ? 'product_addtocart_form_'.$_product->getId(): 'product_addtocart_form';
+$_bornProductListHelper = Mage::helper('born_package/catalog_product_list');
+$messages = $this->getMessagesBlock()->toHtml();
+$formurl = $this->getSubmitUrl($_product, array('_secure' => $this->_isSecure()));
+$subtitle = $_product->getSubtitle();
+$storeId = Mage::app()->getStore()->getId();
+    if($storeId == 1){
+       $affiliation = 'Pur Cosmetics'; 
+    }else if($storeId == 2){
+        $affiliation = 'Cosmedix';
+    }else if($storeId == 3){
+        $affiliation = 'Cosmedix';
+    }else{
+        $affiliation = '';
+    }           
+    $mediaUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+    if( $_product->getTypeId() == 'simple' ){
+        $product_type = 'simple';
+    }elseif( $_product->getTypeId() == 'bundle' ){
+        $product_type = 'bundle';    
+    }elseif( $_product->getTypeId() == 'configurable' ){
+        $product_type = 'configurable';    
+    }
+
+    //$productData = preg_replace("/([^\])'/","$1\'",$productItem->getData());
+
+
+?>
+
+<script>
+    var productObject = {};
+    productObject.type = '<?php echo $product_type; ?>';
+    productObject.skin_url = '<?php echo $mediaUrl; ?>';
+    //productObject.productData = '<?php //echo json_encode($productData); ?>';
+    var product_type = '<?php echo $product_type; ?>';
+    var skin_url = '<?php echo $mediaUrl; ?>';
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>    
+<?php if(isset($messages)&&!empty($messages)){ ?>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->toHtml() ?></div>
+<?php } ?>
+<div id="product-display" class="product-view">
+    <div id="product-<?php echo $_product->getSku(); ?>" class="product-essential">
+        <form class="form-add-to-cart" action="<?php echo $formurl; ?>" method="post" id="<?php echo $varienFormId ?>"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+            <?php echo $this->getBlockHtml('formkey') ?>
+            <div class="no-display">
+                <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+                <input type="hidden" name="related_product" id="related-products-field" value="" />
+            </div>	
+            <div class="form-add-to-cart-row">
+                <div class="product-img-box">
+                    <div class="product-name">
+                        <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                    </div>	
+                    <?php echo $this->getChildHtml('media') ?>
+                    <?php if($productBage = $_product->getAttributeText('product_badge')): ?>
+                            <div class="tag-new"><?php echo $productBage ?></div>
+                            <?php $productBage = null; ?>
+                    <?php elseif ($_bornProductListHelper->isNewProduct($_product)): ?>
+                            <div class="tag-new"><?php echo $this->__('New') ?></div>
+                    <?php endif ?>                   
+                </div>
+                <div class="product-shop">
+                    <div class="product-name">
+                        <h2><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                            <?php if ($_product->getUsage()): ?>
+                                <?php if ($_usageIconClass = Mage::helper('born_package/catalog_product_data')->getUsageIconClass($_product->getUsage())): ?>
+                                    <div class="usage-icon">
+                                        <?php //usage icon class names: am-icon, pm-icon, ampm-icon ?>
+                                        <span class="<?php echo $_usageIconClass ?>"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></span>
+                                    </div>
+                                <?php endif ?>
+                            <?php endif ?>
+                        </h2>
+                    <!-- price-info -->
+                    <div class="price-info">
+                        <?php echo $this->getPriceHtml($_product,true); ?>
+                        <?php echo $this->getChildHtml('bundle_prices') ?>
+                        <?php echo $this->getTierPriceHtml() ?>
+                        <?php echo $this->getChildHtml('tier_pricing') ?>
+                    </div>                    
+                    <!-- /price-info -->                        
+			<div class="turnto_reviews_teaser"><?php echo $this->getChildHtml('turnto_reviews_teaser') ?></div>
+                        <?php if(isset($subtitle)&&!empty($subtitle)){ echo '<h4>'.$subtitle.'</h4>'; } ?>
+                        <?php echo $this->getChildHtml('group-description') ?>
+                    </div>
+
+                    <!-- Shade info html -->
+                    <?php echo $this->getShadeInfoHtml(); ?>
+                    <!-- Shade guide -->
+                    <?php if ($_shadeGuide = $this->getShadeGuideHtml()): ?>
+                        <div id="shade-guide-url" style="display: none">
+                            <?php echo $_shadeGuide ?>
+                        </div>
+                    <?php endif ?>
+                    <div class="extra-info">
+                        <?php echo $this->getChildHtml('product_type_availability'); ?>
+                    </div>
+                    <?php echo $this->getChildHtml('alert_urls') ?>
+                    <?php if($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE): ?>
+                    <div class="data-table-item">
+                        <div class="data-table-item-shade"></div>
+                    </div>
+                    <?php endif; ?>
+                    <?php echo $this->getChildHtml('other');?>
+                    <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                        <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                    <?php endif;?>
+                    <?php if($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_GROUPED): ?>
+                    <!-- Possible hack for grouped product nested forms because xHTML not allowing to include one form in to another.  -->
+                    </form>
+                    <?php endif; ?>
+                    <div class="add-to-cart-wrapper">
+                        <?php echo $this->getChildHtml('product_type_data') ?>
+                        <?php echo $this->getChildHtml('extrahint') ?>
+                        <?php if (!$this->hasOptions()):?>
+                            <div class="add-to-box">
+                                <?php if($_product->isSaleable()): ?>
+                                    <?php echo $this->getChildHtml('addtocart') ?>
+                                    <?php if( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+                                        <span class="or"><?php echo $this->__('OR') ?></span>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                                <?php echo $this->getProductInfo(); ?>
+                                <?php echo $this->getChildHtml('sharing') ?>
+                            </div>
+                            <?php echo $this->getChildHtml('extra_buttons') ?>
+                        <?php elseif (!$_product->isSaleable()): ?>
+                            <div class="add-to-box">
+                                <?php echo $this->getProductInfo(); ?>
+                                <?php echo $this->getChildHtml('sharing') ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                        <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                    <?php endif;?>
+        
+                    <div id="details-box" class="details-box">
+                        <h3 class="details-box"></h3>
+                        <div class="details-box-item"></div>                     
+                    </div>    
+                </div>
+            </div>
+        <?php if($_product->getTypeId() != Mage_Catalog_Model_Product_Type::TYPE_GROUPED): ?>
+        </form>
+        <?php endif; 
+        $categoryIds = $_product->getCategoryIds();
+        $categories = array();
+            foreach($categoryIds as $categoryId) {
+            $category = Mage::getModel('catalog/category')->load($categoryId);
+            $categories[] = $category->getName();
+            }
+        $cc = 0;
+        $cs = 4;
+        $cat_string = '';
+        $first = true;
+        $second = false;
+            foreach($categories AS $cat){
+                if($cc < $cs){
+                    if($first){
+                    $first = false;
+                    $second = true;
+                    }else if($second){
+                    $second = false;    
+                    $cat_string .= $cat;    
+                    }else{
+                    $cat_string .= '/'.$cat;     
+                    }
+                }
+                $cc++;
+            }
+        ?>
+        <script type="text/javascript">      
+        //<![CDATA[
+        function runAnalytics(){
+            var qty = jQuery('.jq-selectbox__select-text').html();
+            var quantityDirty = jQuery('.jq-selectbox__select-text').html();
+            var quantity = parseInt(quantityDirty);    
+            ga('ec:addProduct', {
+                'id': '<?php echo $_product->getSku(); ?>',
+                'name': '<?php echo $_product->getName(); ?>',
+                'category': '<?php echo $cat_string; ?>',
+                'brand': '<?php echo $affiliation; ?>',
+                'price': '<?php echo $_product->getPrice(); ?>',
+                'quantity': qty
+                });
+            ga('ec:setAction', 'add');
+            ga('send', 'event', 'UX', 'click', 'add to cart');
+            var productObject = {id:'<?php echo $_product->getSku(); ?>',item_price:'<?php echo $_product->getPrice(); ?>',quantity:qty};          
+        }             
+            var productAddToCartForm = new VarienForm('<?php echo $varienFormId ?>');
+            productAddToCartForm.submit = function(button, url) {
+                if (this.validator.validate()) {
+                    var form = this.form;
+                    var oldUrl = form.action;
+
+                    if (url) {
+                       form.action = url;
+                    }
+                    var e = null;
+                    try {
+                        //this.form.submit();
+                            $j.post('<?php echo $this->getUrl('bornajax/checkout_cart/add') ?>', $('<?php echo $varienFormId ?>').serialize(true), function(data, status, xhr){
+                                if (status !== 'success') {
+                                    alert('server error');
+                                    return;
+                                }
+
+                                var json = $j.parseJSON(data);
+                                var timeForMinicart = 400; //ms
+                                var popup = $j('#popup-minicart');
+
+                                if ( json.status === "SUCCESS" || json.status === 1 || json.success ) {
+                                    runAnalytics();
+                                    $j('#toggleMiniCartBtn').find('.count').html(json.cart_qty);
+                                    $j('#toggleMiniCartBtn').removeClass('no-count');
+                                    $j('.show-on-mobile.skip-cart').find('.count').html(json.cart_qty);
+                                    $j('.show-on-mobile.skip-cart').removeClass('no-count');
+                                    if (window.innerWidth > 768) {
+                                        $j('#popup-minicart').html(json.result_html);
+                                        $j('.overlay').fadeOut('slow');
+                                        $j('.overlay').find('.modal').hide();
+                                        popup.addClass('slide-minicart').css('display', 'block')
+                                             .addClass('skip-active')
+                                             .animate({'right': 0}, timeForMinicart);
+                                        $j('body').css('overflow', 'scroll');
+                                        $j('body').addClass('overlay-menu');
+
+                                        $j('.menu-overlay-element, span.btn-minicart-toggle').on('click', function () {
+                                            popup.animate({ "right": "-425" }, timeForMinicart,
+                                                function () {
+                                                    popup.removeClass('skip-active');
+                                                    $j('body').removeClass('overlay-menu');
+                                                });
+                                        });
+                                    } else {
+                                        $j(button).addClass('added-successfully');
+                                        $j(button).find('span').text('added to bag');
+                                    }
+                                    button.disabled = false;
+                                }else{
+                                    alert(json.message);
+                                    button.disabled = false;
+                                }
+                            });
+                    } catch (e) {
+                    }
+                    this.form.action = oldUrl;
+                    if (e) {
+                        throw e;
+                    }
+
+                    if (button && button != 'undefined') {
+                        button.disabled = true;
+                    }
+                }
+            }.bind(productAddToCartForm);
+
+            productAddToCartForm.submitLight = function(button, url) {
+                if(this.validator) {
+                    var nv = Validation.methods;
+                    delete Validation.methods['required-entry'];
+                    delete Validation.methods['validate-one-required'];
+                    delete Validation.methods['validate-one-required-by-name'];
+                    // Remove custom datetime validators
+                    for (var methodName in Validation.methods) {
+                        if (methodName.match(/^validate-datetime-.*/i)) {
+                            delete Validation.methods[methodName];
+                        }
+                    }
+
+                    if (this.validator.validate()) {
+                        if (url) {
+                            this.form.action = url;
+                        }
+                        this.form.submit();
+                    }
+                    Object.extend(Validation.methods, nv);
+                }
+            }.bind(productAddToCartForm);
+        //]]>
+        </script>
+    </div>
+<?php
+    if ($this->getShowCmsContents()){
+    echo $this->getChildHtml('product.custom.content');
+    }
+    if ($_product->getRoutineSkus()){
+    echo $this->getChildHtml('routines');
+    }else{
+    echo $this->getChildHtml('related_products');
+    }
+?>
+    <div class="turnto_reviews_content"><?php echo $this->getChildHtml('turnto_reviews_content') ?></div>    
+</div>
+
+
+<script type="text/javascript"> 
+var productId = '<?php echo $_product->getId(); ?>';
+var productSku = '<?php echo $_product->getSku(); ?>';
+var productName = '<?php echo $_product->getName(); ?>';
+var productCategory = '<?php echo str_replace('/',' > ',$cat_string); ?>';
+var productPrice = '<?php echo $_product->getPrice(); ?>';
+var productObject = {id:'<?php echo $_product->getSku(); ?>',item_price:'<?php echo $_product->getPrice(); ?>',quantity:1};
+if(productId == '8770240' || productId == '8770150' || productId == '8770320' || productId == '8770190' || productId == '8770180' || productId == '8770250' || productId == '8770100' || productId == '8770030' || productId == '8770520'){ 
+jQuery('.regular-price').remove();
+jQuery('.add-to-cart-wrapper').remove();
+}
+ga('ec:addImpression', {            // Provide product details in an impressionFieldObject.
+  'id': '<?php echo $_product->getSku(); ?>',                   // Product ID (string).
+  'name': '<?php echo $_product->getName(); ?>', // Product name (string).
+  'brand': '<?php echo $affiliation; ?>',                // Product brand (string).
+});
+ga('ec:setAction', 'detail');
+</script>

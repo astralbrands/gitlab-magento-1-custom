@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<layout version="1.0.0">
+    <shadeguide_foundationfinder_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column-full-width.phtml</template>
+            </action>
+        </reference>
+        <reference name="head">
+            <!-- shadeguide js -->
+            <action method="addItem"><type>skin_js</type><name>js/shadeguide.js</name></action>
+            <!-- category_view js related -->
+            <action method="addItem"><type>skin_js</type><name>js/weltpixel/layerednavigation.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/weltpixel/layerednavigation-ajax.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/weltpixel/jquery-ui.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/configurableswatches/product-media.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/configurableswatches/swatches-list.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/weltpixel/lightbox.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/weltpixel/quickview.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/weltpixel/newsletterpopup.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/weltpixel/cookiemanager.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/weltpixel/jquery.nouislider.all.js</name></action>
+            <!-- owl.carousel 2.3.4 -->
+            <action method="addItem"><type>skin_js</type><name>js/owlcarousel/owl.carousel.min.js</name></action>
+            <!-- category_view css related -->
+            <action method="addItem"><type>skin_css</type><name>css/catalog.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>css/weltpixel/lightbox.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>css/weltpixel/quickview.css</name></action>
+            <!-- owl.carousel 2.3.4 -->
+            <action method="addItem"><type>skin_css</type><name>css/owlcarousel/owl.carousel.min.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>css/owlcarousel/owl.theme.default.min.css</name></action>
+            <!-- shadeguide css -->
+            <action method="addItem"><type>skin_css</type><name>css/shadeguide.css</name></action>
+        </reference>
+        <reference name="content">
+            <block type="shadeguide/foundationfinder" name="foundationfinder" template="weltpixel/shadeguide/foundationfinder.phtml">
+                <block type="shadeguide/foundationfinder" name="image_carousel" template="weltpixel/shadeguide/template/image_carousel.phtml" />
+                <block type="shadeguide/foundationfinder" name="image_label" template="weltpixel/shadeguide/template/image_label.phtml" />
+                <block type="shadeguide/foundationfinder" name="image_only" template="weltpixel/shadeguide/template/image_only.phtml" />
+                <block type="shadeguide/foundationfinder" name="label_only" template="weltpixel/shadeguide/template/label_only.phtml" />
+            </block>
+        </reference>
+    </shadeguide_foundationfinder_index>
+</layout>

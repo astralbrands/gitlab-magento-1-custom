@@ -1,0 +1,7 @@
+<?php if ($_professionalCategory = $this->getProfessionalCategory()): ?>
+	<div class="professional-category">
+		<a class="professional-link" href="<?php echo Mage::getUrl('pro-artist-program'); ?>">
+                    <span class="label"><?php echo strtoupper($_professionalCategory->getName()) ?></span>
+		</a>
+	</div>
+<?php endif ?>

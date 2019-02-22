@@ -1,0 +1,10 @@
+<div class="newsletter-subscribe">
+    <form action="<?php echo  $this->getFormActionUrl(); ?>" method="post" id="newsletter-footer">
+
+        <div class="form-group">
+            <input type="text" name="email" class="input-text required-entry validate-email" placeholder="<?php echo $this->__('Your email address'); ?>"
+            /><button type="submit" class="button"><?php echo $this->__('Sign Up'); ?></button>
+        </div>
+    </form>
+    <script>var newsletterSubscriberFooterFormDetail = new VarienForm('newsletter-footer');</script>
+</div>

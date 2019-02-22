@@ -1,0 +1,308 @@
+.scaffold-form {
+  .input-box {
+    #middlename, #lastname {
+      border-top-width: 1px;
+      &:focus {
+        border-top-width: 2px;
+      }
+    }
+  }
+}
+
+.fieldset {
+  .form-list li {
+    margin-bottom: 0;
+    &:first-child {
+      .input-text {
+        border-top-width: 1px;
+        &:focus {
+          border-top-width: 2px;
+        }
+      }
+    }
+  }
+  p.required {
+    display: none;
+  }
+}
+
+.input-box {
+  padding-top: 0;
+  position: relative;
+  @include gotham();
+  @include setFont(1.3rem, 2.4rem, 500);
+  &._filled {
+    .label-text {
+      top: 0;
+      font-size: 1rem;
+      @include transition(all $fast ease);
+    }
+  }
+  .input-text {
+    border-radius: 0;
+    border: 1px solid $block-border-color;
+    @include border-width(0 1px 1px 1px);
+    color: $black;
+    height: 46px;
+    width: 100%;
+    padding: 13px 14px 5px;
+    font-weight: 400;
+    @include gotham();
+    font-size: 1.3rem;
+
+    &:focus {
+      //box-shadow: inset 0 0 0.5px 1px $block-border-color;
+      outline: none;
+
+      + .label-text,
+      + .validation-advice +.label-text {
+        top: 0;
+        font-size: 1rem;
+        @include transition(all $fast ease);
+      }
+    }
+    &:-webkit-autofill {
+      background-color: transparent;
+      transition: background 999999s !important;
+
+    }
+  }
+
+  #middlename, #lastname {
+    border-top-width: 0;
+    &:focus {
+      border-top-width: 1px;
+    }
+  }
+
+  .label-text {
+    @include gotham();
+    @include setFont(1.29rem, 2.39rem, 400);
+    @include position(absolute, 12px null null 15px);
+    color: $placeholder-color;
+    cursor:text;
+    &:after {
+      display: none;
+    }
+  }
+
+}
+
+.input-text {
+  border-radius: 0;
+  border: 2px solid $block-border-color;
+  @include border-width(2px);
+  color: $black;
+  padding: 10px 15px 8px;
+  @include gotham();
+  @include setFont(1.3rem, 2.8rem, 500);
+
+  &:focus {
+    border: 2px solid $block-border-color;
+    outline: none;
+  }
+
+  &:-webkit-autofill {
+    background-color: transparent;
+  }
+}
+
+textarea.input-text {
+  height: auto !important;
+}
+
+.form-list .control label {
+  padding: 0;
+  background: transparent;
+  margin-bottom: 5px;
+  &:hover {
+    background: transparent;
+  }
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  display: none;
+}
+
+input[type="checkbox"] {
+  & + label {
+    @include gotham();
+    @include setFont(1.39rem, 4.19rem, 500);
+    color: $black;
+    cursor: pointer;
+    &::before {
+      font-family: $icomoon;
+      font-size: 3rem;
+      line-height: 5rem;
+      display: inline-block;
+      margin: 0 5px 0 0;
+      color: $block-border-color;
+      content: "\e907";
+      vertical-align: middle;
+    }
+  }
+  &:checked + label::before {
+    content: "\e906";
+    color: $light-text-color;
+  }
+  &:disabled + label::before {
+    content: "\e907";
+    color: $block-border-color;
+  }
+}
+
+input[type="radio"] {
+  & + label {
+    @include gotham();
+    @include setFont(1.3rem, 2.4rem, 500);
+    background: transparent;
+    &::before {
+      display: inline-block;
+      background: $white;
+      width: 15px;
+      height: 15px;
+      content: '';
+      border-radius: 50%;
+      border: 2px solid $white;
+      margin: 0 10px 0 0;
+      box-shadow: 0 0 0 1px $light-text-color;
+      vertical-align: middle;
+    }
+  }
+  &:checked + label::before {
+    background: $black;
+  }
+}
+
+input[type="file"] {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  padding: 0;
+  & + label * {
+    pointer-events: none;
+  }
+  &:focus + label,
+  & + label:hover {
+    background-color: $black;
+    color: $white;
+    outline: none;
+  }
+}
+.label-file {
+  @include gotham;
+  @include setFont(1.2rem, 3.6rem, 400);
+  text-align: center;
+  text-transform: uppercase;
+  color: $black;
+  background-color: transparent;
+  border: 3px solid $black;
+  box-sizing: border-box;
+  display: inline-block;
+  cursor: pointer;
+  overflow: hidden;
+}
+.firefox .label-file {
+  position: relative;
+  top: -8px;
+}
+
+//select styles
+
+.jq-selectbox {
+  vertical-align: middle;
+  cursor: pointer;
+  //margin-left: 5px; bad idea @lavr
+  z-index: 5 !important;
+  color: $black;
+  @include gotham();
+  @include setFont(1.3rem, 3rem, 500);
+}
+.jq-selectbox.opened {
+  z-index: 10 !important;
+  .jq-selectbox__trigger {
+    @include transform(rotate(180deg));
+  }
+  .jq-selectbox__select {
+    border-bottom: none;
+  }
+}
+.jq-selectbox__select {
+  height: 32px;
+  padding: 0 45px 0 10px;
+  border: 1px solid $block-border-color;
+  border-bottom-color: $block-border-color;
+  border-radius: 0;
+  background: white;
+  color: #333;
+  text-shadow: 1px 1px $white;
+}
+
+.jq-selectbox__select-text {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.jq-selectbox__trigger {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 34px;
+  height: 100%;
+}
+.jq-selectbox__trigger-arrow {
+   position: absolute;
+   width: 0;
+   height: 0;
+   right: 25px;
+ }
+
+.jq-selectbox__trigger-arrow:before {
+  font-family: $icomoon;
+  font-size: 1.1em;
+  font-weight: bold;
+  content: "\e902";
+}
+
+.jq-selectbox__dropdown {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  border: 1px solid $block-border-color;
+  border-top-style: none;
+  border-radius: 0;
+  background: $white;
+}
+
+.jq-selectbox ul {
+  margin: 0;
+  padding: 0;
+}
+.jq-selectbox li {
+  min-height: 18px;
+  padding: 5px 10px 6px;
+  @include user-select(none);
+  //white-space: nowrap;
+}
+
+.jq-selectbox li:hover {
+  color: darkgray;
+}
+
+@media only screen and (max-width: $mobile){
+  .configurable-alert-block {
+    .input-text {
+      margin-bottom: 10px;
+    }
+    .btn-notify {
+      margin: 0;
+    }
+  }
+}

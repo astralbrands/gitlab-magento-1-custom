@@ -1,0 +1,215 @@
+<!-- <?php echo __FILE__; ?> -->
+<?php
+$_groupedProductCollection = $this->groupProducts();
+$_helper = $this->helper('catalog/output');
+$_bornProductListHelper = Mage::helper('born_package/catalog_product_list');
+$_category = $this->getLayer()->getCurrentCategory();
+$storeId = Mage::app()->getStore()->getId();
+    if($storeId == 1){
+       $affiliation = 'Pur Cosmetics'; 
+    }else if($storeId == 2){
+        $affiliation = 'Cosmedix';
+    }else if($storeId == 3){
+        $affiliation = 'Cosmedix';
+    }else{
+        $affiliation = '';
+    }    
+?>
+<div class="category-products custom-list">
+<?php 
+echo $this->getToolbarHtml(); 
+$i = 1;
+    foreach($_groupedProductCollection as $categoryId => $_groupedProduct) :
+    $_columnCount = $this->getColumnCount();
+    $_displayOthers = false;
+    $_categoryImageUrl = null; 
+?>
+        <ul class="products-grid products-grid--max-<?php echo $_columnCount; ?>-col">
+<?php 
+        if (isset($categoryId)):
+            if ($this->getLayer()->getCurrentCategory()->getId() == $categoryId){ 
+            $_displayOthers = true; 
+            }else{ 
+            $category = $this->getCategoryById($categoryId); 
+                if ($categoryImage = $category->getData('image')){ 
+                $_categoryImageUrl = Mage::getBaseUrl('media').'catalog/category/' . $categoryImage; 
+                }
+            }
+    $_styleHtml =  $_categoryImageUrl ? 'style="background-image: url(' . $_categoryImageUrl .')"' : ''
+?>
+                    <li class="item item-category-title first" <?php echo $_styleHtml ?>>
+                        <div class="item-outer<?php if ($_displayOthers): ?> no-bg<?php endif ?>">
+                            <div class="item-inner">
+                                <div class="item-inner__middle">
+                                    <?php $pageContainsProducts = true; ?>
+                                    <?php if ($_displayOthers): ?>
+                                        <h2 class="category-title"> <?php echo $this->__('Others') ?></h2>
+                                        <?php if (count($_groupedProduct)): ?>
+                                            <p class="product-count"><?php echo count($_groupedProduct) . ' ' . $this->__('Products')?></p>
+                                        <?php endif ?>
+                                    <?php else: ?>
+                                        <?php if ($categoryImage = $category->getData('image')): ?>
+                                            <div class="background-img-div" style="background-image: url(<?php echo Mage::getBaseUrl('media').'catalog/category/' . $categoryImage  ?>)"></div>
+                                            <div class="background-arrow"></div>
+                                        <?php endif ?>
+                                        <?php if ($category->getName()): ?>
+                                            <h2 class="category-title"> <?php echo $category->getName() ?></h2>
+                                        <?php endif ?>
+                                        <?php if (count($_groupedProduct)): ?>
+                                            <p class="product-count"><?php echo count($_groupedProduct) . ' ' . $this->__('Products')?></p>
+                                        <?php endif ?>
+                                        <?php if ($category->getDescription() ): ?>
+                                            <h4 class="category-description"><?php echo $category->getDescription() ?></h4>
+                                        <?php endif ?>
+                                    <?php endif ?>
+                                    <?php $i++; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <?php $categoryImage = null; ?>
+                <?php endif ?>
+            <?php 
+            $productArray = array();
+            $pc = 1;
+            foreach($_groupedProduct as $_product) : 
+            $product_item = array();
+            $product_item['sku'] = $_product->getSku();
+            $product_item['name'] = $_product->getName();
+            $product_item['brand'] = $affiliation;
+            $product_item['position'] = $pc;
+            $pc++;
+            $productArray[]=$product_item;        
+            ?>
+                <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+                    <div class="item-outer">
+                        <div class="item-inner">
+                            <div class="item-inner__middle">
+                            <?php if($_bornProductListHelper->hasColors($_product)) : ?>
+                                <div class="color-swatches">
+                                    <dl>
+                                    <?php foreach($_bornProductListHelper->getColors($_product) as $color) : ?>
+                                        <dd>
+					    <?php
+					    if(array_key_exists('value_index',$color) && isset($color['value_index'])){                                        
+                                            echo "<a class=\"".$color['value_index']."\">";
+                                                if(array_key_exists('image',$color) && isset($color['image'])){
+                                                echo "<img src=\"".$color['image']."\" "; 
+						  if(array_key_exists('label',$color) && isset($color['label'])){                                                
+						  echo "title=\"".$color['label']."\" "; 
+						  }
+						  if(array_key_exists('product_image',$color) && isset($color['product_image'])){
+						  echo "data-product-image=\"".$color['product_image']."\" ";
+						  }
+						  if (array_key_exists('alt_image',$color) && $color['alt_image']){
+						  echo "data-product-alt-image=\"".$color['alt_image']."\" ";
+						  }
+                                                echo " />";
+                                                }   
+                                            echo "</a>";
+                                            }
+                                            ?>
+                                        </dd>
+                                    <?php endforeach; ?>
+                                    </dl>
+                                    <div class="btns-swatches">
+                                        <a class="btn-more" href>More</a>
+                                        <a class="btn-less" href>Less</a>
+                                    </div>
+                                </div>
+                                <?php endif; ?>
+                                <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image alt-img">
+                                    <?php $productImages = $_bornProductListHelper->getProductImages($_product) ?>
+
+                                    <img class="product-image-default" id="product-collection-image-<?php echo $_product->getId(); ?>"
+                                         src="<?php echo $productImages['small_image'] ?>"
+                                         alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+
+                                    <?php if (isset($productImages['alt_image']) && $productImages['alt_image']){ ?>
+                                        <img class="product-image-hover bg" src="<?php echo $productImages['alt_image'] ?>"/>
+                                        <?php } else { ?>
+                                        <img class="product-image-hover bg" id="product-collection-image-<?php echo $_product->getId(); ?>"
+                                             src="<?php echo $productImages['small_image'] ?>"
+                                             alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                                    <?php } ?>
+                                </a>
+                                <div class="btns">
+                                    <a class="quickview" data-coherent-modal data-modal-name="quickview-php" data-modal-id="<?php echo $_product->getId() ?>"><?php echo $this->__('Quick View')?></a>
+                                    <a data-formkey="<?php echo $this->helper('wishlist')->getFormKey() ?>" class="link-wishlist wishlist <?php if($this->inWishlist($_product)) echo 'favorite' ?>" href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>"><?php echo $this->__('Favorite')?></a>
+                                </div>
+
+                                <div class="product-info">
+                                    <?php if($productBage = $this->getProductBadge($_product)): ?>
+                                        <div class="tag-new"><?php echo $productBage ?></div>
+                                        <?php $productBage = null; ?>
+                                    <?php elseif ($_bornProductListHelper->isNewProduct($_product)): ?>
+                                        <div class="tag-new"><?php echo $this->__('New') ?></div>
+                                    <?php endif ?>
+                                    <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
+                                    <?php if ($_subText = $this->getSubText($_product)): ?>
+                                        <p class="product-subtitle"><?php echo $_subText ?></p>
+                                    <?php endif ?>
+                                    <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                                    <?php
+                                    // Provides extra blocks on which to hang some features for products in the list
+                                    // Features providing UI elements targeting this block will display directly below the product name
+                                    if ($this->getChild('name.after')) {
+                                        $_nameAfterChildren = $this->getChild('name.after')->getSortedChildren();
+                                        foreach ($_nameAfterChildren as $_nameAfterChildName) {
+                                            $_nameAfterChild = $this->getChild('name.after')->getChild($_nameAfterChildName);
+                                            $_nameAfterChild->setProduct($_product);
+                                            echo $_nameAfterChild->toHtml();
+                                        }
+                                    }
+                                    ?>
+                                    <?php echo $this->getPriceHtml($_product, true) ?>
+                                    <?php if($_product->getRatingSummary()): ?>
+                                        <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>..
+                                    <?php endif; ?>                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <?php $i++ ?>
+            <?php endforeach ?>
+        </ul>
+    <?php endforeach ?>
+    <?php if (!$pageContainsProducts): ?>
+        <h1 class="no-results"><?php echo $_category->getName(); ?></h1>
+        <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+    <?php endif ?>
+    <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script> 
+</div>
+<?php
+// Provides a block where additional page components may be attached, primarily good for in-page JavaScript
+if ($this->getChild('after')) {
+    $_afterChildren = $this->getChild('after')->getSortedChildren();
+    foreach ($_afterChildren as $_afterChildName) {
+        $_afterChild = $this->getChild('after')->getChild($_afterChildName);
+        //set product collection on after blocks
+        if(isset($_productCollection)){
+        $_afterChild->setProductCollection($_productCollection);
+        }
+        echo $_afterChild->toHtml();
+    }
+}
+$productArray = json_encode($productArray);
+?>
+<?php
+$catData = $_category->getData();
+
+?>
+<script type="text/javascript">
+    var productArrayString = '<?php echo $productArray; ?>';
+    var productArrayObject = JSON.parse(productArrayString);
+    productArrayObject.forEach(function(item){
+        ga('ec:addImpression', {
+            'id': item.sku,
+            'name': item.name,
+            'brand': item.brand,
+            'list': 'Category Results',
+            'position': item.position
+        });   
+    });    
+</script>

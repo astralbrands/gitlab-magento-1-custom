@@ -1,0 +1,7 @@
+<layout version="0.1.0">
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addCss"><name>css/amasty/amseotoolkit/config.css</name></action>
+        </reference>
+    </adminhtml_system_config_edit>
+</layout>

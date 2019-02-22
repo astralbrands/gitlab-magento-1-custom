@@ -1,0 +1,48 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Promo
+ */
+?>
+<?php
+/** @var Amasty_Promo_Block_Items $this */
+$products = $this->getItems();
+$mode = $this->getModeName();
+?>
+<script type="text/javascript">
+    Object.extend(Product.Config.prototype, {
+        reloadOptionLabels: function(){},
+        changeSelection: function(){},
+        reloadPrice: function(){}
+    });
+</script>
+
+<div id="ampromo-overlay" class="mode-<?php echo $mode ?>" <?php echo $mode == 'popup' ? 'style="display: none;"' : ''?>>
+    <div id="ampromo-items" class="<?php echo $this->useCarousel() ? 'amcarousel' : '' ?>">
+        <h4><?php echo $this->getPopupHeader()?></h4>
+
+        <a href="javascript:" class="close"></a>
+
+        <?php echo $this->getOptionsJs() ?>
+        <?php echo $this->getCalendarJs() ?>
+
+        <a href="javascript:" class="ampromo-carousel-control prev" rel="prev">Previous slide</a>
+        <div id="ampromo-carousel-wrapper">
+            <div id="ampromo-carousel-content">
+                <?php foreach ($products as $product): ?>
+                    <div class="ampromo-slide">
+                        <?php echo $this->renderItem($product) ?>
+                    </div>
+                <?php endforeach ?>
+            </div>
+        </div>
+        <a href="javascript:" class="ampromo-carousel-control next" rel="next">Next slide</a>
+    </div>
+</div>
+
+<?php if ($mode == 'inline'): ?>
+<script>
+    ampromo_init();
+</script>
+<?php endif ?>

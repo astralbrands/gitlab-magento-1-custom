@@ -1,0 +1,139 @@
+// app\design\frontend\born\born\template\borncmshooks\cms\contents\homepage.phtml
+.look-btn-wrap {
+  margin: 30px;
+}
+
+.look-modal {
+  @include gotham();
+  max-width: 1163px;
+  padding: 0;
+  margin: 10px;
+  &-inner {
+    @include display(flex);
+  }
+  .left-side {
+    @include flex-basis(60%);
+
+    .slider-wrap {
+      position: relative;
+      .look-image {
+        img {
+          width: 100%;
+        }
+      }
+    }
+    .bx-controls {
+      position: absolute;
+      top: 50%;
+      height: 0;
+      width: 100%;
+      left: 0;
+    }
+    .bx-prev {
+      width: 40px;
+      height: 60px;
+      position: absolute;
+      top: -30px;
+      left: 0;
+      &:before {
+        @include hvrp();
+        width: 21px;
+        height: 21px;
+        transform-origin:center;
+        transform: rotate(-45deg);
+        border-left: 6px solid $block-border-color;
+        border-top: 6px solid $block-border-color;
+      }
+    }
+    .bx-next {
+      width: 40px;
+      height: 60px;
+      position: absolute;
+      top: -30px;
+      right: 0;
+      &:before {
+        @include hvrp();
+        width: 21px;
+        height: 21px;
+        transform-origin:center;
+        transform: rotate(135deg);
+        border-left: 6px solid $block-border-color;
+        border-top: 6px solid $block-border-color;
+      }
+    }
+  }
+  .right-side {
+    @include flex-basis(40%);
+    position: relative;
+    text-align: left;
+    padding: 18px;
+    .ava {
+      width: 59px;
+      height: 59px;
+      float: left;
+      margin-right: 10px;
+    }
+    .username-wrap {
+      float: left;
+      .username {
+        font-family: 'Chronicle Display A';
+        @include setFont(1.8rem, 1.8rem, 500);
+      }
+      .date {
+        @include setFont(1.3rem, 1.3rem, 500);
+        color: $light-text-color;
+      }
+    }
+    .message {
+      @include setFont(1.3rem, 2rem, 400);
+      margin-top: 10px;
+    }
+
+    .title {
+      margin-top: 30px;
+      margin-bottom: 8px;
+      text-align: center;
+      @include setFont(1.6rem, 2rem, 500);
+    }
+
+    .product-wrap {
+      @include display(flex);
+      @include justify-content(space-between);
+      .product {
+        text-align: center;
+        @include flex-basis(40%);
+        .image {
+          width: 154px;
+          height: 154px;
+        }
+        .more {
+          @include setFont(1.2rem, 1.2rem, 500);
+          color: $placeholder-color;
+          margin: 5px 0;
+        }
+        .name {
+          @include setFont(1.3rem, 1.3rem, 400);
+        }
+        .price {
+          margin: 10px 0 15px;
+          @include setFont(1.3rem, 1.3rem, 900);
+        }
+      }
+    }
+
+    .footer-links {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      .share {
+        @include gothamBook();
+        @include setFont(1.2rem, 1.2rem, 700);
+      }
+      .item {
+        margin-right: 20px;
+      }
+    }
+
+  }
+}
+

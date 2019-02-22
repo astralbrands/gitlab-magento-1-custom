@@ -1,0 +1,28 @@
+<?php 
+/* called in cms {{block type="core/template" template="page/blog.phtml"}}*/  
+$cos = 'cosmedix';
+$pur = 'purcosmetics';
+	if (strpos($_SERVER['HTTP_HOST'], $cos) !== false) {
+	$url='https://blog.cosmedix.com';
+	}elseif(strpos($_SERVER['HTTP_HOST'], $pur) !== false){
+	$url='https://blog.purcosmetics.com';
+	}
+$uri = $url.'/feed/';
+$channel = new Zend_Feed_Rss($uri); 
+?>
+<style>
+.RoleBlock{
+	width: 95%;
+	margin: auto;
+}
+</style>
+<div id="wp-feed" class="RoleBlock">
+<h2><a href="/news/" title="My site news">
+<?php echo $channel->title(); ?> News &amp; Events</a></h2>
+<?php foreach ($channel as $key=>$item) {  ?>
+<div class="post-block">
+<h3><a href="<?php echo $item->link(); ?>"><?php echo $item->title(); ?></a></h3>
+<?php echo $item->description(); ?>
+</div>
+<?php } ?>
+</div>

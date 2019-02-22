@@ -1,0 +1,7 @@
+<form action="<?php echo $this->helper('weltpixel_newsletter')->getFormActionUrl(); ?>" method="post" id="weltpixel_newsletter">
+
+        <div class="form-group">
+            <input type="text" name="email" class="input-text required-entry validate-email validate-email-forced" placeholder="<?php echo $this->__('Your email address'); ?>" />
+			<button type="submit" class="button"><?php echo $this->__('Sign Up'); ?></button>
+        </div>
+</form>

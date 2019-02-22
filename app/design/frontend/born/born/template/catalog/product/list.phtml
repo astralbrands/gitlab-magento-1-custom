@@ -1,0 +1,10 @@
+<!-- <?php echo __FILE__; ?> -->
+<?php if($this->displayCustomList()) : ?>
+    <div class="level-a-a"></div>
+    <?php echo $this->getChildHtml('product_list_custom'); ?>
+<?php else : ?>
+    <div class="level-a-b">
+        <?php echo $this->getChildHtml('product_list_default'); ?>
+    </div>
+
+<?php endif; ?>

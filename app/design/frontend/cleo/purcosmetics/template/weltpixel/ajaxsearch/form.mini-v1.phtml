@@ -1,0 +1,48 @@
+<?php
+$ajaxHelper = $this->helper('weltpixel_ajaxsearch');
+$minimalCharacters = $ajaxHelper->getMinimalCharacters();
+$headerText = $ajaxHelper->getHeaderText();
+$footerText = $ajaxHelper->getFooterText();
+
+/* @var $catalogSearchHelper Mage_Catalogsearch_Helper_Data */
+$catalogSearchHelper = $this->helper('catalogsearch');
+
+$_formAction = $catalogSearchHelper->getResultUrl();
+$_inputName = $catalogSearchHelper->getQueryParamName();
+$_inputValue = $catalogSearchHelper->getEscapedQueryText();
+$_inputMaxLength = $catalogSearchHelper->getMaxQueryLength();
+$_inputPlaceholder = $this->__('What are you looking for?');
+?>
+<div id="wpas-container">
+    <div id="wpas-loupe" class="qa-link"><i class="icon icon-line-search"></i></div>
+    <form id="wpas-form" action="<?php echo $_formAction; ?>" method="get">
+        <input type="text" id="wpas-q" name="<?php echo $_inputName; ?>" autocomplete="off" class="search-v1" value="<?php echo $_inputValue; ?>" maxlength="<?php echo $_inputMaxLength; ?>" placeholder="<?php echo $_inputPlaceholder; ?>" />
+        <div id="wpas-loader"></div>
+        <div id="wpas-ajax">
+            <?php if (strlen($headerText)): ?>
+                <div id="wpas-header"><?php echo $headerText; ?></div>
+            <?php endif; ?>
+            <div id="wpas-title"><?php echo $this->__('Search result(s)'); ?> : <span id="wpas-count"></span> <?php echo $this->__('item(s)'); ?></div>
+            <div id="wpas-items"></div>
+            <?php if (strlen($footerText)): ?>
+                <div id="wpas-footer"><?php echo $footerText; ?></div>
+            <?php endif; ?>
+        </div>
+        <script>
+            //<![CDATA[
+            var WeltPixel = WeltPixel || {};
+            WeltPixel.AjaxSearch = {
+                url: "<?php echo $this->getUrl('ajaxsearch/products'); ?>",
+                minChars: <?php echo $minimalCharacters; ?>
+            };
+
+            document.observe('dom:loaded', function() {
+                WeltPixel_AjaxSearch.init(WeltPixel.AjaxSearch.url, WeltPixel.AjaxSearch.minChars);
+            });
+
+            WeltPixel_AjaxSearch.bindEvents();
+
+            //]]>
+        </script>
+    </form>
+</div>

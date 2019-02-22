@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * TradeGlobal_TGCommerce Configuration File
+ * Author: Paul Snell
+ * (c) TradegGlobal 2017
+ *
+ *
+ * @category   TradeGlobal
+ * @package    TGCommerce
+*/
+-->
+
+<config>    
+    <modules>
+        <TradeGlobal_TGCommerce>
+            <version>0.1.0</version>
+        </TradeGlobal_TGCommerce>
+    </modules>
+    <global>
+       <blocks>
+           <tgcommerce>
+             <class>TradeGlobal_TGCommerce_Block</class>
+           </tgcommerce>
+           <adminhtml>
+              <rewrite>
+                  <sales_order_view_tab_info>TradeGlobal_TGCommerce_Block_Adminhtml_Sales_Order_View_Tab_Info</sales_order_view_tab_info>
+              </rewrite>
+           </adminhtml>
+       </blocks>
+        <models>
+            <tgcommerce>
+                <class>TradeGlobal_TGCommerce_Model</class>
+                <resourceModel>tgcommerce_resource</resourceModel>
+            </tgcommerce>
+            <tgcommerce_resource>
+                <class>TradeGlobal_TGCommerce_Model_Resource</class>
+                <!--
+                <entities>
+                    <shipping>
+                        <table>tgshipping</table>
+                    </shipping>
+                </entities>
+                -->
+            </tgcommerce_resource>
+            <sales>
+                <rewrite>
+                    <quote_address_rate>TradeGlobal_TGCommerce_Model_Sales_Quote_Address_Rate</quote_address_rate>
+                </rewrite>
+            </sales>
+        </models>
+        <resources>
+            <tgcommerce_setup>
+                <setup>
+                    <module>TradeGlobal_TGCommerce</module>
+                    <class>TradeGlobal_TGCommerce_Model_Resource_Setup</class>
+                </setup>
+            </tgcommerce_setup>
+        </resources>
+        <helpers>
+            <tgcommerce>
+                <class>TradeGlobal_TGCommerce_Helper</class>
+            </tgcommerce>
+        </helpers>
+        <events>
+            <sales_order_place_after>
+                <observers>
+                    <TradeGlobal_TGCommerce_Model_SaveShipPlaceOrder>
+                        <type>singleton</type>
+                        <class>TradeGlobal_TGCommerce_Model_Observer</class>
+                        <method>tgSaveShipPlaceOrder</method>
+                    </TradeGlobal_TGCommerce_Model_SaveShipPlaceOrder>
+                </observers>
+            </sales_order_place_after>
+        </events>
+        <sales>
+	        <shipping>
+	            <carriers>
+	                <tgcommerce>
+	                    <class>TradeGlobal_TGCommerce_Model_Shipping_Carrier_Tgcommerce</class>
+	                </tgcommerce>
+	            </carriers>
+	        </shipping>
+	    </sales>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <tradeglobal module="TradeGlobal_TGCommerce">
+                    <file>tgcommerce.xml</file>
+                </tradeglobal>
+            </updates>
+        </layout>
+    </adminhtml>
+    <frontend>
+        <layout>
+            <updates>
+                <tradeglobal module="TradeGlobal_TGCommerce">
+                    <file>tgcommerce.xml</file>
+                </tradeglobal>
+           </updates>
+        </layout>
+        <routers>
+            <tgcommerce>
+                <use>standard</use>
+                <args>
+                    <module>TradeGlobal_TGCommerce</module>
+                    <frontName>tgcommerce</frontName>
+                </args>
+            </tgcommerce>
+        </routers>
+    </frontend>
+    <default>
+        <carriers>
+            <tgcommerce>
+                <model>tgcommerce/shipping_carrier_tgcommerce</model>
+                <active>0</active>
+                <title>TradeGlobal Commerce</title>
+                <sallowspecific>0</sallowspecific>
+                <countryCode>US</countryCode>
+                <productionWsdl>https://services.filltekglobalsolutions.com/4.1/Merchant/Merchant.svc?wsdl
+                </productionWsdl>
+                <productionAccount backend_model="adminhtml/system_config_backend_encrypted"/>
+                <productionPassword backend_model="adminhtml/system_config_backend_encrypted"/>
+                <productionMerchantCode backend_model="adminhtml/system_config_backend_encrypted"/>
+                <sandbox>1</sandbox>
+                <sandboxWsdl>https://services.filltekglobalsolutions.com/4.1/Merchant/Merchant.svc?wsdl
+                </sandboxWsdl>
+                <sandboxAccount backend_model="adminhtml/system_config_backend_encrypted"/>
+                <sandboxPassword backend_model="adminhtml/system_config_backend_encrypted"/>
+                <sandboxMerchantCode backend_model="adminhtml/system_config_backend_encrypted"/>
+                <specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
+                <debugEnabled>0</debugEnabled>
+                <debugLogFile>tgcommerce.log</debugLogFile>
+                <showMethod>0</showMethod>
+                <sortOrder>2000</sortOrder>
+            </tgcommerce>
+        </carriers>
+    </default>
+</config>  

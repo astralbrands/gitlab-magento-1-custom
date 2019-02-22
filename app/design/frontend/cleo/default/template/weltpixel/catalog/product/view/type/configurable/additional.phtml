@@ -1,0 +1,12 @@
+<?php
+if (!Mage::getStoreConfig('weltpixel_productswatch/general/deactivate')) :
+    $swatchInfo = $this->getAdditionalInfo();
+?>
+
+<script>
+    jQuery(document).ready(function(){
+        Weltpixel_Productswatch.init(<?php echo $swatchInfo ?>);
+    });
+</script>
+
+<?php endif; ?>

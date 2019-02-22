@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <weltpixel translate="label">
+            <label>WeltPixel Extensions</label>
+            <sort_order>150</sort_order>
+        </weltpixel>
+    </tabs>
+    <sections>
+        <shadeguide  translate="label" module="shadeguide">
+            <label>Shade Guide - Foundation Finder</label>
+            <tab>weltpixel</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="shadeguide">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label" module="shadeguide">
+                            <label>Enable Foundation Finder</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <intropage_cms>
+                            <label>CMS Intro Block</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>shadeguide/adminhtml_system_config_source_introcms</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </intropage_cms>
+                    </fields>
+                </general>
+                <step_builder translate="label" module="shadeguide">
+                    <label>Step Builder</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>
+                        <![CDATA[
+                            <p>Click "<b>Add New Step</b>" to begin.</p>
+                            <p>Additional content can be added at the top and/or at the bottom of each step by creating a Static CMS Block with the following identifier: "<b>foundation_finder_{attribute_code}_top</b>" and/or "<b>foundation_finder_{attribute_code}_bottom</b>".<br />
+                            Just replace <b>{attribute_code}</b> with the code of the product attribute selected for that step.</p>
+                        ]]>
+                    </comment>
+                    <fields>
+                        <steps translate="label">
+                            <label>Foundation Finder Steps</label>
+                            <frontend_model>shadeguide/adminhtml_config_steps</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </steps>
+                        <category_filter>
+                            <label>Filter by Category ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </category_filter>
+                    </fields>
+                </step_builder>
+            </groups>
+        </shadeguide>
+    </sections>
+</config>

@@ -1,0 +1,241 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Xnotif
+ */
+-->
+<!--
+    Copyright (c) 2012 Amasty (http://www.amasty.com) 
+-->
+<config>
+    <modules>
+        <Amasty_Xnotif>
+            <version>1.8.5</version>
+        </Amasty_Xnotif>
+    </modules>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Amasty_Xnotif after="Mage_Adminhtml">Amasty_Xnotif_Adminhtml</Amasty_Xnotif>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <global>
+        <models>
+            <amxnotif>
+                <class>Amasty_Xnotif_Model</class>
+                <resourceModel>amxnotif_mysql4</resourceModel>
+            </amxnotif>
+            
+            <productalert>
+                <rewrite>
+                    <observer>Amasty_Xnotif_Model_Observer</observer>
+                    <email>Amasty_Xnotif_Model_Email</email>
+                </rewrite>
+            </productalert>
+            
+             <productalert_mysql4>
+                    <rewrite>      
+                        <stock_customer_collection>Amasty_Xnotif_Model_Resource_Stock_Customer_Collection</stock_customer_collection>
+                        <price_customer_collection>Amasty_Xnotif_Model_Resource_Price_Customer_Collection</price_customer_collection>
+                    </rewrite>
+           </productalert_mysql4>
+            <!-- re-comment for magento 1.9.1.0. Now this method is slow and unuseful -->
+            <!--catalog>
+                <rewrite>
+                    <product_type_configurable>Amasty_Xnotif_Model_Catalog_Product_Type_Configurable</product_type_configurable>
+                </rewrite>
+            </catalog-->
+        </models>
+        
+        <resources>
+            <amxnotif_setup>
+                <setup>
+                    <module>Amasty_Xnotif</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amxnotif_setup>
+            <amxnotif_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </amxnotif_write>
+            <amxnotif_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </amxnotif_read>
+        </resources>
+
+        <blocks>
+            <amxnotif>
+                <class>Amasty_Xnotif_Block</class>
+            </amxnotif>
+            
+            <catalog>
+                <rewrite>
+                    <product_view_type_configurable>Amasty_Xnotif_Block_Product_View_Type_Configurable</product_view_type_configurable>
+                    <product_view_type_grouped>Amasty_Xnotif_Block_Product_View_Type_Grouped</product_view_type_grouped>
+                </rewrite>
+            </catalog>
+
+            <productalert>
+                <rewrite>
+                    <email_stock>Amasty_Xnotif_Block_Product_Email_Stock</email_stock>
+                </rewrite>
+            </productalert>
+
+            <adminhtml>
+                <rewrite>
+                    <catalog_product_edit_tab_alerts_stock>Amasty_Xnotif_Block_Adminhtml_Catalog_Product_Edit_Tab_Alerts_Stock</catalog_product_edit_tab_alerts_stock>
+                    <catalog_product_edit_tab_alerts_price>Amasty_Xnotif_Block_Adminhtml_Catalog_Product_Edit_Tab_Alerts_Price</catalog_product_edit_tab_alerts_price>
+                </rewrite>
+            </adminhtml>
+            
+        </blocks>
+         
+        <helpers>
+            <amxnotif>
+                <class>Amasty_Xnotif_Helper</class>
+            </amxnotif>
+        </helpers>
+
+        <template>
+            <email>
+                <amxnotif_general_template translate="label" module="amxnotif">
+                    <label>Admin Alert Notification</label>
+                    <file>amxnotif_admin_notification.html</file>
+                    <type>html</type>
+                </amxnotif_general_template>
+            </email>
+        </template>
+    </global>
+    
+    <frontend>
+        <secure_url>
+            <xnotif_stock>/xnotif/stock</xnotif_stock>
+            <xnotif_price>/xnotif/price</xnotif_price>
+        </secure_url>
+        <translate>
+            <modules>
+                <Amasty_Xnotif>
+                    <files>
+                        <default>Amasty_Xnotif.csv</default>
+                    </files>
+                </Amasty_Xnotif>
+            </modules>
+        </translate>
+        
+        <layout>
+            <updates>
+                <amxnotif>
+                    <file>amasty/amxnotif.xml</file>
+                </amxnotif>
+            </updates>
+        </layout>
+        
+        <routers>
+            <amxnotif>
+                <use>standard</use>
+                <args>
+                    <module>Amasty_Xnotif</module>
+                    <frontName>xnotif</frontName>
+                </args>
+            </amxnotif>
+            <productalert>
+                <args>
+                    <modules>
+                        <amxnotif_unsubscribe before="Mage_Productalert">Amasty_Xnotif</amxnotif_unsubscribe>
+                    </modules>
+                </args>
+            </productalert>
+        </routers>
+        
+        <events>
+            <core_block_abstract_to_html_before>
+                <observers>
+                    <amxnotif>
+                        <type>singleton</type>
+                        <class>amxnotif/htmlobserver</class>
+                        <method>handleBlockAlert</method>
+                    </amxnotif>
+                </observers>
+            </core_block_abstract_to_html_before>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <amxnotif>
+                        <type>singleton</type>
+                        <class>amxnotif/htmlobserver</class>
+                        <method>handleBlockAlertOnCategory</method>
+                    </amxnotif>
+                </observers>
+            </core_block_abstract_to_html_after>
+        </events>
+    </frontend>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <Amasty_Xnotif>
+                    <files>
+                        <default>Amasty_Xnotif.csv</default>
+                    </files>
+                </Amasty_Xnotif>
+            </modules>
+        </translate>
+    </adminhtml>
+
+    <default>
+        <amxnotif>
+           <general>
+                <account_image>0</account_image>
+                <customer_name>Dear Friend</customer_name>
+				<min_qty>1</min_qty>
+				<notify_admin>0</notify_admin>
+				<template>amxnotif_admin_notification_template</template>
+           </general>
+           <stock>
+               <allow_for>-1</allow_for>
+           </stock>
+           <price>
+                <allow_for>1</allow_for>
+            </price>
+            <gdpr>
+                <enabled>0</enabled>
+                <text><![CDATA[I agree to the <a href="/privacy-policy-cookie-restriction-mode" target="_blank">Privacy Policy</a>]]></text>
+            </gdpr>
+	    </amxnotif>
+    </default>
+
+    <crontab>
+        <jobs>
+            <catalog_product_alert>
+				<schedule>
+                    <cron_expr>*/10 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>productalert/observer::process</model>
+                </run>
+            </catalog_product_alert>
+            <amasty_xnotif_admin_notification>
+				<schedule>
+                    <cron_expr>30 22 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>amxnotif/observer::notify</model>
+                </run>
+            </amasty_xnotif_admin_notification>
+        </jobs>
+    </crontab>
+
+</config>  

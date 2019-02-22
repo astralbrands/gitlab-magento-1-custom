@@ -1,0 +1,37 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Locator
+ */
+?>
+<?php
+$locations = $this->getLocationCollection();
+$i = 1;
+?>
+<?php foreach ($locations as $location): ?>
+    <span onclick="AmLocation.gotoPoint(<?= $i ?>,this)">
+        <h3><?= $this->escapeHtml($location->getName()); ?></h3>
+        <?= $this->__('Address') ?>: <?= $this->escapeHtml($location->getAddress()); ?>
+        <br/>
+        <?= $this->escapeHtml($location->getCity()); ?>
+        , <?= $this->escapeHtml($location->getZip()); ?>
+
+        <?php if (Mage::getStoreConfig('amlocator/locator/show_attrs')) { ?>
+            <?php if (trim($location->getPhone())) { ?>
+                <br/>
+                <?= $this->__('Phone') ?>: <?= $this->escapeHtml($location->getPhone()); ?>
+            <?php }?>
+            <?php if (trim($this->escapeHtml($location->getEmail()))) { ?>
+                <br/>
+                <?= $this->__('E-mail') ?>: <?= $this->escapeHtml($location->getEmail()); ?>
+            <?php }?>
+            <?php if (trim($this->escapeHtml($location->getWebsite()))) { ?>
+                <br/>
+                <?= $this->__('URL') ?>: <?= $this->escapeHtml($location->getWebsite()); ?>
+            <?php }?>
+        <?php }?>
+
+    </span>
+    <?php $i++ ?>
+<?php endforeach; ?>

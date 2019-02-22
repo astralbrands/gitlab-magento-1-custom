@@ -1,0 +1,52 @@
+<div class="modal look-modal">
+    <div class="look-modal-inner">
+        <div class="left-side">
+
+            <div class="slider-wrap">
+                <ul class="looks">
+                    [[ _.forEach(lookImages, function(imageUrl, index) { ]]
+                    <li class="look-image">
+                        <img src="{{-imageUrl}}" class="look-image"/>
+                    </li>
+                    [[ }); ]]
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="right-side">
+            <div class="ava" style="background-image: url('{{-user.avaImgUrl}}')"></div>
+            <div class="username-wrap">
+                <span class="username">{{-user.name}}</span><br/>
+                <span class="date">{{-user.date}}</span>
+            </div>
+            <div class="clear"></div>
+            <div class="message">{{user.message}}</div>
+            <h2 class="title">GET THE LOOK</h2>
+
+            <div class="product-wrap">
+            [[ _.forEach(products, function(product, index) { ]]
+            <div class="product">
+                <img src="{{-product.imgUrl}}" class="image"/>
+                <p class="more">+ MORE COLORS</p>
+                <span class="name">{{-product.name}}</span>
+                <p class="price">${{-product.price}}</p>
+                <a class="btn">
+                    <span class="btn-text">SHOP NOW</span>
+                </a>
+            </div>
+            [[ }); ]]
+            </div>
+            <div class="footer-links">
+                <a class="item share">SHARE</a>
+                <span class="item icon-twitter"></span>
+                <span class="item icon-facebook"></span>
+                <span class="item icon-pinterest"></span>
+            </div>
+
+        </div>
+
+        <span class="close-btn icon-ex"></span>
+
+    </div>
+</div>

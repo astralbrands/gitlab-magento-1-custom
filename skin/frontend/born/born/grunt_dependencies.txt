@@ -1,0 +1,5 @@
+npm install grunt-contrib-requirejs --save-dev
+npm install grunt-contrib-watch --save-dev
+npm install grunt-sass --save-dev
+npm install grunt-contrib-compass --save-dev
+npm install grunt-cssnano-plus --save-dev

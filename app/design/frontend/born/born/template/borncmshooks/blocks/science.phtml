@@ -1,0 +1,28 @@
+<?php 
+
+/*
+Block Type: title-block, image-block, text-block
+ */
+
+$hooks_helper = Mage::helper('borncmshooks');
+$science_object_collection = $this->getScienceObjectCollection();
+
+$science_object_collection = Mage::helper('borncmshooks/sort')->sortCollection($science_object_collection);
+
+?>
+<?php $index = 0; ?>
+<?php foreach ($science_object_collection as $block): ?>
+	<div class="science-inner <?php echo $block->getBlockType()?> <?php echo 'index-'.$index++ ?>">
+		<?php if ($block->getImage()): ?>
+			<div class="background-img">
+				<img class="background-img" src="<?php echo $hooks_helper->getImageUrl($block->getImage()); ?>">
+			</div>
+		<?php endif ?>
+		<?php if ($block->getTitle()): ?>
+			<h2 class="title"><?php echo $block->getTitle() ?></h2>
+		<?php endif ?>
+		<?php if ($block->getDescription()): ?>
+			<p class="description"><?php echo $block->getDescription() ?></p>
+		<?php endif ?>
+	</div>
+<?php endforeach ?>

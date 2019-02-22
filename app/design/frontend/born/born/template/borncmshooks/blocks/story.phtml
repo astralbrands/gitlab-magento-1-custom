@@ -1,0 +1,48 @@
+<?php 
+
+$hooks_helper = Mage::helper('borncmshooks');
+$blockCollection = $this->getStoryObjectCollection();
+
+$titleObject = $this->getSectionObject($blockCollection);
+	if(isset($titleObject)&&!empty($titleObject)){
+?>
+<?php if ($titleObject->getTitle()): ?>
+	<h2 class="section-title">
+		<?php echo $titleObject->getTitle() ?>
+	</h2>
+	<?php if ($titleObject->getCtaText()): ?>
+		<div class="section-link">
+			<a href="<?php echo Mage::getBaseUrl(). $titleObject->getCtaLink(); ?>">
+	            <span class="btn-text"><?php echo $titleObject->getCtaText(); ?></span>
+	        </a>
+        </div>
+	<?php endif; ?>
+
+    <div class="stories-list">
+	<?php foreach ($blockCollection as $block): ?>
+		<?php if ($block->getImage()): ?>
+            <div class="story-block">
+                <img class="img" src="<?php echo $hooks_helper->getImageUrl($block->getImage()); ?>">
+            <?php endif ?>
+            <?php if ($block->getDate()): ?>
+                <h2 class="story-title"><?php echo $block->getDate() ?></h2>
+            <?php endif ?>
+            <?php if ($block->getSlotTitle()): ?>
+                <h2 class="story-main-title"><?php echo $block->getSlotTitle() ?></h2>
+            <?php endif ?>
+            <?php if ($block->getDescription()): ?>
+                <p class="story-description"><?php echo $block->getDescription() ?></p>
+            <?php endif ?>
+            <?php if ($block->getCtaText()): ?>
+                <a class="story-btn" href="<?php echo Mage::getUrl(). $block->getCtaLink(); ?>">
+                    <span><?php echo $block->getCtaText(); ?></span>
+                </a>
+            </div>
+            <?php endif; ?>
+	<?php endforeach; ?>
+    </div>
+
+<?php
+endif;
+	}
+?>

@@ -1,0 +1,134 @@
+
+<?php
+
+$_productCollection= $this->getProductCollection();
+$_helper = $this->helper('catalog/output');
+$_bornProductListHelper = Mage::helper('born_package/catalog_product_list');
+
+?>
+<?php if(!$_productCollection->count()): ?>
+    <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+    <div class="category-products">
+
+
+
+
+        <?php // Grid Mode ?>
+
+
+        <?php $_collectionSize = $_productCollection->count() ?>
+        <?php $_columnCount = $this->getColumnCount(); ?>
+
+            <ul class="products-grid products-grid--max-<?php echo $_columnCount; ?>-col">
+                <?php $i = 1 ?>
+
+                <?php foreach ($_productCollection as $_product): ?>
+                    <?php /*if ($i++%$_columnCount==0): ?>
+            <?php endif*/ ?>
+
+                    <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+                        <div class="item-outer">
+                            <div class="item-inner">
+                                <div class="item-inner__middle">
+                                    <?php if($this->hasColors($_product)) : ?>
+                                        <div class="color-swatches">
+                                            <dl>
+                                                <?php foreach($this->getColors($_product) as $color) : ?>
+                                                    <dd>
+                                                        <img src="<?php echo $color['image']; ?>" title="<?php echo $color['label']; ?>" />
+                                                        <?php
+                                                        if(array_key_exists('product_images',$color) && isset($color['product_images'])){
+							    foreach ($color['product_images'] as $image){ ?>
+                                                            <img src="<?php echo $image; ?>" title="<?php echo $color['label'] . '-product-image'; ?>" />
+							<?php 
+							    }
+							}    
+                                                        ?>
+                                                        
+                                                        <span><?php echo $color['label']; ?></span>
+                                                    </dd>
+                                                <?php endforeach; ?>
+                                                </dl>
+                                                <div class="btns-swatches">
+                                                    <a class="btn-more" href>More</a>
+                                                    <a class="btn-less" href>Less</a>
+                                                </div>
+                                        </div>
+                                    <?php endif; ?>
+                                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image alt-img">
+
+                                        <?php $_imgSize = 210; ?>
+
+                                        <?php $productImages = $_bornProductListHelper->getProductImages($_product, $_imgSize) ?>
+
+                                        <img class="product-image-default" id="product-collection-image-<?php echo $_product->getId(); ?>"
+                                             src="<?php echo $productImages['small_image'] ?>"
+                                             alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+
+                                        <?php if ($productImages['alt_image']) { ?>
+                                            <img class="product-image-hover bg" src="<?php echo $productImages['alt_image'] ?>"/>
+                                        <?php } else { ?>
+                                        <img class="product-image-hover bg" id="product-collection-image-<?php echo $_product->getId(); ?>"
+                                             src="<?php echo $productImages['small_image'] ?>"
+                                             alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                                        <?php } ?>
+                                    </a>
+                                    <!--                        cart-->
+                                    <div class="btns">
+                                        <a class="quickview" data-coherent-modal data-modal-name="quickview-php" data-modal-id="<?php echo $_product->getId() ?>"><?php echo $this->__('Quick View')?></a>
+                                        <a class="wishlist" href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist"><?php echo $this->__('Favorite')?></a>
+                                    </div>
+
+                                    <div class="product-info">
+                                        <?php if ($_bornProductListHelper->isNewProduct($_product)): ?>
+                                            <div class="tag-new"><?php echo $this->__('New') ?></div>
+                                        <?php endif ?>
+                                        <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
+                                        <?php
+                                        // Provides extra blocks on which to hang some features for products in the list
+                                        // Features providing UI elements targeting this block will display directly below the product name
+                                        if ($this->getChild('name.after')) {
+                                            $_nameAfterChildren = $this->getChild('name.after')->getSortedChildren();
+                                            foreach ($_nameAfterChildren as $_nameAfterChildName) {
+                                                $_nameAfterChild = $this->getChild('name.after')->getChild($_nameAfterChildName);
+                                                $_nameAfterChild->setProduct($_product);
+                                                echo $_nameAfterChild->toHtml();
+                                            }
+                                        }
+                                        ?>
+                                        <?php if ($_subText = Mage::helper('born_package/catalog_product_list')->getSubText($_product)): ?>
+                                            <p class="product-subtitle"><?php echo $_subText ?></p>
+                                        <?php endif ?>
+                                        <?php echo $this->getPriceHtml($_product, true) ?>
+                                        <?php if($_product->getRatingSummary()): ?>
+                                            <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <?php /*if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+            <?php endif*/ ?>
+                    <?php $i++ ?>
+                <?php endforeach ?>
+            </ul>
+            <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
+        <?php endif; ?>
+
+    </div>
+
+<?php
+// Provides a block where additional page components may be attached, primarily good for in-page JavaScript
+if ($this->getChild('after')) {
+    $_afterChildren = $this->getChild('after')->getSortedChildren();
+    foreach ($_afterChildren as $_afterChildName) {
+        $_afterChild = $this->getChild('after')->getChild($_afterChildName);
+        //set product collection on after blocks
+        $_afterChild->setProductCollection($_productCollection);
+        echo $_afterChild->toHtml();
+    }
+}
+?>
+<!-- <?php echo __FILE__; ?> -->

@@ -1,0 +1,104 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition End User License Agreement
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magento.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     born_default
+ * @copyright Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license http://www.magento.com/license/enterprise-edition
+ */
+?>
+<?php
+// $shade = $this->getFilterByName('shade');
+
+/**
+ * Category layered navigation
+ *
+ * @see Mage_Catalog_Block_Layer_View
+ */
+$shade = $this->getShadeFilter();
+
+$_filterDisplayLimit = $this->getFilterDisplayLimit();
+?>
+<?php if ($this->canShowBlock()): ?>
+
+    <div id="filtered-items-line" class="summary-filters-box <?php if (!$this->getLayer()->getState()->getFilters()): ?> hidden<?php endif; ?>" style="display: none">
+        <?php echo $this->getStateHtml() ?><?php if ($this->getLayer()->getState()->getFilters()): ?>
+            <div class="actions">
+                <a href="<?php echo $this->getClearUrl() ?>"><?php echo $this->__('Clear All') ?>&nbsp;&nbsp;</a>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <div id="filters-wrapper" class="block filters-wrapper block-layered-nav <?php if (!$this->getLayer()->getState()->getFilters()): ?>no-filters<?php endif; ?>">
+        <!--<div class="block-title">
+            <strong><span><?php /*echo $this->__('Shop By') */?></span></strong>
+        </div>-->
+
+        <div class="block-content toggle-content">
+            <div class="filters__header-mobile">
+                <div class="filters__mobile-title">Filters</div>
+                <a class="filters__mobile-close"></a>
+            </div>
+
+            <div class="filter-container">
+
+                <?php if ($shade): ?>
+                    <?php echo $shade->getHtml(); ?>
+                <?php endif; ?>
+
+                <div class="other-filters" id="other-filters">
+                    <?php $index = 0; ?>
+                    <?php $_sortedFilterAttributes = $this->getSortedFilterAttributes()?>
+                    <?php 
+                    if(isset($_sortedFilterAttributes)){
+                    foreach ($_sortedFilterAttributes as $_attribute){ ?>
+                        <?php $_preferredFilters = $this->getFilterByName($_attribute) ?>
+                        <?php if ($_preferredFilters->getItemsCount() && $index++ < $_filterDisplayLimit): ?>
+                            <div class="<?php echo str_replace ('_', '-',$_preferredFilters->getCode()) ?>-filter static-filter">
+                                <h3 class="filter-title"><?php echo $_preferredFilters->getName() ?></h3>
+                                <?php echo $_preferredFilters->getHtml(); ?>
+                            </div>
+                        <?php endif; 
+                        }
+                    }
+                    ?>
+
+                    <?php $_filters = $this->getFilters() ?>
+                    <?php foreach ($_filters as $_filter): ?>
+                        <?php if($_sortedFilterAttributes && null !== $_filter->getCode() && $_filter->getItemsCount() && !in_array($_filter->getCode(),$_sortedFilterAttributes ) && $_filter->getCode() != 'shade' && $index++ < $_filterDisplayLimit): ?>
+                            <div class="static-filter <?php echo $_filter->getCode($useForWeb = true) ?>-filter ">
+                                <h3 class="filter-title"><?php echo $_filter->getName() ?></h3>
+                                <?php echo $_filter->getHtml() ?>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach ?>
+                </div>
+                <script type="text/javascript">decorateDataList('narrow-by-list')</script>
+            </div>
+            <div class="filters-btn">
+                <a class="btnx btn-open">
+                    <span class="btn-open-text">Close Filters</span>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+<?php endif; ?>

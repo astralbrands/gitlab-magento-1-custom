@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <weltpixel translate="label">
+            <label>WeltPixel Extensions</label>
+            <sort_order>150</sort_order>
+        </weltpixel>
+    </tabs>
+    <sections>
+        <weltpixel_productswatch translate="label" module="weltpixel_productswatch">
+            <label>Product Page Swatches</label>
+            <tab>weltpixel</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="weltpixel_productswatch">
+                    <label>Swatch Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>                       
+                        <colors_images_width translate="label comment" module="weltpixel_productswatch">
+                            <label>Colors and Images width</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </colors_images_width>
+                        <colors_images_height translate="label comment" module="weltpixel_productswatch">
+                            <label>Colors and Images height</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </colors_images_height>
+                        <colors_images_resize translate="label comment" module="weltpixel_productswatch">
+                            <label>Resize images</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </colors_images_resize>
+                        <border_radius translate="label comment" module="weltpixel_productswatch">
+                            <label>Border Radius</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </border_radius>
+                    </fields>
+                </general>
+            </groups>
+        </weltpixel_productswatch>
+    </sections>
+</config>

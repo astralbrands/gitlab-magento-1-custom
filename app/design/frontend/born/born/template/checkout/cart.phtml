@@ -1,0 +1,122 @@
+<?php 
+$itemsQty = (int)Mage::getSingleton('checkout/cart')->getItemsQty();
+$itemsList = array();
+    foreach($this->getItems() as $_item){                 
+    $itemObject = new stdClass();
+    $itemObject->id = $_item->getSku();
+    $itemObject->price = round($_item->getPrice(), 2);
+    $itemObject->quantity = $_item->getQty();
+    $itemsList[] = $itemObject; 
+    }
+$_priceDisplay = ($this->helper('tax')->displayCartBothPrices()) ? 'display-both-prices' : 'display-single-price'; 
+?>
+<div class="checkout-cart <?php echo $_priceDisplay; ?>">
+    <div class="title-wrapper">
+        <div class="page-title title-buttons">
+            <h1><?php echo $this->__('Shopping Bag') ?></h1>
+        </div>      
+       <div class="total-products">
+           <?php  if($itemsQty > 1): ?>
+            <?php echo $this->__('%d Products', $itemsQty) ?>
+           <?php elseif($itemsQty == 1): ?>
+            <?php echo $this->__('%d Product', $itemsQty) ?>
+           <?php endif; ?>
+       </div>
+        <div class="clear"></div>
+    </div>
+<?php 
+    echo $this->getMessagesBlock()->toHtml();
+    echo $this->getChildHtml('form_before'); 
+?>
+    <div class="checkout-cart-content">
+        <div class="left-block">
+            <form class="item-list-form" action="<?php echo $this->getFormActionUrl() ?>" method="post">
+            <div><input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" /></div>
+                <?php echo $this->getBlockHtml('formkey'); ?>
+                <div id="shopping-cart-table" class="table item-list">
+                    <div class="table-row head-row">
+                        <div class="table-cell"><?php echo $this->__('Product') ?></div>
+                        <div class="table-cell center"><?php echo $this->__('Shade') ?></div>
+                        <div class="table-cell center"><?php echo $this->__('Qty') ?></div>
+                        <div class="table-cell"><?php echo $this->__('Total') ?></div>
+                    </div>
+                    <?php 
+                    foreach($this->getItems() as $_item): 
+                    echo $this->getItemHtml($_item) 
+                    ?>
+                        <tr class="spacer">
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    <?php endforeach ?>
+                </div>
+            </form>
+            <?php echo $this->getChildHtml('ampromo.items') ?>
+        </div>        
+        <?php echo $this->getChildHtml('shopping.cart.table.after'); ?>
+        <div class="right-block">
+            <?php
+            echo $this->getChildHtml('checkout_cart_widget');
+            echo $this->getChildHtml('coupon'); 
+            echo $this->getChildHtml('checkout.cart.extra'); 
+                if (!$this->getIsVirtual()): 
+                echo $this->getChildHtml('shipping'); 
+                endif; 
+            ?>
+            <div class="totals">
+                <?php echo $this->getChildHtml('totals'); ?>
+            </div>
+            <div class="btns">
+            <?php if ($_promoMsg = Mage::helper('born_package/checkout_cart')->getPromoMessage(Mage::helper('checkout/cart')->getQuote()->getSubtotal())): ?>
+                    <a href="#" class="promo"><?php echo $_promoMsg?></a>
+            <?php endif ?>
+                <?php if(!$this->hasError()): ?>
+                    <ul class="checkout-types bottom">
+                        <?php foreach ($this->getMethods('methods') as $method): ?>
+                            <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+                                <li class="btn block method-<?php echo preg_replace("/[^_a-zA-Z0-9-]/", '-', $method); ?>"><?php echo $methodHtml; ?></li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+                <a data-coherent-modal data-modal-name="shippingReturns" id="shipping-modal" class="a-link block center"><?php echo $this->__('Shipping & Returns') ?></a>                
+                <div id="shipping-return">
+                    <?php echo $this->getChildHtml('shipping.and.return'); ?>
+                </div>
+                <a href="<?php echo Mage::getUrl('contacts/') ?>" class="a-link block center"><?php echo $this->__('Contact Us') ?></a>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <?php if ($this->getBannerEnabled()): ?>
+        <div class="cart-mid-banner">
+            <?php if ($_bannerTitle = $this->getBannerTitle()): ?>
+                <h2 class="banner-title"><?php echo $_bannerTitle ?></h2>
+            <?php endif ?>
+            <div class="cart-mid-banner-wrapper">
+                <div class="<?php if ($this->getBannerProduct()): ?>two-third<?php else: ?>full<?php endif ?> banner-cart">
+                    <div class="banner-outer">
+                        <div class="banner-inner">
+                            <?php echo $this->getChildHtml('banner') ?>
+                        </div>
+                    </div>
+                </div>
+                <?php if ($_bannerProductHtml = $this->getBannerProduct()): ?>
+                    <div class="one-third banner-product">
+                        <div class="banner-outer">
+                            <div class="banner-inner">
+                                <?php echo $_bannerProductHtml; ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif ?>
+            </div>
+        </div>
+    <?php endif ?>
+    <?php echo $this->getChildHtml('crosssell') ?>
+</div>
+<script type="text/javascript">var items = JSON.parse('<?php echo json_encode($itemsList); ?>');</script>

@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <astral translate="label" module="astral_integrations_helper">
+            <label>Astral</label>
+            <sort_order>500</sort_order>
+        </astral>
+    </tabs>
+    <sections>
+        <astral_integrations_admin translate="label" module="astral_integrations_helper">
+            <tab>astral</tab>
+            <label>Affiliate Configuration</label>
+            <sort_order>501</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <attentive translate="label">
+                    <label>Attentive Configuration</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>1</sort_order>
+                    <fields>
+                        <attentive_id translate="label">
+                            <label>Attentive ID</label>
+                            <sort_order>10</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If you have multiple store configurations with multiple user IDs, this should be configured at the website or store level.</comment>
+                            <tooltip>If a tracking Id is not defined then the Attentive blocks will not be rendered.</tooltip>
+                        </attentive_id>
+                    </fields>
+                </attentive>
+                <commission_junction translate="label">
+                    <label>Commission Junction Configuration</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>2</sort_order>
+                    <fields>
+                        <comission_junction_id translate="label">
+                            <label>Merchant ID</label>
+                            <sort_order>10</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If you have multiple store configurations with multiple user IDs, this should be configured at the website or store level.</comment>
+                            <tooltip>If a tracking Id is not defined then Commission Junction blocks will not be rendered.</tooltip>
+                        </comission_junction_id>
+                        <comission_merchant_type translate="label">
+                            <label>Merchant Type</label>
+                            <sort_order>20</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>A static numeric merchant TYPE constant provided to you by Commission Junction.</comment>
+                        </comission_merchant_type>
+                        <comission_container_id translate="label">
+                            <label>Container ID</label>
+                            <sort_order>30</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>A static numeric provided to you by Commission Junction.</comment>
+                        </comission_container_id>
+                    </fields>
+                </commission_junction>
+                <criteo translate="label">
+                    <label>Criteo Configuration</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>3</sort_order>
+                    <fields>
+                        <criteo_id translate="label">
+                            <label>Criteo ID</label>
+                            <sort_order>20</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <tooltip>If a tracking Id is not defined then Criteo blocks will not be rendered.</tooltip>
+                            <comment>If you have multiple store configurations with multiple user IDs, this should be configured at the website or store level.</comment>
+                        </criteo_id>
+                    </fields>
+                </criteo>
+                <facebook_pixel translate="label">
+                    <label>Facebook Pixel Configuration</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>4</sort_order>
+                    <fields>
+                        <fbq_id translate="label">
+                            <label>Facebook Pixel ID</label>
+                            <sort_order>20</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <tooltip>If a tracking Id is not defined then Facebook Pixel blocks will not be rendered.</tooltip>
+                            <comment>If you have multiple store configurations with multiple user IDs, this should be configured at the website or store level</comment>
+                        </fbq_id>
+                    </fields>
+                </facebook_pixel>
+                <hotjar translate="label">
+                    <label>Hotjar Configuration</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>5</sort_order>
+                    <fields>
+                        <hotjar_id translate="label">
+                            <label>Hotjar ID</label>
+                            <sort_order>20</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <tooltip>If a tracking Id is not defined then Hotjar blocks will not be rendered.</tooltip>
+                            <comment>If you have multiple store configurations with multiple user IDs, this should be configured at the website or store level</comment>
+                        </hotjar_id>
+                    </fields>
+                </hotjar>
+                <mavrck translate="label">
+                    <label>Mavrck Configuration</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>6</sort_order>
+                    <fields>
+                        <mavrck_id translate="label">
+                            <label>Mavrck ID</label>
+                            <sort_order>20</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <tooltip>If a tracking Id is not defined then Mavrck blocks will not be rendered.</tooltip>
+                            <comment>If you have multiple store configurations with multiple user IDs, this should be configured at the website or store level</comment>
+                        </mavrck_id>
+                    </fields>
+                </mavrck>
+                <steelhouse translate="label">
+                    <label>Steelhouse Configuration</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>7</sort_order>
+                    <fields>
+                        <steelhouse_id translate="label">
+                            <label>Steelhouse ID</label>
+                            <sort_order>10</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <tooltip>If a tracking Id is not defined then Steelhouse blocks will not be rendered.</tooltip>
+                            <comment>If you have multiple store configurations with multiple user IDs, this should be configured at the website or store level</comment>
+                        </steelhouse_id>
+                    </fields>
+                </steelhouse>
+            </groups>
+        </astral_integrations_admin>
+    </sections>
+</config>

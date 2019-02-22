@@ -1,0 +1,20 @@
+<?php
+$subscriptionOptions = array();
+?>
+<div class="product-options <?php if(count($subscriptionOptions) > 0): ?>show-it<?php endif; ?>" id="product-options-wrapper">
+    <?php echo $this->getChildHtml('', true, true);?>
+    <?php if ($this->hasRequiredOptions()):?>
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+    <?php endif;?>
+</div>
+<script type="text/javascript">decorateGeneric($$('#product-options-wrapper dl'), ['last']);</script>
+
+
+<!--bundle page-->
+
+
+<div class="bundle-list-wrapper">
+    <div class="bundle-list-inner"></div>
+</div>
+
+

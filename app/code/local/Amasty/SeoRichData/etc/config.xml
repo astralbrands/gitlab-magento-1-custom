@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoRichData
+ */
+-->
+<config>
+    <modules>
+        <Amasty_SeoRichData>
+            <version>1.4.10</version>
+        </Amasty_SeoRichData>
+    </modules>
+
+    <global>
+        <blocks>
+            <amseorichdata>
+                <class>Amasty_SeoRichData_Block</class>
+            </amseorichdata>
+        </blocks>
+
+        <helpers>
+            <amseorichdata>
+                <class>Amasty_SeoRichData_Helper</class>
+            </amseorichdata>
+        </helpers>
+
+        <models>
+            <amseorichdata>
+                <class>Amasty_SeoRichData_Model</class>
+            </amseorichdata>
+        </models>
+    </global>
+
+    <frontend>
+
+        <layout>
+            <updates>
+                <amseorichdata>
+                    <file>amasty/amseorichdata/amseorichdata.xml</file>
+                </amseorichdata>
+            </updates>
+        </layout>
+
+        <translate>
+            <modules>
+                <Amasty_SeoRichData>
+                    <files>
+                        <default>Amasty_SeoRichData.csv</default>
+                    </files>
+                </Amasty_SeoRichData>
+            </modules>
+        </translate>
+
+        <events>
+            <catalog_controller_product_init>
+                <observers>
+                    <amseorichdata>
+                        <type>singleton</type>
+                        <class>amseorichdata/observer</class>
+                        <method>onControllerProductInit</method>
+                    </amseorichdata>
+                </observers>
+            </catalog_controller_product_init>
+        </events>
+    </frontend>
+
+    <adminhtml>
+        <events>
+            <adminhtml_init_system_config>
+                <observers>
+                    <amseorichdata>
+                        <type>singleton</type>
+                        <class>amseorichdata/observer</class>
+                        <method>onAdminhtmlInitSystemConfig</method>
+                    </amseorichdata>
+                </observers>
+            </adminhtml_init_system_config>
+        </events>
+    </adminhtml>
+
+    <default>
+        <amseorichdata>
+            <product>
+                <show_availability>1</show_availability>
+                <show_condition>1</show_condition>
+                <show_configurable_list>0</show_configurable_list>
+                <show_grouped_list>0</show_grouped_list>
+                <use_short_description>1</use_short_description>
+            </product>
+            <rating>
+                <enabled>0</enabled>
+                <totals>3</totals>
+            </rating>
+            <twitter>
+                <enabled>0</enabled>
+                <twitter_account></twitter_account>
+                <max_description_length>200</max_description_length>
+                <image_height>200</image_height>
+                <image_width>200</image_width>
+            </twitter>
+            <pinterest>
+                <enabled>1</enabled>
+            </pinterest>
+        </amseorichdata>
+    </default>
+
+</config>

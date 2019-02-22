@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <weltpixel translate="label">
+            <label>WeltPixel Extensions</label>
+            <sort_order>150</sort_order>
+        </weltpixel>
+    </tabs>
+    <sections>
+        <weltpixel_ajaxsearch translate="label" module="weltpixel_ajaxsearch">
+            <label>AjaxSearch and Autocomplete</label>
+            <tab>weltpixel</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="weltpixel_ajaxsearch">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <minimum_characters translate="label" module="weltpixel_ajaxsearch">
+                            <label>Minimal number of characters</label>
+                            <comment><![CDATA[Set te minimal number of characters for the ajaxsearch and autocomplete.]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </minimum_characters>                       
+                        <no_search_result_text translate="label" module="weltpixel_ajaxsearch">
+                            <label>Text for no search result.</label>
+                            <comment><![CDATA[Set the text to be displayed if there is no search result.]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry</validate>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </no_search_result_text>
+<!--                        <background_shadow_color translate="label" module="weltpixel_ajaxsearch">
+                            <label>Shadow Background color</label>
+                            <comment><![CDATA[Please specify a valid html color code.]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry</validate>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </background_shadow_color>
+                        <background_color translate="label" module="weltpixel_ajaxsearch">
+                            <label>Background color</label>
+                            <comment><![CDATA[Please specify a valid html color code.]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry</validate>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </background_color>-->                        
+                        <result_width translate="label" module="weltpixel_ajaxsearch">
+                            <label>Width of results container</label>
+                            <comment><![CDATA[Please specify the width of the results container, (without px).]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-number</validate>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </result_width>                        
+                        <max_result_nr translate="label" module="weltpixel_ajaxsearch">
+                            <label>Maximum number of items displayed</label>
+                            <comment><![CDATA[Set te maximum number of items displayed. 0 will display all of them]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </max_result_nr>
+                        <more_result_message translate="label" module="weltpixel_ajaxsearch">
+                            <label>More items message in footer of results.</label>
+                            <comment><![CDATA[Set message to be displayed in footer if more items are found then the limit]]>
+                            </comment>
+                            <frontend_type>textarea</frontend_type>
+                            <validate>required-entry</validate>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </more_result_message>
+                        <show_image translate="label" module="weltpixel_ajaxsearch">
+                            <label>Show Image Thumbnail</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>91</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_image>
+                        <image_width translate="label" module="weltpixel_ajaxsearch">
+                            <label>Width of the image</label>
+                            <comment><![CDATA[Please specify the width of image (Without px).]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-number</validate>
+                            <sort_order>95</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <show_image>1</show_image>
+                            </depends>
+                        </image_width>
+                        <image_height translate="label" module="weltpixel_ajaxsearch">
+                            <label>Height of the image</label>
+                            <comment><![CDATA[Please specify the height of image (Without px).]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-number</validate>
+                            <sort_order>99</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <show_image>1</show_image>
+                            </depends>
+                        </image_height>
+                        <show_short_description translate="label" module="weltpixel_ajaxsearch">
+                            <label>Show short description</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_short_description>
+                        <limit_short_description translate="label" module="weltpixel_ajaxsearch">
+                            <label>Limitation for short description</label>
+                            <comment><![CDATA[Maxiumu characters for short description. If it is set to 0 everything is displayed.]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <show_short_description>1</show_short_description>
+                            </depends>
+                        </limit_short_description>                       
+                        <show_price translate="label" module="weltpixel_ajaxsearch">
+                            <label>Show price</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_price>                       
+                        <header_text translate="label" module="weltpixel_ajaxsearch">
+                            <label>Search Result Header Text</label>
+                            <comment>
+                            </comment>
+                            <frontend_type>textarea</frontend_type>
+                            <validate></validate>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </header_text>
+                        <footer_text translate="label" module="weltpixel_ajaxsearch">
+                            <label>Search Result Footer Text</label>
+                            <comment>
+                            </comment>
+                            <frontend_type>textarea</frontend_type>
+                            <validate></validate>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </footer_text>                        
+                    </fields>
+                </general>
+            </groups>
+        </weltpixel_ajaxsearch>
+    </sections>
+</config>

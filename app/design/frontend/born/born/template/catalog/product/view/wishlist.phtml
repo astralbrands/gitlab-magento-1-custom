@@ -1,0 +1,16 @@
+<?php 
+        if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) { 
+        //Mage::log(__FILE__, false, 'OptionSwatch.log');
+        }
+$_product = $this->getCurrentProduct(); 
+?>
+<?php $_wishlistSubmitUrl = $this->helper('wishlist')->getAddUrl($_product); ?>
+<?php $_bornProductListHelper = Mage::helper('born_package/catalog_product_list'); ?>
+<?php if ($this->helper('wishlist')->isAllow()) : ?>
+	<li>
+		<a data-formkey="<?php echo $this->helper('wishlist')->getFormKey() ?>" href="<?php echo $_wishlistSubmitUrl ?>" class="link-wishlist <?php if($_bornProductListHelper->inWishlist($_product)) echo 'favorite' ?>">
+			<span class="icon-favorite"></span>
+			<?php echo $this->getWishlistText() ?>
+		</a>
+	</li>
+<?php endif; ?>

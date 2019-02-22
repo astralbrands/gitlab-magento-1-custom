@@ -1,0 +1,30 @@
+<?php 
+$criteoId = Mage::helper('astral_integrations_helper')->getCriteoId();
+if(isset($criteoId) && !empty($criteoId)): ?>
+    <?php 
+    if(!isset($_productCollection) || empty($_productCollection)) {
+        $_productCollection = $this->getLoadedProductCollection();
+    }
+
+    $criteoViewListEvent = Mage::helper('astral_integrations_helper/productCollectionDecorator')->getCriteoViewListEventArray($_productCollection); ?>
+
+    <script type="text/javascript">
+        if(typeof siteType === 'undefined') {
+            var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+
+            if (windowWidth > 768) {
+                var siteType = 'd';
+            } else if (windowWidth > 480) {
+                var siteType = 't';
+            } else {
+                var siteType = 'm';
+            }
+        }
+        var criteoViewList = <?php echo json_encode($criteoViewListEvent)?>;
+        window.criteo_q = window.criteo_q || [];
+        window.criteo_q.push(
+            { event: "setAccount", account: "<?php echo $criteoId; ?>" },
+            { event: "setSiteType", type: siteType },
+            criteoViewList);
+    </script>
+<?php endif; ?>

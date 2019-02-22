@@ -1,0 +1,13 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoRichData
+ */
+?>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="<?php echo $this->escapeHtml(Mage::getStoreConfig('amseorichdata/twitter/twitter_account')); ?>" />
+<meta name="twitter:title" content="<?php echo $this->escapeHtml($this->getProduct()->getName()); ?>" />
+<meta name="twitter:description" content="<?php echo $this->getDescription() ?>" />
+<meta name="twitter:image" content="<?php echo $this->getResizedImage() ?>" />
+</div>

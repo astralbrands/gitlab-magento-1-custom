@@ -1,0 +1,40 @@
+// app\design\frontend\born\born\template\contacts\form.phtml
+
+.contacts-index-index {
+  .main {
+    padding: 0 20px;
+  }
+  @media only screen and (max-width: $tablet-m) {
+    .main {
+      margin-top: 60px;
+    }
+  }
+
+  #contactForm {
+    padding-left: 0;
+    padding-bottom: 40px;
+    .legend {
+      width: 100%;
+      display: inline-block;
+      text-transform: none;
+      @include gotham;
+      @include setFont(1.4rem, 1.4rem, 500);
+      border-bottom: none;
+      color: $black;
+    }
+  }
+  .field {
+    margin-bottom: 19px;
+    .input-box {
+      margin-bottom: 19px;
+      max-width: 330px;
+    }
+  }
+
+  .buttons-set {
+    margin-left: 0;
+    border-top: 0;
+    max-width: 330px;
+    text-align: right;
+  }
+}

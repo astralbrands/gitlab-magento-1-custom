@@ -1,0 +1,18 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Xnotif
+ */
+if ($this->getType() == 'amxnotif/category_subscribe') {
+    $productId = $this->getData('product')->getId();
+} else {
+    $productId = Mage::registry('current_product')->getId();
+    $parentId = $this->getParentProductId();
+}
+?>
+<p class="<?php echo $this->getHtmlClass() ?>">
+    <a href="<?php echo $this->escapeHtml(Mage::helper('amxnotif')->getSignupUrl('stock', $productId, $parentId)) ?>" >
+        <?php echo $this->escapeHtml($this->__($this->getSignupLabel())); ?>
+    </a>
+</p>

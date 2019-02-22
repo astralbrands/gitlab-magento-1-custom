@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Idevaffiliate_Idevaffiliate>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Idevaffiliate_Idevaffiliate>
+    </modules>
+</config>

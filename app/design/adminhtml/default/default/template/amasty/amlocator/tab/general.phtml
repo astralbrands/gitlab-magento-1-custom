@@ -1,0 +1,50 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Locator
+ */
+?>
+<?php
+
+echo $this->getForm()->getHtml();
+
+?>
+
+
+<script type="text/javascript">
+    //<![CDATA[
+    regionJson = <?php echo $this->helper('directory')->getRegionJson() ?>;
+
+    var billingRegionUpdater = new RegionUpdater('country', 'state', 'state_id', <?php echo $this->helper('directory')->getRegionJson() ?> , undefined, true);
+    //we need to hide tr with region elements
+    Event.observe( $("country"), 'change', function(event) {
+        var regionRequired = regionJson.config.regions_required.indexOf( $("country").value) >= 0;
+
+        if (regionRequired){
+            $('state').up().up().hide();
+            $('state_id').up().up().show()
+        }else{
+            $('state_id').up().up().hide();
+            $('state').up().up().show()
+        }
+        $('state').removeClassName('required-entry');
+        $('state_id').removeClassName('validate-select');
+        $('state_id').removeClassName('required-entry');
+    } );
+    Event.observe(window, 'load',function() {
+        var regionRequired = regionJson.config.regions_required.indexOf( $("country").value) >= 0;
+        if (regionRequired){
+            $('state').up().up().hide();
+        }else{
+            $('state_id').up().up().hide();
+        }
+        $('state').removeClassName('required-entry');
+        $('state_id').removeClassName('validate-select');
+        $('state_id').removeClassName('required-entry');
+
+
+
+    } );
+    //]]>
+</script>

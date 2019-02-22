@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Born_Storeduplicator>
+      <version>0.1.0</version>
+    </Born_Storeduplicator>
+  </modules>
+  <frontend>
+    <routers>
+      <storeduplicator>
+        <use>standard</use>
+          <args>
+            <module>Born_Storeduplicator</module>
+            <frontName>storeduplicator</frontName>
+          </args>
+      </storeduplicator>
+    </routers>
+		<layout>
+		  <updates>
+			<storeduplicator>
+			  <file>storeduplicator.xml</file>
+			</storeduplicator>
+		  </updates>
+		</layout>
+  </frontend>
+  <global>
+    <helpers>
+      <storeduplicator>
+        <class>Born_Storeduplicator_Helper</class>
+      </storeduplicator>
+    </helpers>
+	<blocks>
+	  <storeduplicator>
+		<class>Born_Storeduplicator_Block</class>
+	  </storeduplicator>
+	</blocks>
+  </global>
+  <admin>
+	<routers>
+	  <storeduplicator>
+	    <use>admin</use>
+		<args>
+		  <module>Born_Storeduplicator</module>
+		  <frontName>admin_storeduplicator</frontName>
+		</args>
+	  </storeduplicator>
+	</routers>
+  </admin>
+  <adminhtml>
+	<menu>
+	  <storeduplicator module="storeduplicator">
+		<title>Storeduplicator</title>
+		<sort_order>100</sort_order>
+		<children>
+		  <storeduplicatorbackend module="storeduplicator">
+			<title>Store Duplocator</title>
+			<sort_order>0</sort_order>
+			<action>admin_storeduplicator/adminhtml_storeduplicatorbackend</action>
+		  </storeduplicatorbackend>
+		</children>
+	  </storeduplicator>
+	</menu>
+	<acl>
+	  <resources>
+		<all>
+		  <title>Allow Everything</title>
+		</all>
+		<admin>
+		  <children>
+			<storeduplicator translate="title" module="storeduplicator">
+			  <title>Storeduplicator</title>
+			  <sort_order>1000</sort_order>
+			  <children>
+		  <storeduplicatorbackend translate="title">
+			<title>Store Duplocator</title>
+		  </storeduplicatorbackend>
+			  </children>
+			</storeduplicator>
+		  </children>
+		</admin>
+	  </resources>
+	</acl>
+	<layout>
+	  <updates>
+		<storeduplicator>
+		  <file>storeduplicator.xml</file>
+		</storeduplicator>
+	  </updates>
+	</layout>
+  </adminhtml>
+</config> 

@@ -1,0 +1,187 @@
+// \app\design\frontend\born\born\template\catalog\product\list\default.phtml
+
+// swatch expand
+
+.color-swatches {
+  @include position(absolute, 0 0 null null);
+  padding: 20px 15px;
+  text-align: center;
+  z-index: 8;
+
+  dd {
+    display: none;
+    img {
+      margin: 0 auto;
+      max-width: 45px;
+    }
+    span {
+      @include gotham();
+      @include setFont(1.2rem, 1.2rem, 500);
+      text-transform: uppercase;
+    }
+    &:first-child {
+      display: block;
+    }
+  }
+}
+
+.btns-swatches {
+  margin-top: 15px;
+  .btn-less, .btn-more {
+    @include gotham();
+    @include setFont(1.2rem, 1.2rem, 500);
+    color: $placeholder-color;
+    text-transform: uppercase;
+    &:before {
+      text-align: center;
+      display: block;
+    }
+    &:hover {
+      &:before {
+        text-decoration: none;
+      }
+    }
+  }
+  .btn-more {
+    display: block;
+    &:before {
+      content: '+';
+    }
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .btn-less {
+    display: none;
+    &:before {
+      content: '-';
+    }
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.swatches-open {
+  dd {
+    display: block;
+    img {
+      margin-bottom: 3px;
+    }
+    span {
+      display: none;
+    }
+  }
+
+  .btns-swatches {
+    .btn-more {
+      display: none;
+    }
+    .btn-less {
+      display: block;
+    }
+  }
+}
+
+
+.color-swatches {
+  //Slider
+  .bx-wrapper {
+    position: relative;
+    border-bottom-width: 0;
+  }
+  .bx-controls-direction {
+    @include position(absolute, 25% null null null);
+    width: 100%;
+    a {
+      text-indent: -9999px;
+    }
+  }
+  .bx-prev, .bx-next {
+    width: 40px;
+    height: 40px;
+    @include position(absolute, -20px null null null);
+    &:before {
+      @include hvrp();
+      transform-origin: center;
+    }
+  }
+  .bx-prev {
+    left: -45px;
+    &:before {
+      transform: rotate(45deg);
+    }
+  }
+  .bx-next {
+    right: -45px;
+    top: -10px;
+  }
+  .bx-pager {
+    @include position(absolute, null null -35px 0);
+    width: 100%;
+    text-align: center;
+    font-size: 0;
+  }
+  .bx-pager-item {
+    display: inline-block;
+    vertical-align: middle;
+    & + .bx-pager-item {
+      margin-left: 3px;
+    }
+    a {
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid $black;
+    }
+    .active {
+      background: $black;
+    }
+  }
+  .bx-viewport {
+    height: 190px !important;
+    margin-bottom: 50px;
+  }
+
+  .bx-controls-direction {
+    position: absolute;
+    top: 210px;
+    left: -2px;
+    width: 0;
+  }
+
+  .bx-prev {
+    display: none;
+  }
+
+  .bx-next:before {
+    width: 13px;
+    height: 13px;
+    border-left: 4px solid $placeholder-color;
+    border-bottom: 4px solid $placeholder-color;
+    transform: rotate(-45deg);
+  }
+}
+
+@media only screen and (max-width: $tablet) {
+  .box-outer {
+    &:hover {
+      .btns {
+        display: none !important;
+      }
+      .product-name,
+      .price-box,
+      .product-info {
+        visibility: visible !important;
+      }
+    }
+  }
+}
+
+.out-of-stock-message {
+  display: none;
+  color: $marked-color;
+  @include setFont(1.4rem, 2rem, 500);
+  padding-top: 10px;
+}

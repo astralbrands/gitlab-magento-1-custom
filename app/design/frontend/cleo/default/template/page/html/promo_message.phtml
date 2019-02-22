@@ -1,0 +1,30 @@
+<?php $isEnabled = Mage::getStoreConfig('weltpixel_selector/headeroptions/enable_promo_block') ?>
+<?php if ($isEnabled) : ?>
+<div class="global-notification-wrapper" style="display: none;">
+    <div class="notice-inner">
+        <p><?php echo $this->getChildHtml("global_promo_message"); ?>
+            <a href="javascript: void(0)" class="close-global-notification icon-line-cross"></a>
+        </p>
+    </div>
+</div>
+<script>
+ document.observe("dom:loaded", function() {
+    function closeCallback() {
+        document.cookie = 'weltpixel_global_notification' + "=" + 'true' + "; ";
+    }
+
+    function showGlobalNotification() {
+      jQuery('.global-notification-wrapper').show();
+    }
+
+    if (!CookieManager.getCookie('weltpixel_global_notification')  ) {
+       showGlobalNotification();
+    }
+
+    jQuery('.close-global-notification').bind('click', function() {
+        document.cookie = 'weltpixel_global_notification' + "=" + 'true' + "; ";
+        jQuery('.global-notification-wrapper').hide();
+    });
+});
+</script>
+<?php endif; ?>

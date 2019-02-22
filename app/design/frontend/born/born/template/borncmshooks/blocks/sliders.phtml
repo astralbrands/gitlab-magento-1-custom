@@ -1,0 +1,39 @@
+<?php
+/**
+ * Description of sliders
+ *
+ * @author Alex
+ */
+
+    $hooks_helper = Mage::helper('borncmshooks');
+    $sliders_object_collection = $this->getSlidersObjectCollection();
+?>
+
+<!-- hero slider -->
+<section class="hero">
+    <div class="slider">
+        <div class="overflow">
+
+            <ul class="slides">
+                <?php foreach($sliders_object_collection as $slide): ?>
+                    <li class="slide <?php if ($slide->getVideoSource()): ?> video <?php endif; ?>" style="background-image: url(<?php echo $hooks_helper->getImageUrl($slide->getSlide()); ?>)" <?php if ($slide->getVideoSource()): ?>data-src="<?php echo $slide->getVideoSource() ?>" <?php endif; ?> data-href="<?php echo $slide->getSlideCtaUrl(); ?>">
+                        <div class="content-container <?php echo $slide->getSlideTextColor(); ?>">
+
+                            <div class="content-wrapper">
+                                <span>
+                                    <h2><?php echo $slide->getSlideCopy(); ?></h2>
+                                    <?php if ($slide->getSlideCtaText()): ?>
+                                        <a class="button" href="<?php echo $slide->getSlideCtaUrl(); ?>"><?php echo $slide->getSlideCtaText(); ?></a>
+                                    <?php endif; ?>
+                                </span>
+
+                            </div>
+
+                        </div>
+                    </li>
+                <?php endforeach; ?>                    
+            </ul>
+
+        </div>
+    </div>
+</section>

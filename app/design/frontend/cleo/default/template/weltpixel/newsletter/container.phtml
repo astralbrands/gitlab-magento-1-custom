@@ -1,0 +1,68 @@
+<?php $_helper = $this->helper('weltpixel_newsletter'); ?>
+<?php if (!$_helper->canShowPopup()) : ?>
+    <?php return; ?>    
+<?php else: ?>
+
+    <?php
+    $displayBlockId = $_helper->getDisplayBlock();
+    $cookieLifeTime = $_helper->getLifeTime();
+    $cookieName = $_helper->getCookieName();
+    $blockContent = $this->getLayout()->createBlock('cms/block')->setBlockId($displayBlockId)->toHtml();
+    $visitedPages = $_helper->getVisitedPages();
+    $secondsToDisplay = $_helper->getSecondsToDisplay();
+    $closeOption = $_helper->getCloseOption();
+    ?>
+
+    <div class="weltpixel_newsletter" style="display: none">
+        <?php echo $blockContent; ?>
+        <script>                                   
+                            
+            document.observe("dom:loaded", function() {                                   
+                           
+                function closeCallback() {
+                    CookieManager.setCookie('<?php echo $cookieName ?>', 'true', <?php echo $cookieLifeTime ?>);
+                }
+                
+                function showPopup() {
+                    var closeOption = false;
+                    <?php if ($closeOption == 2) : ?>
+                            closeOption = true;
+                    <?php  endif; ?>
+                    weltpixel.newsletterpopup.init(closeCallback, closeOption);
+                    var newsletterContent = $$('.weltpixel_newsletter')[0];
+                    weltpixel.newsletterpopup.open(newsletterContent);
+                }
+                                
+                CookieManager.init(<?php echo $cookieLifeTime ?>);
+                                       
+                //show newsletter only if cookie is set and condition is correct
+                if (!CookieManager.getCookie('<?php echo $cookieName ?>')  && CookieManager.getPageCount() >= <?php echo $visitedPages ?> ) {                        
+                   setTimeout(showPopup, <?php echo 1000 * $secondsToDisplay ?>);
+                } else if (!CookieManager.getCookie('<?php echo $cookieName ?>')) {
+                     //only if not ajax request was done
+                    <?php if (!Mage::app()->getRequest()->isAjax()): ?>
+                        CookieManager.countPages();
+                    <?php endif; ?>
+                }
+
+               var newsletterSubscriberFormDetail = new VarienForm("weltpixel_newsletter");
+               Validation.add('validate-email-forced','Please enter a valid email address',function(value){
+                   var pattern=/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
+                   if(pattern.test(value)){         
+                       return true;
+                   }else{   
+                       return false;
+                   }
+               });
+               Event.observe('weltpixel_newsletter', 'submit', function (event) {
+                   if (newsletterSubscriberFormDetail.validator.validate()) {
+                       closeCallback();
+                   }
+               });
+
+           });
+                                                
+                                                
+        </script>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,44 @@
+<?php 
+/*
+Fullbleed Field Attributes
+- BackgroundImage
+- Title
+- Subtitle
+- CtaText
+- CtaLink
+- TextColor: black, white
+ */ 
+$hooks_helper = Mage::helper('borncmshooks');
+$fullbleed_object_collection = $this->getFullbleedObjectCollection();
+?>
+
+<div class="fullbleed-wrap" id="fullbleed-wrap">
+
+<?php foreach ($fullbleed_object_collection as $block): ?>
+
+    <img class="background-img" src="<?php echo $hooks_helper->getImageUrl($block->getBackgroundImage()); ?>">
+
+    <?php if ($block->getBackgroundImageMobile()): ?>
+    	<img class="background-img-mobile" src="<?php echo $hooks_helper->getImageUrl($block->getBackgroundImageMobile()); ?>">
+    <?php endif ?>
+
+    <div class="fullbleed-title-wrap <?php echo $block->getTextColor() ?>">
+        <div class="fullbleed-title-wrap-inner">
+            <?php if ($block->getTitle()): ?>
+                <h2 class="title"><?php echo $block->getTitle() ?></h2>
+            <?php endif ?>
+            <?php if ($block->getSubtitle()): ?>
+                <h4 class="subtitle"><?php echo $block->getSubtitle() ?></h4>
+            <?php endif ?>
+            <?php if ($block->getDescription()): ?>
+                <p><?php echo $block->getDescription() ?></p>
+            <?php endif; ?>
+            <?php if ($block->getCtaText()): ?>
+                <a href="<?php echo Mage::getBaseUrl(). $block->getCtaLink(); ?>" class="btn">
+                    <span class="btn-text"><?php echo $block->getCtaText(); ?></span>
+                </a>
+            <?php endif ?>
+        </div>
+    </div>
+<?php endforeach ?>
+</div>

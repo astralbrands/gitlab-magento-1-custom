@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <name>Mage_Compiler</name>
+    <version>1.14.3.9</version>
+    <stability>stable</stability>
+    <license uri="http://www.magentocommerce.com/license/enterprise-edition">Magento Enterprise Edition</license>
+    <channel>enterprise</channel>
+    <extends/>
+    <summary>This module compiles all files of a Magento installation and creates a single include path to increase performance</summary>
+    <description>This module compiles all files of a Magento installation and creates a single include path to increase performance</description>
+    <notes>1.14.3.9</notes>
+    <authors><author><name>Magento Enterprise Team</name><user>core</user><email>core@magentocommerce.com</email></author></authors>
+    <date>2018-05-16</date>
+    <time>19:11:56</time>
+    <contents><target name="magecore"><dir name="Mage"><dir name="Compiler"><dir name="Block"><file name="Process.php" hash="37c109500e744d6615d563eb543ec9c2"/></dir><dir name="Helper"><file name="Data.php" hash="5912eccc64a9ae8b1c4345126c014a32"/></dir><dir name="Model"><file name="Process.php" hash="be23432f49238c2b7c8daeed68a62333"/></dir><dir name="controllers"><dir name="Adminhtml"><dir name="Compiler"><file name="ProcessController.php" hash="cb164bf877a161a2412c460956764c1d"/></dir></dir><file name="ProcessController.php" hash="6cd939406bf0e33d1c25cdb5f5c2f07a"/></dir><dir name="etc"><file name="adminhtml.xml" hash="8af7339305361a3c1e39afa53fb7f102"/><file name="compilation.xml" hash="1c5d3d2b22ff6c8e31858411b9581bf5"/><file name="config.xml" hash="b890afc317bd46928a6c89388f7e9ce4"/></dir></dir></dir></target><target name="mage"><dir name="includes"><file name="config.php" hash="0855442be682b545e733664b30ce1228"/><file name=".htaccess" hash="72617d60821288133a367f70bf39ad93"/><file name=".htaccess" hash="72617d60821288133a367f70bf39ad93"/></dir></target><target name="mageetc"><dir name="modules"><file name="Mage_Compiler.xml" hash="6f42abbbcbe62dfb2b89d854f3fa2d03"/></dir></target><target name="magedesign"><dir name="adminhtml"><dir name="default"><dir name="default"><dir name="layout"><file name="compiler.xml" hash="7c4c89bf0b421ea5fa930b8a0ec47847"/></dir><dir name="template"><dir name="compiler"><file name="process.phtml" hash="fe653022717f1d5d723f504c09a057da"/></dir></dir></dir></dir></dir></target><target name="magelocale"><dir name="en_US"><file name="Mage_Compiler.csv" hash="caa1d67e6c508421a8c8c234ae204c5d"/></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.2.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

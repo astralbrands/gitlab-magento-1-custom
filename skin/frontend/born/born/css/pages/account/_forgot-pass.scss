@@ -1,0 +1,63 @@
+// core of html in  app\design\frontend\born\born\template\customer\form\forgotpassword.phtml
+
+.customer-account-forgotpassword,
+.customer-account-changeforgotten {
+  .account-forgot {
+    padding: 70px 0 107px;
+    @include position(absolute, 0 0 0 0);
+    width: 100%;
+  }
+  .account-content {
+    width: 461px;
+    margin: 0 auto;
+  }
+  .fieldset {
+    margin-left: 0;
+    h2 {
+      text-transform: none;
+    }
+  }
+  .fields {
+    .field {
+      margin-bottom: 0;
+    }
+  }
+
+  .buttons-set {
+    margin: 15px 0;
+  }
+
+  .back-link {
+    a {
+      @include gotham();
+      @include setFont(1.3rem, 2.4rem, 500);
+      color: $page-width;
+      display: block;
+      text-align: center;
+      text-decoration: underline;
+      &:hover {
+        color: $black;
+      }
+    }
+
+  }
+}
+
+@media only screen and (max-width: $mobile-s) {
+  .customer-account-login {
+    .account-forgot {
+      padding: 55px 0 66px;
+    }
+    .account-content {
+      padding: 22px 20px 49px;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-xs) {
+  .customer-account-login {
+    .account-content {
+      width: 100%;
+    }
+  }
+}

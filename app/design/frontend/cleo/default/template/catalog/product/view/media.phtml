@@ -1,0 +1,295 @@
+<?php
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+$_product = $this->getProduct();
+$_imageHelper = $this->helper('catalog/image');
+$_baseImage = ($_product->getImage() != 'no_selection' && $_product->getImage())
+        ? $_product->getImage() : false;
+$_galleryImages = array();
+$_settings = Mage::getStoreConfig('weltpixel_selector/productpageoptions');
+$_zoomMode = "inside";
+$_imageWidth = $_settings['imagewidth'];
+$_zoomWidth = $_settings['zoomwidth'];
+$_galleryLocation = $_settings['gallery_location'];
+$_productImage = $_settings['product_image'];
+
+$productNewToDate = $_product->getNewsToDate();
+if (!$productNewToDate && $_product->getNewsFromDate()) {
+    $productNewToDate = date("Y-m-d", strtotime('+1 years'));
+}
+$_isNew = date("Y-m-d") >= substr($_product->getNewsFromDate(), 0, 10) && date("Y-m-d") <= substr($productNewToDate,
+        0, 10);
+
+$rightNow = time();
+$_isSale = $_product->getSpecialPrice() && ($rightNow >= strtotime($_product->getSpecialFromDate()) && $rightNow <= strtotime($_product->getSpecialToDate()) || $rightNow >= strtotime($_product->getSpecialFromDate()) && is_null($_product->getSpecialToDate()));
+
+$_useRetina = Mage::getStoreConfig('weltpixel_selector/customization_settings/retina');
+
+// Process the gallery images
+foreach ($this->getGalleryImages() as $_image) {
+    $_galleryImages[] = $_image;
+}
+
+$_imagesCount = count($_galleryImages);
+?>
+
+<?php if (($_galleryLocation == "left") && ($_imagesCount > 1)): ?>
+    <div id="carousel-index" class="left">
+
+        <?php
+        $_itemsInGallery = count($_galleryImages);
+        $i = 0;
+        ?>
+
+        <?php foreach ($_galleryImages as $_image) : ?>
+            <img
+                data-imageindex="<?php echo $i++ ?>"
+                style="max-height: <?php echo 100 / $_itemsInGallery; ?>%;"
+                src="<?php echo $_imageHelper->init($_product,
+            'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)->resize(100); ?>"
+                data-src="<?php echo $_imageHelper->init($_product,
+            'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)->resize(100); ?>"
+                <?php if ($_useRetina): ?>
+                    data-src-retina="<?php echo $_imageHelper->init($_product,
+                'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)->resize(2 * 100); ?>"
+                <?php endif; ?>
+                alt=""
+                title=""
+                />
+            <?php endforeach; ?>
+
+    </div>
+<?php endif; ?>
+
+<div
+    id="mobile-carousel"
+    style="width: 100%;"
+    <?php if (($_galleryLocation == "left") && ($_imagesCount > 1)): ?>class="has-left"<?php endif; ?>>
+
+    <div id="mobile-carousel-images">
+        <?php foreach ($_galleryImages as $_image): ?>
+
+            <div class="item">
+
+                <div  class="product-image zoom-<?php echo $_zoomMode; ?> media-<?php echo $_galleryLocation; ?>"
+                      >
+                    <a
+                        href="<?php echo $_imageHelper->init($_product,
+            'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)->resize($_zoomWidth); ?>"
+                        class="cloud-zoom mfp"
+                        data-rel="position: '<?php echo $_zoomMode ?>', showTitle: false, adjustX: 0, adjustY: 0"
+                        title=""
+                        >
+
+                        <img
+                            src="<?php
+                    echo $_imageHelper->init($_product, 'thumbnail',
+                        $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)->resize($_imageWidth);
+                    ;
+                    ?>"
+                            data-src="<?php echo $_imageHelper->init($_product,
+                        'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)->resize($_imageWidth); ?>"
+                            <?php if ($_useRetina): ?>
+                                data-src-retina="<?php echo $_imageHelper->init($_product,
+                            'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)->resize(2 * $_imageWidth); ?>"
+    <?php endif; ?>
+                            alt=""
+                            title=""
+                            />
+                    </a>
+                </div>
+            </div>
+<?php endforeach; ?>
+
+    </div>
+
+    <div class="product-tags">
+        <?php if ($_isNew) : ?>
+            <div class="tag tag-new"><?php echo $this->__('New'); ?></div>
+        <?php endif; ?>
+        <?php if ($_isSale): ?>
+            <div class="tag tag-sale"><?php echo $this->__('Sale'); ?></div>
+<?php endif; ?>
+    </div>
+
+
+        <?php if (($_galleryLocation == "bottom") && ($_imagesCount > 1)) : ?>
+        <div id="carousel-index" style="position: static;">
+
+            <?php
+            $_itemsInGallery = count($_galleryImages);
+            $i = 0;
+            ?>
+
+    <?php foreach ($_galleryImages as $_image) : ?>
+                <img
+                    data-imageindex="<?php echo $i++; ?>"
+                    style="width: <?php echo 100 / $_itemsInGallery; ?>%;"
+                    src="<?php
+            echo $_imageHelper->init($_product, 'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)->resize(100);
+            ;
+        ?>"
+                    data-src="<?php echo $_imageHelper->init($_product,
+                'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)->resize(100); ?>"
+                    <?php if ($_useRetina): ?>
+                        data-src-retina="<?php echo $_imageHelper->init($_product,
+                'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)->resize(2 * 100); ?>"
+                    <?php endif; ?>
+                    alt=""
+                    title=""
+                    />
+        <?php endforeach; ?>
+
+        </div>
+<?php endif; ?>
+
+</div>
+
+<script>
+    var mobileOwl = null;
+    var mobileOwlInitialised = false;
+
+    jQuery(document).ready(function () {
+
+        mobileOwl = jQuery("#mobile-carousel-images");
+        mobileOwl.owlCarousel({
+
+            navigation: true, // Show next and prev buttons
+            slideSpeed: 300,
+            paginationSpeed: 400,
+
+<?php if (($_imagesCount > 1) && ($_productImage == "double")) : ?>
+                items: 2,
+<?php else : ?>
+                items: 1,
+<?php endif; ?>
+
+            itemsDesktop: false,
+            itemsDesktopSmall: false,
+            itemsTablet: false,
+            itemsTabletSmall: false,
+<?php if ($_galleryLocation == "left"): ?>
+                itemsMobile: [960, 1],
+<?php else : ?>
+                itemsMobile: [960, 1],
+<?php endif; ?>
+            afterAction: afterOWLaction,
+            afterInit: afterOWLinit
+        });
+
+
+        jQuery(window).resize(function () {
+            var resizeInterval = setInterval(function () {
+                var owldata = mobileOwl.data('owlCarousel');
+                owldata.updateVars();
+                clearInterval(resizeInterval);
+            }, 1000);
+        }).trigger("resize");
+
+        function afterOWLaction() {
+
+<?php if ($_galleryLocation != "none"): ?>
+
+                var carouselIndex = jQuery('#carousel-index');
+
+    <?php if ($_galleryLocation == "left"): ?>
+                        carouselIndex.css('height',jQuery('#mobile-carousel').height()+'px');
+    <?php endif; ?>
+
+                    var visibleOwl = this.owl.visibleItems;
+
+                    carouselIndex.children().each(function () {
+
+                        jQuery(this).css('opacity', '0.3');
+
+                        if (visibleOwl.indexOf(jQuery(this).index()) >= 0) {
+                            jQuery(this).css('opacity', '1');
+                        }
+                    }).off('click').click(function() {
+                        mobileOwl.data('owlCarousel').jumpTo(jQuery(this).data('imageindex'))
+                    });
+<?php endif; ?>
+        }
+
+        function afterOWLinit() {
+
+<?php
+$_counter = 1;
+if ($_productImage == "double") {
+    $_counter = 2;
+}
+?>
+<?php if ($_imagesCount > $_counter): ?>
+
+                if (!mobileOwlInitialised) {
+                    jQuery('#mobile-carousel').prepend('<div class="carousel-left icon-angle-left"></div><div class="carousel-right icon-angle-right"></div>');
+
+                    jQuery(".carousel-right").click(function () {
+                        removeDynamicElement();
+                        mobileOwl.trigger('owl.next');
+                        return false;
+                    });
+                    jQuery(".carousel-left").click(function () {
+                        removeDynamicElement();
+                        mobileOwl.trigger('owl.prev');
+                        return false;
+                    });
+
+                    mobileOwlInitialised = true;
+                }
+<?php endif; ?>
+        }
+
+        function removeDynamicElement() {
+            if (jQuery('.dynamic-thumb-owl-item').length) {
+                mobileOwl.data('owlCarousel').removeItem();
+            }
+        }
+
+    });
+</script>
+
+<?php if ($_baseImage): ?>
+    <script>
+        // <![CDATA[
+
+        jQuery(document).ready(function ($) {
+
+            var _items = [];
+
+            jQuery('#product-media a.mfp').each(function () {
+                _items.push({
+                    'src': jQuery(this).attr('href')
+                });
+            });
+
+            jQuery('.product-image').click(function(e) {
+                e.preventDefault();
+                var item = jQuery(this).parent().parent();
+                var index= jQuery('div.owl-item').index(item);
+
+
+                jQuery.magnificPopup.open({
+                    callbacks: {
+                        open: function () {
+                            jQuery.magnificPopup.instance.goTo(index);
+                        }
+                    },
+                    items: _items,
+                    type: 'image',
+                    gallery: {
+                        enabled: true
+                    }
+                });
+            });
+
+        });
+
+        // ]]>
+    </script>
+<?php endif; ?>
+
+<?php echo $this->getChildHtml('after'); ?>

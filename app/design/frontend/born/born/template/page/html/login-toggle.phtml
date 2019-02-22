@@ -1,0 +1,25 @@
+<?php $isLoggedIn = Mage::getSingleton('customer/session')->isLoggedIn(); ?>
+
+<?php if($isLoggedIn) : ?>
+	<div class="account-dropdown">
+		<a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" class="account-dropdown__main-link"><?php echo $this->__('My Account'); ?></a>
+		<div class="account-dropdown__drop">
+			<a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" class="account-dropdown__link"><?php echo $this->__('My Dashboard') ?></a>
+			<a href="<?php echo Mage::getUrl('sales/order/history/') ?>" class="account-dropdown__link"><?php echo $this->__('My Orders') ?></a>
+			<a href="<?php echo Mage::getUrl('zendesk/customer_tickets/index') ?>" class="account-dropdown__link"><?php echo $this->__('My Tickets') ?></a>
+			<?php if (Mage::helper('core')->isModuleOutputEnabled('Enterprise_GiftCardAccount')): ?>
+					<a href="<?php echo Mage::getUrl('enterprise_giftcardaccount/customer') ?>" class="account-dropdown__link"><?php echo $this->__('Gift Card') ?></a>
+			<?php endif ?>
+			<a href="<?php echo Mage::getUrl('wishlist/') ?>" class="account-dropdown__link"><?php echo $this->__('My Favorites') ?></a>
+			<?php if (Mage::getStoreConfig('enterprise_reward/general/is_enabled')): ?>
+				<a href="<?php echo Mage::getUrl('enterprise_reward/customer/info/') ?>" class="account-dropdown__link"><?php echo $this->__('My Rewards') ?></a>
+			<?php endif ?>
+			<a href="<?php echo Mage::getUrl('customer/account/logout') ?>" class="account-dropdown__link"><?php echo $this->__('Sign Out') ?></a>
+		</div> 
+	</div>
+<?php else : ?>
+	<a class="sign-in" href="<?php echo $this->helper('customer')->getAccountUrl(); ?>">
+		<span class="icon"></span>
+	    <span class="label"><?php echo $this->__('Sign In'); ?></span>
+    </a>
+<?php endif; ?>

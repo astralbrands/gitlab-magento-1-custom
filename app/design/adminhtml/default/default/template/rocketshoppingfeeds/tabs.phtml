@@ -1,0 +1,63 @@
+<?php
+/**
+ * RocketWeb
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category  RocketWeb
+ * @package   RocketWeb_ShoppingFeeds
+ * @copyright Copyright (c) 2012 RocketWeb (http://rocketweb.com)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author    RocketWeb
+ */
+$feed = Mage::registry('rocketshoppingfeeds_feed');
+
+?>
+<?php if($this->getTitle()): ?>
+    <h3><?php echo $this->getTitle() ?></h3>
+<?php endif ?>
+<?php if(!empty($tabs)): ?>
+<ul id="<?php echo $this->getId() ?>" class="tabs">
+<?php foreach ($tabs as $_tab): ?>
+<?php if (!$this->canShowTab($_tab)): continue;  endif; ?>
+    <li <?php if($this->getTabIsHidden($_tab)): ?> style="display:none"<?php endif; ?>>
+        <a href="<?php echo $this->getTabUrl($_tab) ?>" id="<?php echo $this->getTabId($_tab) ?>" name="<?php echo $this->getTabId($_tab, false) ?>" title="<?php echo htmlspecialchars($this->getTabTitle($_tab), ENT_QUOTES, null, false) ?>" class="tab-item-link <?php echo $this->getTabClass($_tab) ?><?php if (preg_match('/\s?ajax\s?/', $_tab->getClass())) {?> notloaded<?php }?>">
+            <span><span class="changed" title="<?php echo htmlspecialchars($this->__('The information in this tab has been changed.'), ENT_QUOTES, null, false) ?>"></span><span class="error" title="<?php echo htmlspecialchars($this->__('This tab contains invalid data. Please solve the problem before saving.'), ENT_QUOTES, null, false) ?>"></span><?php echo $this->getTabLabel($_tab); ?></span>
+        </a>
+        <?php $tabName = $this->getTabLabel($_tab); ?>
+        <?php $methodName = str_replace(' ', '', $tabName); ?>
+        <div id="<?php echo $this->getTabId($_tab) ?>_content" style="display:none;"><?php echo $this->getTabContent($_tab) ?>
+            <span class="floating-div" onclick="popitup('https://wiki.rocketweb.com/display/RSF/<?php echo urlencode($tabName); ?>')">Help with <?php echo $tabName; ?></span>
+        </div>
+    </li>
+<?php endforeach; ?>
+</ul>
+    <?php $feedName = ucfirst(str_replace('_', ' ', $feed->getType())); ?>
+    <?php $feedUrl = 'https://wiki.rocketweb.com/display/RSF/Set+up+' . urlencode($feedName); ?>
+    <?php if ($feed->getType() != RocketWeb_ShoppingFeeds_Model_Feed_Type::TYPE_GENERIC): ?>
+        <span class="floating-div docs" onclick="popitup('<?php echo $feedUrl; ?>');">Setting up <?php echo $this->escapeHtml($feedName); ?></span>
+    <?php else: ?>
+        <span class="floating-div docs" onclick="popitup('<?php echo $feedUrl; ?>');">Getting started</span>
+        <?php $feedName = 'Getting started' ?>
+        <?php $feedUrl = 'https://wiki.rocketweb.com/display/RSF/' . urlencode($feedName); ?>
+    <?php endif; ?>
+
+    <script>
+        function popitup(url) {
+            var contentWidth = $('content').getWidth()+'px',
+                contentHeight = window.innerHeight - 150;
+            newWindow =  window.open(url, 'User Guide', 'width='+contentWidth+',height='+contentHeight+',left=270,top=180,scrollbars=yes');
+            if (window.focus) {newWindow.focus()}
+            return false;
+        }
+    </script>
+
+<script type="text/javascript">
+    <?php echo $this->getJsObjectName() ?> = new varienTabs('<?php echo $this->getId() ?>', '<?php echo $this->getDestElementId() ?>', '<?php echo $this->getActiveTabId() ?>', <?php echo $this->getAllShadowTabs()?>);
+</script>
+<?php endif; ?>

@@ -1,0 +1,236 @@
+// app\design\frontend\born\born\template\borncmshooks\blocks\videocarousel.phtml
+
+.videocarousel {
+  max-width: 1200px;
+  margin: 0 auto 70px;
+  padding-top: 60px;
+  .section-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.4rem;
+    font-weight: 500;
+  }
+  .slide {
+    @include display(flex);
+  }
+  .video-img {
+    width: 100%;
+    height: auto;
+  }
+  .video-text {
+    font-size: 1.6rem;
+    color: $white;
+    @include chronic();
+    position: absolute;
+    right: 16px;
+    bottom: 17px;
+    padding: 9px 49px 9px 15px;
+    text-align: right;
+    &:after {
+      @include vrp();
+      width: 38px;
+      content: '';
+      right: 0;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid $white;
+    }
+    &:before {
+      @include vrp();
+      width: 14px;
+      height: 14px;
+      right: 11px;
+      border-left: 14px solid $white;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+    }
+  }
+  .video-link {
+    @include flex-basis(50%);
+    position: relative;
+    display: block;
+  }
+  .video-about {
+    @include flex-basis(50%);
+    position: relative;
+    &-inner {
+      padding: 20px 60px 20px 70px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      @include display(flex);
+      @include flex-direction(column);
+      @include justify-content(center);
+    }
+  }
+  .qoute {
+    font-size: 2.4rem;
+    line-height: 3.6rem;
+    @include gotham();
+    font-style: italic;
+    font-weight: 200;
+    margin-bottom: 20px;
+  }
+  .author-name {
+    font-size: 1.6rem;
+    font-weight: 200;
+    @include gotham();
+  }
+  .bx-wrapper {
+    position: relative;
+  }
+  .bx-controls {
+    position: absolute;
+    width: 100%;
+    height: 0;
+    left: 0;
+    top: 50%;
+  }
+  .bx-prev {
+    position: absolute;
+    top: -20px;
+    width: 40px;
+    height: 40px;
+    left: -80px;
+    &:before {
+      @include hvrp();
+      width: 21px;
+      height: 21px;
+      border-top: 6px solid #ededed;
+      border-left: 6px solid #ededed;
+      transform-origin:center;
+      transform: rotate(-45deg);
+    }
+  }
+  .bx-next {
+    position: absolute;
+    top: -20px;
+    width: 40px;
+    height: 40px;
+    right: -80px;
+    &:before {
+      @include hvrp();
+      width: 21px;
+      height: 21px;
+      border-top: 6px solid #ededed;
+      border-left: 6px solid #ededed;
+      transform-origin:center;
+      transform: rotate(135deg);
+    }
+  }
+  .bx-pager {
+    display: none;
+  }
+}
+
+
+@media only screen and (max-width: $desktop-custom-1) {
+  .videocarousel {
+    margin: 0 60px 70px;
+    .bx-prev {
+      left: -50px;
+    }
+    .bx-next {
+      right: -50px;
+    }
+  }
+}
+
+
+@media only screen and (max-width: $tablet) {
+  .videocarousel {
+    .video-about-inner {
+      padding: 20px 30px;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .videocarousel {
+    max-width: 420px;
+    margin: 0 auto 40px;
+    padding-top: 30px;
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+    .slide {
+      display: block;
+      text-align: center;
+    }
+    .video-link {
+      display: block;
+    }
+    .video-text {
+      padding: 50px 15px 0;
+      width: 100%;
+      right: 0;
+      text-align: center;
+      top: 95px;
+      bottom: auto;
+      &:after {
+        @include hrp();
+        top: 0;
+        bottom: auto;
+      }
+      &:before {
+        @include hrp();
+        top: 11px;
+        bottom: auto;
+      }
+    }
+    .video-about {
+      display: block;
+      &-inner {
+        position: static;
+        padding: 30px 55px;
+      }
+    }
+    .qoute {
+      font-size: 1.8rem;
+      line-height: 3rem;
+    }
+    .author-name {
+      font-size: 1.3rem;
+      line-height: 2.1rem;
+    }
+    .bx-controls {
+      top: auto;
+      bottom: 0;
+    }
+    .bx-prev {
+      left: 0;
+      top: -100px;
+    }
+    .bx-next {
+      right: 0;
+      top: -100px;
+    }
+    .bx-pager {
+      display: block;
+      font-size: 0;
+      text-align: center;
+      &-item {
+        display: inline-block;
+        vertical-align: middle;
+        &+.bx-pager-item {
+          margin-left: 3px;
+        }
+        a {
+          display: block;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          border: 1px solid $black;
+        }
+        .active {
+          background: $black;
+        }
+      }
+    }
+  }
+}

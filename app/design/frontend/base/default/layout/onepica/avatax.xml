@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * OnePica_AvaTax
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0), a
+ * copy of which is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category   OnePica
+ * @package    OnePica_AvaTax
+ * @author     OnePica Codemaster <codemaster@onepica.com>
+ * @copyright  Copyright (c) 2009 One Pica, Inc.
+ * @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ */
+-->
+<layout>
+    <checkout_onepage_shippingmethod>
+        <block type="avatax/checkout_onepage_shipping_method_available" name="checkout.onepage.shipping_method.availableAvatax" before="-" output="toHtml" />
+    </checkout_onepage_shippingmethod>
+
+    <checkout_onepage_paymentmethod>
+        <block type="avatax/checkout_onepage_payment_method_available" name="checkout.onepage.payment_method.availableAvatax" before="-" output="toHtml" />
+    </checkout_onepage_paymentmethod>
+
+    <!--Landed Cost-->
+    <sales_order_view>
+        <reference name="order_totals">
+            <block type="avatax/sales_order_totals_importDuties" name="avatax_landed_cost_import_duties" />
+            <block type="avatax/sales_order_totals_fixedTax" name="avatax_fixed_tax" />
+        </reference>
+    </sales_order_view>
+    <sales_order_print>
+        <reference name="order_totals">
+            <block type="avatax/sales_order_totals_importDuties" name="avatax_landed_cost_import_duties" />
+            <block type="avatax/sales_order_totals_fixedTax" name="avatax_fixed_tax" />
+        </reference>
+    </sales_order_print>
+    <sales_order_invoice>
+        <reference name="invoice_totals">
+            <block type="avatax/sales_order_totals_importDuties" name="avatax_landed_cost_import_duties" />
+            <block type="avatax/sales_order_totals_fixedTax" name="avatax_fixed_tax" />
+        </reference>
+    </sales_order_invoice>
+    <sales_order_creditmemo>
+        <reference name="creditmemo_totals">
+            <block type="avatax/sales_order_totals_importDuties" name="avatax_landed_cost_import_duties" />
+            <block type="avatax/sales_order_totals_fixedTax" name="avatax_fixed_tax" />
+        </reference>
+    </sales_order_creditmemo>
+    <!--Landed Cost-->
+</layout>

@@ -1,0 +1,78 @@
+<?php 
+/*
+Press Field Attributes
+- Title - text
+- Subtitle - text
+- Description - text
+- CtaText - text
+- CtaLink - text
+- AlternateLink - text
+- Image - image
+
+
+PressTitle Form
+- SectionTitle - text
+ */ 
+$hooks_helper = Mage::helper('borncmshooks');
+$sort_helper = Mage::helper('borncmshooks/sort');
+$press_object_collection = $this->getPressObjectCollection();
+
+$press_object_collection = $sort_helper->sortCollection($press_object_collection);
+$sectionTitle = $hooks_helper->getSectionTitle($press_object_collection);
+
+?>
+<?php if ($sectionTitle): ?>
+	<h2 class="section-title"><?php echo $sectionTitle ?></h2>	
+<?php endif ?>
+
+<?php $index = 0; ?>
+<div class="press__col-wrap" id="press">
+<?php foreach ($press_object_collection as $column): ?>
+
+    <?php if ($index > 2 && Mage::getSingleton('cms/page')->getIdentifier() != 'home'): ?>
+        <?php $index = 0; ?>
+    <?php endif ?>
+
+    <div class="press__col">
+    <?php if ($index%2 && $column->getImage()): ?>
+        <a  class="press__image-link" href="<?php echo Mage::getUrl(). $column->getCtaLink(); ?>">
+            <img class="img" src="<?php echo $hooks_helper->getImageUrl($column->getImage()); ?>">
+        </a>
+    <?php endif ?>
+
+    <div class="press__info">
+        <div class="press__info-inner">
+            <div class="press__info-inner-middle">
+ 	<a class="press__site-link" href="<?php echo $column->getAlternateLink(); ?>" target="">
+        <h2 class"title"><?php echo $column->getTitle() ?></h2>
+    </a>
+
+    <?php if ($column->getSubtitle()): ?>
+    	<h2 class="subtitle"><?php echo $column->getSubtitle() ?></h2>
+    <?php endif ?>
+    <?php if ($column->getDescription()): ?>
+    	<h2 class="description"><?php echo $column->getDescription() ?></h2>
+    <?php endif ?>
+    <?php if ($column->getAuthor()): ?>
+        <p class="author"><?php echo $column->getAuthor() ?></p>
+    <?php endif ?>
+    <?php if ($column->getAuthorSubtext()): ?>
+        <p class="author-subtext"><?php echo $column->getAuthorSubtext() ?></p>
+    <?php endif ?>
+    <?php if ($column->getCtaText()): ?>
+		<a class="cta-button" href="<?php echo Mage::getUrl(). $column->getCtaLink(); ?>">
+            <span><?php echo $column->getCtaText(); ?></span>
+        </a>
+	<?php endif ?>
+            </div>
+        </div>
+    </div>
+
+    <?php if ($index++%2 == 0 && $column->getImage()): ?>
+        <a class="press__image-link" href="<?php echo Mage::getUrl(). $column->getCtaLink(); ?>">
+            <img class="img" src="<?php echo $hooks_helper->getImageUrl($column->getImage()); ?>">
+        </a>
+    <?php endif ?>
+    </div>
+<?php endforeach ?>
+</div>

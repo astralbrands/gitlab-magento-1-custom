@@ -1,0 +1,19 @@
+<?php
+$_helper = $this->helper('weltpixel_layerednavigation');
+?>
+<?php if ($_helper->isAjaxEnabled()): ?>
+    <script>
+        document.observe("dom:loaded", function() {
+            var ajaxOptions = {};
+            ajaxOptions.disableClicks = Boolean(<?php echo $_helper->disableMouseClicks(); ?>);
+            ajaxOptions.triggercallback = Weltpixel_LayeredNavigation.filterNamesToggle;
+            Weltpixel_LayeredNavigation_Ajax.init(ajaxOptions);
+        });
+    </script>
+<?php endif; ?>
+
+<script>
+    jQuery(document).ready(function(){
+        Weltpixel_LayeredNavigation.init({});       
+    });
+</script>

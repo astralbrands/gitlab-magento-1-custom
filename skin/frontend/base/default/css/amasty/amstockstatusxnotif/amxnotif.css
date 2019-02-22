@@ -1,0 +1,125 @@
+.subcribe-popup {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.subcribe-popup-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 30px 20px;
+    border: 1px solid #888;
+    width: 40%;
+    min-width: 515px;
+    height: auto;
+    position: relative;
+}
+
+.close-subcribe-popup {
+    color: #aaa;
+    position: absolute;
+    right: 5px;
+    top: 0;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-subcribe-popup:hover,
+.close-subcribe-popup:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.amxnotif-block label {
+    display: block;
+    color: #2F2F2F;
+    font-weight: bold;
+    float:none;
+}
+
+.amxnotif-block {
+    margin-bottom: 5px;
+    clear: both;
+}
+
+.amxnotif-block-label {
+    cursor: pointer;
+}
+
+.amxnotif-block.category button {
+    margin-top: 5px;
+}
+
+.amxnotif-block-price {
+    clear: both;
+    margin-bottom: 5px;
+}
+
+.grouped-items-table .amxnotif-block [name="guest_email"] {
+    width: 100%;
+    margin: inherit;
+}
+
+@media only screen and (max-width: 520px) {
+    .grouped-items-table .image .thumbnail {
+        max-width: 70px;
+    }
+}
+
+.amxnotif-button-container, .amxnotif-input-fields {
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    max-width: 100%;
+}
+
+.subcribe-popup.amxnotif-block label {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.amgdpr-checkbox + .amgdpr-label {
+    display: inline;
+    width: 100%;
+    padding: 5px;
+    vertical-align: initial;
+}
+
+.amgdpr-checkbox {
+    vertical-align: middle;
+}
+
+.subcribe-popup-content .amxnotif-input-fields {
+    max-width: 50%;
+}
+
+@media only screen and (max-width: 768px) {
+    .subcribe-popup-content {
+        margin: 20% auto;
+        padding: 30px 10px;
+        width: 90%;
+        min-width: inherit;
+    }
+
+    .subcribe-popup-content .amxnotif-input-fields {
+        max-width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .subcribe-popup-content .amxnotif-button-container {
+        display: block;
+        text-align: center;
+    }
+
+    .amxnotif-email {
+        display: block;
+        margin: auto;
+    }
+}

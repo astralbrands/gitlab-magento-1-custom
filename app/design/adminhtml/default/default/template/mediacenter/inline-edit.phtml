@@ -1,0 +1,19 @@
+<script type="text/javascript">
+function updateName(button, fieldId)
+{
+    new Ajax.Request('<?php echo Mage::helper('adminhtml')->getUrl('*/*/updateName') ?>', {
+        method: 'post',
+        parameters: { id: fieldId, update_name: $(button).previous('input').getValue() }
+    });
+}
+function updateGroup(button, fieldId)
+{
+	var groupArray = $(button).previous('select').getValue();
+	var values = groupArray.join();
+
+    new Ajax.Request('<?php echo Mage::helper('adminhtml')->getUrl('*/*/updateCustomerGroup') ?>', {
+        method: 'post',
+        parameters: { id: fieldId, update_customer_group: values }
+    });
+}
+</script>

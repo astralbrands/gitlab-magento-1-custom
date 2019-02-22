@@ -1,0 +1,101 @@
+<?php
+/**
+ * Cart cross sell items template
+ *
+ * @see Mage_Checkout_Block_Cart_Crosssell
+ */
+$_settings = Mage::getStoreConfig('weltpixel_selector/categoryoptions');
+$_showAddToCart = ('yes' == $_settings['addtocart']);
+$_showAddToWishlist = ('yes' == $_settings['addtowishlist']);
+$_showAddToCompare = ('yes' == $_settings['addtocompare']);
+$_showAddToBox = $_showAddToCart || $_showAddToWishlist || $_showAddToCompare;
+
+$_hoverShowPrice = ($_settings['showprice'] == "yes");
+$_hoverShowName = ($_settings['showname'] == "yes");
+$_shortTitle = ($_settings['onelinetitle'] == "yes");
+
+$_useRetina         = Mage::getStoreConfig('weltpixel_selector/customization_settings/retina');
+$_imgSize = 270;
+?>
+<?php if($this->getItemCount()): ?>
+<div class="crosssell row">
+    <div class="heading-block center">
+    <h2><?php echo $this->__('Based on your selection, you may be interested in the following items:') ?></h2>
+    </div>
+    <ul id="crosssell-products-list" class="products-grid products-grid--max-3-col">
+    <?php foreach ($this->getItems() as $_item): ?>
+        <li class="item">
+            <a class="product-image" href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_item->getName()) ?>">
+                <img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize($_imgSize); ?>"
+                    <?php if($_useRetina) : ?>
+                         data-src-retina = "<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(2*$_imgSize); ?>"
+                     <?php endif; ?>
+                     alt="<?php echo $this->escapeHtml($_item->getName()) ?>"
+                     />
+            </a>
+            <div class="product-details">
+                <?php if ($_showAddToBox): ?>
+                <div class="item-info">
+                    <?php
+                    $_productName = $_item->getName();
+                    $_productNameStripped = $this->stripTags($_item->getName(), null, true);
+
+                    ?>
+                    <span class="<?php echo($_hoverShowName) ? "show" : "hide"; ?>"><a href="<?php echo $_item->getProductUrl(); ?>" title="<?php echo $_productNameStripped; ?>" class="<?php echo($_shortTitle) ? "shortTitle" : "longTitle"; ?>"><?php echo $_productName; ?></a></span>
+
+                     <?php
+                        if ($_hoverShowPrice) {
+                            echo $this->getPriceHtml($_item, true);
+                        }
+                    ?>
+
+                    <div class="add-to-box">
+                        <table>
+                            <tr>
+                                <?php if ($_item->isSaleable() && $_showAddToCart): ?>
+                                    <td>
+                                        <a href="<?php echo $this->getAddToCartUrl($_item); ?>" class="add-to-cart"><i class="icon icon-shopping-cart"></i><span><?php echo $this->__('Add to Cart'); ?></span></a>
+                                    </td>
+                                <?php endif; ?>
+                                <?php if ($this->helper('wishlist')->isAllow() && $_showAddToWishlist) : ?>
+                                    <td>
+                                        <a href="<?php echo $this->getAddToWishlistUrl($_item) ?>"><i class="icon icon-heart3"></i></a>
+                                    </td>
+                                <?php endif; ?>
+                                <?php $_compareUrl=$this->getAddToCompareUrl($_item); ?>
+                                <?php if ($_compareUrl && $_showAddToCompare) : ?>
+                                    <td>
+                                        <a class="wp-add-to-compare" href="<?php echo $_compareUrl; ?>"><i class="icon-line-stack-2"></i></a>
+                                    </td>
+                                <?php endif; ?>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <?php endif; ?>
+            </div>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+    <?php // <script type="text/javascript">decorateList('crosssell-products-list', 'none-recursive')</script> ?>
+</div>
+
+  <script>
+    // <![CDATA[
+        jQuery(document).ready(function($) {
+            var owl = $("#crosssell-products-list");
+            owl.owlCarousel({
+                items: 5,
+                pagination: false,
+                rewindNav: false,
+                lazyLoad : true,
+                navigation: true,
+                navigationText: [
+                    '<i class="icon-angle-left"></i>',
+                    '<i class="icon-angle-right"></i>'
+                ]
+            });
+        });
+    // ]]>
+    </script>
+<?php endif; ?>

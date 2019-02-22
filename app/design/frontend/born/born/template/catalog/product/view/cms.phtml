@@ -1,0 +1,11 @@
+<?php
+        if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) { 
+        //Mage::log(__FILE__, false, 'OptionSwatch.log');
+        }
+?>
+<div class="hightlights">
+    <?php echo $this->getChildHtml('highlight') ?>
+</div>
+<div class="tabs-to-accordion">
+    <?php echo $this->getChildHtml('tabs') ?>
+</div>

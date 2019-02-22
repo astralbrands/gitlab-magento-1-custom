@@ -1,0 +1,45 @@
+<title><?php echo $this->getTitle(); ?></title>
+
+<!-- Meta -->
+<meta charset="utf-8" />
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()); ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()); ?>" />
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()); ?>" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+
+<!-- Favicons -->
+<link rel="icon" type="image/x-icon" href="<?php echo $this->getFaviconFile(); ?>" />
+<link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->getFaviconFile(); ?>" />
+
+<!-- CSS & JavaScript -->
+<?php echo $this->getCssJsHtml(); ?>
+
+<!-- wp_custom.css -->
+<?php if (Mage::getStoreConfig('weltpixel_selector/customization_settings/customcss')) : ?>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/wp_custom.css') ?>" media="all" />
+<?php endif; ?>
+<!-- Global site tag (gtag.js) - Google Ads: 1059501670 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-1059501670"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-1059501670');
+</script>
+<!-- Includes -->
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ?>
+
+<!-- HTML5 IE Enabling Script -->
+<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Media queries for IE -->
+<!--[if lt IE 9]>
+<script src="<?php echo $this->getSkinUrl('js/respond.js') ?>"></script>
+<![endif]-->
+ <!--[if lt IE 9]>
+<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->

@@ -1,0 +1,137 @@
+<?php /* @var $this WeltPixel_MegaMenu_Block_Html_Topmenu */ ?>
+
+<?php $menu = $this->getMenu(); ?>
+<?php if ($menu->hasChildren()): ?>
+<?php
+    $parentLevel = $menu->getLevel();
+    $childLevel = is_null($parentLevel) ? 0 : $parentLevel + 1;
+
+    $counter = 1;
+    $childrenCount = $menu->getChildren()->count();
+    $childrenWrapClass = $menu->getChildrenWrapClass();
+    $_helper = $this->helper('weltpixel_megamenu');
+
+?>
+<div id="wpmm-overlay"></div>
+<div id="wpmm-nav-container">
+    <div id="wpmm-nav-viewport">
+        <input type="hidden" name="wpmm_width_threshold" id="wpmm-width-threshold" value="<?php echo $this->getWidthThreshold(); ?>" />
+        <ul id="wpmm-nav" class="w">
+            <?php $i = 1; foreach ($menu->getChildren() as $child): ?>
+            <?php
+                $displayMode = $_helper->getDisplayModeClass($child->getData('display_mode'));
+                $child->setClass($menu->getOutermostClass() .  ' ' .$displayMode);
+                $child->setLevel($childLevel);
+                $child->setIsFirst($counter == 1);
+                $child->setIsLast($counter == $childrenCount);
+                $child->setPositionClass($menu->getPositionClass() . '-' . $counter);
+            ?>
+            <li<?php echo $this->getRenderedMenuItemAttributes($child); ?>>
+                <a href="<?php echo $child->getUrl(); ?>" class="<?php echo $child->getClass(); ?> nav-link<?php if ($child->getTitleImage()): ?> has-title-image<?php endif; ?>">
+                    <?php if ($child->getTitleImage()): ?>
+                    <img src="<?php echo $child->getTitleImage() ?>" alt="<?php echo $this->escapeHtml($child->getName()); ?>" />
+                    <?php endif; ?>
+                    <span><?php echo $this->escapeHtml($child->getName()); ?></span>
+                </a>
+                <?php if ($child->hasChildren() || $child->getId() != 'home-link'): ?>
+                    <div class="wpmm-nav-content">
+                        <div class="wpmm-nav-content-inner w">
+                            <?php if ($child->getStaticBlock()): ?>
+                                <div class="cat-static-block">
+                                    <?php echo $this->getStaticBlock($child->getStaticBlock()); ?>
+                                </div>
+                            <?php else: ?>
+                                <?php if ($child->getTopBlock()): ?>
+                                <div class="cat-top-block"><?php echo $child->getTopBlock(); ?></div>
+                                <?php endif; ?>
+                                <?php if ($child->hasChildren()): ?>
+                                    <?php
+                                        $overallCounter = 1;
+                                        $subCategoryCounter = 1;
+                                        $subCategoriesCounter = $child->getChildren()->count();
+                                        $itemsPerColumns = 1;
+                                        $categColumns = array(1);
+                                        $column = 0;
+                                        if ($child->getColumns()) {
+                                            $column = (int)$subCategoryCounter/$itemsPerColumns;
+                                            $categColumns = array_fill(0, $child->getColumns(), 0);
+                                            for ($i=0; $i < $subCategoriesCounter; $i++) :
+                                                $categColumns[$i % $child->getColumns()] += 1;
+                                            endfor;
+                                        }
+                                    ?>
+                                    <?php if (!empty($childrenWrapClass)): ?>
+                                    <div class="<?php echo $childrenWrapClass; ?>">
+                                    <?php endif; ?>
+                                    <?php foreach ($child->getChildren() as $subCategory): ?>
+                                        <?php
+                                            $itemsPerColumns = $categColumns[0];
+                                            $index = $subCategoryCounter%$itemsPerColumns;
+                                            $subCategory->setLevel($child->getLevel() + 1);
+                                            $subCategory->setIsFirst($subCategoryCounter == 1);
+                                            $subCategory->setIsLast($subCategoryCounter == $itemsPerColumns);
+                                            $subCategory->setPositionClass($child->getPositionClass() . '-' . $overallCounter);
+                                        ?>
+                                            <?php if ($itemsPerColumns == 1 || $subCategory->getIsFirst() || $index == 1): ?>
+                                            <ul class="level<?php echo $childLevel; ?> nav-column <?php if ($column != 0): ?>nav-column-<?php echo $column; ?><?php endif; ?>">
+                                            <?php endif; ?>
+                                                <li <?php echo $this->getRenderedMenuItemAttributes($subCategory); ?>>
+                                                    <?php if ($subCategory->getTitleImage()): ?>
+                                                        <a href="<?php echo $subCategory->getUrl(); ?>" class="nav-link">
+                                                            <img src="<?php echo $subCategory->getTitleImage() ?>" alt="<?php echo $this->escapeHtml($subCategory->getName()); ?>" />
+                                                        </a>
+                                                    <?php else: ?>
+                                                        <a href="<?php echo $subCategory->getUrl(); ?>" class="nav-link">
+                                                            <span><?php echo $this->escapeHtml($subCategory->getName()); ?></span>
+                                                        </a>
+                                                    <?php endif; ?>
+                                                    <?php if ($subCategory->hasChildren()): ?>
+                                                        <?php if (!empty($childrenWrapClass)): ?>
+                                                            <div class="<?php echo $childrenWrapClass; ?>">
+                                                        <?php endif; ?>
+                                                        <ul class="level<?php echo $subCategory->getLevel(); ?>">
+                                                            <?php echo $this->renderChild($subCategory, $childrenWrapClass); ?>
+                                                        </ul>
+                                                        <?php if (!empty($childrenWrapClass)): ?>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    <?php endif; ?>
+                                                    <?php if ($subCategory->hasChildren()): ?><span class="subnav-toggle"><i class="icon icon-angle-down"></i><i class="icon icon-angle-up"></i></span><?php endif; ?>
+                                                </li>
+                                            <?php if ($subCategory->getIsLast() || $index == 0):
+                                                if ($itemsPerColumns != 1) : array_shift($categColumns); endif;
+                                                ?>
+                                            </ul>
+                                            <?php $subCategoryCounter = 0; ?>
+                                            <?php endif; ?>
+                                        <?php ++$subCategoryCounter; ++$overallCounter; endforeach; ?>
+
+                                    <?php if (!empty($childrenWrapClass)): ?>
+                                    </div>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                                <?php if ($child->getRightBlock()): ?>
+                                    <div class="cat-right-block"><?php echo $child->getRightBlock(); ?></div>
+                                <?php endif; ?>
+                                <?php if ($child->getBottomBlock()): ?>
+                                    <div class="cat-bottom-block"><?php echo $child->getBottomBlock(); ?></div>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?php if ($child->hasChildren() || $child->getStaticBlock()): ?>
+                        <span class="subnav-toggle"><i class="icon icon-angle-down"></i><i class="icon icon-angle-up"></i></span>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <span id="wpmm-closer"><i class="icon icon-remove"></i></span>
+                <?php endif; ?>
+            </li>
+            <?php ++$counter; endforeach; ?>
+        </ul>
+        <div class="wpmm-mobile-cms">
+            <?php echo $this->getChildHtml('cms_weltpixel_mm_custom_mobile_block'); ?>
+        </div>
+    </div>
+</div>
+<span id="wpmm-opener"><i class="icon icon-line-menu"></i></span>
+<?php endif ?>

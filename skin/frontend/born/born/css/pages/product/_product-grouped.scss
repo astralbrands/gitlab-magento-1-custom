@@ -1,0 +1,243 @@
+// app\design\frontend\born\born\template\grouped-options\grouped.phtml
+
+.group-product {
+  .product-view .product-shop .product-name {
+    #BVRRSummaryContainer,
+    #BVRRInlineRating-new-test-configurable,
+    #BVRRInlineRating-new-test-group {
+      display: none;
+    }
+  }
+  .form-add-to-cart-radio-group,
+  .add-to-cart,
+  .availability {
+    display: none;
+  }
+  .std {
+    margin-bottom: 30px;
+  }
+  .form-add-to-cart .bundle-list-inner .ampreorder_note,
+  .form-add-to-cart .shade .ampreorder_note {
+    display: none;
+  }
+  .data-table {
+    border-top: 1px solid $block-border-color;
+    margin-bottom: 50px;
+    &-item {
+      border: 1px solid $block-border-color;
+      border-top: 0;
+      padding: 30px;
+      display: block;
+      width: 100%;
+      .price-box {
+        text-align: left;
+      }
+      &-top {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        margin-bottom: 20px;
+        &-content {
+          display: table-cell;
+          vertical-align: top;
+        }
+        &-img-container {
+          display: table-cell;
+          vertical-align: top;
+          width: 150px;
+          text-align: center;
+          img {
+            float: right;
+          }
+        }
+      }
+      &-about {
+        @include display(flex);
+        margin-bottom: 20px;
+      }
+      &-bottom {
+        @include display(flex);
+        @include flex-wrap(wrap);
+        @include justify-content(space-between);
+      }
+      &-step,
+      &-price {
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 1.8rem;
+      }
+      &-step {
+        display: inline-block;
+        margin-bottom: 15px;
+      }
+      &-img {
+        margin: 0 auto;
+        max-width: 100%;
+        height: auto;
+      }
+      &-text,
+      &-size {
+        font-size: 1.6rem;
+        line-height: 2.4rem;
+        font-weight: 200;
+      }
+      &-text {
+        @include gothamBook;
+      }
+      &-size {
+        margin-left: auto;
+      }
+      &-more {
+        display: inline-block;
+        color: $light-text-color;
+        font-size: 1.3rem;
+        font-weight: 400;
+        margin-top: 10px;
+        text-decoration: underline;
+        &:hover {
+          color: $black;
+        }
+      }
+      &-cart-btn {
+        @include gotham;
+        @include transparentButton(4.4rem, 1.3rem, $black, $white);
+        height: 50px;
+        background: transparent;
+        margin: 24px 0 0 20px;
+      }
+    }
+    .selects-attribute-wrapper {
+      @include display(flex);
+    }
+    .a-center {
+      margin-right: 20px;
+    }
+    .label-text-up {
+      float: left;
+      @include gotham;
+      font-weight: 400;
+    }
+  }
+}
+
+.group-product,
+.product-bundle-view {
+  .shade {
+    margin-left: 0;
+    .shade-top {
+      padding-bottom: 10px;
+    }
+    .shade-list {
+      display: inline-block;
+      width: calc(100% - 73px);
+      height: 48px;
+      overflow: hidden;
+    }
+    li {
+      width: 48px;
+    }
+    a {
+      display: inline-block;
+    }
+    img {
+      width: 48px;
+      height: 48px;
+    }
+    .checked:after {
+      font-size: 2.7rem;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      top: 0;
+      display: flex;
+      justify-content: center;
+    }
+    .more-less {
+      font-size: 1.2rem;
+      display: inline-flex;
+      vertical-align: top;
+    }
+    .btn-more {
+      display: block;
+    }
+    .btn-less {
+      display: none;
+    }
+    &.swatches-open {
+      .shade-list {
+        overflow: inherit;
+        height: auto;
+      }
+      .btn-more {
+        display: none;
+      }
+      .btn-less {
+        display: block;
+      }
+    }
+  }
+}
+
+.group-product {
+  .shade {
+    .shade-list {
+      width: calc(100% - 195px);
+      .shade-item {
+        height: 48px;
+      }
+    }
+    .shade-guide {
+      margin-right: 0;
+    }
+  }
+}
+
+
+@media only screen and (max-width: $tablet-m){
+  .group-product{
+    .data-table-item-cart-btn {
+      margin-left: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile){
+  .group-product {
+    .form-add-to-cart-row .product-shop .product-name h2 {
+      @include gothamBook;
+      font-size: 1.8rem;
+    }
+    .data-table-item {
+      padding: 10px 20px 30px 20px;
+    }
+    .data-table-item-top-content {
+      text-align: left;
+    }
+    .shade {
+      margin-left: -7px;
+      text-align: left;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-s){
+  .group-product {
+    .product-shop {
+      padding: 0;
+    }
+    .shade {
+      .shade-list {
+        width: calc(100% - 40px);
+      }
+      .shade-guide {
+        display: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-xs){
+  .group-product{
+
+  }
+}

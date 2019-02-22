@@ -1,0 +1,257 @@
+<?php
+/**
+ * Copyright 2014 Zendesk.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+?>
+<pre class="press">
+	<div class="pro-artist-form" id="pro-registration">
+		<form action="<?php echo $this->getSubmitAction(); ?>" id="pro-artist-signup"  enctype="multipart/form-data" method="post" class="scaffold-form">
+			<div class="fieldset">
+				<h2 class="legend">Registration Form</h2>
+				<div class="fieldset fieldset-0">
+					<div class="group-name">general</div>
+					<ul>
+						<li>
+							<div class=" field-general">
+								<div class="input-box">
+									<input name="first_name" id="first_name" title="first_name" value="" class="input-text required-entry" type="text">
+									<label class="label-text" for="first_name">First Name</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-general">
+								<div class="input-box">
+									<input name="last_name" id="last_name" title="last_name" value="" class="input-text required-entry" type="text">
+									<label class="label-text" for="last_name">Last Name</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-general">
+								<div class="input-box">
+									<input name="email_address" id="email_address" title="email_address" value="" class="input-text required-entry validate-email" type="email">
+									<label class="label-text" for="email_address">Email Address</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-general">
+								<div class="input-box">
+									<input name="address_1" id="address_1" title="address_1" value="" class="input-text required-entry" type="text">
+									<label class="label-text" for="address_1">Address 1</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-general">
+								<div class="input-box">
+									<input name="address_2" id="address_2" title="address_2" value="" class="input-text " type="text">
+									<label class="label-text" for="address_2">Address 2</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-general">
+								<div class="input-box">
+									<input name="city" id="city" title="city" value="" class="input-text required-entry" type="text">
+									<label class="label-text" for="city">City</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-general">
+								<div class="input-box">
+									<input name="state_territory" id="state_territory" title="state_territory" value="" class="input-text required-entry " type="text">
+									<label class="label-text" for="state_territory">State / Territory</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-general">
+								<div class="input-box">
+									<input name="zip_postal_code" id="zip_postal_code" title="zip_postal_code" value="" class="input-text required-entry validate-zip" type="text">
+									<label class="label-text" for="zip_postal_code">Zip / Postal Code</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-general">
+								<div class="input-box">
+									<input name="country" id="country" title="country" value="" class="input-text required-entry" type="text">
+									<label class="label-text" for="country">Country</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-general">
+								<div class="input-box">
+									<input name="phone_number" id="phone_number" title="phone_number" value="" class="input-text required-entry validate-phoneLax" type="tel">
+									<label class="label-text" for="phone_number">Phone number</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-general">
+								<div class="input-box">
+									<input name="company_personal_url" id="company_personal_url" title="company_personal_url" value="" class="input-text validate-clean-url" type="text">
+									<label class="label-text" for="company_personal_url">Company / Personal URL</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-expertise">
+								<div class="check-box">
+									<input name="sign_up_for_our_newsletter" id="sign_up_for_our_newsletter" title="sign_up_for_our_newsletter" value="Sign up for our newsletter" class=" " type="checkbox">
+									<label for="sign_up_for_our_newsletter">Sign up for our newsletter</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-general">
+								<div class="input-box">
+									<input name="facebook_page" id="facebook_page" title="facebook_page" value="" class="input-text " type="url">
+									<label class="label-text" for="facebook_page">Facebook Page</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-general">
+								<div class="input-box">
+									<input name="instagram_page" id="instagram_page" title="instagram_page" value="" class="input-text " type="url">
+									<label class="label-text" for="instagram_page">Instagram Page</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-general">
+								<div class="input-box">
+									<input name="awards_won" id="awards_won" title="awards_won" value="" class="input-text " type="text">
+									<label class="label-text" for="awards_won">Awards Won</label>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="fieldset fieldset-1 required-entry">
+					<div class="group-name">Area of Expertise</div>
+					<ul>
+						<li>
+							<div class=" field-expertise">
+								<div class="check-box">
+									<input name="area_of_expertise[]" id="celebrity" title="area_of_expertise" value="Celebrity" class="validate-one-required-by-name" type="checkbox">
+									<label for="celebrity">Celebrity</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-expertise">
+								<div class="check-box">
+									<input name="area_of_expertise[]" id="red_carpet" title="area_of_expertise" value="Red Carpet" class=" " type="checkbox">
+									<label for="red_carpet">Red Carpet</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-expertise">
+								<div class="check-box">
+									<input name="area_of_expertise[]" id="editorial" title="area_of_expertise" value="Editorial" class=" " type="checkbox">
+									<label for="editorial">Editorial</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-expertise">
+								<div class="check-box">
+									<input name="area_of_expertise[]" id="wedding" title="area_of_expertise" value="Wedding" class=" " type="checkbox">
+									<label for="wedding">Wedding</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-expertise">
+								<div class="check-box">
+									<input name="area_of_expertise[]" id="retail_sales" title="area_of_expertise" value="Retail Sales" class=" " type="checkbox">
+									<label for="retail_sales">Retail Sales</label>
+								</div>
+							</div>
+						</li>
+
+						<li class="">
+							<div class="field field-credentials field-comments">
+								<label class="label-text-up">Anything else?</label>
+								<div class="input-box">
+									<textarea name="area_of_expertise_comment" id="comment" title="Comment" class="input-text" cols="3" rows="6"></textarea>
+									<label for="comment" class="label-text required">Comment</label>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="fieldset fieldset-2">
+					<div class="group-name">Your Credentials</div>
+					<ul>
+						<li>
+							<div class="field-credentials">
+								<label class="label-text-up" for="photo_identification">Photo Identification</label>
+								<div class="file-box">
+									<input name="photo_identification" id="photo_identification" title="photo_identification" value="" class="input-text input-field required-entry" type="file" data-caption="file selected">
+									<label class="label-file" for="photo_identification">Choose file</label>
+									<span class="label-file-right">No File Chosen</span>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-credentials">
+								<label class="label-text-up" for="1st_proof_of_profession">1st Proof of Profession</label>
+								<div class="file-box">
+									<input name="1st_proof_of_profession" id="1st_proof_of_profession" title="1st_proof_of_profession" value="" class="input-text input-field required-entry" type="file" data-caption="file selected">
+									<label class="label-file" for="1st_proof_of_profession">Choose file</label>
+									<span class="label-file-right">No File Chosen</span>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-credentials">
+								<label class="label-text-up" for="2nd_proof_of_profession"> 2nd Proof of Profession</label>
+								<div class="file-box">
+									<input name="2nd_proof_of_profession" id="2nd_proof_of_profession" title="2nd_proof_of_profession" value="" class="input-text input-field " type="file" data-caption="file selected">
+									<label class="label-file" for="2nd_proof_of_profession">Choose file</label>
+									<span class="label-file-right">No File Chosen</span>
+								</div>
+							</div>
+						</li>
+						<li class="">
+							<div class="field field-credentials field-comments">
+								<label class="label-text-up">Anything else?</label>
+								<div class="input-box">
+									<textarea name="credential_comment" id="comment" title="Comment" class="input-text" cols="3" rows="6"></textarea>
+									<label for="comment" class="label-text required">Comment</label>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>	
+			</div>
+			<div class="buttons-set">
+				<input type="text" name="hideit" id="hideit" value="" style="display:none !important;">
+				<button type="submit" title="Submit" class="button"><span><span>Submit Application</span></span></button>
+			</div>
+		</form>
+		<script type="text/javascript">
+			var proArtistForm = new VarienForm('pro-artist-signup', true);
+		</script>
+	</div>

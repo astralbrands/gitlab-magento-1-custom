@@ -1,0 +1,38 @@
+<?php $_helper = $this->helper('weltpixel_layerednavigation');
+$showCategoryCount = $_helper->showProductCountOnCategories();
+$categoriesDisplayOption = $_helper->getCategoryDisplay();
+?>
+<ol>
+    
+ <?php 
+switch ($categoriesDisplayOption) { case 1: ?>
+ <select onchange="if (this.value) setLocation(this.value)" class="weltpixel-layered-select">
+            <option value=""></option>
+            <?php foreach ($this->getItems() as $_item): ?>
+            <option  value="<?php echo $this->urlEscape($_item->getUrl()) ?>"><?php echo $_item->getLabel() ?> <?php if ($showCategoryCount) : ?> (<?php echo $_item->getCount() ?>) <?php endif; ?></option>
+            <?php endforeach ?>
+        </select>
+<?php break; ?>
+
+<?php case 2: /*not used*/ ?>
+    <?php echo $this->_generateTree($this->getItems(), 0); ?>
+<?php break; ?>
+<?php    default: ?>
+    
+    <?php foreach ($this->getItems() as $_item): ?>
+    <li>
+        <?php if ($_item->getCount() > 0): ?>
+        <a href="<?php echo $this->urlEscape($_item->getUrl()) ?>"><?php echo $_item->getLabel() ?></a>
+        <?php else: echo $_item->getLabel() ?>
+        <?php endif; ?>
+        <?php if (($this instanceof Mage_Catalog_Block_Layer_Filter_Category) && !$showCategoryCount ): ?>
+            <?php continue; ?>
+        <?php endif; ?>
+            <?php if ($this->shouldDisplayProductCount()): ?>
+            (<?php echo $_item->getCount() ?>)
+            <?php endif; ?>
+    </li>
+<?php endforeach ?>
+    
+<?php break;  } ?>
+</ol>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <weltpixel translate="title">
+            <title>WeltPixel</title>
+            <sort_order>300</sort_order>
+            <children>
+                <newsletter translate="title" module="weltpixel_newsletter">
+                    <title>Newsletter</title>
+                    <action>adminhtml/system_config/edit/section/weltpixel_newsletter</action>
+                    <sort_order>10</sort_order>
+                </newsletter>
+            </children>
+        </weltpixel>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <weltpixel_newsletter translate="title" module="weltpixel_newsletter">
+                                        <title>WeltPixel Newsletter</title>
+                                        <sort_order>1000</sort_order> 
+                                    </weltpixel_newsletter>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

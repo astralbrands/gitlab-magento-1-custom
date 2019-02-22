@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config>
+    <api>
+        <resources>
+            <sagepaymentspro translate="title" module="ebizmarts_sagepaymentspro">
+                <model>ebizmarts_sagepaymentspro/api</model>
+                <title>SagePayments API</title>
+                <acl>sagepaymentspro/api</acl>
+                <methods>
+                    <info translate="title" module="ebizmarts_sagepaymentspro">
+                        <title>SagePayments Info</title>
+                        <acl>sagepaymentspro/api/info</acl>
+                    </info>
+                </methods>
+            </sagepaymentspro>
+        </resources>
+        <acl>
+            <resources>
+                <sagepaymentspro translate="title" module="ebizmarts_sagepaymentspro">
+                    <title>SagePayments</title>
+                    <sort_order>89</sort_order>
+                    <api translate="title" module="ebizmarts_sagepaymentspro">
+                        <title>SagePayments API</title>
+                        <info translate="title" module="ebizmarts_sagepaymentspro">
+                            <title>Retrieve payment info</title>
+                        </info>
+                    </api>
+                </sagepaymentspro>
+            </resources>
+        </acl>
+    </api>
+</config>

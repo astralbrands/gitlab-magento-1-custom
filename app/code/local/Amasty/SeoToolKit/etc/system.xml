@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoToolKit
+ */
+-->
+<config>
+    <sections>
+        <amseotoolkit translate="label" module="amseotoolkit">
+            <label>SEO ToolKit</label>
+            <tab>amasty</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>190520</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <expanded>1</expanded>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <home_redirect translate="label comment">
+                            <label>301 Redirects to Home Page</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Requests to /index.php, /cms/index, /home will be redirected to Home Page]]></comment>
+                        </home_redirect>
+                    </fields>
+                </general>
+                <pager translate="label">
+                    <label>Pager Optimization</label>
+                    <expanded>1</expanded>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <prev_next translate="label comment">
+                            <label>Add Link Rel="next/prev"</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Use the rel=next/prev tag to point Google where the next or the previous pages are. Click <a target="_blank" href="https://webmasters.googleblog.com/2011/09/pagination-with-relnext-and-relprev.html">here</a> to read more.]]></comment>
+                        </prev_next>
+                        <meta_title_suffix translate="label comment">
+                            <label>Add Page Number to Meta Title</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Adds the Page Number at the end of the Meta Title, e.g. 'Apparel <strong>Page 5</strong>']]></comment>
+                        </meta_title_suffix>
+                        <meta_description_suffix translate="label comment">
+                            <label>Add Page Number to Meta Description</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Adds the Page Number at the end of the Meta Title, e.g. 'Apparel Description <strong>Page 5</strong>']]></comment>
+                        </meta_description_suffix>
+                    </fields>
+                </pager>
+            </groups>
+        </amseotoolkit>
+    </sections>
+</config>

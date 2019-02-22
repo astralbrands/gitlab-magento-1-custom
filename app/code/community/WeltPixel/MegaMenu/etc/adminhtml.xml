@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <weltpixel translate="title">
+            <title>WeltPixel</title>
+            <sort_order>200</sort_order>
+            <children>
+                <megamenu translate="title" module="weltpixel_megamenu">
+                    <title>MegaMenu</title>
+                    <action>adminhtml/system_config/edit/section/weltpixel_megamenu</action>
+                    <sort_order>10</sort_order>
+                </megamenu>
+            </children>
+        </weltpixel>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <weltpixel_megamenu translate="title" module="weltpixel_megamenu">
+                                        <title>WeltPixel MegaMenu</title>
+                                        <sort_order>1400</sort_order> 
+                                    </weltpixel_megamenu>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

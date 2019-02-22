@@ -1,0 +1,151 @@
+// core of html in  app\design\frontend\born\born\template\persistent\customer\form\register.phtml
+
+//registration
+
+.customer-account-create {
+
+  .col-main {
+    .background-image {
+      position: relative;
+      p {
+        overflow: hidden;
+      }
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .account-wrappper {
+    padding: 70px 0 107px;
+    @include position(absolute, 0 0 0 0);
+    width: 100%;
+  }
+  .account-create{
+    width: 461px;
+    margin: 0 auto;
+  }
+  .account-page-title,
+  .account-page-title-pro{
+    border-bottom: none;
+    color: $black;
+    @include gotham;
+    @include setFont(2.8rem, 4.2rem, 200);
+    letter-spacing: -0.07rem;
+    text-align: center;
+    text-transform: none;
+  }
+  .account-content {
+    .buttons-set {
+      max-width: none;
+      .btn-professionals {
+        display: none;
+      }
+    }
+  }
+  .fieldset {
+    margin-left: 0;
+  }
+  .form-list .control {
+    label {
+      margin-bottom: 0;
+    }
+  }
+  .fields {
+    .field {
+      margin-bottom: 0;
+    }
+  }
+  .remember-me-box {
+    margin-top: 0;
+  }
+  .account-page-title-pro {
+    display: none;
+  }
+  a.back-link {
+    @include gotham();
+    @include setFont(1.3rem, 2.4rem, 500);
+    color: $light-text-color;
+    display: block;
+    text-align: center;
+    text-decoration: underline;
+    &:hover {
+      color: $black;
+    }
+  }
+  .professionals-view {
+    .account-page-title {
+      display: none;
+    }
+    .account-page-title-pro {
+      display: block;
+    }
+    .fieldset {
+      display: none;
+    }
+    .buttons-set {
+      .btn-members {
+        display: none;
+      }
+      .btn-professionals {
+        display: block;
+        line-height: 4.1rem;
+      }
+    }
+  }
+  #firstname, #middlename, #lastname, #email_address {
+    border-bottom: none !important;
+  }
+  .customer-dob {
+    @include display(flex);
+    .dob-month,
+    .dob-day {
+      @include flex-basis(30%);
+      margin-right: 0;
+    }
+    .dob-day {
+      .input-text {
+        border-left: 0 !important;
+      }
+    }
+    .dob-year {
+      @include flex-basis(40%);
+      .input-text {
+        border-left: 0 !important;
+      }
+    }
+  }
+  .customer-dob-title {
+    @include gothamBook;
+    @include setFont(1.4rem, 4.2rem, 400);
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (max-width: $desktop-m) {
+  .customer-account-create {
+    .col-main {
+      .background-image {
+        img {
+          width: inherit;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-s) {
+  .customer-account-create {
+    .account-wrappper {
+      padding: 55px 0 66px;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-xs) {
+  .customer-account-create {
+    .account-create {
+      width: 100%;
+    }
+  }
+}

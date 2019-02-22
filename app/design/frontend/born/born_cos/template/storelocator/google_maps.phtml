@@ -1,0 +1,7 @@
+<?php 
+
+$apiKey = Mage::getStoreConfig('storelocator/storelocator/google_api_key');
+
+if (isset($apiKey) && !empty($apiKey)) : ?>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?php echo $apiKey; ?>"></script>
+<?php endif; ?>

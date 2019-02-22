@@ -1,0 +1,106 @@
+.summary-filters-box {
+  .actions a:after,
+  .currently .btn-remove:after {
+    content: "\e90b";
+  }
+}
+.filter-container {
+  @include display(flex);
+  @include justify-content(center);
+  .block-subtitle--filter {
+    display: none;
+  }
+}
+.static-filter {
+  @include flex-basis(25%);
+  max-width: 300px;
+  float: none;
+  text-align: center;
+  .input-box {
+    height: 40px;
+    .label-text {
+      color: $black;
+      @include setFont(1.4rem, 5rem, 200);
+      left: -4px;
+      top: 0;
+    }
+  }
+}
+.toggle-content {
+  padding: 30px 20px;
+  .filter-title {
+    @include gotham;
+    @include setFont(1.4rem, 5rem, 500);
+  }
+}
+.filter-shade-img {
+  margin-right: calc(100% - 180px);
+}
+
+
+@media only screen and (max-width: $desktop-custom-5){
+  .toggle-content {
+    .filter-container {
+      @include display(flex);
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile + 2px){
+  .block-content.toggle-content {
+    margin-top: 0;
+    padding-top: 15px;
+  }
+  .toggle-content .filter-container {
+    display: block;
+  }
+  .static-filter {
+    max-width: 100%;
+    .filter-list {
+      display: none;
+    }
+    &.open-filter-mobile {
+      .filter-list {
+        display: block;
+      }
+    }
+  }
+  .toggle-content {
+    .filters__header-mobile {
+      border-bottom: 4px solid $menu-border-color;
+      margin: 0;
+    }
+    .filter-title {
+      margin-bottom: 0;
+      &:before {
+        content: "\e904";
+        font-family: $icomoon;
+        @include transform(rotate(-90deg));
+        border: none;
+        width: initial;
+        height: initial;
+      }
+    }
+    .open-filter-mobile .filter-title:before {
+      @include transform(rotate(0deg));
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile + 2px) {
+  .category-products .filters-btn .btnx {
+    line-height: 3.6rem;
+    & > span {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .toggle-content {
+    .open-filter-mobile .filter-title:before,
+    .static-filter.open-filter-mobile .filter-title:before {
+      @include transform(rotate(0deg));
+    }
+  }
+}

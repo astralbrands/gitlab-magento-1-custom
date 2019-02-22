@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Astral_Feeds>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <WeltPixel_QuickView/>
+            </depends>
+        </Astral_Feeds>
+    </modules>
+</config>

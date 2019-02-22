@@ -1,0 +1,21 @@
+<header id="page-header" class="v1">
+    <?php echo $this->getChildHtml('global_promo_message_container'); ?>
+    <div id="page-header-section-01">
+        <div class="w header-container">
+        	<?php echo $this->getChildHtml('logo'); ?>
+        	<?php echo $this->getChildHtml('quickAccess'); ?>
+        	<span  class="header-settings"><i class="icon-user"></i></span>
+        	<div class="header-options">
+        		<?php echo $this->getChildHtml('topLinks'); ?>
+	            <?php echo $this->getChildHtml('store_language_flag') ?>
+	            <?php echo $this->getChildHtml('custom_currency_selector') ?>
+        	</div>
+
+        </div>
+    </div>
+    <div id="page-header-section-02">
+        <?php echo $this->getChildHtml('topMenu'); ?>
+    </div>
+</header>
+<div id="endHeader" class="v1"></div>
+<?php echo $this->getChildHtml('topContainer'); ?>

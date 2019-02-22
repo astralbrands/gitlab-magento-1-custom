@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Born_Sidecar>
+      <version>0.1.0</version>
+    </Born_Sidecar>
+  </modules>
+  <frontend>
+		<layout>
+		  <updates>
+			<sidecar>
+			  <file>sidecar.xml</file>
+			</sidecar>
+		  </updates>
+		</layout>
+  </frontend>
+  <global>
+	<models>
+        <born_sidecar>
+            <class>Born_Sidecar_Model</class>
+        </born_sidecar>
+    </models>
+    <helpers>
+      <sidecar>
+        <class>Born_Sidecar_Helper</class>
+      </sidecar>
+    </helpers>
+	<blocks>
+	  <born_sidecar>
+		<class>Born_Sidecar_Block</class>
+	  </born_sidecar>
+	</blocks>
+  </global>
+</config> 

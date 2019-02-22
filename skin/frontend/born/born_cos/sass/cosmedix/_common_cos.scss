@@ -1,0 +1,44 @@
+input[type="checkbox"] + label::before {
+  content: "\e909";
+}
+
+input[type="checkbox"]:checked + label::before {
+  content: "\e908";
+}
+
+.jq-selectbox__trigger-arrow:before {
+  content: "\e904";
+}
+
+.btn {
+  border-width: 2px;
+}
+
+.price-box {
+  margin: 0 0 7px 0;
+}
+
+.color-swatches {
+  display: none;
+}
+
+/*BV stars*/
+.bv-cleanslate [class*=bv-core-container-] .bv-inline-rating-container .bv-stars-container dd.bv-rating-ratio {
+  display: block !important;
+  text-align: center !important;
+}
+
+.product-shop {
+  .bv-cleanslate [class*=bv-core-container-] .bv-inline-rating-container .bv-stars-container dd.bv-rating-ratio {
+    display: inline-block !important;
+    text-align: left !important;
+  }
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  background-color: transparent;
+  background-image: none;
+  color: $black;
+}

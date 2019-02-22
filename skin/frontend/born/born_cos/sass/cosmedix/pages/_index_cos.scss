@@ -1,0 +1,833 @@
+.cms-index {
+  /*Hero*/
+  .hero {
+    .svg-file {
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      color: $black;
+      font-weight: 200;
+      text-transform: none;
+      margin-bottom: 21px;
+    }
+    .description {
+      color: $black;
+      @include gotham;
+      @include setFont(1.8rem, 3rem, 200);
+      max-width: 770px;
+    }
+    .hero-title-wrap {
+      max-width: 100%;
+    }
+  }
+  /*Results*/
+  .results {
+    .one-third {
+      .slot-title {
+        font-weight: 200;
+        text-transform: none;
+        max-width: 320px;
+      }
+    }
+    .product-slot {
+      .custom-tag-msg {
+        border-radius: 0;
+        width: 57px;
+        height: 32.91px;
+        background-color: #25272b;
+        margin: 16.45px 0;
+        padding: 5px;
+        &:before,
+        &:after {
+          content: "";
+          position: absolute;
+          left: 0;
+          width: 0;
+          border-left: 28.5px solid transparent;
+          border-right: 28.5px solid transparent;
+        }
+        &:before {
+          bottom: 100%;
+          border-bottom: 16.45px solid $black;
+        }
+        &:after {
+          top: 100%;
+          width: 0;
+          border-top: 16.45px solid  $black;
+        }
+      }
+      .product-name {
+        margin-bottom: 0;
+        a {
+          color: $black;
+          @include gotham;
+          @include setFont(1.4rem, 2.4rem, 500);
+          text-transform: uppercase;
+          letter-spacing: 0.15rem;
+        }
+      }
+      .product-subtitle {
+        padding: 0 20px;
+        @include gothamBook;
+        @include setFont(1.2rem, 2.4rem, 400);
+        letter-spacing: 0.15rem;
+        text-transform: uppercase;
+      }
+      .regular-price {
+        @include whitneyBook;
+        font-style: italic;
+        font-weight: normal;
+        .price {
+          @include whitneyBook;
+          font-size: 1.6rem;
+          font-style: italic;
+        }
+      }
+    }
+    .product-slot-outer:hover {
+      .bv-cleanslate {
+        display: none !important;
+      }
+      .btns {
+        height: 69px;
+        left: 0;
+      }
+      .quickview, .wishlist {
+        @include gotham();
+        @include setFont(1.2rem, 2.2rem, 500);
+        border: 1px solid $block-border-color;
+        display: inline-block;
+        width: 114px;
+        height: 100%;
+        padding: 12px 0;
+        text-align: center;
+        text-transform: uppercase;
+        vertical-align: middle;
+        position: relative;
+        &:before {
+          display: block;
+          width: 100%;
+          height: 20px;
+          line-height: 2rem;
+          font-family: $icomoon;
+          color: $icon-color;
+          position: absolute;
+          bottom: 12px;
+          text-align: center;
+          vertical-align: middle;
+        }
+        &:hover {
+          @include transition(all $fast ease);
+          text-decoration: none;
+          background: $black;
+          color: $white;
+          &:before {
+            color: $white;
+          }
+        }
+      }
+      .quickview {
+        &:before {
+          content: "\e936";
+          font-size: 2rem;
+        }
+      }
+      .wishlist {
+        border-left: 0;
+        &:before {
+          content: "\e90d";
+          font-size: 2rem;
+        }
+        &.favorite {
+          &:before {
+            content: "\e90e";
+          }
+          &:hover {
+            &:before {
+              color: $white;
+            }
+          }
+        }
+      }
+    }
+    .one-third-vertical {
+      .box-inner {
+        background: $menu-border-color;
+        &__middle {
+          max-width: 340px;
+        }
+      }
+      .slot-title {
+        color: $black;
+        font-weight: 200;
+        text-transform: none;
+        margin-bottom: 55px;
+      }
+      .slot-text {
+        color: $black;
+        max-width: 220px;
+        margin: 0 auto;
+        @include setFont(1.6rem, 3rem, 200);
+        b {
+          font-size: 3.6rem;
+          font-weight: 500;
+        }
+      }
+    }
+    .background-image .bottom-left-tag {
+      @include whitneyBook;
+      font-style: italic;
+    }
+  }
+  /*Science*/
+  .science {
+    @include display(flex);
+    @include flex-wrap(wrap);
+    border-top: 0;
+    max-width: 935px;
+    margin: 0 auto 30px;
+    .science-inner {
+      @include flex-basis(33.33%);
+      position: relative;
+      &.title-block {
+        @include flex-basis(100%);
+        padding: 60px;
+        text-align: center;
+      }
+      &.text-block {
+        max-width: 33.33%;
+      }
+    }
+    .title {
+      @include setFont(3.6rem, 4.2rem, 200);
+      text-transform: none;
+    }
+    .description {
+      @include setFont(1.6rem, 3rem, 200);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .text-block {
+      border: 1px solid $block-border-color;
+      padding: 20px 30px;
+      .title {
+        @include gotham;
+        @include setFont(1.6rem, 4.2rem, 500);
+        letter-spacing: 0.15rem;
+        text-transform: uppercase;
+      }
+      .description {
+        @include gotham;
+        @include setFont(1.4rem, 2.1rem, 200);
+      }
+    }
+    img.background-img {
+      max-width: 100%;
+      height: auto;
+      width: 100%;
+    }
+  }
+  .section {
+    margin-bottom: 100px;
+    .section-title {
+      @include setFont(1.8rem, 4.2rem, 500);
+      letter-spacing: 0.07rem;
+      margin-bottom: 16px;
+    }
+    .half {
+      .slot-title {
+        max-width: 300px;
+        @include whitneyBook;
+        @include setFont(2.6rem, 6rem, 400);
+        font-style: italic;
+      }
+      .slot-text {
+        line-height: 3rem;
+      }
+      .box-inner__middle {
+        padding: 35px 50px;
+      }
+    }
+  }
+  /*Team*/
+  .team {
+    .press {
+      &__col-wrap {
+        @include display(flex);
+        @include flex-wrap(wrap);
+        border: 1px solid $block-border-color;
+        &._initialized {
+          display: block;
+        }
+      }
+      &__col {
+        @include flex-basis(33.33%);
+        &:nth-of-type(2n) {
+          .press__info {
+            order: 2;
+            &:before {
+              border-top: 0;
+              border-bottom: 12px solid $black;
+              bottom: 100%;
+              top: auto;
+            }
+          }
+        }
+      }
+      &__image-link {
+        display: block;
+        border: 1px solid $block-border-color;
+        position: relative;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+      &__info {
+        padding-top: 100%;
+        position: relative;
+        &:before {
+          @include hrp();
+          top: 100%;
+          width: 25px;
+          height: 12px;
+          border-top: 12px solid $white;
+          border-left: 12px solid transparent;
+          border-right: 12px solid transparent;
+          z-index: 2;
+        }
+        &:after {
+          z-index: 2;
+        }
+        &-inner {
+          @include position(absolute, 0 0 0 0);
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          padding: 0 30px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          text-align: center;
+        }
+      }
+    }
+    .section-title {
+      @include gotham;
+      @include setFont(3.6rem, 4.2rem, 200);
+      text-align: center;
+      text-transform: none;
+      margin-bottom: 25px;
+    }
+    .description {
+      @include gotham;
+      @include setFont(1.8rem, 3rem, 200);
+      text-transform: none;
+      margin-bottom: 20px;
+    }
+    .author {
+      @include whitneyBook;
+      @include setFont(2.4rem, 4.2rem, 400);
+      font-style: italic;
+    }
+    .author-subtext {
+      @include whitneyBook;
+      @include setFont(1.8rem, 4.2rem, 400);
+      font-style: italic;
+      margin-bottom: 25px;
+    }
+    .cta-button {
+      color: $dark-grey-background;
+      @include gotham;
+      @include setFont(1.3rem, 2.4rem, 500);
+      text-decoration: underline;
+    }
+    .press__col:nth-of-type(4),
+    .press__col:nth-of-type(6){
+      .press__info:before {
+        top: 100%;
+        bottom: auto;
+        border-top: 12px solid $white;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-bottom: 0;
+        z-index: 2;
+      }
+    }
+    .press__col:nth-of-type(2),
+    .press__col:nth-of-type(5){
+      .press__info:before {
+        border-top: 0;
+        border-bottom: 12px solid $white;
+        bottom: 100%;
+        top: auto;
+      }
+    }
+  }
+  /*videocarousel*/
+  .videocarousel {
+    .video-about-inner {
+      padding: 20px 80px;
+    }
+    .section-title {
+      @include setFont(1.8rem, 4.2rem, 500);
+      letter-spacing: 0.07rem;
+      margin-bottom: 50px;
+    }
+    .video-text {
+      @include whitneyBook;
+      @include setFont(1.6rem, 4.2rem, 400);
+      font-style: italic;
+    }
+    .qoute {
+      @include whitneyBook;
+      font-style: italic;
+    }
+    .author-name {
+      @include whitneyBook;
+      @include setFont(2rem, 4.2rem, 400);
+      font-style: italic;
+    }
+  }
+}
+
+.ie {
+  .cms-about-us .results .product-slot-outer:hover {
+    .quickview:before,
+    .wishlist:before {
+      bottom: 0;
+    }
+  }
+}
+
+@media only screen and  (max-width: $desktop-custom-4){
+  .cms-about-us {
+    .team {
+      .press__col {
+        @include flex-basis(50%);
+        &:nth-child(3) {
+          border-right: 1px solid $block-border-color;
+          max-width: 50%;
+        }
+        &:nth-child(4) {
+          border-top: 1px solid $block-border-color;
+        }
+        &:nth-child(5) {
+          order: 6;
+          border-bottom: 1px solid $block-border-color;
+        }
+        &:nth-child(6) {
+          order: 5;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and  (max-width: $desktop-xs){
+  .cms-about-us .one-third .box-inner__middle {
+    padding: 20px;
+  }
+}
+
+@media only screen and (max-width: $tablet) {
+  .about-us-template .results {
+    .one-third-vertical {
+      order: 3;
+      background: $menu-border-color;
+    }
+    .product-slot-outer:hover {
+      .bv-cleanslate {
+        display: block !important;
+      }
+    }
+  }
+  .cms-about-us .videocarousel .video-about-inner {
+    padding: 20px 30px;
+  }
+}
+
+@media only screen and (max-width: $tablet) and (min-width: $mobile-m) {
+  .cms-about-us .team .press__col {
+    &:nth-child(3) {
+      border-right: 0;
+    }
+    &:nth-child(4) {
+      border-top: 0;
+      position: relative;
+      .press__info,
+      .press__image-link {
+        position: absolute;
+        left: 0;
+        right: 0;
+      }
+      .press__info {
+        bottom: 0;
+        &:before {
+          bottom: 100%;
+          border-bottom: 12px solid $white;
+          top: auto;
+          border-top: 0;
+        }
+      }
+      .press__image-link {
+        top: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet-m) {
+  .breadcrumbs li:nth-last-child(2):before,
+  .cms-about-us .breadcrumbs li:nth-last-child(2):before {
+    content: "\e946";
+  }
+  .breadcrumbs li a,
+  .breadcrumbs li span {
+    font-weight: 500;
+  }
+}
+
+@media only screen and (max-width: $tablet-s) {
+  .cms-about-us .science {
+    max-width: 623px;
+    .science-inner.title-block {
+      padding: 20px;
+    }
+    .science-inner {
+      @include flex-basis(50%);
+      &.text-block {
+        max-width: 50%;
+      }
+      &.index-1 {
+        order: 1;
+      }
+      &.index-2 {
+        order: 2;
+      }
+      &.index-3 {
+        order: 4;
+      }
+      &.index-4 {
+        order: 3;
+      }
+      &.index-5 {
+        order: 5;
+      }
+      &.index-6 {
+        order: 6;
+      }
+      &.index-7 {
+        order: 8;
+      }
+      &.index-8 {
+        order: 7;
+      }
+      &.index-9 {
+        display: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .cms-about-us{
+    .hero {
+      .hero-title-wrap {
+        position: absolute;
+      }
+      .svg-file {
+        width: 95px;
+      }
+      .subtitle {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-top: 0;
+      }
+      .description {
+        max-width: 100%;
+        font-size: 1.4rem;
+        line-height: 2.4rem;
+      }
+    }
+    .results {
+      max-width: 100%;
+      margin: 0 auto 20px;
+      .product-slot,
+      .background-image {
+        @include flex-basis(50%);
+      }
+      .one-third:first-child .box-outer:after {
+        width: 21px;
+        height: 21px;
+        display: block;
+        bottom: -11px;
+        left: 50%;
+        margin-left: -11px;
+        content: '';
+        position: absolute;
+        transform-origin: center;
+        transform: rotate(45deg);
+        background: $white;
+        border-right: 1px solid #e6e6e6;
+        border-bottom: 1px solid #e6e6e6;
+        z-index: 2;
+      }
+      .product-slot {
+        .product-name a {
+          font-size: 1.2rem;
+        }
+        & + .product-slot .product-slot-outer {
+          border-top: 1px solid $block-border-color;
+          border-left: none;
+        }
+      }
+      .background-image .bottom-left-tag {
+        font-size: 1.8rem;
+      }
+      .one-third-vertical {
+        background: $menu-border-color;
+      }
+    }
+    .science {
+      .title {
+        font-size: 2.6rem;
+        line-height: 3.2rem;
+      }
+      .description {
+        font-size: 1.4rem;
+        line-height: 2.4rem;
+      }
+    }
+    .team {
+      .description {
+        font-size: 1.4rem;
+        line-height: 2.1rem;
+        margin-bottom: 10px;
+      }
+      .author {
+        line-height: 3.2rem;
+      }
+      .author-subtext {
+        margin-bottom: 10px;
+        line-height: 3.2rem;
+      }
+      .press__info-inner {
+        padding: 0px 25px;
+      }
+    }
+    .videocarousel {
+      max-width: 100%;
+      margin-bottom: 75px;
+      .section-title {
+        font-size: 1.6rem;
+        line-height: 3.2rem;
+        margin-bottom: 20px
+      }
+      .video-about {
+        max-width: 270px;
+        margin: 0 auto;
+      }
+      .video-text {
+        top: 50%;
+        margin-top: -25px;
+        &:before {
+          top: 12px;
+        }
+      }
+      .author-name {
+        @include whitneyBook;
+        @include setFont(1.8rem, 3rem, 400);
+        font-style: italic;
+      }
+      .bx-prev {
+        display: none;
+      }
+      .bx-next {
+        right: 11px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-m) {
+  .cms-about-us {
+    .section {
+      .slots {
+        max-width: 100%;
+      }
+    }
+    .team {
+      .section-title {
+        font-size: 2.6rem;
+        line-height: 3.4rem;
+      }
+      .description {
+        margin-bottom: 15px;
+      }
+      .press__col-wrap {
+        display: block;
+        .press__col {
+          display: inline-table;
+          .press__image-link {
+            display: table-caption;
+          }
+        }
+      }
+      .press__info-inner {
+        padding: 0 30px;
+      }
+      .press__info:before {
+        display: none;
+      }
+      /*slider*/
+      .bx-viewport {
+        height: 100% !important;
+      }
+      .bx-wrapper {
+        position: relative;
+        border: 1px solid $block-border-color;
+      }
+      .bx-controls-direction {
+        position: absolute;
+        top: 25%;
+        width: 100%;
+      }
+      .bx-prev,
+      .bx-next {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: -20px;
+        &:before {
+          @include hvrp();
+          width: 28px;
+          height: 28px;
+          border-left: 6px solid $block-border-color;
+          border-bottom: 6px solid $block-border-color;
+          transform-origin:center;
+        }
+      }
+      .bx-prev {
+        left: 9px;
+        &:before {
+          @include transform(rotate(45deg));
+        }
+      }
+      .bx-next {
+        right: 9px;
+        &:before {
+          @include transform(rotate(-135deg));
+        }
+      }
+      .bx-pager {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 0;
+      }
+      .bx-pager-item {
+        display: inline-block;
+        vertical-align: middle;
+        &+.bx-pager-item {
+          margin-left: 3px;
+        }
+        a {
+          display: block;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          border: 1px solid $black;
+        }
+        .active {
+          background: $black;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-s) {
+  .cms-about-us {
+    .hero .hero-title-wrap {
+      position: relative;
+    }
+    .results {
+      .product-slot,
+      .background-image {
+        @include flex-basis(100%);
+      }
+      .one-third .slot-text {
+        max-width: 95%;
+      }
+      .product-slot + .product-slot .product-slot-outer {
+        border-top: none;
+        border-left: 1px solid $block-border-color;
+      }
+    }
+    .science {
+      max-width: 100%;
+      display: block;
+      margin-bottom: 0;
+      .science-inner {
+        text-align: center;
+        &.text-block {
+          max-width: 100%;
+        }
+      }
+      .science-inner.image-block {
+        height: 295px;
+        overflow: hidden;
+      }
+      .text-block {
+        padding: 20px 10px;
+      }
+    }
+    .section {
+      margin-bottom: 20px;
+      .section-title {
+        max-width: 160px;
+        margin: 0 auto 15px;
+        line-height: 3.2rem;
+      }
+      .half {
+        .box-inner__middle {
+          padding: 40px 19px;
+          line-height: 2.4rem;
+        }
+        &:first-child .box-inner__middle {
+          padding: 0 30px 20px;
+        }
+        .slot-title {
+          max-width: 216px;
+          font-size: 1.8rem;
+          line-height: 3rem;
+        }
+        .slot-text {
+          font-size: 1.4rem;
+          line-height: 2.4rem;
+        }
+      }
+    }
+
+
+  }
+}
+
+@media only screen and (max-width: $mobile-iphone-6) {
+  .cms-about-us {
+    .science .science-inner.image-block {
+      height: 267px;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-iphone-5) {
+  .cms-about-us {
+    .science .science-inner.image-block {
+      height: 228px;
+    }
+  }
+}

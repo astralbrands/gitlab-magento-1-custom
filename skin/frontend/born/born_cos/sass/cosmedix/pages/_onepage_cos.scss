@@ -1,0 +1,600 @@
+.cms-one-page {
+  .main-container,
+  .page .main-container .main,
+  #page .main-container .main {
+    max-width: 100%;
+  }
+  .restricted {
+    padding-left: 27px;
+    @include gotham();
+    @include setFont(1.5rem, 2.4rem, 400);
+  }
+  .one-page-form {
+    margin: 0 auto;
+    .section-title {
+      @include setFont(3rem, 4rem, 200);
+      color: $black;
+      text-align: center;
+      text-transform: none;
+      margin-bottom: 50px;
+    }
+  }
+  .one-page-nav {
+    max-width: 1275px;
+    margin: 0 auto;
+  }
+  .one-page-nav {
+    @include display(flex);
+    @include justify-content(space-between);
+    height: 50px;
+  }
+  .one-page-menu {
+    li {
+      display: inline-block;
+      margin: 0 60px 0 0;
+      a {
+        @include gotham;
+        @include setFont(1.4rem, 2.4rem, 500);
+        font-style: normal;
+      }
+      &.current a {
+        text-decoration: underline;
+      }
+    }
+  }
+  .one-page-menu-mobile {
+    display: none;
+  }
+  .link-how-to {
+    @include gotham;
+    @include setFont(1.3rem, 2.4rem, 500);
+    color: $dark-grey-background;
+    min-width: 170px;
+    .icon-info {
+      color: $dark-grey-background;
+      font-size: 2rem;
+      vertical-align: middle;
+      padding-left: 3px;
+    }
+    &:hover {
+      text-decoration: none;
+      color: $black;
+      .icon-info {
+        color: $black;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .one-page-block {
+    .block-title {
+      @include gotham;
+      @include setFont(1.8rem, 6.9rem, 500);
+      letter-spacing: 0.15rem;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      border-top: 1px solid $block-border-color;
+    }
+  }
+  .one-page-form .block-content {
+    margin-top: 0;
+    background: $light-grey-background;
+    border-top: 1px solid $block-border-color;
+    padding-bottom: 58px;
+  }
+  .skincare .block-content {
+    padding-bottom: 0;
+  }
+  .block-content-wrap {
+    max-width: 1275px;
+    margin: 0 auto;
+    .tier-pricing {
+      visibility: hidden;
+      &:first-child {
+        visibility: visible;
+      }
+    }
+  }
+  .refinements {
+    text-align: center;
+    margin-bottom: 15px;
+    .input-box {
+      display: inline-block;
+      font-style: normal;
+      .label-text {
+        position: static;
+        color: $black;
+        @include setFont(1.4rem, 5rem, 500);
+      }
+    }
+  }
+  .tier-pricing {
+    @include display(flex);
+    @include justify-content(flex-end);
+    margin-right: 35px;
+    margin-bottom: 0;
+    li {
+      display: inline-block;
+      border-right: 1px solid $white;
+      color: $black;
+      @include flex-basis(120px);
+      @include gotham;
+      @include setFont(1.74rem, 5rem, 500);
+      font-style: normal;
+      text-align: center;
+      text-transform: uppercase;
+      margin: 0;
+      &:first-child {
+        border-left: 1px solid $white;
+      }
+    }
+  }
+  .left {
+    float: left;
+  }
+  .right {
+    float: right;
+  }
+  .products-list {
+    border: 1px solid $block-border-color;
+    padding: 0;
+    margin: 0;
+    & > li {
+      display: block;
+      background: $white;
+      @include clearfix;
+      font-style: normal;
+      padding: 35px;
+      margin: 0;
+    }
+    .skincare-subtitle {
+      background: $light-grey-background;
+      color: $black;
+      position: relative;
+      left: 0;
+      top: -38px;
+      max-width: 230px;
+      height: 0;
+      padding: 0;
+      border: none;
+      @include gotham;
+      @include setFont(1.8rem, 2.4rem, 500);
+    }
+    .skincare-product {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    .product-pricing-table {
+      display: table;
+      margin: 0;
+      .table-column {
+        display: table-cell;
+        color: $black;
+        min-width: 120px;
+        @include whitneyBook;
+        @include setFont(1.6rem, 5rem, 400);
+        font-style: italic;
+        text-align: center;
+        margin: 0;
+        vertical-align: top;
+        border: 1px solid $block-border-color;
+        border-left: 0;
+        &:first-child {
+          border-left: 1px solid $block-border-color;
+        }
+        div {
+          height: 50px;
+        }
+        &.mobile-only {
+          display: none;
+        }
+      }
+      .table-row {
+        &:last-child .table-column {
+          border-bottom: 1px solid $block-border-color;
+        }
+        .table-column:first-child {
+          border: none;
+          border-right: 1px solid $block-border-color;
+        }
+        &:nth-child(even) {
+          div,
+          .qty-promotion {
+            border-top: none;
+            border-bottom: none;
+          }
+        }
+      }
+    }
+    .table-row {
+      display: table-row;
+    }
+    .table-column {
+      display: table-column;
+    }
+    .product-image {
+      width: 100px;
+      height: 100px;
+      margin-right: 25px;
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+    .product-name {
+      max-width: 230px;
+      padding-top: 14px;
+      margin-bottom: 35px;
+      a {
+        @include gotham;
+        @include setFont(1.6rem, 2.4rem, 500);
+        color: $light-text-color;
+        text-decoration: underline;
+        text-transform: none;
+        &:hover {
+          color: $black;
+        }
+      }
+    }
+    .product-sku {
+      @include gotham;
+      @include setFont(1.4rem, 5rem, 500);
+      font-style: normal;
+      color: $black;
+      margin: 0 10px;
+      text-align: center;
+      .size-variant {
+        display: block;
+        color: $black;
+        @include gotham;
+        @include setFont(1.4rem, 5rem, 500);
+        font-style: normal;
+        text-align: center;
+        margin: 0;
+      }
+    }
+    .label-text-up {
+      display: none;
+    }
+  }
+  .skincare .products-list {
+    position: relative;
+    border: none;
+  }
+  .qty-promotion {
+    outline: none;
+    padding: 0 10px;
+    width: 120px;
+    height: 50px;
+    border: none;
+    color: $black;
+    @include gotham;
+    @include setFont(1.4rem, 5rem, 500);
+    text-align: center;
+  }
+  .link-edit-qty,
+  .link-update-total {
+    color: $light-text-color;
+    @include gotham;
+    @include setFont(1.3rem, 2.4rem, 500);
+    font-style: normal;
+    text-decoration: underline;
+  }
+  .button-set {
+    background: $light-grey-background;
+    padding: 45px 0 60px;
+    @include clearfix;
+  }
+  .btn-checkout,
+  .btn-add-to-bag {
+    @include transparentButton(5rem, 1.4rem, $white, $black);
+    @include gotham;
+    background: $black;
+    color: $white;
+    float: right;
+    border: 2px solid $black;
+    width: 235px;
+    &:focus,
+    &:hover,
+    &:active {
+      box-shadow: none;
+    }
+  }
+  .btn-checkout {
+    margin-right: 10px;
+  }
+}
+
+.ie .cms-one-page {
+  .page {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: $desktop-m){
+  .cms-one-page {
+     .one-page-menu li {
+      margin-right: 35px;
+    }
+  }
+}
+
+@media only screen and (max-width: $desktop-m){
+  .cms-one-page {
+    .one-page-nav,
+    .block-content-wrap {
+      margin: 0 20px;
+    }
+  }
+}
+
+@media only screen and (max-width: $desktop-custom-5){
+  .cms-one-page {
+    .one-page-nav {
+      @include flex-direction(column);
+      @include justify-content(center);
+      @include align-items(center);
+      height: initial;
+      margin-bottom: 20px;
+    }
+    .one-page-menu {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet){
+  .cms-one-page {
+    .one-page-menu li {
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    .tier-pricing li {
+      @include flex-basis(100px);
+    }
+    .products-list .product-pricing-table .table-column {
+      min-width: 100px;
+    }
+    .qty-promotion {
+      width: 100px;
+    }
+  }
+}
+
+
+
+@media only screen and (max-width: $mobile){
+  .cms-one-page {
+    .one-page-form {
+      .section-title {
+        font-size: 2.2rem;
+        margin-bottom: 25px;
+      }
+    }
+    .link-how-to {
+      display: none;
+    }
+    .one-page-menu {
+      display: none;
+    }
+    .one-page-menu-mobile {
+      display: block;
+      width: 100%;
+      .label-text-up {
+        @include setFont(1.3rem, 4.2rem, 500);
+        text-transform: uppercase;
+      }
+      .one-page-menu-select {
+        width: 100%;
+        line-height: 5rem;
+      }
+      .jq-selectbox__select {
+        height: 50px;
+      }
+    }
+    .block-content-wrap .tier-pricing:first-child,
+    .tier-pricing {
+      visibility: hidden;
+    }
+    .products-list {
+      & > li {
+        @include display(flex);
+        @include flex-wrap(wrap);
+        padding: 25px;
+      }
+      .skincare-subtitle {
+        font-size: 1.6rem;
+        max-width: 100%;
+        @include display(flex);
+        @include justify-content(center);
+      }
+      .product-image {
+        width: 33.33%;
+        height: auto;
+        margin-bottom: 25px;
+      }
+      .product-name {
+        margin: auto 0;
+        padding-top: 0;
+        padding-bottom: 25px;
+        max-width: 60%;
+      }
+      .product-pricing-table {
+        display: block;
+        width: 100%;
+        .table-row {
+          @include display(flex);
+          @include flex-wrap(wrap);
+          .sku-cell {
+            @include flex-basis(100%);
+          }
+          .table-column:first-child {
+            border: 1px solid $block-border-color;
+          }
+          &:nth-child(even) {
+            .price-cell div,
+            .qty-promotion,
+            .total-price {
+              border-bottom: 1px solid $block-border-color;
+              border-top: 1px solid $block-border-color;
+            }
+          }
+          &:last-child .table-column {
+            &.qty-cell,
+            &.total-cell {
+              border-bottom: none;
+            }
+          }
+        }
+
+        .table-column {
+          &.mobile-only,
+          &.price-cell {
+            display: inline-block;
+            @include flex-basis(33.33%);
+          }
+          &.qty-cell,
+          &.total-cell {
+            display: inline-block;
+            @include flex-basis(50%);
+            border: none;
+            padding-top: 10px;
+          }
+          &.mobile-only {
+            background: $light-grey-background;
+            border-width: 0 1px 0 1px;
+            border-color: $white;
+          }
+          &.price-cell:nth-child(5) {
+            border-left: 1px solid $block-border-color;
+          }
+          &.qty-cell .label-text-up {
+            text-align: right;
+            padding-right: 55px;
+
+          }
+          &.total-cell .label-text-up {
+            text-align: left;
+            padding-left: 47px;
+          }
+        }
+        .table-row:last-child .table-column.mobile-only {
+          border-bottom: none;
+        }
+      }
+      .label-text-up {
+        @include gotham;
+        @include setFont(1.3rem, 3.2rem, 500);
+        font-style: normal;
+        display: block;
+        width: 100%;
+        text-transform: uppercase;
+      }
+    }
+    .qty-promotion {
+      width: 120px;
+      border: 1px solid $block-border-color;
+      margin-right: 8px;
+      margin-bottom: 27px;
+      float: right;
+    }
+    .total-price {
+      width: 120px;
+      border: 1px solid $block-border-color;
+      margin-left: 8px;
+      float: left;
+    }
+  }
+}
+
+
+@media only screen and (max-width: $mobile-m){
+  .cms-one-page {
+    .block-content-wrap {
+      margin: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-s){
+  .cms-one-page {
+    .one-page-form .block-content {
+      padding-bottom: 0;
+    }
+    .refinements .input-box {
+      margin: 0 8px;
+      input[type="checkbox"] + label::before {
+        line-height: 4.2rem;
+      }
+      &:first-child {
+        width: 100%;
+        margin: 0;
+      }
+    }
+    .products-list > li {
+      padding: 25px 0;
+    }
+    .product-name {
+      padding-right: 25px;
+    }
+    .products-list {
+      .product-image {
+        margin: 0;
+        width: 40%;
+        padding: 0 25px 25px;
+      }
+      .product-name a {
+        font-size: 1.4rem;
+        line-height: 2.2rem;
+      }
+    }
+    .button-set {
+      padding: 30px 20px;
+      border: 1px solid $block-border-color;
+      border-top: none;
+      background: $light-grey-background;
+      margin-bottom: 45px;
+    }
+    .btn-checkout {
+      float: none;
+      margin-right: 0;
+    }
+    .btn-add-to-bag {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+/* ASBI-910 add to bag button - one page order form  */
+.cms-one-page {
+  .wrapper {
+    padding-bottom: 159px;
+    
+    @media (max-width: 767px) {
+      padding-bottom: 189px;
+    }  
+  }
+  
+  .one-page-form .button-set {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    margin-bottom: 0;
+    
+    @media (max-width: 767px) {
+      .button {
+        margin-right: auto;
+        width: 235px;
+        
+        &:first-child {
+        margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+
+<?php $position = $_product->getAttributeText('current_product_position'); ?>
+<?php if($position && $_product->getRoutineSkus()) : ?>
+
+    <?php $routineSkus = $this->orderRoutines(); ?>
+    <?php $_routineProductCollection = $this->getRoutineProductCollection($routineSkus) ?>
+
+    <?php $counter = 1; ?>
+    <?php if(sizeof($routineSkus) === 3) : ?>
+        <div class="routines">
+            <?php if ($_product->getRoutineMainTitle()): ?>
+                <h2 class="routines__title"><?php echo $_product->getRoutineMainTitle() ?></h2>
+            <?php endif ?>
+            <div class="routines__wrap_cos">
+                <?php foreach($_routineProductCollection as $_productRoutine) : ?>
+                    <?php if (strpos(get_class($_productRoutine), 'Product')): ?>
+                    <div class="routine">
+                        <div class="routine-outer <?php if ($_product->getSku() == $_productRoutine->getSku()) {echo 'current-product';} ?>">
+                            <p class="routine-title"><?php echo $_product->getData('routine_title' . $counter); ?></p>
+                            <div class="routine-product">
+                                <span class="number"><?php echo $counter++; ?></span>
+                                <div class="routines__product-inner">
+                                    <a href="<?php echo $this->getUrl($_productRoutine->getUrlKey()) ?>" title="<?php echo $_productRoutine->getName(); ?>"><img class="alt" src="<?php echo $this->helper('catalog/image')->init($_productRoutine, 'small_image'); ?>" width="" height="" alt="<?php $this->stripTags($_productRoutine->getName(), null, true) ?>" /></a>
+                                    <p class="routines__product-name"><a href="<?php echo $this->getUrl($_productRoutine->getUrlKey()) ?>" title="<?php echo $_productRoutine->getName(); ?>"><?php echo $_productRoutine->getName(); ?></a></p>
+                                    <p class="routines__product-subtitle"><?php echo $_productRoutine->getSubtitle() ?></p>
+                                    <span><?php echo $this->getPriceHtml($_productRoutine); ?></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php else: ?>
+                        <div class="routine">
+                            <div class="routine-outer">
+                                <p class="routine-title"><?php echo $_product->getData('routine_title' . $counter); ?></p>
+                                <div class="routine-product">
+                                    <span class="number"><?php echo $counter++; ?></span>
+                                    <div class="routines__product-inner">
+                                    <p class="routines__product-subtitle">
+                                        <?php echo 'Invalid Product SKU: ' . $_productRoutine->getSku() ?>
+                                    </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif ?>
+                <?php endforeach; ?>
+            </div>
+            <?php if($_product->getRoutineCtaText() && $_product->getRoutineCtaLink()) : ?>
+                <a class="routines__button" href="<?php echo $_product->getRoutineCtaLink(); ?>">
+                    <?php echo $_product->getRoutineCtaText(); ?>
+                </a>
+            <?php endif; ?>
+        </div>
+    <?php elseif(sizeof($routineSkus) > 3): ?>
+        <?php //Mage::log($_product->getSku() . ' - routineSku exceeded 2 items.') ?>
+    <?php endif; ?>
+    
+
+<?php endif; ?>

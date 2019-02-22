@@ -1,0 +1,66 @@
+<?php 
+
+/*
+Slot Field Attributes
+- SectionId: 1,2,3
+- SortOrder - text
+- SlotType: title,product,image
+- BackgroundImage - Image
+- Title - text
+- Subtitle - text
+- CtaText - text
+- CtaLink - text
+- ProductSku - text
+- TextAlignment - left, center, right
+- BackgroundColor: white, black
+- TextFontColor: white, black
+ */
+
+	$hooks_helper = Mage::helper('borncmshooks');
+	$slot = $this->getSlotObjectCollection();
+	$widthClass = ($slot->getWidth()) ? $slot->getWidth() : 'one-third';
+	$fontColorClass = ($slot->getTextFontColor()) ? $slot->getTextFontColor() : 'font-black';
+	$bgColorClass = ($slot->getBackgroundColor()) ? $slot->getBackgroundColor() : 'bg-white';
+    $slotType = ($slot->getSlotType()) ? $slot->getSlotType() : 'content';
+    $textAlignment = ($slot->getTextAlignment()) ? $slot->getTextAlignment() : 'center';
+?>
+
+<?php if($slotType) : ?>
+    <?php if ($hooks_helper->getImageUrl($slot->getBackgroundImage())): ?>
+        <div class='background-image <?php echo "$widthClass $fontColorClass $bgColorClass "; if(!is_null($this->getIndex())){echo 'index-' . $this->getIndex(); } ?>'
+             style='background-image: url(<?php echo $hooks_helper->getImageUrl($slot->getBackgroundImage()); ?>)'>
+    <?php elseif($slot->getBackgroundColorInHex()): ?>
+        <div class='<?php echo "$widthClass $fontColorClass $textAlignment "; if(!is_null($this->getIndex())){echo 'index-' . $this->getIndex(); } ?>' style="background-color: <?php echo $slot->getBackgroundColorInHex() ?>">
+    <?php else:  ?>
+        <div class='<?php echo "$widthClass $fontColorClass $bgColorClass $textAlignment "; if(!is_null($this->getIndex())){echo 'index-' . $this->getIndex(); } ?>'>
+    <?php endif ?>
+        <?php if ($widthClass != 'half' ): ?>
+            <div class="box-outer">
+                <div class="box-inner">
+        <?php endif ?>
+                <div class="box-inner__middle">
+            <?php if ($slotType == 'content'): ?>
+                <?php if ($slot->getTitle()): ?>
+                    <h2 class="slot-title"><?php echo $slot->getTitle() ?></h2>
+                <?php endif ?>
+                <?php if ($slot->getSubtitle()): ?>
+                    <h4 class="slot-subtitle"><?php echo $slot->getSubtitle() ?></h4>
+                <?php endif ?>
+                <?php if ($slot->getDescription()): ?>
+                    <p class="slot-text"><?php echo $slot->getDescription() ?></p>
+                <?php endif ?>
+                <?php if ($slot->getCtaText()): ?>
+                    <a class="slot-btn" href="<?php echo Mage::getUrl(). $slot->getCtaLink(); ?>">
+                        <span><?php echo $slot->getCtaText(); ?></span>
+                    </a>
+                <?php endif ?>
+            <?php elseif ($slotType == 'product'): ?>
+                <?php $this->renderSubWidgets('productslot', $slot) ?>
+            <?php endif; ?>
+            <?php if ($widthClass != 'half' ): ?>
+                    </div>
+                </div>
+            <?php endif ?>
+                </div>
+	</div>
+<?php endif; ?>

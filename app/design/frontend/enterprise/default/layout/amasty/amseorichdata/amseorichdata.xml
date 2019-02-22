@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoRichData
+ */
+-->
+
+<layout version="0.1.0">
+    <catalog_product_view>
+        <block type="amseorichdata/product_breadcrumbs" name="amseorichdata.breadcrumbs" />
+        <reference name="before_body_end">
+            <action ifconfig="amseorichdata/breadcrumbs/enabled" method="append"><block>amseorichdata.breadcrumbs</block></action>
+        </reference>
+
+        <block type="amseorichdata/product_twitter" template="amasty/amseorichdata/catalog/product/twitter.phtml" name="amseorichdata.twitter" />
+        <reference name="before_body_end">
+            <action ifconfig="amseorichdata/twitter/enabled" method="append"><block>amseorichdata.twitter</block></action>
+        </reference>
+
+        <block type="amseorichdata/product_pinterest" template="amasty/amseorichdata/catalog/product/pinterest.phtml" name="amseorichdata.pinterest" />
+        <reference name="before_body_end">
+            <action ifconfig="amseorichdata/pinterest/enabled" method="append"><block>amseorichdata.pinterest</block></action>
+        </reference>
+
+        <block type="amseorichdata/product_richdata" name="amseorichdata.richdata" />
+        <reference name="before_body_end">
+            <action ifconfig="amseorichdata/product/enabled" method="append"><block>amseorichdata.richdata</block></action>
+        </reference>
+    </catalog_product_view>
+
+    <review_product_list>
+        <reference name="product.info.media">
+            <block type="amseorichdata/product_richdata" name="product.richdata" after="-" output="toHtml" />
+        </reference>
+
+        <block type="amseorichdata/product_twitter" template="amasty/amseorichdata/catalog/product/twitter.phtml" name="amseorichdata.twitter" />
+        <reference name="head">
+            <action ifconfig="amseorichdata/twitter/enabled" method="append"><block>amseorichdata.twitter</block></action>
+        </reference>
+
+    </review_product_list>
+
+    <amseorichdata_category>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/amasty/amseorichdata/category.css</stylesheet></action>
+        </reference>
+    </amseorichdata_category>
+
+    <catalog_category_view>
+        <update handle="amseorichdata_category" />
+
+        <reference name="content">
+            <block after="category.products" type="amseorichdata/category_richdata" name="amseorichdata.category.richdata" />
+        </reference>
+
+        <reference name="content">
+            <block type="amseorichdata/product_breadcrumbs" name="product.breadcrumbs" after="-" />
+        </reference>
+    </catalog_category_view>
+
+    <amlanding_page_view>
+        <update handle="amseorichdata_category" />
+
+        <reference name="content">
+            <block after="product_list" type="amseorichdata/category_richdata" name="amseorichdata.category.richdata" />
+        </reference>
+    </amlanding_page_view>
+
+    <amshopby_index_index>
+        <update handle="amseorichdata_category" />
+
+        <reference name="content">
+            <block after="category.products" type="amseorichdata/category_richdata" name="amseorichdata.category.richdata" />
+        </reference>
+    </amshopby_index_index>
+
+    <default>
+        <block type="core/template" template="amasty/amseorichdata/organization.phtml" name="amseorichdata.header" />
+        <reference name="before_body_end">
+            <action ifconfig="amseorichdata/organization/enabled" method="append"><block>amseorichdata.header</block></action>
+        </reference>
+    </default>
+
+    <cms_index_index>
+        <block type="core/template" template="amasty/amseorichdata/search.phtml" name="amseorichdata.search" />
+        <reference name="before_body_end">
+            <action ifconfig="amseorichdata/search/enabled" method="append"><block>amseorichdata.search</block></action>
+        </reference>
+    </cms_index_index>
+</layout>

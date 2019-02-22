@@ -1,0 +1,90 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoToolKit
+ */
+?>
+<?php
+/** @var Mage_Core_Block_Template $this */
+$data = $this->getHreflangData();
+$isSeoMetaEnabled = Mage::helper('core')->isModuleEnabled('Amasty_Meta');
+$isSeoSitemapEnabled = Mage::helper('core')->isModuleEnabled('Amasty_SeoGoogleSitemap');
+$mttConfigLink = '<a href="'
+    . Mage::helper("adminhtml")->getUrl("adminhtml/system_config/edit/section/ammeta")
+    . '" target="_blank">'
+    . $this->escapeHtml($this->__('SEO Meta Tags'))
+    . '</a>';
+?>
+<div id="hreflang-preview" style="display: none">
+    <table class="table">
+
+        <tr class="row header blue">
+            <td class="cell">
+                <?php echo $this->escapeHtml($this->__('Store')); ?>
+            </td>
+
+            <td class="cell" colspan="3">
+                <?php echo $this->escapeHtml($this->__('Hreflang Value')); ?>
+            </td>
+
+        </tr>
+        <tr class="row header blue">
+            <td class="cell"></td>
+            <td class="cell">
+                <?php echo $this->escapeHtml($this->__('Product')); ?>
+            </td>
+            <td class="cell">
+                <?php echo $this->escapeHtml($this->__('Category')); ?>
+            </td>
+            <td class="cell">
+                <?php echo $this->escapeHtml($this->__('CMS Page')); ?>
+            </td>
+        </tr>
+        <?php foreach ($data['websites'] as $website): ?>
+            <tr class="row header light">
+                <td class="cell"><?php echo $this->escapeHtml($website['name']) ?></td>
+                <td class="cell"></td>
+                <td class="cell"></td>
+                <td class="cell"></td>
+            </tr>
+            <?php foreach ($website['stores'] as $store): ?>
+                <tr class="row">
+                    <td class="cell"><?php echo $this->escapeHtml($store['name']) ?></td>
+                    <td class="cell <?php echo $data['product_style'] ?>">
+                        <?php echo $this->escapeHtml($store['hreflang'])?>
+                    </td>
+                    <td class="cell <?php echo $data['category_style'] ?>">
+                        <?php echo $this->escapeHtml($store['hreflang'])?>
+                    </td>
+                    <td class="cell <?php echo $data['cms_style'] ?>">
+                        <?php echo $this->escapeHtml($store['hreflang'])?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endforeach; ?>
+    </table>
+
+    <div class="legend">
+        <?php if($isSeoSitemapEnabled): ?>
+            <p class="seositemap">*<?php echo $this->escapeHtml('Hreflang Tags are added individually to each rule of the SEO XML Google Sitemap extension')?></p>
+        <?php endif ?>
+        <?php if($isSeoMetaEnabled): ?>
+            <p><?php echo $this->escapeHtml($this->__('Legend:')) ?></p>
+            <p>
+                <span class="included"><?php echo $this->escapeHtml($this->__('Enabled')) ?></span>
+                <span><?php echo $this->__("in $mttConfigLink extension") ?></span>
+            </p>
+            <p>
+                <span class="excluded"><?php echo $this->escapeHtml($this->__('Disabled')) ?></span>
+                <span><?php echo $this->__("in $mttConfigLink extension") ?></span>
+            </p>
+        <?php endif ?>
+    </div>
+</div>
+<script>
+function showHreflangPreview() {
+        $('hreflang-preview').toggle();
+        $('row_amseotoolkit_hreflang_preview').select('.note').first().toggleClassName('rotate');
+    }
+</script>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+	<config>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<sidecar_pdp translate="title" module="sidecar">
+											<title>Sidecar Product Page configuration Section</title>
+											<sort_order>0</sort_order>
+										</sidecar_pdp>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</config>

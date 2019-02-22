@@ -1,0 +1,533 @@
+<?php
+/**
+ * Copyright 2014 Zendesk.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+?>
+<pre class="press">
+	<?php 
+	$form_fields=$this->getFieldsets();
+	$_storeId = Mage::app()->getStore()->getStoreId();
+	$_professionalAnchorTag = Mage::getStoreConfig('customer/startup/professional_signup_anchor_tag', $_storeId);
+	?>
+	<?php if ($_professionalAnchorTag): ?>
+		<a name="<?php echo $_professionalAnchorTag ?>"></a>
+	<?php endif ?>
+	<div class="pro-artist-form" id="pro-registration">
+		<form action="<?php echo $this->getSubmitAction(); ?>" id="pro-artist-signup"  enctype="multipart/form-data" method="post" class="scaffold-form">
+			<div class="fieldset">
+				<h2 class="legend">Registration Form</h2>
+
+				<div class="fieldset fieldset-0">
+					<div class="group-name">general</div>
+					<ul>
+						<li>
+							<div class="field-general fields">
+								<div class="input-box">
+									<input name="first_name" id="first_name" title="first_name" value="" class="input-text required-entry" type="text">
+									<label class="label-text" for="first_name">First Name</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-general fields">
+								<div class="input-box">
+									<input name="last_name" id="last_name" title="last_name" value="" class="input-text required-entry" type="text">
+									<label class="label-text" for="last_name">Last Name</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-general fields">
+								<div class="input-box">
+									<input name="company_name" id="company_name" title="company_name" value="" class="input-text required-entry" type="text">
+									<label class="label-text" for="company_name">Facility/Spa Name</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-general fields">
+								<div class="input-box">
+									<input name="address_1" id="address_1" title="address_1" value="" class="input-text required-entry" type="text">
+									<label class="label-text" for="address_1">Facility Address</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-general fields">
+								<div class="input-box">
+									<input name="address_2" id="address_2" title="address_2" value="" class="input-text " type="text">
+									<label class="label-text" for="address_2">   </label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-general fields">
+								<div class="input-box">
+									<input name="city" id="city" title="city" value="" class="input-text required-entry" type="text">
+									<label class="label-text" for="city">City</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-general fields">
+								<div class="input-box">
+									<input name="state_territory" id="state_territory" title="state_territory" value="" class="input-text required-entry" type="text">
+									<label class="label-text" for="state_territory">State</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-general fields">
+								<div class="input-box">
+									<input name="country" id="country" title="country" value="" class="input-text required-entry" type="text">
+									<label class="label-text" for="country">Country</label>
+								</div>
+							</div>
+						</li>
+						<li>
+
+							<div class="field-general fields">
+								<div class="input-box">
+									<input name="zip_postal_code" id="zip_postal_code" title="zip_postal_code" value="" class="input-text required-entry validate-zip" type="text">
+									<label class="label-text" for="zip_postal_code">Zip</label>
+								</div>
+							</div>
+						</li>
+						<li>
+
+							<div class="field-general fields">
+								<div class="input-box">
+									<input name="email_address" id="email_address" title="email_address" value="" class="input-text required-entry validate-email" type="email">
+									<label class="label-text" for="email_address">Email Address</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-general fields">
+								<div class="input-box">
+									<input name="phone_number" id="phone_number" title="phone_number" value="" class="input-text required-entry validate-phoneLax" type="tel">
+									<label class="label-text" for="phone_number">Phone number</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<h3 class="checkbox-title" for="sign_up_for_our_newsletter">Please sign me up to receive special offers from CosMedix!</h3>
+							<div class="field-expertise fields">
+								<div class="check-box">
+									<input name="sign_up_for_our_newsletter[]" id="sign_up_for_our_newsletter" title="sign_up_for_our_newsletter" value="Sign up for our newsletter" class=" " type="checkbox">
+									<label for="sign_up_for_our_newsletter">Sign up for our newsletter</label>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<div class="fieldset fieldset-1">
+					<div class="group-name">Others</div>
+					<ul>
+						<li>
+							<h3 class="radio-title" for="occupation">Which of the following best describes you?</h3>
+							<div class=" field-radio fields" data-target-id="02">
+								<div class="radio-box">
+									<input name="occupation[]" id="spa_owner" title="occupation" value="Spa Owner" class=" " type="radio">
+									<label for="spa_owner"><?php echo $this->__('Spa Owner') ?></label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields" data-target-id="02">
+								<div class="radio-box">
+									<input name="occupation[]" id="spa_manager_spa_director" title="occupation" value="Spa Manager/Spa Director" class="validate-one-required-by-name" type="radio">
+									<label for="spa_manager_spa_director">Spa Manager/Spa Director</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields" data-target-id="02">
+								<div class="radio-box">
+									<input name="occupation[]" id="dermatologist_physician" title="occupation" value="Dermatologist/Physician" class=" " type="radio">
+									<label for="dermatologist_physician">Dermatologist/Physician</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields" data-target-id="02">
+								<div class="radio-box">
+									<input name="occupation[]" id="esthetician" title="occupation" value="Esthetician" class=" " type="radio">
+									<label for="esthetician">Esthetician</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields" data-target-id="02">
+								<div class="radio-box">
+									<input name="occupation[]" id="nurse_practioner_physician_assistant" title="occupation" value="Nurse Practioner/Physician Assistant" class=" " type="radio">
+									<label for="nurse_practioner_physician_assistant">Nurse Practioner/Physician Assistant</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="occupation[]" id="esthetician_student" title="occupation" value="Esthetician Student" class=" " type="radio">
+									<label for="esthetician_student">Esthetician Student</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="occupation[]" id="other_skincare_cosmetics_industry_professional" title="occupation" value="Other Skincare/Cosmetics Industry Professional" class=" " type="radio">
+									<label for="other_skincare_cosmetics_industry_professional">Other Skincare/Cosmetics Industry Professional</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields" data-target-id="01">
+								<div class="radio-box">
+									<input name="occupation[]" id="other._please_specify" title="occupation" value="Other. Please Specify" class=" " type="radio">
+									<label for="other._please_specify">Other. Please Specify</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-general fields" style="display:none" id="01">
+								<div class="input-box">
+									<input name="occupation[]" id="occupation" title="occupation" value="" class="input-text " type="text">
+									<label class="label-text" for="occupation">Other. Please Specify</label>
+								</div>
+							</div>
+						</li>
+					</ul>
+
+						<!-- Others -->
+					<ul>
+						<li>
+							<h3 class="radio-title" for="referral"><?php echo $this->__('How did you hear about us?') ?></h3>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="referral[]" id="trade_magazine" title="referral" value="<?php echo $this->__('Trade Magezine') ?>" class="validate-one-required-by-name" type="radio">
+									<label for="trade_magazine"><?php echo $this->__('Trade Magezine') ?></label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="referral[]" id="publication" title="referral" value="<?php echo $this->__('Publication') ?>" class=" " type="radio">
+									<label for="publication"><?php echo $this->__('Publication') ?></label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="referral[]" id="internet_search" title="referral" value="<?php echo $this->__('Internet Search') ?>" class=" " type="radio">
+									<label for="internet_search"><?php echo $this->__('Internet Search') ?></label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="referral[]" id="linkedin" title="referral" value="<?php echo $this->__('LindkedIn') ?>" class=" " type="radio">
+									<label for="linkedin"><?php echo $this->__('LinkedIn') ?></label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="referral[]" id="instagram" title="referral" value="<?php echo $this->__('Instagram') ?>" class=" " type="radio">
+									<label for="instagram"><?php echo $this->__('Instagram') ?></label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="referral[]" id="facebook" title="referral" value="<?php echo $this->__('Facebook') ?>" class=" " type="radio">
+									<label for="facebook"><?php echo $this->__('Facebook') ?></label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="referral[]" id="friends_coworkers" title="referral" value="<?php echo $this->__('Friends / Coworkers') ?>" class=" " type="radio">
+									<label for="friends_coworkers"><?php echo $this->__('Friends / Coworkers') ?></label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields" data-target-id="others_01">
+								<div class="radio-box">
+									<input name="referral[]" id="other_radio_box_1" title="referral" value="Other. Please Specify" class=" " type="radio">
+									<label for="other_radio_box_1"><?php echo $this->__('Other. Please Specify') ?></label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-general fields" style="display:none" id="others_01">
+								<div class="input-box">
+									<input name="referral[]" id="other_radio_field_1" title="referral" value="" class="input-text " type="text">
+									<label class="label-text" for="other_radio_field_1"><?php echo $this->__('Other. Please Specify') ?></label>
+								</div>
+							</div>
+						</li>
+						<!-- End -->
+					</ul>
+				</div>
+
+				<div class="fieldset fieldset-2" style="display:none" id="02">
+					<div class="group-name"><?php echo $this->__('TO BETTER SERVE YOUR NEEDS, PLEASE TELL US MORE ABOUT YOURSELF.') ?></div>
+					<ul>
+						<li>
+							<h3 class="radio-title" for="facility_type">Which description below best describes your facility?</h3>
+							<div class=" field-radio fields" style="display:none" id="02">
+								<div class="radio-box">
+									<input name="facility_type[]" id="spa" title="facility_type" value="Spa" class=" " type="radio">
+									<label for="spa">Spa</label>
+								</div>
+							</div>
+						</li>
+						<li>
+
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="facility_type[]" id="full_service_salon_spa" title="facility_type" value="Full Service Salon/Spa" class=" " type="radio">
+									<label for="full_service_salon_spa">Full Service Salon/Spa</label>
+								</div>
+							</div>
+						</li>
+						<li>
+
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="facility_type[]" id="medispa" title="facility_type" value="MediSpa" class=" " type="radio">
+									<label for="medispa">MediSpa</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="facility_type[]" id="dermatology_office" title="facility_type" value="Dermatology Office" class=" " type="radio">
+									<label for="dermatology_office">Dermatology Office</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="facility_type[]" id="plastic_surgeon_office" title="facility_type" value="Plastic Surgeon Office" class=" " type="radio">
+									<label for="plastic_surgeon_office">Plastic Surgeon Office</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-radio fields" data-target-id="facility_type_block">
+								<div class="radio-box">
+									<input name="facility_type[]" id="other._please_specify_29" title="facility_type" value="Other. Please Specify" class=" " type="radio">
+									<label for="other._please_specify_29">Other. Please Specify</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-general fields" style="display:none" id="facility_type_block">
+								<div class="input-box">
+									<input name="facility_type[]" id="facility_type" title="facility_type" value="" class="input-text " type="text">
+									<label class="label-text" for="facility_type">Facility Type</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<h3 class="radio-title" for="facility_rooms">How many treatment rooms does your facility have?</h3>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="facility_rooms[]" id="1" title="facility_rooms" value="1" class="validate-one-required-by-name" type="radio">
+									<label for="1">1</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="facility_rooms[]" id="2-3" title="facility_rooms" value="2-3" class=" " type="radio">
+									<label for="2-3">2-3</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="facility_rooms[]" id="4-6" title="facility_rooms" value="4-6" class=" " type="radio">
+									<label for="4-6">4-6</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="facility_rooms[]" id="7+" title="facility_rooms" value="7+" class=" " type="radio">
+									<label for="7+">7+</label>
+								</div>
+							</div>
+						</li>
+						<li>
+						<!-- What product lines do you currently carry? -->
+							<h3 class="checkbox-title" for="product_lines">What product lines do you currently carry?</h3>
+							<div class="field-expertise fields">
+								<div class="check-box">
+									<input name="product_lines[]" id="aveda" title="product_lines" value="Aveda" class="validate-one-required-by-name" type="checkbox">
+									<label for="aveda">Aveda</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-expertise fields">
+								<div class="check-box">
+									<input name="product_lines[]" id="b._kamins" title="product_lines" value="B. Kamins" class=" " type="checkbox">
+									<label for="b._kamins">B. Kamins</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-expertise fields">
+								<div class="check-box">
+									<input name="product_lines[]" id="dermalogica" title="product_lines" value="Dermalogica" class=" " type="checkbox">
+									<label for="dermalogica">Dermalogica</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-expertise fields">
+								<div class="check-box">
+									<input name="product_lines[]" id="eminence" title="product_lines" value="Eminence" class=" " type="checkbox">
+									<label for="eminence">Eminence</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-expertise fields">
+								<div class="check-box">
+									<input name="product_lines[]" id="osmosis" title="product_lines" value="Osmosis" class=" " type="checkbox">
+									<label for="osmosis">Osmosis</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-expertise fields">
+								<div class="check-box">
+									<input name="product_lines[]" id="pca" title="product_lines" value="PCA" class=" " type="checkbox">
+									<label for="pca">PCA</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-expertise fields">
+								<div class="check-box">
+									<input name="product_lines[]" id="pevonia" title="product_lines" value="Pevonia" class=" " type="checkbox">
+									<label for="pevonia">Pevonia</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-expertise fields">
+								<div class="check-box">
+									<input name="product_lines[]" id="skinceuticals" title="product_lines" value="Skinceuticals" class=" " type="checkbox">
+									<label for="skinceuticals">Skinceuticals</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-expertise fields" data-target-id="product_lines_others_box">
+								<div class="check-box">
+									<input name="product_lines[]" id="other._please_specify_product_lines" title="product_lines" value="Other. Please Specify" class=" " type="checkbox">
+									<label for="other._please_specify_product_lines">Other. Please Specify</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="field-general fields" style="display:none" id="product_lines_others_box">
+								<div class="input-box">
+									<input name="product_lines[]" id="field_product_lines" title="product_lines" value="" class="input-text " type="text">
+									<label class="label-text" for="field_product_lines">Product Lines</label>
+								</div>
+							</div>
+						</li>
+						<!-- end -->
+						<li>
+							<h3 class="radio-title" for="most_used_product">Out of those products, which one do you often use most in a professional skin treatment?</h3>
+							<div class="field-general fields" id="product_lines_others_box">
+								<div class="input-box">
+									<input name="most_used_product[]" id="most_used_product_field_answer" title="most_used_product" value="" class="input-text " type="text">
+									<label class="label-text" for="most_used_product_field_answer"></label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<h3 class="radio-title" for="experience_with_cosmedix">What best describes your level of experience with CosMedix?</h3>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="experience_with_cosmedix[]" id="i_have_used_it_in_the_past" title="experience_with_cosmedix" value="I have used it in the past" class="validate-one-required-by-name " type="radio">
+									<label for="i_have_used_it_in_the_past">I have used it in the past</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="experience_with_cosmedix[]" id="my_facility_currently_carries_it" title="experience_with_cosmedix" value="My facility currently carries it" class=" " type="radio">
+									<label for="my_facility_currently_carries_it">My facility currently carries it</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="experience_with_cosmedix[]" id="i_am_interested_in_carrying_it" title="experience_with_cosmedix" value="I am interested in carrying it" class=" " type="radio">
+									<label for="i_am_interested_in_carrying_it">I am interested in carrying it</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="experience_with_cosmedix[]" id="i_have_heard_of_it,_but_never_used_it" title="experience_with_cosmedix" value="I have heard of it, but never used it" class=" " type="radio">
+									<label for="i_have_heard_of_it,_but_never_used_it">I have heard of it, but never used it</label>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" field-radio fields">
+								<div class="radio-box">
+									<input name="experience_with_cosmedix[]" id="i_am_unfamiliar_with_cosmedix" title="experience_with_cosmedix" value="I am unfamiliar with CosMedix" class=" " type="radio">
+									<label for="i_am_unfamiliar_with_cosmedix">I am unfamiliar with CosMedix</label>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="buttons-set">
+				<input type="text" name="hideit" id="hideit" value="" style="display:none !important;">
+				<button type="submit" title="Submit" class="button"><span><span>Submit Application</span></span></button>
+			</div>
+		</form>
+		<script type="text/javascript">
+			var proArtistForm = new VarienForm('pro-artist-signup', true);
+		</script>
+	</div>

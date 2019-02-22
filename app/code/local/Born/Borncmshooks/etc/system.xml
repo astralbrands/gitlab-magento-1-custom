@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <borncmshooks_config translate="label" module="borncmshooks">
+            <label>Cms Hooks</label>
+            <tab>bornpackage</tab>
+            <sort_order>2000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <borncmshooks_slots_for_tiles translate="label">
+                    <label>Slot Count for Tiles Section</label>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <max_count translate="label">
+                            <label>Maximum no of Slots</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1000</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </max_count>
+                    </fields>
+                </borncmshooks_slots_for_tiles>
+                <borncmshooks_slots_for_highlights translate="label">
+                    <label>Slot Count for Highlights Section</label>
+                    <sort_order>200</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <max_count translate="label">
+                            <label>Maximum no of Slots</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1000</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </max_count>
+                    </fields>
+                </borncmshooks_slots_for_highlights>
+            </groups>
+        </borncmshooks_config>
+    </sections>
+</config>

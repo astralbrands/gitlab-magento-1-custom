@@ -1,0 +1,100 @@
+<?php
+    $_helper = $this->helper('shadeguide');
+    $steps = $this->getFinderSteps();
+    $stepsCount = count($steps);
+    $cmsBackground = $_helper->getBackgroundImage();
+?>
+<div class="shadeguide">
+<div class="shadeguide-overlay"></div>
+    <div class="shadeguide-steps">
+        <?php if ($introBlock = $_helper->getIntroBlock()): ?>
+            <div id="start" class="shadeguide-step shadeguide-intro">
+                <?php echo $introBlock->toHtml(); ?>
+            </div>
+        <?php endif; ?>
+        <?php $stepId = 1; foreach ($steps as $step): ?>
+            <?php $canSkip = $step['skip'] ? 'can-skip' : ''; ?>
+            <div id="step-<?php echo $stepId; ?>" class="shadeguide-step <?php echo $canSkip; ?> <?php echo $step['template'] ?>" data-attr="<?php echo $step['product_attribute'] ?>">
+                <?php if ($cmsBackground && $step['template'] == 'label_only'): ?>
+                    <div class="background-image">
+                        <?php echo $cmsBackground; ?>
+                    </div>
+                <?php endif; ?>
+                <div class="step-wrapper">
+                    <h2 class="w step-title"><?php echo $step['step_title'] ?></h2>
+                    <div class="message center">
+                        <?php if ($step['multiselect']): ?>
+                            <?php echo $this->__('Multiple select is allowed') ?>
+                        <?php endif; ?>
+                    </div>
+                    <?php $cmsBlockTop = $_helper->getAdditionalCmsBlock($step, 'top'); ?>
+                    <?php if ($cmsBlockTop): ?>
+                        <div class="w additional-cms cms-top">
+                            <?php echo $cmsBlockTop; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php $this->setCurrentStep($stepId, $step); ?>
+                    <?php echo $this->getChildHtml($step['template'], false); ?>
+
+                    <?php $cmsBlockBottom = $_helper->getAdditionalCmsBlock($step, 'bottom'); ?>
+                    <?php if ($cmsBlockBottom): ?>
+                        <div class="w additional-cms cms-bottom">
+                            <?php echo $cmsBlockBottom; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="w actions">
+                    <?php if ($stepId > 1): ?>
+                        <p class="prev-step back center" data-action="#step-<?php echo $stepId - 1; ?>">
+                            <i class="icon icon-angle-left"></i>
+                            <?php echo $this->__('Back') ?>
+                        </p>
+                    <?php endif; ?>
+                    <?php if ($step['skip']): ?>
+                        <p class="skip center" data-action="#step-<?php echo $stepId + 1; ?>">
+                            <?php echo $this->__('No Preference') ?>
+                            <?php if (!$step['multiselect']): ?>
+                                <i class="icon icon-angle-right"></i>
+                            <?php endif; ?>
+                        </p>
+                    <?php endif; ?>
+
+                    <?php if ($step['multiselect'] && $stepId != count($steps)): ?>
+                        <p class="next-step center" data-action="#step-<?php echo $stepId + 1; ?>">
+                            <?php echo $this->__('Next') ?>
+                            <i class="icon icon-angle-right"></i>
+                        </p>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php $stepId++; endforeach ?>
+
+        <div id="results" class="shadeguide-step">
+            <div class="w step-wrapper">
+                <h2 class="step-title"><?php echo $this->__('Meet your Match.') ?></h2>
+                <p class="center"><?php echo $this->__('Too Many Options?') ?></p>
+                <div class="actions">
+                    <p class="start-over center" data-action="#step-<?php echo $stepId + 1; ?>">
+                        <?php echo $this->__('Start Over') ?>
+                        <i class="icon icon-angle-right"></i>
+                    </p>
+                </div>
+
+                <div id="product-results" class="products-grid product-results catalog-category-view">
+                    Filtered products collection goes here...
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        shadeGuide.init({
+            collectionUrl: '<?php echo $this->getAjaxUrl('collection'); ?>',
+            disableOptionsUrl: '<?php echo $this->getAjaxUrl('disableUnavailableOptions'); ?>'
+        });
+    });
+</script>

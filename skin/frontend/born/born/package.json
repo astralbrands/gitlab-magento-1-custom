@@ -1,0 +1,21 @@
+{
+  "name": "born",
+  "scripts": {
+    "postinstall": "grunt"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.3",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-compass": "^1.1.1",
+    "grunt-contrib-requirejs": "^0.4.4",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-cssnano-plus": "^1.0.0",
+    "grunt-sass": "^1.2.1",
+    "grunt-shell-spawn": "^0.3.10",
+    "lodash": "^4.0.0",
+    "node-sass": "^3.4.2",
+    "npmconf": "^2.1.2",
+    "rjs-build-analysis": "0.0.3"
+  }
+}

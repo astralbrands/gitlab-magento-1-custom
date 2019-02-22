@@ -1,0 +1,28 @@
+<div class="index">
+	<div class="hero">
+		<?php $this->renderWidgets('hero'); ?>
+	</div>
+	<div class="results">
+		<?php $this->renderWidgets('results'); ?>
+	</div>
+	<div class="science">
+		<?php $this->renderWidgets('science'); ?>
+	</div>
+	<div class="section">
+		<?php $this->renderWidgets('section'); ?>
+	</div>
+	<div class="team">
+		<?php $this->renderWidgets('press'); ?>
+	</div>
+	<div class="videocarousel">
+		<?php $this->renderWidgets('videocarousel'); ?>
+	</div>
+</div>
+<?php
+$ur = $_SERVER["REQUEST_URI"];
+$sn = str_ireplace("www.","",$_SERVER['HTTP_HOST']);
+
+$ar = explode("?",$ur);
+$vc = $ar[0];
+	if($vc=="/about-us"){
+}

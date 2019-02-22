@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<layout version="1.0.0">
+    <catalog_product_view>
+        <reference name="content">
+            <block type="weltpixel_schema/schema" before="product.info" name="weltpixel_schema" >
+                <action method="setTemplate">
+                    <template>weltpixel/schema/meta.phtml</template>
+                </action>
+            </block>
+        </reference>
+        <reference name="head">
+            <block type="weltpixel_schema/schema" name="weltpixel_schema_head">
+                <action method="setTemplate">
+                    <template>weltpixel/schema/meta_head.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </catalog_product_view>
+</layout>

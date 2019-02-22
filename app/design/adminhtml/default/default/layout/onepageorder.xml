@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <born_onepageorder_adminhtml_index_index>
+        <reference name="content">
+            <block type="born_onepageorder/adminhtml_navigation" name="b2b.onepageorder.nav" />
+        </reference>
+    </born_onepageorder_adminhtml_index_index>
+    
+    <born_onepageorder_adminhtml_index_edit>
+        <reference name="content">
+            <block type="born_onepageorder/adminhtml_navigation_edit" name="b2b_onepageorder_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="born_onepageorder/adminhtml_navigation_edit_tabs" name="b2b_onepageorder_edit_tabs">
+                <block type="born_onepageorder/adminhtml_navigation_edit_tab_main" name="b2b_onepageorder_edit_tab_main" />
+                <!--<block type="born_onepageorder/adminhtml_navigation_edit_tab_products" name="b2b_onepageorder_edit_tab_products" />-->
+                <action method="addTab"><name>main_section</name><block>b2b_onepageorder_edit_tab_main</block></action>
+                <!--<action method="addTab"><name>products_section</name><block>b2b_onepageorder_edit_tab_products</block></action>-->
+            </block>
+        </reference>
+    </born_onepageorder_adminhtml_index_edit>
+    
+    <born_onepageorder_adminhtml_index_products>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="born_onepageorder/adminhtml_navigation_edit_tab_products" name="b2b.onepageorder.tab.products"/>
+            <block type="adminhtml/widget_grid_serializer" name="onepageorder_grid_serializer">
+                <reference name="onepageorder_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>b2b.onepageorder.tab.products</grid_block_name>
+                        <data_callback>getNavigationSelectedProducts</data_callback>
+                        <hidden_input_name>onepageorder[products]</hidden_input_name>
+                        <reload_param_name>onepageorder_products</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </born_onepageorder_adminhtml_index_products>
+    
+    <born_onepageorder_adminhtml_index_productsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="born_onepageorder/adminhtml_navigation_edit_tab_products" name="b2b.onepageorder.tab.products"/>
+        </block>
+    </born_onepageorder_adminhtml_index_productsgrid>
+</layout>

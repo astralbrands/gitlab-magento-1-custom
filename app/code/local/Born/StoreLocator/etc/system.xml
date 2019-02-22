@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <storelocator translate="label" module="storelocator">
+            <class>separator-top</class>
+            <label>Store Locator</label>
+            <tab>born</tab>
+            <sort_order>130</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <storelocator translate="label comment">
+                    <label>Configuration</label>
+                    <sort_order>500</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <google_api_key>
+                            <label>Google GEO API Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </google_api_key>
+                        
+                        <country_code>
+                            <label>Country Code</label>
+                            <comment>Force country code when can't be resolved from Locale (Optional)</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </country_code>
+                        
+                         <language>
+                            <label>Language</label>
+                            <comment>In Which Language Google Apis should return the results (domain name, not locale code)(Optional)</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </language>                        
+                    </fields>
+                    <fields>
+			            <getlatlng>
+			                <label>Update Latitude &amp; Longitude</label>
+			                <frontend_type>button</frontend_type>
+			                <frontend_model>storelocator/adminhtml_system_config_button</frontend_model>
+			                <comment>Updates lattitude &amp; longitude co-ordinates from Google API.</comment>
+			                <sort_order>80</sort_order>
+			                <show_in_default>1</show_in_default>
+			                <show_in_website>1</show_in_website>
+			                <show_in_store>0</show_in_store>
+			            </getlatlng>
+                                    <location_export translate="label" module="storelocator">
+                                        <label>Export Store Locations</label>
+                                        <frontend_type>button</frontend_type>
+                                        <frontend_model>storelocator/adminhtml_system_config_export_button</frontend_model>
+                                        <sort_order>81</sort_order>
+                                        <show_in_default>0</show_in_default>
+			                <show_in_website>0</show_in_website>
+			                <show_in_store>1</show_in_store>
+                                    </location_export>
+                                    <location_import translate="label">
+                                        <label>Import Store Locations</label>
+                                        <frontend_type>import</frontend_type>
+                                        <backend_model>storelocator/system_config_backend_import</backend_model>
+                                        <sort_order>82</sort_order>
+                                        <show_in_default>0</show_in_default>
+                                        <show_in_website>0</show_in_website>
+                                        <show_in_store>1</show_in_store>
+                                    </location_import>
+                                    <page_title translate="label" module="storelocator">
+                                        <label>Store Locatore Page Title</label>
+                                        <frontend_type>text</frontend_type>
+                                        <sort_order>83</sort_order>
+                                        <show_in_default>1</show_in_default>
+                                        <show_in_store>1</show_in_store>
+                                        <show_in_website>1</show_in_website>
+                                    </page_title>
+			        </fields>
+                </storelocator>
+                <search_protection>
+                    <label>Search Protection</label>
+                    <sort_order>600</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <max_hours>
+                            <label>Time period to Enforce Limit In Hours </label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </max_hours>
+                        <max_attempts>
+                            <label>Maximum Attempts per Time period </label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </max_attempts>
+                        <err_msg>
+                            <label>Error Message</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </err_msg>
+                    </fields>
+                </search_protection>
+            </groups>
+        </storelocator>
+    </sections>
+</config>

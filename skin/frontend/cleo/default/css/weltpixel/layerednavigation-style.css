@@ -1,0 +1,33 @@
+/* Add the design for mobile layered navigation style 1 */
+
+.swatches .filter_checkbox {
+    padding: 1px;
+    text-decoration: none;
+}
+
+.swatches .filter_checkbox img {
+    border: 1px solid transparent;        
+    padding: 1px;
+}
+
+.swatches .active_swatch img, .swatches .filter_checkbox img:hover{
+    border: 1px solid #000000;        
+}
+
+.block-layered-nav .show_more, .block-layered-nav .show_less {
+    text-align: right;
+}
+
+.block-layered-nav .show_less {
+    display: none;
+}
+
+.block-layered-nav .show_more span, .block-layered-nav .show_less span {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #1e7ec8;
+}
+
+.block-layered-nav .attribute_more_less {
+    display: none;
+}

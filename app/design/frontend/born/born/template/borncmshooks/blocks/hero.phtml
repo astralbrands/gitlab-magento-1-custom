@@ -1,0 +1,80 @@
+<?php 
+/*
+Hero Field Attributes
+- DisplaySetting: image, video
+- TextPosition: left, center, right
+- TextColor: black, white
+- BackgroundImage
+- Title
+- Subtitle
+- CtaText
+- CtaLink
+- VideoImage
+- VideoLink
+ */ 
+
+$hooks_helper = Mage::helper('borncmshooks');
+$hero_object_collection = $this->getHeroObjectCollection();
+ ?>
+
+
+<div class="hero-wrap">
+<?php foreach ($hero_object_collection as $block): ?>
+	<?php $_displaySetting = $block->getDisplaySetting() ? $block->getDisplaySetting() : 'image' ?>
+	<?php if($_displaySetting == 'video'): ?>
+		<div class="video-background hero-background">
+			<a class="video-link image-video-container" data-href="<?php echo $block->getVideoLink(); ?>">
+				<img class="video-img background-img" src="<?php echo $hooks_helper->getImageUrl($block->getVideoImage()); ?>">
+			</a>
+			<div class="desktop youtube-link">
+				<iframe width='420' height='315' src="<?php echo $block->getVideoLink(); ?>" frameborder="0"></iframe>
+			</div>
+		</div>
+	<?php elseif ($_displaySetting == 'image'): ?>
+		<div class= "hero-background">
+			<img class="background-img" src="<?php echo $hooks_helper->getImageUrl($block->getBackgroundImage()); ?>">
+			<?php if ($block->getBackgroundImageMobile()): ?>
+				<div class="mobile-background">
+					<img class="background-img-mobile" src="<?php echo $hooks_helper->getImageUrl($block->getBackgroundImageMobile()); ?>">
+				</div>
+			<?php endif ?>
+			
+		<?php $_textPosition = $block->getTextPosition() ? $block->getTextPosition() : 'right' ?>
+		<?php $_textColor =  $block->getTextColor() ? $block->getTextColor() : 'black'?>
+		<div class="hero-title-wrap <?php echo  $_textColor . ' ' . $_textPosition; ?>">
+		<?php if ($block->getTitleIcon()): ?>
+			<?php if (strpos($block->getTitleIcon(), '.svg')): ?>
+				<img class="icon-img svg-file" src="<?php echo $hooks_helper->getImageUrl($block->getTitleIcon()); ?>" width="150px"/>
+			<?php else: ?>
+				<img class="icon-img non-svg-file" src="<?php echo $hooks_helper->getImageUrl($block->getTitleIcon()); ?>"/>
+			<?php endif ?>
+		<?php elseif ($block->getTitle()): ?>
+			<?php if ($block->getTitle() == 'PUR'): ?>
+				<span class="icon-PUR_logo"></span>
+			<?php else: ?>
+				<h2 class="title"><?php echo $block->getTitle() ?></h2>
+			<?php endif ?>
+		<?php endif ?>
+
+		<?php if ($block->getSubtitle()): ?>
+			<h2 class="subtitle"><?php echo $block->getSubtitle() ?></h2>
+		<?php endif ?>
+		<?php if ($block->getDescription()): ?>
+			<p class="description"><?php echo $block->getDescription() ?></p>
+		<?php endif ?>
+		<?php if ($block->getCtaText()): ?>
+			<a href="<?php echo Mage::getBaseUrl(). $block->getCtaLink(); ?>" class="btn">
+	            <span class="btn-text"><?php echo $block->getCtaText(); ?></span>
+	        </a>
+		<?php endif ?>
+		</div>
+		<?php if ($this->getIsHomePage()): ?>
+			<a href="#fullbleed-wrap" class="scroll-down" id="home-scroll-down">
+				<?php echo $this->__('KEEP GOING') ?>
+				<span class="icon-arrow__down_small"></span>
+			</a>
+		<?php endif ?>
+		</div>
+	<?php endif ?>
+<?php endforeach ?>
+</div>

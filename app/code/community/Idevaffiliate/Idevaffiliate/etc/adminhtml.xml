@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+	<config>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<idevaffiliate translate="title" module="idevaffiliate">
+											<title>iDevAffiliate Section</title>
+											<sort_order>99</sort_order>
+										</idevaffiliate>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</config>

@@ -1,0 +1,207 @@
+<?php
+$_productCollection = $this->getItemCollection()->getItems();
+$this->resetItemsIterator();
+
+
+
+$_helper = $this->helper('catalog/output');
+$_settings = Mage::getStoreConfig('weltpixel_selector/categoryoptions');
+$_showRating = ('yes' == $_settings['showratings']);
+$_showAddToCart = ('yes' == $_settings['addtocart']);
+$_showAddToWishlist = ('yes' == $_settings['addtowishlist']);
+$_showAddToCompare = ('yes' == $_settings['addtocompare']);
+$_showAddToBox = $_showAddToCart || $_showAddToWishlist || $_showAddToCompare;
+$_showQuickView = ('yes' == $_settings['enablequickview']);
+$_addToCartLightBox = ('lightbox' == $_settings['addtocartbutton']);
+$_useRetina = Mage::getStoreConfig('weltpixel_selector/customization_settings/retina');
+
+$_imgSize = 270;
+?>
+
+<?php if (count($_productCollection)): ?>
+    <div class="category-products">
+        <div class="heading-title center">
+            <h3><?php echo $this->getBlockTitle(); ?></h3>
+        </div>
+        <div>
+            <ul id="featured-products-<?php echo $this->getData('category_id') ?>" class="featured-products products-grid owl-carousel">
+                <?php
+                // limit the number of upsale items using the admin setting if the limit is > 0
+                $upsaleLimit = $this->getData('num_products');
+                if ($upsaleLimit > 0) {
+                    $_productCollection = array_slice($_productCollection, 0, $upsaleLimit);
+                }
+                ?>
+                <?php foreach ($_productCollection as $_product): ?>
+                    <?php
+                    $_productUrl = $_product->getProductUrl();
+                    $_productName = $_helper->productAttribute($_product, $_product->getName(), 'name');
+                    $_productNameStripped = $this->stripTags($_product->getName(), null, true);
+                    $_productPrice = $this->getPriceHtml($_product, true, '-grid-related');
+                    $_productAddToCart = $this->getAddToCartUrl($_product);
+                    $_wishlistUrl = $this->helper('wishlist')->getAddUrl($_product);
+                    $_compareUrl = $this->getAddToCompareUrl($_product);
+                    $_wishlistIsAllow = $this->helper('wishlist')->isAllow();
+                    $_productReviews = $this->getReviewsSummaryHtml($_product, 'short');
+                    $_hoverShowPrice = (Mage::getStoreConfig('weltpixel_selector/categoryoptions/showprice') == "yes");
+                    $_hoverShowName = (Mage::getStoreConfig('weltpixel_selector/categoryoptions/showname') == "yes");
+                    $_shortTitle = (Mage::getStoreConfig('weltpixel_selector/categoryoptions/onelinetitle') == "yes");
+                    $customSize = (Mage::getStoreConfig('weltpixel_selector/categoryoptions/equal_grid_images') && (Mage::getStoreConfig('weltpixel_selector/categoryoptions/grid_image_size'))) ? Mage::getStoreConfig('weltpixel_selector/categoryoptions/grid_image_size') : false;
+
+
+                    // -------------------------------------------------------------
+
+                    if (Mage::getStoreConfig('weltpixel_selector/categoryoptions/newsaletag') == "yes") {
+                        $productNewToDate = $_product->getNewsToDate();
+                        if (!$productNewToDate && $_product->getNewsFromDate()) {
+                            $productNewToDate = date("Y-m-d", strtotime('+1 years'));
+                        }
+                        $_productIsNew = date("Y-m-d") >= substr($_product->getNewsFromDate(), 0, 10) && date("Y-m-d") <= substr($productNewToDate, 0, 10);
+                        $rightNow = time();
+                        $_productIsSale = $_product->getSpecialPrice() && ($rightNow >= strtotime($_product->getSpecialFromDate()) && $rightNow <= strtotime($_product->getSpecialToDate()) || $rightNow >= strtotime($_product->getSpecialFromDate()) && is_null($_product->getSpecialToDate()));
+                    } else {
+                        $_productIsNew = false;
+                        $_productIsSale = false;
+                    }
+
+                    // -------------------------------------------------------------
+
+                    $_imgSize = 270; //default
+                    $keepFrame = false;
+                    $keepAspectRatio = true;
+                    if ($customSize) {
+                        $_imgSize = $customSize;
+                        $keepFrame = true;
+                    }
+                    $_imgSizeRetina = 2 * $_imgSize;
+
+                    //hover image preparation
+                    $_secondImage = '';
+                    $_secondImageRetina = '';
+                    $_images = Mage::getModel('catalog/product')->load($_product->getId())->getMediaGalleryImages();
+                    if ($_images) {
+                        foreach ($_images as $_image) {
+                            if (($_secondImage == "") && (strtoupper($_image->getLabel()) == "BACK")) {
+                                $_secondImage = (string) $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio($keepAspectRatio)->keepFrame($keepFrame)->resize($_imgSize);
+                                if ($_useRetina) {
+                                    $_secondImageRetina = (string) $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio($keepAspectRatio)->keepFrame($keepFrame)->resize($_imgSizeRetina);
+                                }
+                            }
+                        }
+                    }
+                    if ($_secondImage == '') {
+                        $_secondImage = (string) $this->helper('catalog/image')->init($_product, 'thumbnail')->constrainOnly(true)->keepAspectRatio($keepAspectRatio)->keepFrame($keepFrame)->resize($_imgSize);
+                        if ($_useRetina) {
+                            $_secondImageRetina = (string) $this->helper('catalog/image')->init($_product, 'small_image')->constrainOnly(true)->keepAspectRatio($keepAspectRatio)->keepFrame($keepFrame)->resize($_imgSizeRetina);
+                        }
+                    }
+
+                    // product main image
+                    $_productImage = (string) $this->helper('catalog/image')->init($_product, 'thumbnail')->constrainOnly(true)->keepAspectRatio($keepAspectRatio)->keepFrame($keepFrame)->resize($_imgSize);
+                    $_productImageRetina = '';
+                    if ($_useRetina) {
+                        $_productImageRetina = (string) $this->helper('catalog/image')->init($_product, 'small_image')->constrainOnly(true)->keepAspectRatio($keepAspectRatio)->keepFrame($keepFrame)->resize($_imgSizeRetina);
+                    }
+                    ?>
+                    <li>
+                        <div class="item">
+                            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="hover product-image">
+                                <img src="<?php echo $_secondImage; ?>"
+                                     data-src="<?php echo $_secondImage; ?>"
+                                     <?php if ($_useRetina): ?>
+                                         data-src-retina="<?php echo $_secondImageRetina; ?>"
+                                     <?php endif; ?>
+                                     alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                            </a>
+                            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="normal product-image">
+                                <img src="<?php echo $_productImage; ?>"
+                                     data-src="<?php echo $_productImage; ?>"
+                                     <?php if ($_useRetina): ?>
+                                         data-src-retina="<?php echo $_productImageRetina; ?>"
+                                     <?php endif; ?>
+                                     alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                            </a>
+
+                            <div class="product-tags tags-sm">
+                                <?php if ($_productIsNew) : ?>
+                                    <div class="tag tag-new"><?php echo $this->__('New'); ?></div>
+                                <?php endif; ?>
+                                <?php if ($_productIsSale): ?>
+                                    <div class="tag tag-sale"><?php echo $this->__('Sale'); ?></div>
+                                <?php endif; ?>
+                            </div>
+
+                            <div class="item-info">
+
+                                <span class="<?php echo($_hoverShowName) ? "show" : "hide"; ?>"><a href="<?php echo $_productUrl; ?>" title="<?php echo $_productNameStripped; ?>" class="<?php echo($_shortTitle) ? "shortTitle" : "longTitle"; ?>"><?php echo $_productName; ?></a></span>
+
+                                <?php
+                                if ($_showRating):
+                                    echo $_productReviews;
+                                endif;
+                                ?>
+                                <?php
+                                if ($_hoverShowPrice) {
+                                    echo $_productPrice;
+                                }
+                                ?>
+                                <?php if ($_showAddToBox): ?>
+                                    <div class="add-to-box">
+                                        <table>
+                                            <tr>
+                                                <?php if ($_product->isSaleable() && $_showAddToCart): ?>
+                                                    <td>
+                                                        <?php if (($_productUrl == $_productAddToCart) && $_addToCartLightBox): ?>
+                                                            <a href="javascript: void(0);" onclick="weltpixel.quickview.showProductInfoModal('<?php echo Mage::helper('weltpixel_quickview')->getProductUrl($_product, array()); ?>');" class="add-to-cart"><i class="icon icon-shopping-cart"></i><span><?php echo $this->__('Add to Cart'); ?></span></a>
+                                                        <?php else: ?>
+                                                            <a href="<?php echo $_productAddToCart; ?>" class="add-to-cart"><i class="icon icon-shopping-cart"></i><span><?php echo $this->__('Add to Cart'); ?></span></a>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                <?php endif; ?>
+                                                <?php if ($_wishlistIsAllow && $_showAddToWishlist) : ?>
+                                                    <td>
+                                                        <a href="<?php echo $_wishlistUrl; ?>"><i class="icon icon-heart3"></i></a>
+                                                    </td>
+                                                <?php endif; ?>
+                                                <?php if ($_compareUrl && $_showAddToCompare) : ?>
+                                                    <td>
+                                                        <a class="wp-add-to-compare" href="<?php echo $_compareUrl; ?>"><i class="icon-line-stack-2"></i></a>
+                                                    </td>
+                                                <?php endif; ?>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if ($_showQuickView): ?>
+                                    <?php if (Mage::getStoreConfig('weltpixel_selector/categoryoptions/quickview_design') == 'version1'): ?>
+                                        <a href="javascript: void(0);" onclick="weltpixel.quickview.showProductInfoModal('<?php echo Mage::helper('weltpixel_quickview')->getProductUrl($_product, array()); ?>');" class="quickview"><i class="icon-line-plus"></i><?php echo $this->__('Quickview'); ?></a>
+                                    <?php elseif (Mage::getStoreConfig('weltpixel_selector/categoryoptions/quickview_design') == 'version2'): ?>
+                                        <a href="javascript: void(0);" onclick="weltpixel.quickview.showProductInfoInline('<?php echo Mage::helper('weltpixel_quickview')->getProductUrl($_product, array()); ?>', this);" class="quickview"><i class="icon-line-plus"></i><?php echo $this->__('Quickview'); ?></a>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+    <script>
+        // <![CDATA[
+        jQuery(document).ready(function($) {
+            var owl = $("#featured-products-<?php echo $this->getData('category_id') ?>");
+            owl.owlCarousel({
+                items: 5,
+                pagination: false,
+                rewindNav: false,
+                navigation: true,
+                itemsMobile : [479,2],
+                navigationText: [
+                    '<i class="icon-angle-left"></i>',
+                    '<i class="icon-angle-right"></i>'
+                ]
+            });
+        });
+        // ]]>
+    </script>
+<?php endif; ?>

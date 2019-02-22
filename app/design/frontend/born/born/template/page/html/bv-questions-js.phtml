@@ -1,0 +1,12 @@
+<?php if(Mage::getStoreConfig("bazaarvoice/general/enable_bv") === "1"): ?>
+<?php
+$doShowContentJs = Mage::getStoreConfig('bazaarvoice/qa/do_show_content_js');
+?>
+<script type="text/javascript">
+  $BV.ui( 'qa', 'show_questions', {
+    doShowContent : function () {
+      <?php echo $doShowContentJs ?>
+    }
+  });    
+</script>
+<?php endif; ?>

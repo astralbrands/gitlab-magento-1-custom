@@ -1,0 +1,107 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition End User License Agreement
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magento.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     born_default
+ * @copyright Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license http://www.magento.com/license/enterprise-edition
+ */
+
+/**
+ * Shoping cart sidebar
+ *
+ * @var Mage_Checkout_Block_Cart_Minicart $this
+ */
+?>
+
+<?php
+$_cartQty = $this->getSummaryCount();
+if(empty($_cartQty)) {
+    $_cartQty = 0;
+}
+?>
+<div id="minicart-error-message" class="minicart-message"></div>
+<div id="minicart-success-message" class="minicart-message"></div>
+
+<div class="minicart-wrapper">
+    <p class="minicart-title">Shopping Bag <span class="btn-minicart-toggle"></span></p>
+    <p class="summary-items">
+        <span class="cart-qty"><?php echo $_cartQty ?></span>
+        <?php echo $this->__('items') ?>  
+    </p>
+    <?php if ($_promoMsg = Mage::helper('born_package/checkout_cart')->getPromoMessage($this->getSubtotal())): ?>
+        <p class="promo"><?php echo $_promoMsg?></p>
+    <?php endif ?>
+    <?php $_items = $this->getItems() ?>
+    <?php $countItems = count($_items); ?>
+    <?php if($countItems): ?>
+        <div id="minicart-list-block">
+            <ul id="cart-sidebar" class="mini-products-list">
+                <?php foreach($_items as $_item): ?>
+                    <?php echo $this->getItemHtml($_item) ?>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            truncateOptions();
+            decorateList('cart-sidebar', 'none-recursive');
+            $j('document').ready(function() {
+                var minicartOptions  = {
+                    formKey:           "<?php echo $this->getFormKey();?>",
+                    selectors: {
+                        itemRemove: '#cart-sidebar .remove-item'
+                    }
+                };
+                var Mini = new Minicart(minicartOptions);
+                Mini.init();
+            });
+        </script>
+        <div id="minicart-widgets">
+            <?php echo $this->getChildHtml('cart_promotion') ?>
+        </div>
+        <div class="block-content">
+            <p class="subtotal">
+                <?php if ($this->canApplyMsrp()): ?>
+                    <span class="map-cart-sidebar-total"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
+                <?php else: ?>
+                    <span class="label"><?php echo $this->__('Total:') ?></span> <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?>
+                    <?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?>
+                        <br />(<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+                    <?php endif; ?>
+                <?php endif; ?>
+            </p>
+            <a class="go-to-cart btn" href="<?php echo Mage::helper('checkout/cart')->getCartUrl() ?>">
+                <span class="btn-text">view bag / checkout</span>
+            </a>
+        </div>
+    <?php endif ?>
+    <?php if(!$countItems): ?>
+        <p class="empty"><?php echo $this->__('You have no items in your shopping cart.') ?></p>
+    <?php endif; ?>
+        <script>
+        var page = jQuery('body').outerHeight();
+        var blockContent = jQuery('.block-content').outerHeight();
+        var headHeight = 80;
+        var footHeight = 160; 
+        var buffer = 50;
+        var mc = page - headHeight - footHeight - buffer;
+        jQuery('#minicart-list-block').css('height',mc);       
+        </script>
+</div>

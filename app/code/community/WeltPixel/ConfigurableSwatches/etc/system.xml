@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <weltpixel_productswatch>
+            <groups>
+                <general>
+                    <fields>
+                        <deactivate translate="label comment" module="weltpixel_configurableswatches">
+                            <label>Deactivate Weltpixel swatches and use default magento swatches</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>(Default swatches only in magento 1.9.1 and over)</comment>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </deactivate>
+                    </fields>
+                </general>
+            </groups>
+        </weltpixel_productswatch>
+        <weltpixel_selector>
+            <groups>
+                <categoryoptions>
+                    <fields>
+                        <activate translate="label comment" module="weltpixel_configurableswatches">
+                            <label>Activate Magento swatches on product listing pages</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>(Default swatches only in magento 1.9.1 and over. Make sure they are enabled in ConfigurableSwatches menu)</comment>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </activate>
+                    </fields>
+                </categoryoptions>
+            </groups>
+        </weltpixel_selector>
+    </sections>
+</config>

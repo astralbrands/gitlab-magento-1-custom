@@ -1,0 +1,82 @@
+<?php
+    $save_section_action = Mage::helper("adminhtml")->getUrl("borncmshooks/adminhtml_borncmshooks/savesection/");
+    $save_field_action = Mage::helper("adminhtml")->getUrl("borncmshooks/adminhtml_borncmshooks/savefield/");
+    $save_form_action = Mage::helper("adminhtml")->getUrl("borncmshooks/adminhtml_borncmshooks/saveform/");
+    $delete_action = Mage::helper("adminhtml")->getUrl("borncmshooks/adminhtml_borncmshooks/deletecontent/");
+    $get_sections_action = Mage::helper("adminhtml")->getUrl("borncmshooks/adminhtml_borncmshooks/getsections/");
+    $get_sections_dropdown_action = Mage::helper("adminhtml")->getUrl("borncmshooks/adminhtml_borncmshooks/getsectionsfordropdown/");
+    $get_fields_action = Mage::helper("adminhtml")->getUrl("borncmshooks/adminhtml_borncmshooks/getfields/");
+    $get_fields_dropdown_action = Mage::helper("adminhtml")->getUrl("borncmshooks/adminhtml_borncmshooks/getfieldsfordropdown/");
+    $get_forms_action = Mage::helper("adminhtml")->getUrl("borncmshooks/adminhtml_borncmshooks/getforms/");
+    
+    $show_new_content_form_action = Mage::helper("adminhtml")->getUrl("borncmshooks/adminhtml_borncmshooks/shownewcontentform/");
+    $show_edit_content_form_action = Mage::helper("adminhtml")->getUrl("borncmshooks/adminhtml_borncmshooks/showeditcontentform/");
+    
+    $id = $this->getRequest()->getParam('id');
+?>
+<div id ="content-container">
+    <div id="section_region">
+        <div id="section_region_add_button">
+            <button 
+                id="add_section_button" 
+                title="Hang Section" 
+                type="button" 
+                class="scalable add" 
+                onclick="showNewContentForm('<?php echo $show_new_content_form_action; ?>', 'section', <?php echo $id; ?>)" style=""><span><span><span>Hang Section on Hook</span></span></span>
+            </button>
+        </div>
+
+        <div id="section_region_sections">
+            <?php
+                $sections = Mage::getModel('borncmshooks/sections')->getCollection()->addFieldToFilter('hook_id', array('eq' => $id))->setOrder('section_order', 'ASC');
+                foreach($sections as $section):
+            ?>
+                <div class="section">
+                    <div class="delete-section"><a href="javascript:void(0);" onClick="deleteContent('<?php echo $delete_action; ?>','section', <?php echo $section->getSectionId(); ?>)">Del</a></div>
+                    <div class="view-section"><a href="javascript:void(0);" 
+                       onClick="getFields('<?php echo $show_edit_content_form_action; ?>','<?php echo $get_fields_action; ?>',<?php echo $section->getSectionId(); ?>)">
+                           <?php echo $section->getName(); ?>
+                    </a></div>
+                </div>
+            <?php
+                endforeach;
+            ?>
+        </div>
+    </div>
+
+
+
+    <div id="field_region">
+        <div id="field_region_add_button">
+            <button 
+                id="add_field_button" 
+                title="Add Field" 
+                type="button" 
+                class="scalable add" 
+                onclick="showNewContentForm('<?php echo $show_new_content_form_action; ?>', 'field', <?php echo $id; ?>)" style=""><span><span><span>Add Field to Section</span></span></span>
+            </button>
+        </div>
+
+        <div id="field_region_field">
+        </div>
+    </div>
+
+    <div id="form_region">
+        <div id="form_region_add_button">
+            <button 
+                id="add_form_button" 
+                title="Add Form to Field" 
+                type="button" 
+                class="scalable add" 
+                onclick="showNewContentForm('<?php echo $show_new_content_form_action; ?>', 'form', <?php echo $id; ?>)" style=""><span><span><span>Add Form to Field</span></span></span>
+            </button>
+        </div>
+
+        <div id="form_region_form">
+        </div>
+    </div>
+</div>
+
+<div id="form-container">
+    
+</div>

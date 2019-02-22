@@ -1,0 +1,318 @@
+.blog #page {
+  display: block;
+}
+.blog-page {
+  .link-blog-name {
+    @include whitneyBook;
+    @include setFont(2rem, 3rem, 400);
+    font-style: italic;
+  }
+  .menu-cosmedix-menu-container {
+    display: inline-block;
+    margin-top: 25px;
+  }
+  .menu-item a {
+    font-weight: 500;
+  }
+  .search-form .search-field {
+    @include placeholder {
+      color: $white;
+    }
+    &:-webkit-autofill {
+      background-color: $black !important;
+    }
+  }
+  .search-form .search-submit {
+    &:hover,
+    &:active,
+    &:focus {
+      outline: none;
+    }
+  }
+  .top-story-inner {
+    @include align-items(center);
+    .link-read-more {
+      border-width: 2px;
+      line-height: 4.5rem;
+      width: 188px;
+    }
+  }
+  .caption {
+    @include whitneyLight;
+    @include setFont(1.8rem, 2.4rem, 200);
+    font-style: italic;
+  }
+  .title {
+    text-transform: none;
+  }
+  .video-text {
+    @include whitneyBook;
+    font-weight: 200;
+    font-style: italic;
+  }
+  .icon-playbutton {
+    font-size: 3.8rem;
+    margin-left: 5px;
+  }
+  .blog-story .note-msg {
+    display: none;
+  }
+  .category-products {
+    margin-bottom: 10px;
+  }
+  .link-shop-look {
+    border-width: 2px;
+    width: 188px;
+    line-height: 4.5rem;
+  }
+  .subtitle {
+    @include gotham;
+    @include setFont(1.6rem, 4.2rem, 500);
+    letter-spacing: 0.15rem;
+    font-style: normal;
+    text-transform: uppercase;
+    margin-bottom: 0;
+  }
+  .excerpt {
+    @include gotham;
+    @include setFont(1.4rem, 2.1rem, 200);
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .blog-post {
+    .caption {
+      margin-bottom: 0;
+    }
+  }
+  .link-read-more,
+  .btn-older-posts,
+  .btn-find-events,
+  .btn-reset {
+    border-width: 2px;
+    line-height: 4.5rem;
+    &:focus,
+    &:active,
+    &:hover {
+      outline: none;
+    }
+  }
+  .event-title {
+    text-transform: none;
+  }
+  .event-period {
+    @include whitneyBook;
+    font-style: italic;
+  }
+  .aligncenter {
+    @include setFont(1.3rem, 4.2rem, 500);
+  }
+  .day-content {
+    background: $menu-border-color;
+  }
+  .month-view .day-content {
+    border: 1px solid $menu-border-color;
+    .event-day.event-exist {
+      background: $menu-border-color;
+    }
+  }
+  .event-date li {
+    height: inherit;
+  }
+  .event-description {
+    box-shadow: 0 0 2px 1px $menu-border-color;
+    .event-name {
+      font-size: 1.6rem;
+    }
+    .link-view-details {
+      color: $dark-grey-background;
+    }
+  }
+  .show-events-container .event-description .event-time {
+    font-size: 1.6rem;
+    font-weight: 500;
+  }
+  .events-table-list {
+    .event-time,
+    .event-name {
+      font-size: 1.4rem;
+    }
+    .event-time {
+      @include gotham;
+      font-weight: 200;
+    }
+    .day-name.event-exist {
+      font-weight: 500;
+    }
+  }
+  .one-third .image-block .attachment-thumb {
+    width: 100%;
+  }
+}
+
+.blog {
+  .section-1 .item {
+    .box-outer {
+      padding-top: 120%;
+    }
+    .product-info {
+      width: 90%;
+      margin: 0 auto;
+      .regular-price .price {
+        font-size: 1.4rem;
+      }
+    }
+    .product-name {
+      margin-bottom: 5px;
+      a {
+        @include gotham;
+        @include setFont(1.2rem, 1.2rem, 700);
+        letter-spacing: 0.15rem;
+        text-transform: uppercase;
+      }
+    }
+    .product-subtitle {
+      line-height: 1.4rem;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.blog-modal {
+  .caption {
+    @include gotham;
+    @include setFont(1rem, 2rem, 500);
+    font-style: normal;
+  }
+  .description {
+    @include gotham;
+    font-size: 1.4rem;
+    font-weight: 200;
+  }
+  .modal-image img {
+    width: 100%;
+  }
+}
+
+.icon-person {
+  font-size: 2rem;
+  padding-right: 5px;
+  vertical-align: middle;
+}
+
+@media  only screen and (max-width: $b2c-mobile-menu) and (min-width: $mobile) {
+  .blog {
+    .content-top {
+      padding-top: 20px;
+    }
+  }
+}
+
+@media  only screen and (max-width: $desktop-m) {
+  .blog-page {
+    .menu-cosmedix-menu-container {
+      float: right;
+      width: 100%;
+    }
+  }
+}
+
+@media  only screen and (max-width: $mobile) {
+  .blog-page {
+    .content-top {
+      padding-top: 20px;
+      margin: 0 20px;
+    }
+    .blog-top-story {
+      margin-bottom: 38px;
+    }
+    .top-story-inner {
+      height: initial;
+      .link-read-more {
+        line-height: 3.6rem;
+      }
+    }
+    .title {
+      margin-top: 10px;
+      margin-bottom: 25px;
+    }
+    .link-read-more,
+    .link-shop-look,
+    .btn-older-posts {
+      line-height: 3.6rem;
+    }
+    .category-products {
+      width: 60%;
+      margin: 0 auto 10px;
+    }
+  }
+  .blog .section-1 {
+    .bx-wrapper {
+      margin-bottom: 50px;
+    }
+    .bx-viewport {
+      border: 1px solid $block-border-color;
+    }
+    .bx-controls-direction {
+      top: 42%;
+    }
+    .item {
+      .alt-img img {
+        max-width: 200px;
+        margin: 0 auto 5px;
+      }
+      .box-outer {
+        padding-top: 100%;
+      }
+    }
+  }
+  .blog-modal {
+    .modal-footer .share-link {
+      border-width: 2px;
+    }
+  }
+}
+
+@media  only screen and (max-width: $mobile-s) {
+  .blog-page {
+    .content-top {
+      padding-top: 10px;
+    }
+    .menu-cosmedix-menu-container {
+      margin-bottom: 25px;
+    }
+    .attachment-full {
+      max-width: initial;
+      width: auto;
+      height: 260px;
+    }
+    .top-story-image,
+    .image-video-container {
+      overflow: hidden;
+    }
+    .video-text {
+      top: 40%;
+      left: 0;
+      right: 0;
+      text-align: center;
+      display: table;
+      width: 100%;
+    }
+    .icon-playbutton {
+      display: table-caption;
+    }
+  }
+
+}
+@media  only screen and (max-width: $mobile-xs) {
+  .blog-page {
+    .category-products {
+      width: 100%;
+    }
+  }
+  .blog .section-1 {
+    .item .box-outer {
+      padding-top: 100%;
+    }
+  }
+
+}

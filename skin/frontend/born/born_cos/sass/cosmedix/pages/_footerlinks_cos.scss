@@ -1,0 +1,298 @@
+.footer-link-template,
+.footer-links-template {
+  .col-main {
+    padding-bottom: 100px;
+  }
+  .left-navigation {
+    margin-top: 50px;
+    width: 240px;
+    .block-title {
+      strong span {
+        border-bottom: 4px solid $menu-border-color !important;
+        font-size: 1.8rem;
+        letter-spacing: 0.15rem;
+      }
+    }
+  }
+  .press  {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+    .title {
+      letter-spacing: 0.07rem;
+    }
+  }
+  table {
+    width: 100%;
+    td {
+      padding: 10px;
+      border-left: 1px solid $block-border-color;
+      &:first-child {
+        border-left: 0;
+      }
+    }
+    thead th {
+      @include gotham;
+      @include setFont(1.2rem, 2rem, 700);
+      letter-spacing: 0.15rem;
+      text-transform: uppercase;
+    }
+    tbody {
+      border: 1px solid $block-border-color;
+    }
+
+  }
+  .LowerStates {
+    margin-top: 20px;
+  }
+  .TitleRow {
+    border-bottom: 1px solid $block-border-color;
+  }
+}
+.red {
+  color: $red;
+}
+.professional-block {
+  margin-bottom: 20px;
+}
+.professional-signup,
+.professional-login {
+  display: inline-block;
+  .btn {
+    @include gotham;
+    @include setFont(1.3rem, 4.2rem, 500);
+    letter-spacing: 0.07rem;
+    text-transform: uppercase;
+    padding: 0 20px;
+    &:hover {
+      background: $black;
+      color: $white;
+      text-decoration: none;
+    }
+  }
+}
+.professional-signup {
+  padding-right: 13px;
+  .btn {
+    background: $black;
+    color: $white;
+    &:hover {
+      background:  $white;
+      color: $black;
+    }
+  }
+}
+
+/*Registration form*/
+.show-radio-block {
+  display: block !important;
+}
+.pro-artist-form {
+  input[type="radio"] + label::before {
+    margin-left: 1px;
+    margin-bottom: 2px;
+  }
+  input[type="radio"] + label {
+    line-height: 4rem;
+    cursor: pointer;
+  }
+  .input-box .input-text {
+    font-weight: 500;
+  }
+  .scaffold-form {
+    .fieldset-0 ul li {
+      width: 330px;
+      padding-right: 0;
+      margin-right: 20px;
+      &:nth-child(even) {
+        margin-right: 0;
+      }
+    }
+    .fieldset-1 ul {
+      position: relative;
+      .validation-advice {
+        position: absolute;
+        bottom: -20px;
+      }
+      li + li .radio-title {
+        margin-top: 20px;
+      }
+    }
+  }
+  .field-general.show-radio-block {
+    padding-top: 10px;
+  }
+  button[type="submit"]{
+    &:hover,
+    &:active,
+    &:focus {
+      box-shadow: inset 0 0 0 2px $black;
+    }
+  }
+  .radio-box label {
+    display: block;
+  }
+}
+
+.scaffold-form {
+  .legend {
+    letter-spacing: -0.03rem;
+  }
+  .group-name {
+    letter-spacing: 0.15rem;
+    border-bottom-color: $menu-border-color;
+  }
+  .show-radio-block {
+    .radio-title,
+    .checkbox-title {
+      width: 100%;
+      float: left;
+      margin: 15px 0 20px;
+    }
+    .field-expertise,
+    .field-radio {
+      width: 50%;
+      float: left;
+    }
+  }
+  .buttons-set {
+    max-width: 100%;
+  }
+}
+
+.pro-artist-form .scaffold-form .fieldset-0 ul li {
+  @include flex-basis(100%);
+  margin-right: 0;
+  width: initial;
+  &:nth-child(1),
+  &:nth-child(2),
+  &:nth-child(7),
+  &:nth-child(9) {
+    @include flex-basis(48%);
+  }
+  &:nth-child(1),
+  &:nth-child(9) {
+    margin-right: 4%;
+  }
+  &:nth-child(7) {
+    order: 3;
+  }
+  &:nth-child(9) {
+    order: 2;
+  }
+  &:nth-child(n + 10) {
+    order: 3;
+  }
+}
+
+
+@media only screen and  (max-width: $tablet-custom-4) {
+  .professional-signup,
+  .professional-login {
+    display: block;
+    .btn {
+      width: 265px;
+    }
+  }
+  .professional-signup {
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and  (max-width: $mobile) {
+  .contacts-index-index .main {
+    padding: 0;
+  }
+  .professional-signup,
+  .professional-login {
+    .btn {
+      height: 44px;
+    }
+  }
+}
+
+@media only screen and  (max-width: $mobile-m) {
+  .footer-link-template,
+  .footer-links-template {
+    .left-navigation {
+      margin-top: 0;
+      width: 100%;
+      .block-title strong span {
+        font-size: 1.6rem;
+      }
+    }
+    .press {
+      width: 100%;
+      margin: 0;
+    }
+    table {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+@media only screen and  (max-width: $mobile-s) {
+  .scaffold-form {
+    .show-radio-block {
+      .field-expertise,
+      .field-radio {
+        width: 100%;
+        float: none;
+      }
+    }
+    .buttons-set .button {
+      height: 40px;
+      padding: 0 15px;
+    }
+    .fieldset h3 {
+      font-size: 1.6rem;
+    }
+  }
+  .professional-signup {
+    padding-right: 0;
+  }
+  .professional-signup,
+  .professional-login {
+    .btn {
+      width: 100%;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  }
+}
+
+@media only screen and  (max-width: $mobile-iphone-6-plus) {
+  .pro-artist-form .scaffold-form .fieldset-0 ul li {
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(7),
+    &:nth-child(9) {
+      @include flex-basis(100%);
+    }
+    &:nth-child(1),
+    &:nth-child(9) {
+      margin-right: 0%;
+    }
+  }
+
+}
+
+@media only screen and  (max-width: $mobile-iphone-6) {
+  .footer-link-template,
+  .footer-links-template {
+    table td {
+      padding: 5px;
+    }
+  }
+  .pro-artist-form .scaffold-form .fieldset-0 ul li {
+    margin-right: 0;
+  }
+}
+
+@media only screen and  (max-width: $mobile-iphone-5) {
+  .footer-link-template,
+  .footer-links-template {
+    table td {
+      font-size: 1.2rem;
+    }
+  }
+}

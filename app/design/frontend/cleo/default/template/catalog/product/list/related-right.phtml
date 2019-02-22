@@ -1,0 +1,66 @@
+<?php
+$_productCollection = $this->getItems();
+$_useRetina         = Mage::getStoreConfig('weltpixel_selector/customization_settings/retina');
+$_imgSize = 270;
+?>
+
+<?php if ($_productCollection->getSize()): ?>
+<div class="heading-block center">
+    <h3><?php echo $this->__('WE RECOMMEND'); ?></h3>
+</div>
+
+    <div id="related-products" class="products-grid">
+        <?php
+        // limit the number of related items using the admin setting if the limit is > 0
+        $relatedLimit = (int)Mage::getStoreConfig('weltpixel_selector/productpageoptions/relatedproductsnumber');
+
+        if($relatedLimit > 0) {
+            $relatedLimit++;
+        }
+        ?>
+        <?php foreach ($_productCollection as $_product){ ?>
+            <div class="item">
+                <a href="<?php echo $_product->getProductUrl(); ?>" title="<?php echo $this->escapeHtml($_product->getName()); ?>">
+                    <img
+                        src = "<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($_imgSize); ?>"
+                        data-src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($_imgSize); ?>"
+                        <?php if($_useRetina) : ?>
+                            data-src-retina="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(2*$_imgSize); ?>"
+                        <?php endif; ?>
+                alt="<?php echo $this->escapeHtml($_product->getName()); ?>"
+                /></a>
+                <h4><a href="<?php echo $_product->getProductUrl(); ?>" title="<?php echo $this->escapeHtml($_product->getName()); ?>"><?php echo $this->escapeHtml($_product->getName()); ?></a></h4>
+                <?php echo $this->getPriceHtml($_product, true, '-related'); ?>
+            </div>
+        <?php $relatedLimit--; if($relatedLimit == 1) break; } ?>
+    </div>
+    <script>
+    // <![CDATA[
+        jQuery(document).ready(function($) {
+            var owl = $("#related-products");
+            owl.owlCarousel({
+                <?php
+                $_relatedLocation = Mage::getStoreConfig('weltpixel_selector/productpageoptions/secondary_column_location');
+                ?>
+                <?php if($_relatedLocation == "right") : ?>
+                items: 1,
+                <?php else: ?>
+                items: 5,
+                <?php endif; ?>
+                itemsDesktop: [979,1],
+                itemsDesktopSmall: [970,5],
+                //itemsTablet: [],
+                //itemsTabletSmall: [],
+                //itemsMobile: [],
+                pagination: false,
+                rewindNav: false,
+                navigation: true,
+                navigationText: [
+                    '<i class="icon-angle-left"></i>',
+                    '<i class="icon-angle-right"></i>'
+                ]
+            });
+        });
+    // ]]>
+    </script>
+<?php endif; ?>

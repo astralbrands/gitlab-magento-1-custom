@@ -1,0 +1,229 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <weltpixel translate="label">
+            <label>WeltPixel Extensions</label>
+            <sort_order>150</sort_order>
+        </weltpixel>
+    </tabs>
+    <sections>
+        <weltpixel_layerednavigation translate="label" module="weltpixel_layerednavigation">
+            <label>Layered Navigation</label>
+            <tab>weltpixel</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <ajax translate="label" module="weltpixel_layerednavigation">
+                    <label>Ajax Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable_ajax translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Enable Ajax</label>
+                            <comment></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_ajax>
+                        <disable_mouseclicks translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Disable Mouse clicks while performing Ajax refresh</label>
+                            <comment></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </disable_mouseclicks>
+                    </fields>
+                </ajax>
+                <display translate="label" module="weltpixel_layerednavigation">
+                    <label>Display Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <position translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Filter Positioning</label>
+                            <comment></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>weltpixel_layerednavigation/adminhtml_system_config_source_navigation_options</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </position>                                                
+                        <show_shop_by translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Show currently shopping by</label>
+                            <comment></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_shop_by>                    
+                    </fields>
+                </display>
+                <default_display  translate="label" module="weltpixel_layerednavigation">
+                    <label>Default Display Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <show_categories_as translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Show Categories as</label>                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>weltpixel_layerednavigation/adminhtml_system_config_source_navigation_showcategories</source_model>                            
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store> 
+                        </show_categories_as>
+                        <show_categories_product_count translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Show product count for categories</label>                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store> 
+                        </show_categories_product_count>
+                        <show_attributes_product_count translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Show product count for attributes</label>                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store> 
+                        </show_attributes_product_count>
+                        <show_price_filter_as translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Show price filter as</label>                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>weltpixel_layerednavigation/adminhtml_system_config_source_navigation_showpricefilter</source_model>                            
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store> 
+                        </show_price_filter_as>                        
+                        <colors_images_width translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Colors and Images width</label>                            
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                             
+                        </colors_images_width>
+                        <colors_images_height translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Colors and Images height</label>                            
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store> 
+                        </colors_images_height>  
+                        <colors_images_resize translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Resize images</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store> 
+                        </colors_images_resize>                    
+                        <border_radius translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Border Radius</label>                            
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store> 
+                        </border_radius>
+                        <show_other_filters_as translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Show All other filters as</label>                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>weltpixel_layerednavigation/adminhtml_system_config_source_navigation_showotherfilters</source_model>                            
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store> 
+                        </show_other_filters_as>
+                        <sort_items_by translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Sort Items by</label>                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>weltpixel_layerednavigation/adminhtml_system_config_source_navigation_sortby</source_model>                            
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_items_by>
+                        <order_items_by translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Order Items by</label>                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>weltpixel_layerednavigation/adminhtml_system_config_source_navigation_orderby</source_model>                            
+                            <sort_order>85</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_items_by>
+                        <display_all_items_as translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Display all items as</label>                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>weltpixel_layerednavigation/adminhtml_system_config_source_navigation_itemsdisplay</source_model>                            
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </display_all_items_as>
+                        <show_item_limit translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Show item limit</label>                            
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>                          
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                            
+                        </show_item_limit>
+                        <show_clear_all translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Show "Clear All"</label>                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store> 
+                        </show_clear_all>
+                        <category_mobile_image translate="label comment" module="weltpixel_layerednavigation">
+                            <label>Category Image On Mobile Devices</label>
+                            <comment>Allowed file types: jpg, jpeg, gif, png</comment>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>weltpixel_layerednavigation/adminhtml_system_config_backend_navigation_category_image</backend_model>
+                            <base_url type="media" scope_info="1">layerednavigation/categoryimage</base_url>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </category_mobile_image>                       
+                    </fields>
+                </default_display>               
+            </groups>
+        </weltpixel_layerednavigation>
+    </sections>
+</config>

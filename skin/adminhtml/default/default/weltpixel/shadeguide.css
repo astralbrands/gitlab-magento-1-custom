@@ -1,0 +1,6 @@
+#shadeguide_step_builder_steps .narrow {
+    max-width: 100px;
+}
+#shadeguide_step_builder_steps .medium-narrow {
+    max-width: 200px;
+}

@@ -1,0 +1,58 @@
+<?php
+$_i = 1;
+$_max = 2;
+$_items = $this->getReviewsCollection()->getItems();
+?>
+<div id="customer-reviews">
+    <h4><span><?php echo $this->__('Customer Reviews'); ?></span></h4>
+    <?php if (count($_items)): ?>
+        <?php // echo $this->getChildHtml('toolbar'); ?>
+        <ul class="reviews-list">
+        <?php foreach ($_items as $_review): ?>
+            <?php //if ($_i > $_max) break; ?>
+            <li>
+            <?php $_votes = $_review->getRatingVotes(); ?>
+            <?php if (count($_votes)): ?>
+                <ul class="ratings-list">
+                <?php foreach ($_votes as $_vote): ?>
+                    <li>
+                        <?php echo $this->escapeHtml($_vote->getRatingCode()); ?>
+                        <div class="rating-box">
+                            <div class="rating" style="width:<?php echo $_vote->getPercent() ?>%;"></div>                           
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+                <div class="review-main">
+                    <h5><a href="<?php echo $this->getReviewUrl($_review->getId()); ?>"><?php echo $this->escapeHtml($_review->getTitle()); ?></a></h5>
+                    <h6><?php echo $this->__('Review by <strong>%s</strong>', $this->escapeHtml($_review->getNickname())); ?> <?php echo $this->__('(on %s)', $this->formatDate($_review->getCreatedAt()), 'long'); ?></h6>
+                    <div><?php echo nl2br($this->escapeHtml($_review->getDetail())); ?></div>
+                </div>
+            </li>
+            <?php $_i++; ?>
+        <?php endforeach; ?>
+        </ul>
+        <div class="buttons-set">
+            <?php if ($_i > $_max): ?>
+                <a href="<?php echo Mage::getUrl('review/product/list', array('id'=> $this->getProduct()->getId())); ?>" class="button"><?php echo $this->__('View All Reviews'); ?></a>
+            <?php endif; ?>
+            <a href="#" title="<?php echo $this->__('Write Your Own Review'); ?>" class="button write-button"><span><?php echo $this->__('Write Your Own Review'); ?></span></a>
+        </div>
+        <script>
+        // <![CDATA[
+            // todo: review this
+            jQuery(document).ready(function($) {
+                $('#customer-reviews .write-button').on('click', function() {
+                    $('#reviews-read').hide();
+                    $('#reviews-write').show();
+                    WeltPixel.jumpTo('#product-reviews');
+                    return false;
+                });
+            });
+        // ]]>
+        </script>
+    <?php else: ?>
+        <p><?php echo $this->__('No reviews have been submitted for this product yet.'); ?></p>
+    <?php endif; ?>
+</div>

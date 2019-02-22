@@ -1,0 +1,17 @@
+<!--@subject Admin alert notification @-->
+
+{{template config_path="design/email/header"}}
+{{inlinecss file="email-inline.css"}}
+
+<table cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td class="action-content">
+            <h1>{{var name}},</h1>
+            <h2>List of subscriptions for {{var date}}:</h2>
+
+            {{var html}}
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer"}}

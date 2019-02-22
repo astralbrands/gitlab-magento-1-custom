@@ -1,0 +1,142 @@
+// inherit from /skin/frontend/born/default/css/styles.css
+
+@import "bourbon/bourbon";
+@import "jquery/jquery";
+
+@import "variable";
+@import "cosmedix/variable_cos";
+@import "global";
+@import "mixins";
+@import "partials/modal";
+
+@import "style";
+
+@import "elements/buttons";
+@import "elements/breadcrumbs";
+@import "elements/form";
+@import "elements/data-tables";
+@import "elements/spinner";
+
+@import "partials/header";
+@import "partials/footer";
+
+@import "pages/common";
+
+
+// Home blocks
+@import "pages/home/home";
+@import "pages/home/home-hero";
+@import "pages/home/home-fullbleed";
+@import "pages/home/home-slot";
+
+@import "pages/home/home-single-promo";
+@import "pages/home/home-press";
+@import "pages/home/home-purlooks";
+
+//Category blocks
+@import "pages/category/category-hero";
+@import "pages/category/category-section";
+@import "pages/category/category-story";
+
+// Listing
+@import "pages/product/product-essential";
+
+// Product blocks
+@import "pages/listing/listing";
+
+// Product Detail
+@import "pages/product/product-add-to-cart";
+@import "pages/product/product-detail";
+@import "pages/product/product-routines";
+@import "pages/product/product-benefit";
+@import "pages/product/product-ingredients";
+@import "pages/product/product-item";
+@import "pages/product/product-grouped";
+@import "pages/product/product-bundle";
+@import "pages/product/product-related";
+@import "pages/product/product-giftcard";
+
+// Customer
+@import "pages/customer/customer";
+@import "pages/customer/customer-wishlist";
+@import "pages/customer/customer-address";
+@import "pages/customer/customer-bestseller";
+@import "pages/customer/customer-order";
+@import "pages/customer/customer-cards";
+@import "pages/customer/customer-productcompare";
+@import "pages/customer/customer-tickets";
+
+//Login page
+@import "pages/account/login";
+@import "pages/account/register";
+@import "pages/account/forgot-pass";
+
+// Cart / Checkout / minicart (popup)
+@import "pages/cart/minicart";
+@import "pages/cart/cart";
+@import "pages/cart/cart-freesample";
+@import "pages/cart/cart-midbanner";
+
+//Checkout 6-steps onepage
+@import "pages/checkout/onepage";
+@import "pages/checkout/success";
+@import "pages/checkout/paypal";
+
+// Catalog Search
+@import "pages/catalogsearch/catalog-search";
+
+// Store Locator
+@import "pages/storelocator/storelocator";
+
+// Index
+@import "pages/index/index-benefits";
+@import "pages/index/index-proud";
+@import "pages/index/index-videocarousel";
+@import "pages/index/index-results";
+@import "pages/index/index-hero";
+
+// About Us
+@import "pages/aboutus/aboutus-benefits";
+@import "pages/aboutus/aboutus-proud";
+@import "pages/aboutus/aboutus-videocarousel";
+@import "pages/aboutus/aboutus-results";
+@import "pages/aboutus/aboutus-hero";
+
+// About Us
+@import "pages/cos-b2c-index/cos-b2c-index-benefits";
+@import "pages/cos-b2c-index/cos-b2c-index-proud";
+@import "pages/cos-b2c-index/cos-b2c-index-videocarousel";
+@import "pages/cos-b2c-index/cos-b2c-index-results";
+@import "pages/cos-b2c-index/cos-b2c-index-hero";
+
+// About Us
+@import "pages/cos-b2b-index/cos-b2b-index-benefits";
+@import "pages/cos-b2b-index/cos-b2b-index-proud";
+@import "pages/cos-b2b-index/cos-b2b-index-videocarousel";
+@import "pages/cos-b2b-index/cos-b2b-index-results";
+@import "pages/cos-b2b-index/cos-b2b-index-hero";
+
+//Footer Links
+@import "pages/footerlinks/footer-links";
+@import "pages/footerlinks/footer-links-form";
+
+@import "pages/404";
+
+//Blog
+@import "pages/blog/blog";
+@import "pages/blog/blog-events";
+@import "pages/blog/blog-article";
+@import "pages/blog/blog-modal";
+@import "pages/blog/blog-comments";
+
+//Press
+@import "pages/press/press";
+@import "pages/press/press-modal";
+
+//Sitemap
+@import "pages/sitemap";
+
+//WishlistShared
+@import "pages/wishlistshared/wishlistshared";
+
+@import "cosmedix/main_cos";

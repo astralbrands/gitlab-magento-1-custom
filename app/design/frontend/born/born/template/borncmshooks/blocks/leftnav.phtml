@@ -1,0 +1,27 @@
+<div class="left-navigation">
+	<div class="block-title"><strong><span><?php echo $this->getNavMainTitle() ?></span></strong></div>
+	<?php $navLinks = $this->getNavLinks() ?>
+	<?php if ($navLinks): ?>
+		<ul class="items-list">
+			<?php foreach ($navLinks as $link): ?>
+				<?php $_url = $this->getNavUrl($link['url_key']) ?>
+				<li class="item<?php echo ' ' . $this->getIsActive($link['url_key']) ?>">
+					<a title="" href="<?php echo $_url ?>" <?php if($this->isExternalUrl($_url)){echo 'target="_blank"'; } ?>><?php echo $link['title'] ?></a>
+				</li>
+			<?php endforeach ?>
+		</ul>
+	<?php endif ?>
+
+	<div class="mobile-only">
+	<?php if ($navLinks): ?>
+		<select onchange="setLocation(this.value)" title="">
+			<?php foreach ($navLinks as $link): ?>
+				<?php $_url = $this->getNavUrl($link['url_key']) ?>
+				<option value="<?php echo $_url ?>" <?php if($this->getIsActive($link['url_key'])): ?> selected="selected"<?php endif; ?>>
+					<?php echo $link['title'] ?>
+				</option>
+			<?php endforeach ?>
+		</select>
+	<?php endif ?>	
+	</div>
+</div>

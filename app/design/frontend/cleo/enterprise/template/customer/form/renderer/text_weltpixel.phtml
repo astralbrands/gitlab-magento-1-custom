@@ -1,0 +1,14 @@
+<?php
+/**
+ * Create account form template
+ *
+ * @see Enterprise_Customer_Block_Form_Renderer_Text
+ */
+/* @var $this Enterprise_Customer_Block_Form_Renderer_Text */
+?>
+<div class="input-box">
+    <input type="text" id="<?php echo $this->getHtmlId()?>" placeholder="<?php echo strtoupper($this->__($this->getFieldName())); ?>" name="<?php echo $this->getFieldName()?>" value="<?php echo $this->getEscapedValue() ?>" class="input-text<?php echo $this->getHtmlClass(); ?>" />
+    <?php if ($_message = $this->getAdditionalDescription()) : ?>
+        <div class="validation-advice"><?php echo $_message; ?></div>
+    <?php endif; ?>
+</div>

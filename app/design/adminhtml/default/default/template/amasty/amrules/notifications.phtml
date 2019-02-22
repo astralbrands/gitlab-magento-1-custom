@@ -1,0 +1,40 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+?>
+<?php $attributeString = $this->__('Product Attributes'); ?>
+<div class="amrules_notifications" id="amrules_notifications">
+    <div id="messages">
+        <ul class="messages">
+            <li class="notice-msg">
+                <ul>
+                    <li>
+                        <?php echo $this->__("Please keep in mind that product attributes you set in "); ?>
+                        <u><?php echo $this->__("Conditions and Actions"); ?></u>
+                        <?php echo $this->__(" tabs will work differently, Please check");?>
+                        <a href="https://amasty.com/docs/doku.php?id=magento_1%3Aspecial-promotions&utm_source=extension&utm_medium=link&utm_campaign=userguide_special_promo_5#conditions_and_actions"
+                           target="_blank"><?php echo $this->__(" the guide "); ?></a>
+                        <?php echo $this->__("for more info on how Conditions and Actions work with product attributes."); ?>
+                    </li>
+                    <li>
+                        <?php echo $this->__("In order to use attributes like SKU or Manufacturer, please activate 
+                        `Use for Promo Rule Condition` option in ");
+                        ?>(<a href="<?php echo $this->getSettingsUrl(); ?>"><?php echo $attributeString; ?></a>).
+                    </li>
+                    <?php if (Mage::helper('ambase')->isModuleActive('Amasty_RulesPro')) :?>
+                        <li class="condition_content_notice">
+                            <?php echo $this->__("For more info on how advanced conditions like ");?>
+                            <u><?php echo $this->__("Purchase History"); ?></u>
+                            <?php echo $this->__(" work please see"); ?>
+                            <a href="https://amasty.com/docs/doku.php?id=magento_1%3Aspecial-promotions&utm_source=extension&utm_medium=link&utm_campaign=userguide_special_promo_3#special_promotions_pro_specific_features"
+                               target="_blank"><?php echo $this->__("the guide"); ?></a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

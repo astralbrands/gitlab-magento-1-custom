@@ -1,0 +1,28 @@
+/*! ----------------------------------------------------------------------------
+    Filename:       cloudzoom.css
+    Version:        1.0
+    Description:    -
+    ------------------------------------------------------------------------- */
+
+.cloud-zoom-lens {
+    cursor: move;
+}
+.cloud-zoom-big {
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    margin: 5px 15px;
+}
+.zoom-aside .cloud-zoom-big {
+    margin: -1px;
+    margin-left: 70px;
+    border: 1px solid #BCBEC0;
+}
+.cloud-zoom-loading {
+    display: none;
+}
+@media screen and (max-width: 1199px) {
+    .mousetrap, #cloud-big-zoom {
+        display: none;
+    }
+}

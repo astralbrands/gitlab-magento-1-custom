@@ -1,0 +1,375 @@
+<?php
+$_helper = $this->helper('catalog/output');
+$_selectorHelper = $this->helper('weltpixel_selector');
+$ajaxAddToCartEnabled = $_selectorHelper->getAjaxAddtoCart();
+$ajaxConfirmationHide = $_selectorHelper->getAjaxAddtoCartConfirmationHide();
+$_product = $this->getProduct();
+$_productId = $_product->getId();
+$_productName = $_helper->productAttribute($_product, $_product->getName(),
+        'name');
+$_productSku = $_helper->productAttribute($_product, $_product->getSku(), 'sku');
+$_productShortDescription = $_helper->productAttribute($_product,
+        nl2br($_product->getShortDescription()), 'short_description'); ///
+$_productPrice = $this->getPriceHtml($_product, true); ///
+$_productReviews = $this->getReviewsSummaryHtml($_product, false, true); ///
+$_upsells = trim($this->getChildHtml('upsell_products')); ///
+$_relatedRight = trim($this->getChildHtml('related_right'));
+$_messages = trim($this->getMessagesBlock()->getGroupedHtml()); ///
+$_review_form = $this->getChildHtml('review_form');
+$_reviews = $this->getChildHtml('reviews');
+
+$_settings = Mage::getStoreConfig('weltpixel_selector/productpageoptions');
+$_infoFormat = $_settings['product_info_format'] ? $_settings['product_info_format']
+        : "accordion";
+$_infoLayout = $_settings['product_info_layout'] ? $_settings['product_info_layout']
+        : "twocolumns";
+$_secondaryColumnLocation = $_settings['secondary_column_location'];
+$_imageColumnWidth = $_settings['image_column_width'];
+$_productInfoWidth = $_settings['product_info_width'];
+$_secondaryColumnWidth = $_settings['secondary_column_width'];
+
+$_relatedProductsCount = count($_product->getRelatedProductIds());
+$_secondaryColumnOption = $_settings['secondary_column_options']; //related,cms,replace
+
+
+
+if ($ajaxAddToCartEnabled) :
+    $_productAction = $this->getSubmitUrl($_product, array());
+else :
+    $_productAction = $this->getSubmitUrl($_product, array(), false);
+endif;
+?>
+
+<script>var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig(); ?>);</script>
+
+<?php if ($_messages): ?>
+    <div id="messages_product_view"><?php echo $_messages; ?></div>
+<?php endif; ?>
+
+<div id="product-view">
+    <form action="<?php echo $_productAction; ?>" method="post" id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <?php echo $this->getBlockHtml('formkey'); ?>
+        <input type="hidden" name="product" value="<?php echo $_productId; ?>" />
+        <input type="hidden" name="related_product" id="related-products-field" value="" />
+        <div class="product-essential">
+            <div id="product-media" class="col-md-<?php echo $_imageColumnWidth; ?> col-sm-12 col-xs-12">
+                <?php echo $this->getChildHtml('media'); ?>
+            </div>
+            <div id="product-info" class="col-md-<?php echo $_productInfoWidth; ?> col-sm-12 col-xs-12">
+                <div class="product-info-main">
+                    <div class="panel-a">
+                        <h1><?php echo $_productName; ?></h1>
+                    </div>
+                    <div class="panel-b">
+                        <?php echo $_productPrice; ?>
+                        <?php echo $_productReviews; ?>
+                    </div>
+                    <div class="panel-c">
+                        <?php echo $this->getChildHtml('alert_urls'); ?>
+                        <?php echo $this->getTierPriceHtml(); ?>
+                        <?php if ($_productShortDescription): ?>
+                            <div class="product-description"><?php echo $_productShortDescription; ?></div>
+                        <?php endif; ?>
+                        <?php if ($_settings['display_sku'] && $_productSku): ?>
+                            <div class="product-sku"><?php echo $this->__('SKU'); ?>: <?php echo $_productSku; ?></div>
+                        <?php endif; ?>
+                        <?php echo $this->getChildHtml('extrahint'); ?>
+                        <?php if ($_settings['display_availability']): ?>
+                            <?php echo $this->getChildHtml('product_type_data'); ?>
+                        <?php endif; ?>
+                    </div>
+                    <?php if (!$this->hasOptions()): ?>
+                        <div class="add-to-box">
+                            <?php if ($_product->isSaleable()): ?>
+                                <?php echo $this->getChildHtml('addtocart'); ?>
+                            <?php endif; ?>
+                            <?php echo $this->getChildHtml('addto'); ?>
+                        </div>
+                        <?php echo $this->getChildHtml('extra_buttons'); ?>
+                    <?php elseif (!$_product->isSaleable()): ?>
+                        <div class="add-to-box">
+                            <?php echo $this->getChildHtml('addto'); ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                        <?php echo $this->getChildChildHtml('container1',
+                            '', true, true); ?>
+                    <?php endif; ?>
+                    <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                        <?php echo $this->getChildChildHtml('container2',
+                            '', true, true) ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php if (($_secondaryColumnLocation == "right")): ?>
+                <div class="product-info-right col-md-<?php echo $_secondaryColumnWidth; ?> col-sm-12 col-xs-12">
+                    <div class="related other-products">
+                        <?php
+                        if (($_secondaryColumnOption == "related")) {
+                            echo $_relatedRight;
+                        }
+                        ?>
+                        <?php
+                        if (($_secondaryColumnOption == "cms")) {
+                            echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_replace_related')->toHtml();
+                        }
+                        ?>
+                        <?php if ($_secondaryColumnOption == "replace"): ?>
+                            <?php
+                            if (($_relatedProductsCount > 0)) {
+                                echo $_relatedRight;
+                            }
+                            ?>
+                            <?php
+                            if (($_relatedProductsCount == 0)) {
+                                echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_replace_related')->toHtml();
+                            }
+                            ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <script>
+                //<![CDATA[
+
+                var productAddToCartForm = new VarienForm('product_addtocart_form');
+                var addOptions = {};
+                addOptions.submittedForm = false;
+                addOptions.confirmationHide = <?php echo $ajaxConfirmationHide ?>;
+                
+                /*
+                 *Enter on input to submit the form as well
+                 */
+                jQuery('input#qty').keypress(function (e) {
+                  if (e.which == 13) {
+		    e.preventDefault();
+                    productAddToCartForm.submit();
+		    return false;
+                  }
+                });
+
+<?php if ($ajaxAddToCartEnabled) : ?>
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate() &&  !addOptions.submittedForm) {
+                var form = this.form;
+                var url = form.action;
+
+                if (weltpixel.quickview.inIframe) {
+                    parent.weltpixel.quickview.addToCart(url, $(form).serialize(true), addOptions);
+                } else {
+                    weltpixel.quickview.addToCart(url, $(form).serialize(true), addOptions);
+                }
+
+                addOptions.submittedForm = true;
+            } else {
+                jQuery('html,body').animate({
+                    scrollTop: jQuery("#product-options-wrapper").offset().top -100
+                });
+            }
+        }.bind(productAddToCartForm);
+<?php else : ?>
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                    form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            } else {
+                jQuery('html,body').animate({
+                    scrollTop: jQuery("#product-options-wrapper").offset().top -100
+                });
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                // Remove custom datetime validators
+                for (var methodName in Validation.methods) {
+                    if (methodName.match(/^validate-datetime-.*/i)) {
+                        delete Validation.methods[methodName];
+                    }
+                }
+
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+<?php endif; ?>
+
+
+        //]]>
+            </script>
+        </div>
+    </form>
+    <?php if (($_secondaryColumnLocation == "bottom")): ?>
+        <div class="col-xs-12 col-md-12">
+            <div class="related other-products">
+                <?php
+                if (($_secondaryColumnOption == "related")) {
+                    echo $_relatedRight;
+                }
+                ?>
+                <?php
+                if (($_secondaryColumnOption == "cms")) {
+                    echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_replace_related')->toHtml();
+                }
+                ?>
+                <?php if ($_secondaryColumnOption == "replace"): ?>
+                    <?php
+                    if (($_relatedProductsCount > 0)) {
+                        echo $_relatedRight;
+                    }
+                    ?>
+                    <?php
+                    if (($_relatedProductsCount == 0)) {
+                        echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_replace_related')->toHtml();
+                    }
+                    ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <div class="product-info <?php echo $_infoLayout; ?>">
+        <div class="w">
+            <div class="panel-a">
+                <?php if ($_infoFormat == "tabs"): ?>
+                    <div class="rtabs">
+                        <ul class="tabs">
+                            <?php
+                            foreach ($this->getChildGroup('detailed_info',
+                                'getChildHtml') as $alias => $html):
+                                ?>
+                                <li><i class="<?php echo $this->getChildData($alias,
+                            'icon'); ?>"></i><?php echo $this->escapeHtml($this->getChildData($alias,
+                                       'title')); ?></li>
+                                <?php
+                            endforeach;
+                            ?>
+                        </ul>
+                        <div class="tabs-content">
+                            <?php
+                            foreach ($this->getChildGroup('detailed_info',
+                                'getChildHtml') as $alias => $html):
+                                ?>
+                                <div><?php echo $html; ?></div>
+                                <?php
+                            endforeach;
+                            ?>
+                        </div>
+                    </div>
+                    <script>
+                        // <![CDATA[
+
+                        jQuery(document).ready(function($) {
+                            jQuery('.rtabs').rtabs();
+                        });
+
+                        // ]]>
+                    </script>
+                    <?php else: ?>
+                    <dl id="todo" class="<?php echo $_infoFormat; ?>">
+                        <?php
+                        $i = 0;
+                        foreach ($this->getChildGroup('detailed_info',
+                            'getChildHtml') as $alias => $html):
+                            ?>
+                            <dt<?php if ($i == 0): ?> class="active"<?php endif; ?>><i class="<?php echo $this->getChildData($alias,
+                                                                                   'icon'); ?>"></i><?php echo $this->escapeHtml($this->getChildData($alias,
+                            'title')); ?></dt>
+                            <dd<?php if ($i == 0): ?> class="active"<?php endif; ?>><?php echo $html; ?></dd>
+                            <?php
+                            $i++;
+                        endforeach;
+                        ?>
+                    </dl>
+<?php endif; ?>
+            </div>
+            <div class="hr"></div>
+            <div class="vr"></div>
+            <div class="panel-b">
+                <?php
+                $smartAttribute = $_settings['smart_box'];
+                $smartContent = '';
+                if ($smartAttribute) :
+                    $smartBlock = trim($_product->getAttributeText($smartAttribute));
+                    $smartBlock = str_replace(' ', '_', strtolower($smartBlock)) . '_smart_block';
+                    $smartContent = $this->getLayout()->createBlock('cms/block')->setBlockId($smartBlock)->toHtml();
+                    if ($smartContent):
+                        echo $smartContent;
+                    else:
+                        echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_smart_block')->toHtml();
+                    endif;
+                endif;
+                ?>
+            </div>
+        </div>
+    </div>
+
+<?php if ($_upsells): ?>
+        <div class="upsell other-products">
+            <div class="w">
+    <?php echo $_upsells; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php echo $this->getChildHtml('product_additional_data'); ?>
+
+<?php if ($_settings['display_reviews']) : ?>
+        <div id="product-reviews">
+            <div class="w">
+                <h3><span><?php echo $this->__('Reviews'); ?></span></h3>
+                <div class="row">
+                        <?php if ($_review_form): ?>
+                        <div class="col-md-6 col-sm-12 col-xs-12" id="reviews-write">
+        <?php echo $_review_form; ?>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12" id="reviews-read">
+                        <?php echo $_reviews; ?>
+                        </div>
+                        <?php else: ?>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                        <?php echo $_reviews; ?>
+                        </div>
+    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+<?php endif; ?>
+</div>
+
+<script>
+    jQuery(function($) {
+        $('.accordion').on('click', 'dt', function() {
+            $('#todo').find('dt').removeClass('active');
+            $('#todo').find('dd').removeClass('active');
+            $(this).addClass('active');
+            $(this).next('dd').addClass('active');
+        });
+    });
+</script>

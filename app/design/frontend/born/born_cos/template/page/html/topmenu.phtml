@@ -1,0 +1,72 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition End User License Agreement
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magento.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     born_default
+ * @copyright Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license http://www.magento.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Top menu for store
+ *
+ * @see Mage_Page_Block_Html_Topmenu
+ */
+?>
+<?php $_menu = $this->getHtml('level-top') ?>
+<?php $isLoggedIn = Mage::getSingleton('customer/session')->isLoggedIn(); ?>
+
+<?php if($_menu): ?>
+    <nav id="nav" class="site-menu">
+        <ol class="nav-primary">
+            <?php echo $_menu ?>
+        </ol>
+    </nav>
+    <?php if($isLoggedIn) : ?>
+    <div class="m-account-dropdown level0">
+        <a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" class="m-account-dropdown-main-link level-top"><?php echo $this->__('My Account'); ?></a>
+        <a href="#" class="arrow"></a>
+        <div class="m-account-dropdown-drop">
+            <a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" class="m-account-dropdown-link"><?php echo $this->__('My Dashboard') ?></a>
+            <a href="<?php echo Mage::getUrl('sgusa/token') ?>" class="m-account-dropdown-link"><?php echo $this->__('Payment Methods') ?></a>
+            <a href="<?php echo Mage::getUrl('sales/order/history/') ?>" class="m-account-dropdown-link"><?php echo $this->__('My Orders') ?></a>
+            <a href="<?php echo Mage::getUrl('zendesk/customer_tickets/index') ?>" class="m-account-dropdown-link"><?php echo $this->__('My Tickets') ?></a>
+            <a href="#" class="m-account-dropdown-link"><?php echo $this->__('Gift Cards') ?></a>
+            <a href="<?php echo Mage::getUrl('wishlist/') ?>" class="m-account-dropdown-link"><?php echo $this->__('My Wish List') ?></a>
+            <a href="#" class="m-account-dropdown-link"><?php echo $this->__('My Rewards') ?></a>
+            <a href="#" class="m-account-dropdown-link"><?php echo $this->__('In Stock Notifications') ?></a>
+            <a href="<?php echo Mage::getUrl('customer/account/logout') ?>" class="m-account-dropdown-link"><?php echo $this->__('Sign Out') ?></a>
+        </div>
+    </div>
+    <?php else : ?>
+        <a class="m-account-dropdown-main-link sign-in mobile-only" href="<?php echo $this->helper('customer')->getAccountUrl(); ?>">
+            <span class="label"><?php echo $this->__('Sign In'); ?></span>
+        </a>
+    <?php endif; ?>
+    <a class="wishlist-link-mobile" href="<?php echo $this->getUrl('wishlist'); ?>">
+        <span class="label"><?php echo $this->__('Favorites') ?></span>
+    </a>
+    <a href="<?php echo Mage::getUrl('store-locator') ?>" class="spa-finder-mobile"><span class="icon-spa_finder"></span><?php echo $this->__('Spa finder') ?></a>
+    <?php if(Mage::getStoreConfig('onepageorder/general/enabled')): ?>
+    <a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).Mage::getStoreConfig('onepageorder/general/page_link') ?>" class="left-message-mobile"><span class="icon-one_page_order_form"></span><?php echo $this->__('One-page order form') ?></a>
+    <?php endif; ?>
+    <a href="#" class="sale-label"><?php echo $this->__('now on sale') ?></a>
+<?php endif ?>

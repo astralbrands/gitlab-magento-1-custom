@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<config>
+    <menu>
+        <weltpixel>            
+            <children>                
+                <opc translate="title" module="opc">
+                    <title>IWD One Page Checkout</title>
+                    <action>adminhtml/system_config/edit/section/opc</action>
+                    <sort_order>420</sort_order>
+                </opc>
+            </children>
+        </weltpixel>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <opc translate="title" module="opc">
+                                        <title>IWD One Page Checkout</title>
+                                        <sort_order>70</sort_order>
+                                    </opc>
+                                </children>
+                            </config>
+                        </children>
+                    </system>                    
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

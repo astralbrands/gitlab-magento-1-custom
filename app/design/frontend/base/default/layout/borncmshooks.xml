@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <cms_page>
+        <reference name="head">
+                <!--<action method="addItem"><type>skin_js</type><name>borncmshooks/js/borncmshooks.js</name><params/></action>-->
+            <!--<action method="addCss"><stylesheet>borncmshooks/css/borncmshooks.css</stylesheet></action>-->
+        </reference>
+        <reference name="root">
+            <!-- enter your cms pages here -->
+        </reference>
+    </cms_page>
+
+    <catalog_category_default translate="label">
+        <reference name="head">
+            <!--<action method="addItem"><type>skin_js</type><name>borncmshooks/js/borncmshooks.js</name><params/></action>-->
+            <!--<action method="addCss"><stylesheet>borncmshooks/css/borncmshooks.css</stylesheet></action>-->
+        </reference>
+        <reference name="root">
+                <!-- enter your pages for categories here -->
+
+        </reference>
+    </catalog_category_default>
+
+    <catalog_category_layered translate="label">
+        <reference name="head">
+<!--            <action method="addItem"><type>skin_js</type><name>borncmshooks/js/borncmshooks.js</name><params/></action>
+            <action method="addCss"><stylesheet>borncmshooks/css/borncmshooks.css</stylesheet></action>-->
+         </reference>
+        <reference name="root">
+            <!-- enter your pages for categories here -->
+
+        </reference>
+    </catalog_category_layered>
+    
+    <borncmshooks_craftmanship_detail>
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="borncmshooks/borncmshooks" name="craftmanship-detail" template="borncmshooks/cms/contents/craftmanship-detail.phtml"/>
+        </reference>
+    </borncmshooks_craftmanship_detail>
+</layout> 

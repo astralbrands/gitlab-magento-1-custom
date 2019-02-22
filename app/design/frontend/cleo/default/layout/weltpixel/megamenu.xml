@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/weltpixel/megamenu.css</stylesheet>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/weltpixel/megamenu-mobile.css</stylesheet>
+                <params helper="weltpixel_megamenu/data/getMobileCssMedia" />
+            </action>
+            <!--
+            Removed and added as pregenerated css into file
+            <action method="addItem">
+                <type>link_rel</type>
+                <url helper="weltpixel_megamenu/data/getCssOptionsUrl" />
+                <params><![CDATA[rel="stylesheet" type="text/css" media="all"]]></params>
+            </action>
+            -->
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/megamenu.js</name>
+            </action>
+        </reference>
+        <reference name="catalog.topnav">
+            <block type="cms/block" name="cms_weltpixel_mm_custom_mobile_block" as="cms_weltpixel_mm_custom_mobile_block">
+                <action method="setBlockId"><block_id>weltpixel_mm_custom_mobile_block</block_id></action>
+            </block>
+        </reference>
+    </default>
+    <!-- DEPRECATED NOt used anymore
+    <weltpixel_megamenu_css_options>
+        <block type="weltpixel_megamenu/css_options" name="root" output="toHtml" />
+    </weltpixel_megamenu_css_options>
+    -->
+</layout>

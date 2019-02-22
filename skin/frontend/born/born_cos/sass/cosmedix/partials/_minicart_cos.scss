@@ -1,0 +1,99 @@
+#popup-minicart {
+  .minicart-title {
+    @include gotham;
+    @include setFont(3rem, 4.2rem, 200);
+  }
+  .summary-items {
+    @include whitneyBook;
+    @include setFont(1.8rem, 3.6rem, 400);
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+}
+
+.block-cart {
+  right: -425px;
+  @include transition-property(transform);
+  @include transition-duration($fast);
+  @include transition-timing-function(ease-out);
+  .promo {
+    background: $icon-color;
+    font-weight: 500;
+    margin: 0 20px;
+  }
+  .mini-products-list {
+    padding: 0;
+    .item {
+      margin-right: 20px;
+      margin-left: 20px;
+      .product-details {
+        .product-name {
+          padding-top: 0;
+          max-width: 195px;
+          a {
+            @include gotham;
+            @include setFont(1.4rem, 2rem, 500);
+            letter-spacing: 0.18rem;
+            text-transform: uppercase;
+          }
+        }
+        .product-subtitle {
+          @include gothamBook;
+          @include setFont(1.2rem, 2rem, 400);
+          letter-spacing: 0.15rem;
+          text-transform: uppercase;
+          margin-bottom: 10px;
+          min-height: 40px;
+        }
+        .remove-item {
+          font-size: 1.7rem;
+        }
+        .info-wrapper span,
+        .qty-wrapper span {
+          @include gothamBook;
+          @include setFont(1.3rem, 2.4rem, 400);
+        }
+        .info-wrapper .price,
+        .price {
+          @include whitneyBook;
+          @include setFont(1.6rem, 2rem, 400);
+          font-style: italic;
+        }
+        .info-wrapper .wrapper-price {
+          bottom: 12px;
+        }
+      }
+    }
+  }
+  .block-content {
+    padding: 33px 20px 40px;
+    .subtotal {
+      margin-bottom: 23px;
+    }
+    .go-to-cart {
+      border-width: 2px;
+      max-width: 284px;
+      margin: 0 auto;
+      .btn-text {
+        font-size: 1.4rem;
+        letter-spacing: 0.07rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $b2b-mobile-menu){
+  .cos-b2b {
+    #popup-minicart {
+      top: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: $b2c-mobile-menu){
+  .cos-b2c {
+    #popup-minicart {
+      top: 0;
+    }
+  }
+}

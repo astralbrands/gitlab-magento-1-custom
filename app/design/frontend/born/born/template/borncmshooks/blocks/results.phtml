@@ -1,0 +1,64 @@
+<?php 
+/*
+Results Field Attributes
+- SortOrder - text
+- SlotType: content, product
+- BackgroundImage - Image
+- Title - text
+- CtaText - text
+- CtaLink - text
+- ProductSku - text
+- BackgroundColor - white, black
+- TextFontColor - white, black
+- Width - one-third,two-third, one-third-vertical
+- Description - text
+- TagMessage- text
+ */ 
+
+$hooks_helper = Mage::helper('borncmshooks');
+$sort_helper = Mage::helper('borncmshooks/sort');
+$result_object_collection = $this->getResultsObjectCollection();
+$result_object_collection = $sort_helper->sortCollection($result_object_collection);
+
+?>
+<?php foreach ($result_object_collection as $slot): ?>
+	<?php if ($slot->getSlotType() == 'product'): ?>
+		<div class="product-slot">
+			<div class="product-slot-outer">
+				<div class="product-slot-inner">
+					<div class="product-slot-inner-middle">
+						<?php $this->renderSubWidgets('productslot', $slot) ?>
+					</div>
+				</div>
+			</div>
+        </div>
+	<?php else: ?>
+		<?php 
+		$widthClass = ($slot->getWidth()) ? $slot->getWidth() : 'one-third';
+		$fontColorClass = ($slot->getTextFontColor()) ? $slot->getTextFontColor() : 'font-black';
+		$bgColorClass = ($slot->getBackgroundColor()) ? $slot->getBackgroundColor() : 'bg-white';
+			 ?>
+	    <?php if ($hooks_helper->getImageUrl($slot->getBackgroundImage())): ?>
+	        <div class='background-image <?php echo "$widthClass $fontColorClass $bgColorClass" ?>' style="background-image: url(<?php echo $hooks_helper->getImageUrl($slot->getBackgroundImage()); ?>)">
+<!--	        <img class="background-img" src="--><?php //echo $hooks_helper->getImageUrl($slot->getBackgroundImage()); ?><!--">-->
+	    <?php else: ?>
+	        <div class='<?php echo "$widthClass $fontColorClass $bgColorClass" ?>'>
+	    <?php endif ?>
+	        <div class="box-outer">
+	            <div class="box-inner">
+	                <div class="box-inner__middle">
+	                <?php if ($slot->getTitle()): ?>
+	                    <h2 class="slot-title"><?php echo $slot->getTitle() ?></h2>
+	                <?php endif ?>
+	                <?php if ($slot->getDescription()): ?>
+	                    <p class="slot-text"><?php echo $slot->getDescription() ?></p>
+	                <?php endif ?>
+	               <?php if ($tagMessage = $slot->getTagMessage()): ?>
+       					<div class="bottom-left-tag"><?php echo $tagMessage ?></div>
+	               <?php endif ?>
+	                </div>
+	            </div>
+	        </div>
+		</div>
+	<?php endif ?>
+<?php endforeach ?>

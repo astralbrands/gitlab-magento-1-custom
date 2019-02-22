@@ -1,0 +1,54 @@
+<?php
+$_helper = $this->helper('shadeguide');
+$currentStep = $this->getCurrentStep();
+$currentStepOptions = $this->getStepOptions($currentStep);
+$mediaUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+$placeholderImage = $mediaUrl . 'catalog/product/placeholder/' . $_helper->getPlaceholderImage();
+$currentStepId = $this->getCurrentStepId();
+$disabled = $currentStepId == 1 ? false: true;
+?>
+<?php  ?>
+<div class="options-wrapper <?php echo $currentStep['template'] ?>" data-attr="<?php echo $currentStep['product_attribute'] ?>">
+    <?php foreach ($currentStepOptions as $option): ?>
+        <?php $optionImageSrc = $this->getOptionImage($option['value']); ?>
+        <?php if ($optionImageSrc): ?>
+            <div class="fieldset">
+                <div class="field-wrapper">
+                    <div class="field">
+                        <?php if (!$currentStep['multiselect']): ?>
+                            <input
+                                class="input-radio option-<?php echo $option['value']; ?>"
+                                type="radio"
+                                name="<?php echo $currentStep['product_attribute']; ?>"
+                                value="<?php echo $option['value']; ?>"
+                                <?php echo $disabled ? 'disabled="disabled"' : ''; ?>
+                            />
+                        <?php else: ?>
+                            <input
+                                class="input-checkbox option-<?php echo $option['value']; ?>"
+                                type="checkbox"
+                                name="<?php echo $currentStep['product_attribute']; ?>"
+                                value="<?php echo $option['value']; ?>"
+                                <?php echo $disabled ? 'disabled="disabled"' : ''; ?>
+                            />
+                        <?php endif; ?>
+                        <label for="option-<?php echo $option['value']; ?>" class="option-select label <?php echo $disabled ? 'disabled' : '' ?>">
+                            <?php echo $option['label']; ?>
+                        </label>
+                    </div>
+                    <div class="option-select option-image option-<?php echo $option['value']; ?> <?php echo $disabled ? 'disabled' : '' ?>">
+                        <img src="<?php echo $optionImageSrc ?>" alt="<?php echo $option['label']; ?>" title="<?php echo $option['label']; ?>" />
+                    </div>
+
+                    <?php $cmsIdentifier = $_helper->convertOptionLabel($option['label']); ?>
+                    <?php $optionCms = $_helper->getAdditionalCmsBlock($currentStep, $cmsIdentifier) ?>
+                    <?php if ($optionCms): ?>
+                        <div class="w additional-cms option-cms">
+                            <?php echo $optionCms; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</div>

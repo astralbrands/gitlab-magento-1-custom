@@ -1,0 +1,873 @@
+title,identifier,content,is_active
+"WeltPixel Mobile Block",weltpixel_mm_custom_mobile_block,"<p>Lorem ipsum dolor sit amet</p>",1
+"WelPixel Newsletter",weltpixel_newsletter,"
+<!-- LEFT CONTENT SECTION BEGIN -->
+<div class=""col-md-7 weltpixel_newsletter_signup_section"">
+<div class=""title"">JOIN OUR MAILING LIST</div>
+<div class=""title-detail""></div>
+
+<p>Pellentesque de fermentum mollis comodous an loremous</p>
+
+<!-- NEWSLETTER LOGIN BLOCK BEGIN -->
+{{block type=""core/template"" name=""weltpixel_newsletter_popup"" template=""weltpixel/newsletter/popup.phtml""}}
+<!-- NEWSLETTER LOGIN BLOCK END -->
+
+<p><strong>SIGN UP FOR EXCLUSIVE UPDATES, NEW ARRIVALS AND INSIDER-ONLY DISCOUNTS</strong></p>
+<!-- SOCIAL ICONS BEGIN -->
+<div>
+<a href=""#"" class=""social-icons si-dark si-rounded si-facebook"">
+    <i class=""icon-facebook""></i>
+    <i class=""icon-facebook""></i>
+</a>
+
+<a href=""#"" class=""social-icons si-dark si-rounded si-twitter"">
+    <i class=""icon-twitter""></i>
+    <i class=""icon-twitter""></i>
+</a>
+
+<a href=""#"" class=""social-icons si-dark si-rounded si-google"">
+    <i class=""icon-google""></i>
+    <i class=""icon-google""></i>
+</a>
+
+<a href=""#"" class=""social-icons si-dark si-rounded si-instagram"">
+    <i class=""icon-instagram""></i>
+    <i class=""icon-instagram""></i>
+</a>
+
+<a href=""#"" class=""social-icons si-dark si-rounded si-vimeo"">
+    <i class=""icon-vimeo""></i>
+    <i class=""icon-vimeo""></i>
+</a>
+
+<a href=""#"" class=""social-icons si-dark si-rounded si-pinterest"">
+    <i class=""icon-pinterest""></i>
+    <i class=""icon-pinterest""></i>
+</a>
+</div>
+<!-- SOCIAL ICONS END -->
+</div>
+<!-- LEFT CONTENT SECTION END -->
+<!-- IMAGE SECTION BEGIN -->
+<div class=""col-md-5 col-last"" style=""padding:0px;"">
+<img class=""image-fade"" alt=""Newsletter Fashion Box"" src=""{{skin url='media/cleo/v1/34396788_012_h.jpg'}}"" style=""width:100%"">
+</div>
+<!-- IMAGE SECTION END -->",1
+"Weltpixel Empty Cart Page Static Block",weltpixel_empty_cart,"<p>This block can be edited from the static static block with the following identifier: cleo_empty_cart</p>",1
+"Footer Newsletter Static Block",weltpixel_footer_newsletter,"<p>By subscribing to our mailing list you will<br />always be update with the latest news.</p>",1
+"Weltpixel Section 2 version 2",weltpixel_footer_section2-2,"
+<!-- FOOTER COLUMN #1 BEGIN -->
+<div class=""col-md-3 col-sm-6 col-xs-12 mobile-toggle"">
+<h4><img alt=""Logo"" src=""{{skin url='media/cleo/v1/logo.png'}}"" style=""width:100px""></h4>
+<p><i class=""icon icon-location""></i>9087S Divamus Faucibus Str., <br/>
+City name, Postal Code, <br>
+PA 19130, United States. <br><br>
+<i class=""icon  icon-phone3""></i> (1800) 000 000<br/>
+<i class=""icon  icon-line-mail""></i> contact@domain.com</p><br/>
+</div>
+<!-- FOOTER COLUMN #1 END -->
+
+<!-- FOOTER COLUMN #2 BEGIN -->
+<div class=""col-md-3 col-sm-6 col-xs-12 mobile-toggle"">
+<h4>Company</h4>
+<ul>
+	<li><a href=""{{store url='about-magento-demo-store'}}"">About Us</a></li>
+	<li><a href=""{{store url='contacts'}}"">Contact Us</a></li>
+	<li><a href=""{{store url='customer-service'}}"">Customer Service</a></li>
+	<li><a href=""{{store url='privacy-policy-cookie-restriction-mode'}}"">Privacy Policy</a></li>
+</ul>
+</div>
+<!-- FOOTER COLUMN #2 END -->
+
+<div class=""col-sm-clear""></div>
+<div class=""clearfix visible-sm-block""></div>
+
+<!-- FOOTER COLUMN #3 BEGIN -->
+<div class=""col-md-3 col-sm-6 col-xs-12 mobile-toggle"">
+<h4>Quick Links</h4>
+<ul>
+	<li><a href=""{{store url='catalog/seo_sitemap/category'}}"" title=""Site Map"">Site Map</a></li>
+	<li><a href=""{{store url='catalogsearch/term/popular'}}"" title=""Search Terms"">Search Terms</a></li>
+	<li><a href=""{{store url='catalogsearch/advanced'}}"" title=""Advanced Search"">Advanced Search</a></li>
+</ul>
+</div>
+<!-- FOOTER COLUMN #3 END -->
+
+<!-- FOOTER COLUMN #4 BEGIN -->
+<div class=""col-md-3 col-sm-6 col-xs-12 mobile-toggle"">
+<h4>Let's Stay in touch!</h4>
+<div>
+<!-- FOOTER SOCIAL-ICONS BEGIN -->
+<a href=""#"" class=""social-icons si-borderless si-facebook"">
+    <i class=""icon-facebook""></i>
+    <i class=""icon-facebook""></i>
+</a>
+
+<a href=""#"" class=""social-icons si-borderless si-twitter"">
+    <i class=""icon-twitter""></i>
+    <i class=""icon-twitter""></i>
+</a>
+
+<a href=""#"" class=""social-icons si-borderless si-google"">
+    <i class=""icon-google""></i>
+    <i class=""icon-google""></i>
+</a>
+
+<a href=""#"" class=""social-icons si-borderless si-instagram"">
+    <i class=""icon-instagram""></i>
+    <i class=""icon-instagram""></i>
+</a>
+
+<a href=""#"" class=""social-icons si-borderless si-vimeo"">
+    <i class=""icon-vimeo""></i>
+    <i class=""icon-vimeo""></i>
+</a>
+
+<a href=""#"" class=""social-icons si-borderless si-pinterest"">
+    <i class=""icon-pinterest""></i>
+    <i class=""icon-pinterest""></i>
+</a>
+<!-- FOOTER SOCIAL-ICONS END -->
+
+<!-- FOOTER NEWSLETTER BLOCK BEGIN -->
+	{{block type=""newsletter/subscribe"" name=""weltpixel_newsletter_footer"" template=""newsletter/footer.phtml""}}
+<!-- FOOTER NEWSLETTER BLOCK END -->
+</div>
+</div>
+<!-- FOOTER COLUMN #4 END -->",1
+"Weltpixel Section 1 version 2",weltpixel_footer_section1-2,"
+<!-- FREE AND FAST SECTION BEGIN -->
+<div class=""col-md-3 col-sm-6 col-xs-12"">
+<div class=""promo-box"">
+<i class=""promo-box-icon icon-stopwatch""></i>
+<h4>Free and Fast</h4>
+<h5>delivery</h5>
+</div>
+</div>
+<!-- FREE AND FAST SECTION END -->
+
+<!-- SUPPORT SECTION BEGIN -->
+<div class=""col-md-3 col-sm-6 col-xs-12"">
+<div class=""promo-box"">
+<i class=""promo-box-icon icon-line2-call-out""></i>
+<h4>24/7 support</h4>
+<h5>1-800-000-000</h5>
+</div>
+</div>
+<!-- SUPPORT SECTION END -->
+
+<div class=""clearfix visible-sm-block""></div>
+
+<!-- PRICE SECTION BEGIN -->
+<div class=""col-md-3 col-sm-6 col-xs-12"">
+<div class=""promo-box"">
+<i class=""promo-box-icon icon-tag3""></i>
+<h4>Best Price</h4>
+<h5>Guaranteed</h5>
+</div>
+</div>
+<!-- PRICE SECTION END -->
+
+<!-- POLICY SECTION BEGIN -->
+<div class=""col-md-3 col-sm-6 col-xs-12"">
+<div class=""promo-box"">
+<i class=""promo-box-icon icon-box""></i>
+<h4>30 days</h4>
+<h5>return policy</h5>
+</div>
+</div>
+<!-- POLICY SECTION END -->
+",1
+"Weltpixel Section 3 version 2",weltpixel_footer_section3-2,"
+<!-- PAYMENTS IMAGE BLOCK BEGIN -->
+<div class=""col-md-6 col-sm-12 col-xs-12"">
+<img alt=""Payments"" src=""{{skin url='images/payment.png'}}"">
+</div>
+<!-- PAYMENTS IMAGE BLOCK END -->
+
+<!-- LINKS BLOCK BEGIN -->
+<div class=""col-md-6 col-sm-12 col-xs-12"">
+<ul class=""footer-nav"">
+	<li><a href=""{{store url='customer/account'}}"" title=""My Account"">My Account</a></li>
+	<li><a href=""{{store url='sales/guest/form'}}"" title=""Orders and Returns"">Orders and Returns</a></li>
+</ul>
+</div>
+<!-- LINKS BLOCK END -->
+
+<!-- COPYRIGHT BLOCK BEGIN -->
+<div class=""col-md-12"">
+<p>Copyright © 2014 <a href=""http://www.weltpixel.com"">Premium Magento Themes</a> by <a href=""http://www.weltpixel.com/"">WeltPixel</a>. All Rights Reserved.</p>
+</div>
+<!-- COPYRIGHT BLOCK END -->",1
+"Weltpixel Replace Related",weltpixel_replace_related,"
+<style scoped>
+.owl-theme .owl-controls{
+margin-top: 0px;
+text-align: center;
+top: initial;
+}
+</style>
+
+<!-- OWL CAROUSEL BEGIN -->
+<div id=""owl-product-page"" class=""owl-carousel owl-theme"">
+
+  <div class=""item""><img alt=""Product Slider"" class=""image-fade"" src=""{{skin url='media/cleo/v1/product-page-slider.jpg'}}"" ></div>
+  <div class=""item""><img alt=""Product Slider"" class=""image-fade"" src=""{{skin url='media/cleo/v1/product-page-slider-2.jpg'}}"" ></div>
+
+</div>
+<!-- OWL CAROUSEL END -->
+
+<!-- OWL CAROUSEL SETUP BEGIN -->
+<script>
+jQuery(document).ready(function() {
+
+  jQuery(""#owl-product-page"").owlCarousel({
+
+      navigation : false, // Show next and prev buttons
+      slideSpeed : 300,
+      paginationSpeed : 400,
+      singleItem:true
+
+  });
+});
+</script>
+<!-- OWL CAROUSEL SETUP END -->
+<!-- PROMO BOXES BEGIN -->
+<div style=""padding-top: 25px; padding-left: 25px;"">
+<!-- PROMO BOX DELIVERY BEGIN -->
+<div class=""promo-box"">
+<i class=""promo-box-icon icon-stopwatch""></i>
+<h4>Free and Fast</h4>
+<h5>delivery</h5>
+</div>
+<!-- PROMO BOX DELIVERY END -->
+
+<!-- PROMO BOX SUPPORT BEGIN -->
+<div class=""promo-box"">
+<i class=""promo-box-icon icon-line2-call-out""></i>
+<h4>24/7 support</h4>
+<h5>1-800-000-000</h5>
+</div>
+<!-- PROMO BOX SUPPORT END -->
+
+<!-- PROMO BOX POLICY BEGIN -->
+<div class=""promo-box"">
+<i class=""promo-box-icon icon-box""></i>
+<h4>30 days</h4>
+<h5>return policy</h5>
+</div>
+<!-- PROMO BOX POLICY END -->
+</div>
+<!-- PROMO BOXES END -->",1
+"Weltpixel Section 2 version 1",weltpixel_footer_section2-1,"
+<!-- FOOTER COLUMN #1 BEGIN -->
+<div class=""col-md-3 col-sm-6 col-xs-12 mobile-toggle"">
+<h4><img alt=""Logo"" src=""{{skin url='media/cleo/v1/logo.png'}}"" style=""width:100px""></h4>
+<p>9087S Divamus Faucibus Str., <br>
+City name, Postal Code, <br>
+PA 19130, United States. <br><br>
+Call us at (1800) 000<br>
+contact@domain.com</p><br>
+</div>
+<!-- FOOTER COLUMN #1 END -->
+
+<!-- FOOTER COLUMN #2 BEGIN -->
+<div class=""col-md-3 col-sm-6 col-xs-12 mobile-toggle"">
+<h4>Company</h4>
+<ul>
+	<li><a href=""{{store url='about-magento-demo-store'}}"">About Us</a></li>
+	<li><a href=""{{store url='contacts'}}"">Contact Us</a></li>
+	<li><a href=""{{store url='customer-service'}}"">Customer Service</a></li>
+	<li><a href=""{{store url='privacy-policy-cookie-restriction-mode'}}"">Privacy Policy</a></li>
+</ul>
+</div>
+<!-- FOOTER COLUMN #2 END -->
+
+<div class=""clearfix visible-sm-block""></div>
+
+<!-- FOOTER COLUMN #3 BEGIN -->
+<div class=""col-md-3 col-sm-6 col-xs-12 mobile-toggle"">
+<h4>Quick Links</h4>
+<ul>
+	<li><a href=""{{store url='catalog/seo_sitemap/category'}}"" title=""Site Map"">Site Map</a></li>
+	<li><a href=""{{store url='catalogsearch/term/popular'}}"" title=""Search Terms"">Search Terms</a></li>
+	<li><a href=""{{store url='catalogsearch/advanced'}}"" title=""Advanced Search"">Advanced Search</a></li>
+</ul>
+</div>
+<!-- FOOTER COLUMN #3 END -->
+
+<div class=""clearfix visible-sm-block""></div>
+
+<!-- FOOTER COLUMN #4 BEGIN -->
+<div class=""col-md-3 col-sm-6 col-xs-12 mobile-toggle"">
+<h4>Account</h4>
+<ul>
+	<li><a href=""{{store url='customer/account'}}"" title=""My Account"">My Account</a></li>
+	<li><a href="" {{store url='sales/guest/form'}}"" title=""Orders and Returns"">Orders and Returns</a></li>
+</ul>
+</div>
+<!-- FOOTER COLUMN #4 END -->",0
+"Weltpixel Section 1 version 1",weltpixel_footer_section1-1,"<div class=""col-xs-12"" style=""margin:0 auto; float:none;"">
+<!-- STAY IN TOUCH SECTION BEGIN -->
+<div class=""col-md-6 col-sm-12 col-xs-12"">
+<h4 style=""text-align:center;"">Let's Stay in touch!</h4>
+<!-- NEWSLETTER BLOCK BEGIN -->
+       {{block type=""core/template"" name=""weltpixel_newsletter_footer"" template=""newsletter/footer.phtml""}}
+<!-- NEWSLETTER BLOCK END -->
+</div>
+<!-- STAY IN TOUCH SECTION END -->
+
+<div class=""col-sm-clear col-xs-clear""></div>
+
+<!-- FOLLOW US SECTION BEGIN -->
+<div class=""col-md-6 col-sm-12 col-xs-12"" style=""text-align:center;"">
+<h4>FOLLOW US</h4>
+
+<!-- SOCIAL ICONS BEGIN -->
+<a href=""#"" class=""social-icons si-borderless si-facebook"">
+    <i class=""icon-facebook""></i>
+    <i class=""icon-facebook""></i>
+</a>
+
+<a href=""#"" class=""social-icons si-borderless si-twitter"">
+    <i class=""icon-twitter""></i>
+    <i class=""icon-twitter""></i>
+</a>
+
+<a href=""#"" class=""social-icons si-borderless si-google"">
+    <i class=""icon-google""></i>
+    <i class=""icon-google""></i>
+</a>
+
+<a href=""#"" class=""social-icons si-borderless si-instagram"">
+    <i class=""icon-instagram""></i>
+    <i class=""icon-instagram""></i>
+</a>
+
+<a href=""#"" class=""social-icons si-borderless si-vimeo"">
+    <i class=""icon-vimeo""></i>
+    <i class=""icon-vimeo""></i>
+</a>
+
+<a href=""#"" class=""social-icons si-borderless si-pinterest"">
+    <i class=""icon-pinterest""></i>
+    <i class=""icon-pinterest""></i>
+</a>
+<!-- SOCIAL ICONS END -->
+</div>
+<!-- FOLLOW US SECTION END -->
+</div>
+
+",0
+"Weltpixel Section 3 version 1",weltpixel_footer_section3-1,"
+<!-- COPYRIGHT SECTION BEGIN -->
+<div class=""col-md-3 col-sm-12 col-xs-12"">
+<p>Copyright © 2014 <a href=""http://www.weltpixel.com"">Premium Magento Themes</a> by <a href=""http://www.weltpixel.com/"">WeltPixel</a>. All Rights Reserved.</p>
+</div>
+<!-- COPYRIGHT SECTION END -->
+
+<!-- LINKS BLOCK BEGIN -->
+<div class=""col-md-6 col-sm-12 col-xs-12"">
+<ul class=""footer-nav"">
+	<li><a href=""{{store url='customer-service'}}"">Customer Service</a></li>
+	<li><a href=""{{store url='privacy-policy-cookie-restriction-mode'}}"">Privacy Policy</a></li>
+	<li><a href=""{{store url='contacts'}}"">Contact Us</a></li>
+</ul>
+</div>
+<!-- LINKS BLOCK END -->
+
+<!-- PAYMENTS IMAGE BLOCK BEGIN -->
+<div class=""col-md-3 col-sm-12 col-xs-12"">
+<img alt=""Payments"" src=""{{skin url='images/payment.png'}}"">
+</div>
+<!-- PAYMENTS IMAGE BLOCK END -->
+",0
+"Weltpixel Shopping Cart Promo",weltpixel_shopping_cart_promo,"<img alt=""Cart Discount"" src=""{{media url='cleo/v1/cart-discount.png'}}"" width=""100%"">",0
+"Weltpixel Shopping Cart Secutiry",weltpixel_shopping_cart_security,"<div class=""col-12"">Sample info about SSL Certificate <img src=""{{media url='cleo/v1/block_cart_below_totals.png'}}"" alt=""Example Image"" title=""Static CMS block displayed below totals. Put your own content here.""></div>",1
+"Weltpixel Shopping Cart Top",weltpixel_shopping_cart_top,"<p style=""color: #d83701; font-size:16px; letter-spacing: 2px; text-align:center; font-weight:bold;  padding: 5px; margin-top: 25px;""><span>FREE SHIPPING FOREVER (THE SHIPPING'S ON US)!</span></p>",1
+"Weltpixel Contact Page",weltpixel_contact_page,"<h4> Contact Information </h4>
+<p>
+If you would like to talk to us about a project or you have a question, please get in touch. Fill in our contact form below and we’ll get right back to you.<br>
+
+Whether you’re looking to discuss a new project or simply say hello, we’d love to hear from you.</p>
+
+<h4><i class=""icon icon-location""></i> Address: </h4>
+<p>8500 Beverly Boulevard Los Angeles, CA 90048</p>
+
+<h4><i class=""icon  icon-phone3""></i> Phone: </h4>
+<p>1 800 000 000</p>
+
+<h4><i class=""icon  icon-line-mail""></i> Email: </h4>
+<p>mail@email.com</p>",1
+"Weltpixel Smart Block",weltpixel_smart_block,"
+<!-- CSS BLOCK BEGIN -->
+<style scoped>
+/*===================================================================================*/
+/* table size chart                                                                             */
+/*===================================================================================*/
+
+	.sizeChart th:first-child{-webkit-border-radius: 6px 0 0 0;border-radius: 6px 0 0 0;border-left: 0;}
+	.sizeChart{border: 6px solid #E6E6E6 !important;-webkit-border-radius: 6px;border-radius: 6px;background-color: #eeeeee;width: 100% !important;font-size: 12px;margin-top: 20px;}
+	.sizeChart.partialWidth{width: 250px !important;}
+	.sizeChart.twoSideBySide{float: left;margin-bottom: 1em;margin-right: 20px;width: 220px !important;}
+	.sizeChart.threeSideBySide{float: left;margin-bottom: 1em;margin-right: 0;width: 100% !important;}
+	.sizeChart .cm{display: none;}
+	.sizeChart td{border-left: 1px solid #e6e6e6;border-top: 1px solid #e6e6e6;padding: 6px;text-align: center;vertical-align: middle;}
+	.sizeChart tr.odd td{background-color: #f8f8f8;}
+	.sizeChart th{background-color: #e6e6e6;border: 0;padding: 4px 10px 7px 10px;text-align: center;font-size: 9px;font-weight: bold;color: #666666;}
+	.sizeChartTitle{display: none;}
+
+</style>
+<!-- CSS BLOCK END -->
+The <b>Smart Box</b> area can be customized based on product attribute.<br> Best example is the sizing chart or shipping/return policy...
+<!-- PROMO BLOCK HEADER BEGIN -->
+									<div class=""col-12"">
+										<div class=""promo-box"">
+										<i class=""promo-box-icon icon-resize-full""></i>
+										<h4>Womens  Smart Box</h4>
+										<h5>Size Chart</h5>
+										</div>
+									</div>
+<!-- PROMO BLOCK HEADER END -->
+
+<!-- SIZE TABLE BLOCK BEGIN -->
+									<div class=""col-12"">
+										<table class=""sizeChart sizesUS"" style=""display: table;"">
+											<tbody>
+											<tr>
+											<th style=""WIDTH: 60px"">SIZE</th>
+											<th>CHEST (in)</th>
+											<th>WAIST (in)</th>
+											<th>HIP (in)</th>
+											</tr>
+											<tr class=""odd"">
+											<td>S</td>
+											<td>35 - 37 1/2</td>
+											<td>29 - 32</td>
+											<td>35 - 37 1/2</td>
+											</tr>
+											<tr>
+											<td>M</td>
+											<td>37 1/2 - 41</td>
+											<td>32 - 35</td>
+											<td>37 1/2 - 41</td>
+											</tr>
+											<tr class=""odd"">
+											<td>L</td>
+											<td>41 - 44</td>
+											<td>35 - 38</td>
+											<td>41 - 44</td>
+											</tr>
+											<tr>
+											<td>XL</td>
+											<td>44 - 48 1/2</td>
+											<td>38 - 43</td>
+											<td>44 - 47</td>
+											</tr>
+											<tr class=""odd"">
+											<td>XXL</td>
+											<td>48 1/2 - 53 1/2</td>
+											<td>43 - 47 1/2</td>
+											<td>47 - 50 1/2</td>
+											</tr>
+											<tr>
+											<td>XXXL</td>
+											<td>53 1/2 - 58</td>
+											<td>47 1/2 - 53 1/2</td>
+											<td>50 1/2 - 53 1/2</td>
+											</tr>
+											<tr class=""odd"">
+											<td>XXXXL</td>
+											<td>58 - 63</td>
+											<td>52 1/2 - 57</td>
+											<td>53 1/2 - 57</td>
+											</tr>
+											</tbody>
+										</table>
+									</div>
+<!-- SIZE TABLE BLOCK END -->
+",1
+"Weltpixel Lookbook",weltpixel_lookbook,"<div class=""lookbook"">
+
+<nav id=""primary-menu""><ul></ul></nav>
+<!-- SLIDER BLOCK BEGIN -->
+        <section id=""slider"" class=""slider-parallax force-full-screen full-screen"">
+            <!-- SLIDER BACKGROUND IMAGE SETUP -->
+            <div class=""force-full-screen full-screen"" style=""background: url('{{skin url='media/cleo/v1/lookbook/0.jpg'}}') center center;"">
+
+                <div class=""container clearfix"">
+<!-- SLIDER MESSGAES BEGIN -->
+                    <div class=""slider-caption slider-caption-center"">
+                        <h2 data-animate=""fadeInDown"">2015 Summer Lookbook</h2>
+                        <p data-animate=""fadeInUp"" data-delay=""400"">Create amazing lookbooks, present your collections in the most creative ways</p>
+                    </div>
+<!-- SLIDER MESSGAES END -->
+                </div>
+<a href=""#"" data-scrollto=""#section-about"" data-easing=""easeInOutExpo"" data-speed=""1250"" data-offset=""65"" class=""one-page-arrow""><i class=""icon-angle-down infinite animated fadeInDown""></i></a>
+            </div>
+</section>
+<!-- SLIDER BLOCK END -->
+
+<!-- LOOKBOOK SECTION #1 BEGIN -->
+<div id=""section-about"" class=""w"">
+	<div class=""col-xs-12 col-xs-offset-0 col-md-4 col-md-offset-2"" data-animate=""fadeInUp"">
+		<img src=""{{skin url='media/cleo/v1/lookbook/1.jpg'}}"" alt=""Lookbook"">
+<span class=""center"">In maximus ligula semper metus pellentesque mattis. Maecenas volutpat, diam enim.</span>
+	</div>
+
+	<div class=""col-xs-12 col-md-4"" data-animate=""fadeInUp"">
+		<img src=""{{skin url='media/cleo/v1/lookbook/2.jpg'}}"" alt=""Lookbook"">
+<span class=""center"">Maecenas volutpat, diam enim.</span>
+	</div>
+</div>
+<!-- LOOKBOOK SECTION #1 END -->
+
+<!-- LOOKBOOK SECTION #2 BEGIN -->
+<div class=""w"">
+	<div class=""col-xs-12 col-xs-offset-0 col-md-4 col-md-offset-3"" data-animate=""fadeInUp"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/3.jpg'}}"" alt=""Lookbook"">
+<span class=""center"">Lorem ipsum dolor sit amet, c-r adipiscing elit. In maximus ligula semper metus pellentesque mattis. Maecenas volutpat, diam enim.</span>
+	</div>
+</div>
+<!-- LOOKBOOK SECTION #2 END -->
+
+<!-- LOOKBOOK SECTION #3 BEGIN -->
+<div class=""w"">
+	<div class=""col-xs-12 col-md-5"" data-animate=""fadeIn"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/4.jpg'}}"" alt=""Lookbook"">
+	</div>
+	<div class=""col-xs-12 col-md-3 clear-right"" data-animate=""fadeIn"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/5.jpg'}}"" alt=""Lookbook"">
+	</div>
+	<div class=""col-xs-12 col-xs-push-0 col-md-5 col-md-push-1 clear-right"" data-animate=""fadeInUp"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/6.jpg'}}"" alt=""Lookbook"">
+	</div>
+	<div class=""col-xs-12 col-xs-offset-0 col-md-4 col-md-offset-2 up-25"" data-animate=""fadeInUp"">
+		<img src=""{{skin url='media/cleo/v1/lookbook/7.jpg'}}"" alt=""Lookbook"">
+	</div>
+</div>
+<!-- LOOKBOOK SECTION #3 END -->
+
+<!-- LOOKBOOK SECTION #4 BEGIN -->
+<div class=""w"">
+	<div class=""col-xs-12 col-xs-offset-0 col-md-5 col-md-offset-1"" data-animate=""fadeInLeftBig"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/8.jpg'}}"" alt=""Lookbook"">
+	</div>
+
+	<div class=""col-xs-12 col-md-5"" data-animate=""fadeInRightBig"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/9.jpg'}}"" alt=""Lookbook"">
+	</div>
+
+
+	<div class=""col-xs-12 col-md-12"" data-animate=""fadeInUp"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/10.jpg'}}"" alt=""Lookbook"">
+<span class=""center"">Maximus ligula semper metus pellentesque mattis. Maecenas volutpat, diam enim.</span>
+	</div>
+</div>
+<!-- LOOKBOOK SECTION #4 END -->
+
+<!-- LOOKBOOK SECTION #5 BEGIN -->
+<div class=""w"" data-animate=""fadeInUp"">
+	<div class=""col-xs-12 col-xs-offset-0 col-md-5 col-md-offset-2 down-5"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/11.jpg'}}"" alt=""Lookbook"">
+	</div>
+
+	<div class=""col-xs-12 col-md-5"" data-animate=""fadeInUp"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/12.jpg'}}"" alt=""Lookbook"">
+<span class=""center"">In maximus ligula semper metus pellentesque mattis. Morbi ac mattis nulla, quis ultricies est. Sed hendrerit sollicitudin felis, at aliquet purus suscipit ut. Aliquam eget aliquam tortor, non egestas nibh. Donec tortor nunc, venenatis a dui nec, consectetur cursus tortor.</span>
+	</div>
+</div>
+<!-- LOOKBOOK SECTION #5 END -->
+
+<!-- LOOKBOOK SECTION #6 BEGIN -->
+<div class=""w"" data-animate=""fadeInUp"">
+	<div class=""col-xs-12 col-xs-offset-0 col-md-5 col-md-offset-1"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/13.jpg'}}"" alt=""Lookbook"">
+	</div>
+
+	<div class=""col-xs-12 col-md-5"" data-animate=""fadeInUp"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/14.jpg'}}"" alt=""Lookbook"">
+	</div>
+</div>
+<!-- LOOKBOOK SECTION #6 END -->
+
+<!-- LOOKBOOK SECTION #7 BEGIN -->
+<div class=""w"">
+	<div class=""col-xs-12 col-xs-offset-0 col-md-7 col-md-offset-3"" data-animate=""fadeInUp"">
+<span class=""center"">Maecenas volutpat, diam enim.</span>
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/15.jpg'}}"" alt=""Lookbook"">
+	</div>
+</div>
+<!-- LOOKBOOK SECTION #7 END -->
+
+<!-- LOOKBOOK SECTION #8 BEGIN -->
+<div class=""w"">
+	<div class=""col-xs-12 col-xs-offset-0 col-md-5"" data-animate=""fadeIn"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/16.jpg'}}"" alt=""Lookbook"">
+<span class=""center"">Maecenas volutpat, diam enim.</span>
+	</div>
+	<div class=""col-xs-12 col-md-4 clear-right"" data-animate=""fadeIn"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/19.jpg'}}"" alt=""Lookbook"">
+	</div>
+	<div class=""col-xs-12 col-xs-push-0 col-md-5 col-md-push-2 clear-right"" data-animate=""fadeIn"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/17.jpg'}}"" alt=""Lookbook"">
+	</div>
+	<div class=""col-xs-12 col-xs-offset-0 col-md-4 col-md-offset-3 up-20"" data-animate=""fadeIn"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/18.jpg'}}"" alt=""Lookbook"">
+	</div>
+</div>
+<!-- LOOKBOOK SECTION #8 END -->
+
+<!-- LOOKBOOK SECTION #9 BEGIN -->
+<div class=""w"">
+	<div class=""col-xs-12 col-md-12 image-fadeInUp"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/20.jpg'}}"" alt=""Lookbook"">
+	</div>
+</div>
+<!-- LOOKBOOK SECTION #9 END -->
+
+<!-- LOOKBOOK SECTION #10 BEGIN -->
+<div class=""w"">
+	<div class=""col-xs-12 col-xs-offset-0 col-md-5 col-md-offset-2 down-5"" data-animate=""fadeInLeft"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/21.jpg'}}"" alt=""Lookbook"">
+	</div>
+
+	<div class=""col-xs-12 col-md-5"" data-animate=""fadeInRight"">
+		<img class=""image-fade"" src=""{{skin url='media/cleo/v1/lookbook/22.jpg'}}"" alt=""Lookbook"">
+<span class=""center"">Dolor sit amet, c-r adipiscing elit. In maximus ligula semper metus <br> pellentesque mattis. Maecenas volutpat, diam enim.</span>
+	</div>
+</div>
+<!-- LOOKBOOK SECTION #10 END -->
+</div>",1
+"Female smart block",female_smart_block,"
+<!-- CSS BLOCK BEGIN -->
+<style scoped>
+/*===================================================================================*/
+/* table size chart                                                                             */
+/*===================================================================================*/
+
+	.sizeChart th:first-child{-webkit-border-radius: 6px 0 0 0;border-radius: 6px 0 0 0;border-left: 0;}
+	.sizeChart{border: 6px solid #E6E6E6 !important;-webkit-border-radius: 6px;border-radius: 6px;background-color: #eeeeee;width: 100% !important;font-size: 12px;margin-top: 20px;}
+	.sizeChart.partialWidth{width: 250px !important;}
+	.sizeChart.twoSideBySide{float: left;margin-bottom: 1em;margin-right: 20px;width: 220px !important;}
+	.sizeChart.threeSideBySide{float: left;margin-bottom: 1em;margin-right: 0;width: 100% !important;}
+	.sizeChart .cm{display: none;}
+	.sizeChart td{border-left: 1px solid #e6e6e6;border-top: 1px solid #e6e6e6;padding: 6px;text-align: center;vertical-align: middle;}
+	.sizeChart tr.odd td{background-color: #f8f8f8;}
+	.sizeChart th{background-color: #e6e6e6;border: 0;padding: 4px 10px 7px 10px;text-align: center;font-size: 9px;font-weight: bold;color: #666666;}
+	.sizeChartTitle{display: none;}
+
+</style>
+<!-- CSS BLOCK END -->
+
+<!-- PROMO BLOCK HEADER BEGIN -->
+									<div class=""col-12"">
+										<div class=""promo-box"">
+										<i class=""promo-box-icon icon-resize-full""></i>
+										<h4>Womens  Smart Box</h4>
+										<h5>Size Chart</h5>
+										</div>
+									</div>
+<!-- PROMO BLOCK HEADER END -->
+
+<!-- SIZE TABLE BLOCK BEGIN -->
+									<div class=""col-12"">
+										<table class=""sizeChart sizesUS"" style=""display: table;"">
+											<tbody>
+											<tr>
+											<th style=""WIDTH: 60px"">SIZE</th>
+											<th>CHEST (in)</th>
+											<th>WAIST (in)</th>
+											<th>HIP (in)</th>
+											</tr>
+											<tr class=""odd"">
+											<td>S</td>
+											<td>35 - 37 1/2</td>
+											<td>29 - 32</td>
+											<td>35 - 37 1/2</td>
+											</tr>
+											<tr>
+											<td>M</td>
+											<td>37 1/2 - 41</td>
+											<td>32 - 35</td>
+											<td>37 1/2 - 41</td>
+											</tr>
+											<tr class=""odd"">
+											<td>L</td>
+											<td>41 - 44</td>
+											<td>35 - 38</td>
+											<td>41 - 44</td>
+											</tr>
+											<tr>
+											<td>XL</td>
+											<td>44 - 48 1/2</td>
+											<td>38 - 43</td>
+											<td>44 - 47</td>
+											</tr>
+											<tr class=""odd"">
+											<td>XXL</td>
+											<td>48 1/2 - 53 1/2</td>
+											<td>43 - 47 1/2</td>
+											<td>47 - 50 1/2</td>
+											</tr>
+											<tr>
+											<td>XXXL</td>
+											<td>53 1/2 - 58</td>
+											<td>47 1/2 - 53 1/2</td>
+											<td>50 1/2 - 53 1/2</td>
+											</tr>
+											<tr class=""odd"">
+											<td>XXXXL</td>
+											<td>58 - 63</td>
+											<td>52 1/2 - 57</td>
+											<td>53 1/2 - 57</td>
+											</tr>
+											</tbody>
+										</table>
+									</div>
+<!-- SIZE TABLE BLOCK END -->
+",1
+"Weltpixel Fashion Page",weltpixel_fashion_page,"
+<!-- FASHION BLOCK BEGIN -->
+<div class=""w"">
+<!-- FASHION BLOCK PRODUCT SECTION BEGIN -->
+	<div class=""col-md-6 col-sm-12 col-xs-12"">
+		<div class=""cd-product-wrapper fashion_page"">
+			<img src=""{{skin url='media/cleo/v1/detail.jpg'}}"" style=""width: 100%"" alt=""Preview image"">
+			<ul>
+<!-- TOOLTIP #1 BEGIN -->
+				<li class=""cd-single-point"">
+					<a class=""cd-img-replace"" href=""#0"">More</a>
+					<div class=""cd-more-info cd-top"">
+						<h2>Title 1</h2>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae distinctio esse placeat minus fugit, voluptate, quos, ea, nisi temporibus repudiandae perspiciatis natus quasi ipsa corrupti ipsum amet facere ut nihil.
+						</p>
+						<a href=""#0"" class=""cd-close-info cd-img-replace"">Close</a>
+					</div>
+				</li> <!-- .cd-single-point -->
+<!-- TOOLTIP #1 END -->
+<!-- TOOLTIP #2 BEGIN -->
+				<li class=""cd-single-point"">
+					<a class=""cd-img-replace"" href=""#0"">More</a>
+					<div class=""cd-more-info cd-top"">
+						<h2>Title 2</h2>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae distinctio esse placeat minus fugit, voluptate, quos, ea, nisi temporibus repudiandae perspiciatis natus quasi ipsa corrupti ipsum amet facere ut nihil.
+						</p>
+						<a href=""#0"" class=""cd-close-info cd-img-replace"">Close</a>
+					</div>
+				</li> <!-- .cd-single-point -->
+<!-- TOOLTIP #2 END -->
+<!-- TOOLTIP #3 BEGIN -->
+				<li class=""cd-single-point"">
+					<a class=""cd-img-replace"" href=""#0"">More</a>
+					<div class=""cd-more-info cd-right"">
+						<h2>Title 3</h2>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae distinctio esse placeat minus fugit, voluptate, quos, ea, nisi temporibus repudiandae perspiciatis natus quasi ipsa corrupti ipsum amet facere ut nihil.
+						</p>
+						<a href=""#0"" class=""cd-close-info cd-img-replace"">Close</a>
+					</div>
+				</li> <!-- .cd-single-point -->
+<!-- TOOLTIP #3 END -->
+<!-- TOOLTIP #4 BEGIN -->
+				<li class=""cd-single-point"">
+					<a class=""cd-img-replace"" href=""#0"">More</a>
+					<div class=""cd-more-info cd-right"">
+						<h2>Title 4</h2>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae distinctio esse placeat minus fugit, voluptate, quos, ea, nisi temporibus repudiandae perspiciatis natus quasi ipsa corrupti ipsum amet facere ut nihil.
+						</p>
+						<a href=""#0"" class=""cd-close-info cd-img-replace"">Close</a>
+					</div>
+				</li> <!-- .cd-single-point -->
+<!-- TOOLTIP #4 END -->
+			</ul>
+		</div> <!-- .cd-product-wrapper -->
+	</div> <!-- .cd-product -->
+<!-- FASHION BLOCK PRODUCT SECTION END -->
+<!-- FASHION BLOCK INFO SECTION BEGIN -->
+<div class=""col-md-6 col-sm-12 col-xs-12"">
+<div class=""heading-block valign-middle"" style=""margin-left:0;"">
+                                <h1>Fashion</h1>
+
+</div>
+<h2>The new collection is here!</h2>
+<p style=""padding:50px 0"">A classic pencil skirt that feels refreshingly modern. Crafted from our lighweight refined wool, the Jane skirt is an essential piece for on-the-go professionals.</p>
+<!-- MATERIALS PERCENTAGE BEGIN -->
+                        <ul class=""skills"">
+                            <li data-percent=""30"">
+                                <span>polyester</span>
+                                <div class=""progress"">
+                                    <div class=""progress-percent""><div class=""counter counter-inherit counter-instant""><span data-from=""0"" data-to=""30"" data-refresh-interval=""10"" data-speed=""1100""></span>%</div></div>
+                                </div>
+                            </li>
+                            <li data-percent=""70"">
+                                <span>Cotton</span>
+                                <div class=""progress"">
+                                    <div class=""progress-percent""><div class=""counter counter-inherit counter-instant""><span data-from=""0"" data-to=""70"" data-refresh-interval=""30"" data-speed=""1100""></span>%</div></div>
+                                </div>
+                            </li>
+                        </ul>
+<!-- MATERIALS PERCENTAGE END -->
+<br/>
+<!-- COLLECTION BUTTON -->
+<a class=""simple-button"" href=""{{store url='women/dresses.html'}}"">View Collection</a>
+</div>
+<!-- FASHION BLOCK INFO SECTION END -->
+</div>
+<!-- FASHION BLOCK END -->
+
+<!-- EXPLORE OUR COLLECTION BLACK BOCK BEGIN -->
+<div class=""section-featured dark notopmargin noborder"">
+                    <div class=""container clearfix"">
+
+                        <div class=""clear""></div>
+
+                        <div class=""heading-block center"">
+                            <h2>Explore our latest collections</h2>
+                        </div>
+
+                    </div>
+</div>
+<!-- EXPLORE OUR COLLECTION BLACK BOCK END -->
+
+<!-- FEATURE BOXES BOCK BEGIN -->
+<div class=""w"">
+<!-- FEATURE BOX #1 BEGIN -->
+<div class=""featured-box col-md-4 col-sm-12 col-xs-12"">
+                    	<a href=""{{store url='women/dresses.html'}}"">
+                            <div class=""featured-box-content""><img alt=""Fashion Dresses"" src=""{{skin url='media/cleo/v1/fashion-box-1.jpg'}}"" style=""width:100%""></div>
+                            <div class=""featured-box-overlay"">
+                                <span class=""featured-box-subtitle"">Maecenas volutpat</span>
+                                <span class=""featured-box-title"">Dresses</span>
+                            </div>
+                        </a>
+                    </div>
+<!-- FEATURE BOX #1 END -->
+<!-- FEATURE BOX #2 BEGIN -->
+<div class=""featured-box col-md-4 col-sm-12 col-xs-12"">
+                    	<a href=""{{store url='women/bottoms.html'}}"">
+                            <div class=""featured-box-content""><img alt=""Fashion Bottoms"" src=""{{skin url='media/cleo/v1/fashion-box-3.jpg'}}"" style=""width:100%""></div>
+                            <div class=""featured-box-overlay"">
+                                <span class=""featured-box-subtitle"">Maecenas volutpat</span>
+                                <span class=""featured-box-title"">Bottoms</span>
+                            </div>
+                        </a>
+                    </div>
+<!-- FEATURE BOX #2 END -->
+<!-- FEATURE BOX #3 BEGIN -->
+<div class=""featured-box col-md-4 col-sm-12 col-xs-12"">
+                    	<a href=""{{store url='women/shoes.html'}}"">
+                            <div class=""featured-box-content""><img alt=""Fashion Shoes"" src=""{{skin url='media/cleo/v1/fashion-box-2.jpg'}}"" style=""width:100%""></div>
+                            <div class=""featured-box-overlay"">
+                                <span class=""featured-box-subtitle"">Maecenas volutpat</span>
+                                <span class=""featured-box-title"">Shoes</span>
+                            </div>
+                        </a>
+                    </div>
+<!-- FEATURE BOX #3 END -->
+</div>
+<!-- FEATURE BOXES BOCK END -->
+",1

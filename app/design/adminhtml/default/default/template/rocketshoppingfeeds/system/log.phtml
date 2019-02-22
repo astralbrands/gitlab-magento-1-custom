@@ -1,0 +1,64 @@
++<?php
+$file = Mage::getBaseDir('log'). DS. $this->getFeed()->getLogFile();
+if (file_exists($file) && !is_readable($file)): ?>
+    <div id="messages">
+        <ul class="messages">
+            <li class="error-msg">
+                <ul>
+                    <li><span><?php echo $this->__('Log file readable! Check permissions for %s', $file); ?></span></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+<?php else: ?>
+<div class="content-header">
+    <h3><?php echo sprintf($this->__('"%s" log.'), $this->getFeed()->getName()); ?></h3>
+    <div class="content-buttons-placeholder">
+        <p class="content-buttons form-buttons">
+            <?php if(file_exists($file)): ?>
+                <button title="Download Log" type="button" class="scalable cancel" onclick="setLocation('<?php echo $this->getDownloadUrl();?>')">
+                    <span><?php echo $this->__('Download Log'); ?></span>
+                </button>
+                <button title="Clear Log" type="button" class="scalable cancel" onclick="setLocation('<?php echo $this->getClearUrl();?>')">
+                    <span><?php echo $this->__('Clear Log'); ?></span>
+                </button>
+            <?php endif; ?>
+            <button title="Close Window" type="button" class="scalable cancel" onclick="window.close()">
+                <span><?php echo $this->__('Close Window'); ?></span>
+            </button>
+        </p>
+    </div>
+</div>
+<pre style="float:right;background-color: #cccccc;"> <?php echo 'Log path [mage_root]/var/log/'. $this->getFeed()->getLogFile(); ?> </pre>
+<?php
+    if (is_readable($file)) {
+        $fl = fopen($file, "r");
+        $date = '';
+        for($x_pos = 0, $ln = 0, $output = array(); fseek($fl, $x_pos, SEEK_END) !== -1; $x_pos--) {
+            $char = fgetc($fl);
+            if ($char === "\n") {
+                if (empty($output[$ln])) {
+                    unset($output[$ln]);
+                } else {
+                    $buff_date = substr($output[$ln], 0, 10);
+                    if (!empty($date) && $buff_date != $date) {
+                        break;
+                    }
+                    $date = $buff_date;
+                }
+
+                $ln++;
+                continue;
+            }
+            $output[$ln] = $char . ((array_key_exists($ln, $output)) ? $output[$ln] : '');
+        }
+        fclose($fl);
+
+        for ($i = count($output); $i > 0; $i--) {
+            if (array_key_exists($i, $output)) {
+                echo trim($output[$i]) . "<br />\n";
+            }
+        }
+    }
+endif;
+?>

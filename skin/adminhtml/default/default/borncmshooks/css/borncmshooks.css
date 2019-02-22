@@ -1,0 +1,197 @@
+/* 
+    Document   : borncmshooks
+    Created on : Mar 6, 2013, 4:38:44 PM
+    Author     : mem0ri0us
+*/
+#content-container{
+    display:inline-block;
+    margin-top:20px;
+    vertical-align: top;
+    width: 210px;
+}
+
+#form-container{
+    display:inline-block;
+    margin:10px;
+    vertical-align: top;
+    /*width:100%;*/
+    width:550px;
+}
+
+#section_region{
+    display: inline-block;
+    /*border:1px solid #bbb;*/
+    margin:10px;
+    /*min-height: 300px;*/
+    vertical-align: top;
+    width:200px;
+}
+
+#section_region_add_miniform{
+    display: inline-block;
+    margin-bottom:10px;
+    margin-top:10px;
+    width:100%;
+}
+#section_miniform_remove{
+    margin-top: 5px;
+}
+#section_region_sections{
+    display: inline-block;
+    margin-top: 5px;
+    width:100%;
+}
+#section_name{
+    float:right;
+    width:150px;
+}
+#section_save{
+    float:right;
+    margin-top:2px;
+    width:156px;
+}
+
+.delete-section{
+    display:inline-block;
+    margin-right:5px;
+}
+.view-section{
+    display:inline-block;
+}
+
+#add_section_button{
+    width:100%;
+}
+
+#field_region{
+    display: inline-block;
+    /*border:1px solid #bbb;*/
+    margin:10px;
+/*    min-height: 300px;*/
+    vertical-align: top;
+    width:200px;
+}
+#field_region_add_miniform{
+    display: inline-block;
+    margin-bottom:10px;
+    margin-top:10px;
+    width:100%;
+}
+#field_miniform_remove{
+    margin-top: 5px;
+}
+#field_region_field{
+    display: inline-block;
+    margin-top: 5px;
+    width:100%;
+}
+#field_section_name{
+    float:right;
+    height:24px;
+    width:156px;
+}
+#field_name{
+    float:right;
+    margin-top:2px;
+    width:150px;
+}
+#field_save{
+    float:right;
+    margin-top:2px;
+    width:156px;
+}
+.delete-field{
+    display:inline-block;
+    margin-right:5px;
+}
+.view-field{
+    display:inline-block;
+}
+
+#add_field_button{
+    width:100%;
+}
+
+#form_region{
+    display: inline-block;
+    /*border:1px solid #bbb;*/
+    margin:10px;
+    /*min-height: 300px;*/
+    vertical-align: top;
+    width:200px;
+}
+#form_region_add_miniform{
+    display: inline-block;
+    margin-bottom:10px;
+    margin-top:10px;
+    width:100%;
+}
+#form_miniform_remove{
+    margin-top: 5px;
+}
+#form_region_form{
+    display: inline-block;
+    margin-top: 5px;
+    width:100%;
+}
+#form_section_name{
+    float:right;
+    height:24px;
+    width:156px;
+}
+#form_field_name{
+    float:right;
+    height:24px;
+    margin-top:2px;
+    width:156px;
+}
+#form_name{
+    float:right;
+    margin-top:2px;
+    width:150px;
+}
+#form_save{
+    float:right;
+    margin-top:2px;
+    width:156px;
+}
+.delete-form{
+    display:inline-block;
+    margin-right:5px;
+}
+.view-form{
+    display:inline-block;
+}
+
+#add_form_button{
+    width:100%;
+}
+
+#borncmshooks_formform{
+    display: inline-block;
+    vertical-align: top;
+    min-width: 530px;
+    width:530px;
+    
+}
+
+#borncmshooks_formelements{
+    display: inline-block;
+    vertical-align: top;
+    min-width: 530px;
+    width:530px;
+}
+
+#borncmshooks_elementform{
+    border:none;
+}
+
+.borncmshooks-delete-element{
+    display:inline;
+    margin-right: 10px;
+}
+
+.borncmshooks-element{
+    display:inline;
+    margin-right: 10px;
+}

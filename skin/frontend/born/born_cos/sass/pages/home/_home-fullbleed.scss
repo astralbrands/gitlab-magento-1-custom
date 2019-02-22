@@ -1,0 +1,159 @@
+.homepage { // core of html in app\design\frontend\born\born\template\borncmshooks\blocks\fullbleed.phtml
+
+  // Secondary promo: 2 block
+
+  .fullbleed-wrap {
+    position: relative;
+
+    .background-img {
+      width: 100%;
+    }
+    .background-img-mobile {
+      display: none;
+    }
+
+    .fullbleed-title-wrap {
+      &.white {
+        .title, .subtitle, .btn-text {
+          color: $white;
+        }
+        .btn {
+          border-color: $white;
+        }
+      }
+      &.black {
+        .title, .subtitle, .btn-text {
+          color: $black;
+        }
+        .btn {
+          border-color: $black;
+          &:hover {
+            .btn-text {
+              color: $white;
+            }
+          }
+        }
+      }
+      .btn {
+        transition: background-color $fast ease-out, color $fast ease-out;
+      }
+
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      margin: auto;
+      text-align: center;
+      font-size: 0;
+      &:after {
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        height: 100%;
+        content: '';
+      }
+      &-inner {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .title {
+        @include setFont(3.6rem, 4.2rem, 500);
+        margin-bottom: 16px;
+      }
+      .subtitle {
+        @include setFont(1.6rem, 3rem, 300);
+        margin: 0 0 32px;
+        text-transform: none;
+        &::first-letter {
+          text-transform: uppercase;
+        }
+      }
+      .btn {
+        display: table;
+        margin: 0 auto;
+      }
+      .btn-text {
+        line-height: 3.7rem;
+        padding: 4px 40px;
+      }
+    }
+  }
+
+}
+
+@media only screen and (max-width: $tablet-custom-1) {
+  .homepage {
+    .fullbleed-wrap {
+      .fullbleed-title-wrap {
+        .title {
+          font-size: 2.9rem;
+        }
+        .subtitle {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .homepage {
+    .fullbleed {
+      border-bottom: 1px solid $block-border-color;
+      padding-bottom: 20px;
+    }
+    .fullbleed-wrap {
+      width: 100%;
+      overflow: hidden;
+
+      .background-img {
+        display: none;
+      }
+
+      .background-img-mobile {
+        display: block;
+        width: 100%;
+      }
+
+      .fullbleed-title-wrap {
+        &.white {
+          .title, .subtitle, .btn-text {
+            color: $black;
+          }
+          .btn {
+            border-color: $black;
+          }
+        }
+        @include position(relative, 20px null null null);
+        .title {
+          @include setFont(2.6rem, 3.3rem, 500);
+          width: 240px;
+          margin: 0 auto;
+        }
+
+        .subtitle {
+          @include setFont(1.4rem, 3.0rem, 300);
+          margin: 5px 0 15px;
+        }
+
+        .btn {
+          width: 164px;
+          margin-bottom: 36px;
+          .btn-text {
+            height: 34px;
+            font-size: 1.2rem;
+            line-height: 3.4rem;
+            font-weight: 500;
+            padding: 0;
+          }
+        }
+
+      }
+    }
+  }
+
+}
+

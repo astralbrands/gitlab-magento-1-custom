@@ -1,0 +1,290 @@
+.cart-mid-banner {
+  .banner-title {
+    display: none;
+  }
+  .banner-cart {
+    h2 {
+      color: $white;
+      @include setFont(3.6rem, 4.2rem, 500);
+      margin-bottom: 20px;
+    }
+    p {
+      color: $white;
+      @include setFont(1.6rem, 3rem, 300);
+      width: 390px;
+      margin: 0 auto 20px;
+      &:first-child {
+        display: none;
+      }
+      img {
+        display: none;
+      }
+    }
+    .btn {
+      width: 170px;
+      transition: background-color $fast ease-out, color $fast ease-out;
+      border-color: $white;
+      &:hover {
+        background: $white;
+        border-color: $white;
+        .btn-text {
+          color: $black;
+        }
+      }
+    }
+    .btn-text {
+      color: $white;
+      line-height: 3.8rem;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.cart-mid-banner-wrapper {
+  @include display(flex);
+  .one-third {
+    @include flex-basis(33.33%);
+    .banner-outer {
+      padding-top: 100%;
+      border: 1px solid $block-border-color;
+    }
+  }
+  .two-third {
+    @include flex-basis(66.66%);
+    .banner-outer {
+      padding-top: 50%;
+    }
+  }
+  .full {
+    @include flex-basis(100%);
+    .banner-outer {
+      padding-top: 33.33%;
+    }
+  }
+  .banner-outer {
+    position: relative;
+  }
+  .banner-inner {
+    @include position(absolute, 0 0 0 0);
+    width: 100%;
+    height: 100%;
+    @include display(flex);
+    @include flex-direction(column);
+    @include justify-content(center);
+    text-align: center;
+  }
+  .banner-middle {
+    vertical-align: middle;
+    display: inline-block;
+  }
+  .banner-cart {
+    background-size: cover;
+  }
+  .banner-product {
+    &:hover {
+      .btns {
+        height: 69px;
+      }
+      .quickview, .wishlist {
+        @include gotham();
+        @include setFont(1.3rem, 2.2rem, 500);
+        border: 1px solid $block-border-color;
+        display: inline-block;
+        width: 114px;
+        height: 100%;
+        padding: 12px 0;
+        text-align: center;
+        text-transform: uppercase;
+        vertical-align: middle;
+        &:before {
+          display: block;
+          width: 100%;
+          font-family: $icomoon;
+          text-align: center;
+          color: $black;
+          height: 25px;
+        }
+        &:hover {
+          @include transition(all $fast ease);
+          text-decoration: none;
+          background: $black;
+          color: $white;
+          &:before {
+            color: $white;
+          }
+        }
+      }
+      .quickview {
+        &:before {
+          content: "\e919";
+          font-size: 3rem;
+        }
+      }
+      .wishlist {
+        border-left: 0;
+        &:before {
+          content: "\e91c";
+          font-size: 2rem;
+        }
+        &.favorite {
+          &:before {
+            content: "\e91b";
+            color: $black;
+          }
+          &:hover {
+            &:before {
+              color: $white;
+            }
+          }
+        }
+      }
+      .product-name,
+      .price-box,
+      .product-info {
+        visibility: hidden;
+      }
+      .btns {
+        font-size: 0;
+        position: absolute;
+        text-align: center;
+        width: 100%;
+      }
+    }
+  }
+  .alt-img {
+    img {
+      max-width: 210px;
+      margin: 0 auto;
+    }
+  }
+  .product-image-default {
+    width: 100%;
+    height: auto;
+  }
+  .product-image-hover {
+    opacity: 0;
+    height: 0;
+  }
+  .quickview {
+    display: none;
+  }
+  .wishlist {
+    display: none;
+  }
+  .product-name {
+    padding: 0 25px;
+    @include gothamBook();
+    @include setFont(1.6rem, 2.4rem, 400);
+    text-transform: none;
+    margin-bottom: 0.5em;
+    a {
+      color: $black;
+      &:hover {
+        color: $light-text-color;
+      }
+    }
+  }
+  .price {
+    @include gotham();
+    font-size: 1.4rem;
+    color: $black;
+    font-weight: 500;
+  }
+  .old-price {
+    color: $light-text-color;
+    span {
+      @include chronic();
+    }
+    .price {
+      font-size: 1.6rem;
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet) {
+  .cart-mid-banner-wrapper {
+    .one-third {
+      @include flex-basis(50%);
+      .banner-outer {
+        padding-top: 100%;
+      }
+    }
+    .two-third {
+      @include flex-basis(50%);
+      .banner-outer {
+        padding-top: 100%;
+      }
+    }
+    .full {
+      .banner-outer {
+        padding-top: 50%;
+      }
+      p {
+        max-width: 55%;
+      }
+    }
+    .banner-product {
+      &:hover {
+        .btns {
+          display: none;
+        }
+        .product-info,
+        .product-name,
+        .price-box {
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $tablet) {
+  .cart-mid-banner-wrapper {
+    .alt-img:hover {
+      .product-image-default {
+        height: 0;
+      }
+      .product-image-hover {
+        opacity: 1;
+        width: 100%;
+        height: auto;
+        -webkit-transition: transform .2s, opacity 0.5s;
+        -o-transition: transform .2s, opacity 0.5s;
+        -moz-transition: transform .2s, opacity 0.5s;
+        transition: transform .2s, opacity 0.5s;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet-s){
+  .cart-mid-banner {
+    .banner-cart {
+      h2 {
+        font-size: 2.8rem;
+      }
+      p {
+        font-size: 1.5rem;
+        width: 100%;
+        padding: 0 15px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .cart-mid-banner  .banner-cart {
+    p {
+      .btn-text {
+        line-height: 2.8rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-s) {
+  .cart-mid-banner {
+    display: none;
+  }
+}

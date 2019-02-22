@@ -1,0 +1,118 @@
+<?php
+$skin_url = $this->getSkinUrl('', array('_secure'=>true));
+$http_host = $_SERVER['HTTP_HOST'];
+$session = Mage::getSingleton('core/session');
+$SID=$session->getEncryptedSessionId();
+$esid = md5($SID);
+$hjid = 0;
+?>
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType(); ?>" />
+<title><?php echo $this->getTitle() ?></title>
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<script src="<?php echo $this->helper('core/js')->getJsUrl('mf.js') ?>"></script>
+<script src="//plugin.mavrck.co/mavrck_plugin.js" type="text/javascript"></script>
+<?php
+$url = Mage::helper('core/url')->getHomeUrl();
+?>
+<script>
+	var BASE_URL = '<?php echo $url; ?>';
+</script>
+<?php
+if( $http_host === 'www.purcosmetics.com' || $http_host === 'purcosmetics.com' || $http_host === 'staging.purcosmetics.com' || $http_host === 'development.purcosmetics.com' || $http_host === 'tgi.purcosmetics.com'){
+$hjid = '348334';
+?>
+<!-- Google structured data -->  
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "url": "https://www.purcosmetics.com",
+  "logo":"https://www.purcosmetics.com/media/logos/PurLogo_2015_black.png",
+  "name": "Pur Cosmetics",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-678-303-3088",
+    "contactType": "Customer service"
+  },
+  "sameAs": [
+    "https://www.facebook.com/PurBeautyCosmetics",
+    "https://twitter.com/purcosmetics",
+    "https://www.pinterest.com/purcosmetics/",
+    "https://www.instagram.com/purcosmetics/",
+    "https://www.youtube.com/c/PurCosmetics",
+    "https://www.snapchat.com/add/purcosmetics"
+  ]  
+}
+{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "name": "Pur Cosmetics",
+  "alternateName": "The Complexion Authority",
+  "url": "https://www.purcosmetics.com"
+} 
+</script>
+<!-- End Google structured data -->
+<?php 
+}
+if( $http_host === 'www.cosmedix.com' || $http_host === 'cosmedix.com' || $http_host === 'staging.cosmedix.com' || $http_host === 'development.cosmedix.com' || $http_host === 'tgi.cosmedix.com'){
+$hjid = '515516';
+?>  
+<!-- Google structured data -->
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "url": "https://www.cosmedix.com",
+  "logo":"https://www.cosmedix.com/media/logos/CosMedix_Logo_silver.png",
+  "name": "Cosmedix",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-800-676-9522",
+    "contactType": "Customer service"
+  },
+  "sameAs": [
+    "https://www.facebook.com/COSMEDIX/",
+    "https://twitter.com/CosMedix",
+    "https://www.pinterest.com/cosmedix/",
+    "https://www.instagram.com/cosmedix_/",
+    "https://www.youtube.com/user/CosMedixVideos"
+  ]  
+}
+{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "name": "Cosmedix",
+  "alternateName": "Cosmedix",
+  "url": "https://www.cosmedix.com"
+} 
+</script>
+<!-- End Google structured data -->
+<?php
+}
+?>
+<!-- Hotjar Tracking Code for www.purcosmetics.com -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:<?php echo $hjid; ?>,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+<!-- /Hotjar Tracking Code for www.purcosmetics.com -->
+
+<!-- CSS / JS  -->
+<?php echo $this->getCssJsHtml() ?>
+<!-- End CSS / JS  -->
+<!-- TSS -->
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<!-- Inc -->
+<?php echo $this->getIncludes() ?>
+<!-- Child -->
+<?php echo $this->getChildHtml() ?>

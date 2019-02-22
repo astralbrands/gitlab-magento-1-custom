@@ -1,0 +1,15 @@
+.product-purcosmetics-gift-card {
+  #giftcard_amount-styler {
+    margin-bottom: 10px;
+    min-width: 193px;
+  }
+  #giftcard_message {
+    max-width: 100%;
+  }
+  .availability  {
+    @include setFont(1.4rem, 2rem, 500);
+    padding: 10px 0;
+    text-transform: none;
+  }
+
+}

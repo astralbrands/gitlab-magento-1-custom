@@ -1,0 +1,22 @@
+.message {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    right: 180px;
+}
+
+#note_preview {
+    width: 640px;
+}
+
+.message span {
+    font-size: 14px;
+}
+
+.form-list p.note {
+    background: none;
+}
+
+#promo_catalog_edit_tabs_actions_section_content .condition_content_notice {
+    display: none;
+}

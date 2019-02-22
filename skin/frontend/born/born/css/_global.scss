@@ -1,0 +1,172 @@
+@import "partials/_fonts";
+@import "partials/_fontsA";
+@import "partials/_fontsB";
+@import "mixins";
+
+.great-title {
+  @include setFont(3.6rem, 4.2rem, 500);
+  color: $black;
+}
+
+html {
+  font-size: 62.5%;
+  @include gotham();
+  color: $black;
+}
+
+input, textarea, html {
+  -webkit-appearance: none;
+}
+
+.input-box {
+  & input, & textarea, & input:focus, & textarea:focus {
+    border: 1px solid $block-border-color !important;
+    outline: none !important;
+  }
+}
+
+table, tr, td {
+  color: $black;
+}
+
+a, a:hover {
+  color: $black;
+  cursor: pointer;
+}
+a:focus {outline: none;}
+
+// todo check it is necessary?
+// it's reusable classes. Maybe move these to other place?
+
+.table {
+  display: table;
+}
+
+.table-row {
+  display: table-row;
+  position: relative;
+}
+
+.table-cell {
+  display: table-cell;
+}
+
+.product-image {
+  border: none;
+}
+
+.clear-after {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+.clear {
+  clear: both;
+}
+
+.center {
+  text-align: center;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.block {
+  display: block;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.bg-black {
+  background-color: $black;
+}
+.bg-white {
+  background-color: $white;
+}
+
+.font-black {
+  color: $black !important;
+  .slot-title {
+    color: $black !important;
+  }
+  .slot-subtitle {
+    color: $black !important;
+  }
+  .slot-btn {
+    color: $black !important;
+    border-color: $black !important;
+    &:hover {
+      background: $black !important;
+      color: $white !important;
+    }
+  }
+}
+.font-white {
+  color: $white !important;
+  .slot-title {
+    color: $white !important;
+  }
+  .slot-subtitle {
+    color: $white !important;
+  }
+  .slot-btn {
+    color: $white !important;
+    border-color: $white !important;
+    &:hover {
+      background: $white !important;
+      color: $black !important;
+    }
+  }
+}
+
+*[data-coherent-modal] {
+ cursor: pointer;
+}
+
+.field {
+  cursor: default;
+}
+
+.show-it {
+  display: block !important;
+}
+
+.grayscale {
+  filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 3.5+ */
+  filter: gray; /* IE6-9 */
+  -webkit-filter: grayscale(100%);
+}
+
+.out-of-stock img {
+  opacity: 0.4;
+}
+
+.scroll-y {
+  overflow-y: auto;
+}
+
+#bv-mbox-lightbox-list {
+  .bv-mbox-content-container {
+    overflow: scroll !important;
+    height: 100vh !important;
+  }
+}
+
+.partial-overlay {
+  position: absolute;
+  z-index: 10.5;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: $white;
+  opacity: 0.7;
+}

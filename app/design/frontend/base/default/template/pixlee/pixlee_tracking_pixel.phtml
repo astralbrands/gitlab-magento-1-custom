@@ -1,0 +1,10 @@
+<?php
+$pixleeAccountApiKey = Mage::app()->getWebsite()->getConfig('pixlee/pixlee/account_api_key');
+$pixleeAnalyticsEnabled = Mage::app()->getWebsite()->getConfig('pixlee/advanced/enable_analytics');
+
+if (isset($pixleeAccountApiKey) && $pixleeAccountApiKey != '' && $pixleeAnalyticsEnabled) {
+	$embedSnippet = "<script type='text/javascript' src='https://assets.pixlee.com/assets/pixlee_events.js'></script>
+	<script id='pixlee_tracking'>pixlee_analytics = new Pixlee_Analytics('{$pixleeAccountApiKey}');</script>";
+	echo $embedSnippet;
+}
+?>

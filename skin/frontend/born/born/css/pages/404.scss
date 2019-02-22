@@ -1,0 +1,249 @@
+.cms-no-route {
+  .main {
+    padding: 40px 20px;
+  }
+  .col-main {
+    width: 65%;
+  }
+  .page-head-alt {
+    h3 {
+      margin-bottom: 25px;
+    }
+  }
+  .disc {
+    li {
+      @include chronic;
+      @include setFont(1.6rem, 2.6rem, 400);
+      font-style: italic;
+      color: $black;
+      a {
+        color: $light-text-color;
+        text-decoration: underline;
+        &:hover {
+          color: $black;
+        }
+      }
+    }
+
+  }
+  .sidebar {
+    .block {
+      margin-bottom: 25px;
+    }
+    .block-subtitle {
+      @include gothamBook;
+      @include setFont(1.8rem, 4.2rem, 400);
+      text-transform: none;
+    }
+    .block-title {
+      border-top: none;
+      border-bottom: 4px solid $black;
+      padding: 0;
+      text-transform: uppercase;
+      strong {
+        color: $black;
+        @include gotham;
+        @include setFont(1.3rem, 4.2rem, 500);
+        letter-spacing: 0.25rem;
+      }
+    }
+    .product-name {
+      a {
+        &:hover {
+          color: $black;
+        }
+      }
+    }
+    .button {
+      background: $black;
+      color: $white;
+      width: 144px;
+      float: left;
+      padding: 4px 15px;
+      &:hover,
+      &:active {
+        background: $white;
+        color: $black;
+      }
+    }
+    .btn-remove {
+      border: none;
+      &:after {
+        font-family: $icomoon;
+        color: $black;
+        content: '\e917';
+      }
+      &:hover {
+        background: transparent;
+        text-decoration: none;
+      }
+    }
+    .actions {
+      a {
+        float: right;
+        font-size: 1.3rem;
+        color: $light-text-color;
+        text-decoration: underline;
+        &:hover {
+          color: $black;
+        }
+      }
+    }
+    .price-box {
+      .price {
+        @include gotham;
+        @include setFont(1.3rem, 1.6rem, 500);
+        color: $black;
+      }
+    }
+  }
+  .block-compare {
+    .button {
+      @include gotham;
+      box-sizing: border-box;
+      border: 3px solid $black;
+      font-weight: 500;
+      line-height: 3.6rem;
+      &:hover {
+        transition: background-color 0.2s ease;
+      }
+    }
+  }
+
+  .block-poll {
+    #poll-answers {
+      .input-box {
+        height: 40px;
+      }
+      .label-text {
+        color: $black;
+      }
+      input[type="radio"] + label::before {
+        border: 1px solid $radio-border-color;
+        box-shadow: inset 0 0 0 2px $white;
+      }
+      .votes,
+      .answer {
+        @include chronic;
+        font-style: italic;
+      }
+    }
+
+  }
+  .block-reorder {
+    .input-box {
+      height: 50px;
+    }
+    .label-text {
+      left: 0;
+      top: 0;
+      padding-left: 0;
+    }
+    .product-name {
+      @include gotham;
+      @include setFont(1.3rem, 1.5rem, 400);
+      //max-width: 198px;
+      max-width: initial;
+
+    }
+    .label-text {
+      padding-left: 35px;
+      width: 100%;
+      @include display(flex);
+      @include justify-content(space-between);
+      &:before {
+        position: absolute;
+        left: 0;
+        line-height: 3rem;
+      }
+    }
+
+  }
+  .block-wishlist {
+    .link-cart {
+      color: $light-text-color;
+      text-decoration: underline;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+  .product-name a {
+    @include gotham;
+    @include setFont(1.3rem, 1.5rem, 400);
+
+  }
+}
+.block-reorder {
+  p.product-name {
+    @include gotham;
+  }
+}
+
+.cms-no-route .block-reorder .product-name,
+.mini-products-list .product-details .product-name  a {
+  @include setFont(1.3rem, 1.5rem, 500);
+}
+
+@media only screen and (max-width: $desktop-s){
+  .cms-no-route {
+    .col-right {
+      width: 31%;
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet-m){
+  .cms-no-route {
+    .main {
+      padding-top: 75px;
+    }
+    .col-right {
+      width: 35%;
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet-xs){
+  .cms-no-route {
+    .col-main {
+      width: 60%;
+    }
+    .col-right {
+      width: 40%;
+    }
+  }
+}
+
+
+@media only screen and (max-width: $mobile){
+  .cms-no-route {
+    .col-main,
+    .col-right {
+      width: 100%;
+    }
+    .sidebar {
+      .block:not(.block-layered-nav) .block-content,
+      .block:last-of-type {
+        border: none;
+      }
+      .block-reorder {
+        .label-text {
+          @include justify-content(flex-start);
+        }
+        .product-name {
+          line-height: 1.5rem;
+        }
+      }
+    }
+    .block-title strong span{
+      text-transform: uppercase;
+    }
+    .block-compare .block-content .actions .button {
+      line-height: 2.8rem;
+    }
+    .button {
+      line-height: 3.4rem;
+    }
+  }
+}

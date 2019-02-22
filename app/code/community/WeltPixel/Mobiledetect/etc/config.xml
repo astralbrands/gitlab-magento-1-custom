@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <WeltPixel_Mobiledetect>
+            <version>0.0.1</version>
+        </WeltPixel_Mobiledetect>
+    </modules>
+    <global>
+        <helpers>
+            <weltpixel_mobiledetect>
+                <class>WeltPixel_Mobiledetect_Helper</class>
+            </weltpixel_mobiledetect>
+        </helpers>       
+    </global>    
+</config>

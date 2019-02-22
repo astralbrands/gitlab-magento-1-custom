@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Turnto_Admin>
+            <version>3.1.16</version>
+        </Turnto_Admin>
+    </modules>
+
+    <global>
+        <helpers>
+            <turnto_client_helper>
+                <class>Turnto_Client_Helper</class>
+            </turnto_client_helper>
+        </helpers>
+        <blocks>
+            <turnto_client_block>
+                <class>Turnto_Client_Block</class>
+            </turnto_client_block>
+        </blocks>
+    </global>
+	
+    <frontend>
+        <layout>
+            <updates>
+                <catalog_product_view>
+                    <file>turnto_client.xml</file>
+                </catalog_product_view>
+            </updates>
+        </layout>
+
+        <routers>
+            <turntopinboard>
+                <use>standard</use>
+                <args>
+                    <module>Turnto_Client</module>
+                    <frontName>pinboard</frontName>
+                </args>
+            </turntopinboard>
+        </routers>
+    </frontend>
+</config>

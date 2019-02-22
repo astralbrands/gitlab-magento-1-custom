@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoToolKit
+ */
+-->
+<config>
+    <modules>
+        <Amasty_SeoToolKit>
+            <version>1.9.0</version>
+        </Amasty_SeoToolKit>
+    </modules>
+
+    <global>
+        <helpers>
+            <amseotoolkit>
+                <class>Amasty_SeoToolKit_Helper</class>
+            </amseotoolkit>
+        </helpers>
+
+        <models>
+            <amseotoolkit>
+                <class>Amasty_SeoToolKit_Model</class>
+            </amseotoolkit>
+        </models>
+
+        <blocks>
+            <amseotoolkit>
+                <class>Amasty_SeoToolKit_Block</class>
+            </amseotoolkit>
+            <page>
+                <rewrite>
+                    <html_pager>Amasty_SeoToolKit_Block_Html_Pager</html_pager>
+                </rewrite>
+            </page>
+        </blocks>
+
+        <events>
+            <controller_front_init_before>
+                <observers>
+                    <amasty_amseotoolkit_model_observer>
+                        <type>singleton</type>
+                        <class>amseotoolkit/observer</class>
+                        <method>redirect301</method>
+                    </amasty_amseotoolkit_model_observer>
+                </observers>
+            </controller_front_init_before>
+            <controller_action_layout_generate_blocks_after>
+                <observers>
+                    <amseotoolkit_observer>
+                        <type>singleton</type>
+                        <class>amseotoolkit/observer</class>
+                        <method>onLayoutGenerateBlocksAfter</method>
+                    </amseotoolkit_observer>
+                </observers>
+            </controller_action_layout_generate_blocks_after>
+            <controller_front_send_response_before>
+                <observers>
+                    <amseotoolkit_observer>
+                        <type>singleton</type>
+                        <class>amseotoolkit/observer</class>
+                        <method>onControllerFrontSendResponseBefore</method>
+                    </amseotoolkit_observer>
+                </observers>
+            </controller_front_send_response_before>
+        </events>
+    </global>
+    <frontend>
+        <modules>
+            <Amasty_SeoToolKit>
+                <files>
+                    <default>Amasty_SeoToolKit.csv</default>
+                </files>
+            </Amasty_SeoToolKit>
+        </modules>
+    </frontend>
+    <adminhtml>
+        <events>
+            <adminhtml_cms_page_edit_tab_meta_prepare_form>
+                <observers>
+                    <amseotoolkit_observer_add_cms_uuid>
+                        <type>singleton</type>
+                        <class>Amasty_SeoToolKit_Model_Observer</class>
+                        <method>addHreflangUuidField</method>
+                    </amseotoolkit_observer_add_cms_uuid>
+                </observers>
+            </adminhtml_cms_page_edit_tab_meta_prepare_form>
+        </events>
+        <layout>
+            <updates>
+                <amseotoolkit>
+                    <file>amasty/amseotoolkit.xml</file>
+                </amseotoolkit>
+            </updates>
+        </layout>
+    </adminhtml>
+    <default>
+        <amseotoolkit>
+            <hreflang>
+                <enabled>1</enabled>
+                <scope>0</scope>
+                <language>1</language>
+                <country>1</country>
+                <cms_relation>page_id</cms_relation>
+            </hreflang>
+        </amseotoolkit>
+    </default>
+</config>

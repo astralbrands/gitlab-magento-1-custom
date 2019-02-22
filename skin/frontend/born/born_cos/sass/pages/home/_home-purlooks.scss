@@ -1,0 +1,124 @@
+#container {
+  background: $black;
+  color: $white;
+  padding-bottom: 36px;
+  margin-top: 63px;
+  margin-bottom: 100px;
+  .block-header {
+    padding-top: 30px;
+  }
+  .block-title {
+    color: $white;
+    border-top: 0;
+    @include setFont(3.5rem, 4.1rem, 200);
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .subtitle {
+    @include chronic;
+    @include setFont(2rem, 2.9rem, 400);
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  .fm-gridhub-load-more {
+    font-size: 0 !important;
+    position: relative !important;
+    height: 39px !important;
+    background: $white !important;
+    border: none !important;
+    box-sizing: border-box !important;
+    &:after {
+      display: block ;
+      @include position(absolute, 14px null null 50%);
+      content: '';
+      width: 9px;
+      height: 9px;
+      margin-left: -4px;
+      border-left: 3px solid $black;
+      border-bottom: 3px solid $black;
+      transform-origin: center;
+      @include transform(rotate(-45deg));
+    }
+  }
+  .footer-title {
+    color: $white;
+    @include gotham;
+    @include setFont(3rem, 4.5rem, 200);
+    text-align: center;
+    text-transform: none;
+    padding-top: 30px;
+  }
+  .btn-upload {
+    @include transparentButton(4.6rem, 1.4rem, $black, $white);
+    width: 170px;
+    background: $white;
+    border-color: $white;
+    &:hover {
+      border-color: $white;
+    }
+  }
+}
+.product-view {
+  #container {
+    margin-bottom: 80px;
+    .block-header {
+      background: $white;
+      border: 1px solid $block-border-color;
+    }
+    .block-title,
+    .subtitle {
+      color: $black;
+    }
+    .block-title {
+      @include gotham;
+      @include setFont(2.4rem, 4.2rem, 500);
+    }
+  }
+}
+
+
+@media only screen and  (max-width: $mobile){
+  #container {
+    margin-top: 37px;
+    margin-bottom: 70px;
+    padding-bottom: 20px;
+    .block-title {
+      padding-top: 25px;
+      font-size: 2.5rem;
+    }
+    .subtitle {
+      font-size: 1.7rem;
+    }
+    .footer-title {
+      font-size: 2.5rem;
+      padding-top: 20px;
+    }
+    .btn-upload {
+      width: 158px;
+      font-size: 1.1rem;
+      line-height: 3.6rem;
+    }
+  }
+  .product-view {
+    #container {
+      margin-bottom: 30px;
+      padding-top: 0;
+      .block-header {
+        padding-top: 17px;
+      }
+      .block-title {
+        padding-top: 0;
+        font-size: 1.6rem;
+        line-height: 2.2rem;
+        margin-bottom: 0;
+      }
+    }
+  }
+  .blog {
+    #container {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+

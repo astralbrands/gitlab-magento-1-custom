@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <WeltPixel_AttributeImages>
+            <version>1.0.1</version>
+        </WeltPixel_AttributeImages>
+    </modules>   
+    <global>
+        <resources>
+            <weltpixel_attributeimages_setup>
+                <setup>
+                    <module>WeltPixel_AttributeImages</module>
+                </setup>
+            </weltpixel_attributeimages_setup>
+        </resources>
+        <models>
+            <weltpixel_attributeimages>
+                <class>WeltPixel_AttributeImages_Model</class>
+                <resourceModel>weltpixel_attributeimages_resource</resourceModel>
+            </weltpixel_attributeimages> 
+            <weltpixel_attributeimages_resource>
+                <class>WeltPixel_AttributeImages_Model_Resource</class>
+                <entities>
+                    <attributeimages>
+                        <table>weltpixel_attributeimages</table>
+                    </attributeimages>
+                </entities>
+            </weltpixel_attributeimages_resource>           
+        </models>
+        <helpers>
+            <weltpixel_attributeimages>
+                <class>WeltPixel_AttributeImages_Helper</class>
+            </weltpixel_attributeimages>
+        </helpers>  
+        <blocks>
+            <weltpixel_attributeimages>
+                <class>WeltPixel_AttributeImages_Block</class>                
+            </weltpixel_attributeimages>                      
+        </blocks>
+    </global>       
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <WeltPixel_AttributeImages before="Mage_Adminhtml">WeltPixel_AttributeImages_Adminhtml</WeltPixel_AttributeImages>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>    
+</config>

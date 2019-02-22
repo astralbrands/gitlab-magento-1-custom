@@ -1,0 +1,82 @@
+<?php
+$showClearAll = $this->helper('weltpixel_layerednavigation')->showClearAll();
+$appliedFilters = array();
+
+$_layer = $this->getLayer();
+if (isset($_layer)) :
+    $_filters = $_layer->getState()->getFilters();
+    foreach ($_filters as $_filter):
+        $appliedFilters[] = $_filter->getFilter()->getRequestVar();
+    endforeach;
+endif;
+
+?>
+<?php if ($this->canShowBlock()): ?>
+<div class="filter-button trigger-sign">
+    		<i class="icon-filter"></i>
+			<?php echo $this->__('SHOP BY'); ?>
+			&nbsp;
+			<span class="toggle-sign">
+				<i class="icon-line-plus"></i>
+			</span>
+		</div>
+
+    <div class="block-layered-nav hidden" id="block-layered-nav">
+   		<div class="block-title-horizontal tablet">
+            <span><?php echo $this->__('Refine your search:') ?></span>
+            <span class="layered-arrow"></span>
+       	</div>
+        <div class="block-content-horizontal">
+            <?php
+            //do not show the filters on mobile or table
+            if (!$this->helper('weltpixel_layerednavigation')->isMobileOrTablet()) : ?>
+            <?php echo $this->getStateHtml() ?>
+            <?php endif; ?>
+            <?php if ($this->canShowOptions()): ?>
+                <div class="filters-wrapper">
+                    <?php $_filters = $this->getFilters() ?>
+                    <?php foreach ($_filters as $_filter): ?>
+                        <?php if ($_filter->getItemsCount()): ?>
+                            <div class="filter-container">
+                                <p class="filter-name <?php if (!empty($appliedFilters) && in_array($_filter->_filter->getRequestVar(), $appliedFilters)) : echo 'filter-applied' ; endif; ?>">
+                                	<span>
+                                            <?php if($_filter->getType() == 'catalog/layer_filter_category'):  ?>
+                                            <img alt="<?php echo $this->__($_filter->getName()) ?>" class="mobile" src="<?php echo Mage::helper('weltpixel_layerednavigation')->getCategoryImage();?>" />
+                                            <?php else: ?>
+                                            <img alt="<?php echo $this->__($_filter->getName()) ?>" class="mobile" src="<?php echo Mage::helper('weltpixel_attributeimages')->getAttributeImageByCode($_filter->getAttributeCode());?>" />
+                                            <?php endif; ?>
+                                		<?php echo $this->__($_filter->getName()) ?>
+                                		<i class="icon-checkmark mobile"></i>
+                                	</span>
+                                </p>
+                                <div class="filter-content">
+                                	<?php echo $_filter->getHtml() ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+                <script type="text/javascript">decorateDataList('narrow-by-list')</script>
+            <?php endif; ?>
+        	<div class="actions actions-mobile">
+        		<a class="filters-close ignore-ajax" href="JavaScript:void(0);">
+        			<span class="mobile  ignore-ajax">
+        				<i class="icon-chevron-left ignore-ajax"></i>&nbsp;&nbsp;
+        				<?php echo $this->__('back') ?>
+        			</span>
+        			<span class="tablet ignore-ajax">
+        				<i class="icon-line-cross ignore-ajax"></i>&nbsp;&nbsp;
+        				<?php echo $this->__('close') ?>
+        			</span>
+        		</a>
+            	<a class="filters-clear" href="<?php echo $this->getClearUrl() ?>">
+            		<?php echo $this->__('reset') ?>&nbsp;&nbsp;
+            		<i class="icon-refresh ignore-ajax"></i>
+            	</a>
+            </div>
+        </div>
+        <div class="layered-nav-mask"></div>
+    </div>
+<?php endif; ?>
+
+<?php $_helper = $this->helper('weltpixel_layerednavigation'); ?>

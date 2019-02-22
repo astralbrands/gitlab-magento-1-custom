@@ -1,0 +1,65 @@
+.cms-page-view .col-main .col2-set .col-1,
+.cms-page-view .col-main .col2-set .col-2 {
+  width: 48%;
+  float: left;
+  margin-bottom: 10px; }
+.cms-page-view .col-main .col2-set .col-1 {
+  margin-right: 2%; }
+.cms-page-view .col-main .col2-set .col-2 {
+  margin-left: 2%; }
+  .cms-page-view .col-main .col2-set .col-2 img {
+    float: left;
+    width: 100%;
+    height: auto; }
+.cms-page-view .col-main .col2-set .std {
+  width: 100%;
+  float: left; }
+@media screen and (max-width: 992px) {
+  .cms-page-view .col-main .col2-set .col-1,
+  .cms-page-view .col-main .col2-set .col-2 {
+    width: 100%;
+    float: left;
+    margin: 0 0 10px 0; } }
+
+.contacts-index-index .buttons-set {
+  border: none; }
+  .contacts-index-index .buttons-set button span span {
+    color: #FFF;
+    display: block;
+    font-weight: bold;
+    padding: 5px 25px; }
+.contacts-index-index .page-title {
+  background-color: transparent;
+  padding: 0; }
+  .contacts-index-index .page-title h1 {
+    font: 23px/25px "Brandon Light";
+    padding: 10px 0px;
+    text-transform: uppercase;
+    font-weight: bold; }
+@media screen and (max-width: 992px) {
+  .contacts-index-index .col-main .col-6 {
+    width: 100%; } }
+
+.reviews-list > li {
+  margin-bottom: 32px; }
+.reviews-list h5 {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-family: 'Brandon Regular'; }
+.reviews-list h6 {
+  margin-bottom: 10px;
+  font: 14px/1em 'Brandon Medium';
+  color: #999; }
+.reviews-list .ratings-list {
+  float: left;
+  width: 150px;
+  padding-right: 25px;
+  margin-right: -1px;
+  border-right: 1px solid #D1D2D4; }
+.reviews-list .review-main {
+  overflow: hidden;
+  padding-left: 15px;
+  border-left: 1px solid #D1D2D4; }
+#recent-products, #new-products, #featured-products, .featured-products {
+    margin-top: 0px !important;
+}

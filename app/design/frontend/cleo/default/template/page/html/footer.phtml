@@ -1,0 +1,49 @@
+<footer id="page-footer">
+    <div id="page-footer-section-01">
+        <div class="w">
+            <div class="footer-section1-content row">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_footer_section1-1')->toHtml() ?>
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_footer_section1-2')->toHtml() ?>
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_footer_section1-3')->toHtml() ?>
+            </div>
+        </div>
+    </div>
+    <div id="page-footer-section-02">
+        <div class="w">
+            <div class="footer-section2-content row">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_footer_section2-1')->toHtml() ?>
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_footer_section2-2')->toHtml() ?>
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_footer_section2-3')->toHtml() ?>
+            </div>
+        </div>
+    </div>
+    <div id="page-footer-section-03">
+        <div class="w">
+			<div class="footer-section3-content row">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_footer_section3-1')->toHtml() ?>
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_footer_section3-2')->toHtml() ?>
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_footer_section3-3')->toHtml() ?>
+	        </div>
+        </div>
+    </div>
+</footer>
+<?php $settings = Mage::getStoreConfig('weltpixel_selector/customization_settings'); ?>
+<?php if ($settings['back_to_top_button']): // back to top button ?>
+    <?php
+        $offset = $settings['back_to_top_offset'] != '' ? $settings['back_to_top_offset'] : '300';
+        $duration = $settings['back_to_top_duration'] != '' ? $settings['back_to_top_duration'] : '700';
+    ?>
+    <a href="#0" class="cd-top button back-to-top">
+        <i class="icon icon-chevron-up"></i>
+    </a>
+    <script type="text/javascript">
+        jQuery(function() {
+            WeltPixel.bttButton({
+                button: '.back-to-top',
+                offset: '<?php echo $offset; ?>',
+                duration: '<?php echo $duration; ?>',
+            });
+        });
+    </script>
+<?php endif; ?>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS) . 'weltpixel/features/functions.js' ?> "></script>

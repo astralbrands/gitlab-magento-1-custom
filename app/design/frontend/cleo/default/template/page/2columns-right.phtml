@@ -1,0 +1,53 @@
+<?php
+    $_bodyClass = $this->getBodyClass() ? ' class="'.trim($this->getBodyClass()).' no-transition"' : 'class="no-transition"';
+?>
+<!DOCTYPE HTML>
+<!--[if lt IE 7 ]>  <html class="ie ie6 lt-ie9 lt-ie8 lt-ie7">  <![endif]-->
+<!--[if IE 7 ]>     <html class="ie ie7 lt-ie9 lt-ie8">         <![endif]-->
+<!--[if IE 8 ]>     <html class="ie ie8 lt-ie9">                <![endif]-->
+<!--[if IE 9 ]>     <html class="ie ie9">                       <![endif]-->
+<!--[if gt IE 9]>   <html class="ie">                           <![endif]-->
+<!--!(IE)]><!-->    <html>                                      <!--<![endif]-->
+    <head>
+        <?php echo $this->getChildHtml('head'); ?>
+    </head>
+    <body<?php echo $_bodyClass; ?>>
+        <?php echo $this->getChildHtml('after_body_start'); ?>
+        <div id="wrapper">
+        <a id="top"></a>
+        <div class="page layout-2columns-right" id="page">
+            <?php echo $this->getChildHtml('global_notices'); ?>
+            <?php echo $this->getChildHtml('header'); ?>
+            <div id="page-body" class="body">                
+                <div id="page-body-section-01">
+                    <?php echo $this->getChildHtml('intro'); ?>
+                </div>
+                <div class="section-breadcrumbs"><div class="w"><?php echo $this->getChildHtml('breadcrumbs') ?></div></div>
+                <div id="page-body-section-02">
+                    <div class="w">
+                        <div class="row">
+                            <div class="col-main main">
+                                <?php echo $this->getChildHtml('global_messages') ?>
+                                <?php echo $this->getChildHtml('content'); ?>
+                            </div>
+                            <div class="col-right aside">
+                                <?php echo $this->getChildHtml('right'); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="page-body-section-03">
+                    <?php echo $this->getChildHtml('outro'); ?>
+                </div>
+            </div>
+            <?php echo $this->getChildHtml('footer_before') ?>
+            <?php echo $this->getChildHtml('footer'); ?>
+            <div id="device-info"></div>
+        </div><!-- /#page -->
+
+        <?php echo $this->getChildHtml('global_cookie_notice') ?>
+		</div>
+        <?php echo $this->getChildHtml('before_body_end'); ?>
+        <?php echo $this->getAbsoluteFooter(); ?>
+    </body>
+</html>

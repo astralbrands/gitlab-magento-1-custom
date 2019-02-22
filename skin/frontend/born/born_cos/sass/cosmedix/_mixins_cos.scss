@@ -1,0 +1,33 @@
+@mixin whitneyLight() {
+  font-family: "Whitney A", "Whitney B";
+  font-style: normal;
+  font-weight: 300;
+}
+@mixin whitneyBook() {
+  font-family: "Whitney A", "Whitney B";
+  font-style: normal;
+  font-weight: 400;
+}
+
+
+@mixin transparentButton($lineHeight, $fontSize, $color, $hoverColor) {
+  min-width: 144px;
+  line-height: $lineHeight;
+  font-size: $fontSize;
+  border: 2px solid $color;
+  padding: 0 20px;
+  font-weight: 500;
+  color: $color;
+  text-align: center;
+  text-transform: uppercase;
+  display: table;
+  margin: 0 auto;
+  transition: background-color $fast ease-out, color $fast ease-out;
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+    background: $color;
+    color: $hoverColor;
+  }
+}

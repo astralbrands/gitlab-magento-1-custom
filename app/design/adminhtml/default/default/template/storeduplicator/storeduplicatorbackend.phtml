@@ -1,0 +1,86 @@
+<img src="<?php echo $this->getSkinUrl('images/ajax-loader-tr.gif') ?>" id="faq-loader" style="display:none;"/>
+<div id="form">
+    <table border="1">
+        <tr>
+            <th width="60px">Steps</th>
+            <th width="250px"> <?php echo $this->__('Action') ?> </th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td> <?php echo $this->__('Create stores') ?> </td>
+            <td>
+                <button type="button" class="action"
+                        url='<?php echo Mage::helper("adminhtml")->getUrl("storeduplicator/adminhtml_storeduplicatorbackend/createstores"); ?>'> <?php echo $this->__('Create store') ?></button>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td colspan="2"><?php echo $this->__('Assign products to new store manually') ?> </td>
+        </tr>
+
+        <!-- <tr> Re-index All </td><td><button type="button" class="action" url='<?php echo Mage::helper("adminhtml")->getUrl("storeduplicator/adminhtml_storeduplicatorbackend/reindex"); ?>'>Re-index</button></td><td><span></span></td></tr> -->
+
+        <tr>
+            <td>3</td>
+            <td> <?php echo $this->__('Assign CMS pages') ?> </td>
+            <td>
+                <button type="button" class="action"
+                        url='<?php echo Mage::helper("adminhtml")->getUrl("storeduplicator/adminhtml_storeduplicatorbackend/assigncms"); ?>'> <?php echo $this->__('Assign CMS pages') ?></button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>4</td>
+            <td> <?php echo $this->__('Assign Static Blocks') ?> </td>
+            <td>
+                <button type="button" class="action"
+                        url='<?php echo Mage::helper("adminhtml")->getUrl("storeduplicator/adminhtml_storeduplicatorbackend/assignblocks"); ?>'><?php echo $this->__('Assign Blocks') ?></button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>5</td>
+            <td> <?php echo $this->__('Assign Hooks') ?> </td>
+            <td>
+                <button type="button" class="action"
+                        url='<?php echo Mage::helper("adminhtml")->getUrl("storeduplicator/adminhtml_storeduplicatorbackend/assignhooks"); ?>'><?php echo $this->__('Assign Hooks') ?></button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>6</td>
+            <td> <?php echo $this->__('Copy store configuration') ?> </td>
+            <td>
+                <button type="button" class="action"
+                        url='<?php echo Mage::helper("adminhtml")->getUrl("storeduplicator/adminhtml_storeduplicatorbackend/copystoreconfig"); ?>'><?php echo $this->__('Copy store configuration') ?></button>
+            </td>
+        </tr>
+
+        <!-- <tr><td> Copy Category configuration </td><td><button type="button" class="action" url='<?php echo Mage::helper("adminhtml")->getUrl("storeduplicator/adminhtml_storeduplicatorbackend/copycategoryconfig"); ?>'>Copy Category configuration</button></td><td><span></span></td></tr>  -->
+
+        <tr>
+            <td>7</td>
+            <td colspan="2"><?php echo $this->__('Change store URLs manually') ?> </td>
+        </tr>
+
+
+        <table>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script> $.noConflict(); </script>
+<script type="text/javascript">
+    jQuery('.action').click(function () {
+        var url = jQuery(this).attr('url');
+        var obj = jQuery(this);
+        jQuery('#faq-loader').show();
+        jQuery.ajax({
+            url: url, success: function (result) {
+                jQuery('#faq-loader').hide();
+                alert('Done');
+            }
+        });
+    });
+</script>

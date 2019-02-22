@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <WeltPixel_AjaxSearch>
+            <version>0.0.1</version>
+        </WeltPixel_AjaxSearch>
+    </modules>
+    <global>
+        <helpers>
+            <weltpixel_ajaxsearch>
+                <class>WeltPixel_AjaxSearch_Helper</class>
+            </weltpixel_ajaxsearch>
+        </helpers>
+    </global>
+    <frontend>
+        <routers>
+            <weltpixel_ajaxsearch>
+                <use>standard</use>
+                <args>
+                    <module>WeltPixel_AjaxSearch</module>
+                    <frontName>ajaxsearch</frontName>
+                </args>
+            </weltpixel_ajaxsearch>
+        </routers>
+        <layout>
+            <updates>
+                <weltpixel_ajaxsearch>
+                    <file>weltpixel/ajaxsearch.xml</file>
+                </weltpixel_ajaxsearch>
+            </updates>
+        </layout>
+    </frontend>
+    <default>
+        <weltpixel_ajaxsearch>
+            <general>
+                <minimum_characters>3</minimum_characters>
+                <no_search_result_text>Sorry, no results were found.</no_search_result_text>
+                <show_image>1</show_image>
+                <image_width>50</image_width>
+                <image_height>50</image_height>
+                <max_result_nr>5</max_result_nr>
+                <more_result_message><![CDATA[<p class="more_result">For more results click: <a href="javascript:void(0)" id="advanced_search">here</a></p>]]></more_result_message>
+                <show_short_description>1</show_short_description>
+                <limit_short_description>0</limit_short_description>
+                <show_price>1</show_price>
+                <header_text>Search Header Text</header_text>
+                <footer_text>Search Footer Text</footer_text>
+            </general>
+        </weltpixel_ajaxsearch>
+    </default>  
+</config>

@@ -1,0 +1,287 @@
+@mixin mobile-nav-menu-cos() {
+  .nav-primary {
+    .level0.menu-active ul {
+      position: static;
+      width: 100%;
+    }
+    li.level0._open-submenu ul.level0 {
+      position: static;
+      padding: 0 0 15px 0;
+      width: 100%;
+    }
+    .nav-1 {
+      .child-level-0 {
+        width: 100%;
+        display: block;
+        min-width: initial;
+        & > li.level1 {
+          & > span {
+            display: inline-block;
+            line-height: 4.8rem;
+            font-weight: 500;
+            width: 90%;
+            padding: 0
+          }
+          & > ul.level1 .child-level-1 li.level2 > a {
+            padding: 0;
+            width: 100%;
+          }
+        }
+      }
+    }
+    .nav-3 {
+      .child-level-0 {
+        margin: 0;
+      }
+      &.menu-active > ul {
+        padding: 0;
+      }
+    }
+    .nav-5 .child-level-0,
+    .nav-6 .child-level-0 {
+      margin: 0;
+    }
+  }
+  #header-nav {
+    width: 283px;
+    border-right: none;
+    padding: 0;
+    .nav-primary > li.level0 {
+      border-bottom: 1px solid $block-border-color;
+      padding: 0 15px 0 25px;
+      .level-top,
+      & > span {
+        line-height: 4.8rem;
+        font-weight: 500;
+        width: 90%;
+        padding: 0;
+      }
+    }
+    .nav-primary li.level1 > a {
+      padding-left: 0;
+      @include gothamBook;
+      @include setFont(1.4rem, 4.8rem, 400);
+    }
+    .arrow {
+      position: relative;
+      left: 0;
+      height: 0;
+      width: 0;
+      &:before {
+        font-family: $icomoon;
+        font-size: 1.5rem;
+        content: "\e904";
+        border: none;
+        @include transform(rotate(-90deg));
+        position: absolute;
+        top: 5px;
+        right: 26px;
+      }
+    }
+    .nav-primary li {
+      margin-right: 0;
+    }
+    .nav-primary li.level1 > a.arrow {
+      line-height: 3rem;
+      &:before {
+        @include transform(rotate(-90deg));
+      }
+    }
+    li.level2 {
+      display: none;
+    }
+    .nav-primary li.level1._open-submenu li.level2 {
+      display: block;
+    }
+  }
+  ._menu-open #header-nav {
+    @include transform(translateX(0));
+  }
+  #header-nav ._open-submenu > .arrow:before {
+    @include transform(rotate(0deg));
+    top: -28px;
+    right: -26px;
+  }
+  #header-nav .nav-primary li.level1._open-submenu > a.arrow:before {
+    @include transform(rotate(0deg));
+    top: -28px;
+    right: -26px;
+  }
+  #header-nav .m-account-dropdown._open-submenu > .arrow:before {
+    right: -40px;
+  }
+  .skip-content__mobile-title {
+    border-bottom: 1px solid $block-border-color;
+    padding-left: 25px;
+  }
+  .site-menu {
+    width: 100%;
+    border: none;
+    padding: 0;
+
+  }
+  .m-account-dropdown,
+  .m-account-dropdown-main-link.mobile-only,
+  .wishlist-link-mobile,
+  .spa-finder-mobile,
+  .left-message-mobile,
+  .sale-label {
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid $block-border-color;
+    padding: 0 27px 0 25px;
+    font-weight: 500;
+    line-height: 4.8rem;
+  }
+  .spa-finder-mobile,
+  .left-message-mobile {
+    @include gothamBook;
+    @include setFont(1.2rem, 4.8rem, 400);
+    letter-spacing: normal;
+    &:hover {
+      text-decoration: none;
+    }
+    .icon-spa_finder,
+    .icon-one_page_order_form {
+      padding-right: 10px;
+      font-size: 2rem;
+      vertical-align: middle;
+    }
+  }
+  .m-account-dropdown-main-link {
+    line-height: 4.8rem;
+    font-weight: 500;
+    width: 90%;
+  }
+  .m-account-dropdown-link {
+    padding: 0;
+    @include gothamBook;
+    @include setFont(1.4rem, 4.8rem, 400);
+  }
+  .menu-links-wrap {
+    padding: 0;
+  }
+  .group-title {
+    @include gotham;
+    @include setFont(1.4rem, 4.8rem, 500);
+    letter-spacing: normal;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    &:after {
+      font-family: $icomoon;
+      font-size: 1.2em;
+      content: "\e904";
+      color: $black;
+      @include position(absolute, 0px 0px null null);
+      @include transform(rotate(-90deg));
+    }
+  }
+  .skip-link.skip-active {
+    @include transform(translateX(283px));
+    &:before {
+      @include hvrp();
+      width: 20px;
+      height: 3px;
+      background: $black;
+      @include transform-origin(center);
+      @include transform(rotate(45deg));
+      top: 6px;
+      z-index: 1;
+    }
+  }
+}
+
+@media only screen and (max-width: $b2b-mobile-menu){
+  .cos-b2b {
+    @include mobile-nav-menu-pur();
+    @include mobile-nav-menu-cos();
+    .spa-finder-mobile {
+      display: none;
+    }
+  }
+  ._menu-open .cos-b2b  #header-nav {
+    @include transform(translateX(0));
+  }
+}
+
+@media only screen and (max-width: $b2c-mobile-menu){
+  .cos-b2c {
+    @include mobile-nav-menu-pur();
+    @include mobile-nav-menu-cos();
+    .left-message-mobile,
+    .nav-primary .nav-1 .category-thumbnail {
+      display: none;
+    }
+    .nav-primary .nav-1 .child-level-0 > li.level1.nav-1-2 > span {
+      display: inline-block;
+    }
+  }
+  ._menu-open .cos-b2c  #header-nav {
+    @include transform(translateX(0));
+  }
+}
+
+@mixin mobile-width($width) {
+  .cos-b2b,
+  .cos-b2c {
+    #header-nav {
+      width: $width;
+    }
+    .skip-link.skip-active {
+      @include transform(translateX($width));
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .cos-b2b,
+  .cos-b2c {
+    .skip-nav {
+      display: inline-block;
+      color: $light-text-color;
+    }
+    #header-nav .nav-primary li.level1._open-submenu > a.arrow:before {
+      right: -12px;
+    }
+  }
+  @include mobile-width(723px);
+}
+
+@media only screen and (max-width: $mobile) and (min-width: $mobile-xs + 1px) {
+  .cos-b2b,
+  .cos-b2c {
+    #header-nav .nav-primary > li.level0 .level-top,
+    #header-nav .nav-primary > li.level0 > span,
+    .m-account-dropdown-main-link {
+      width: 95%;
+    }
+    .nav-primary .nav-1 .child-level-0 > li.level1 > span {
+      width: 96%;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-xs) {
+  @include mobile-width(435px);
+}
+
+@media only screen and (max-width: $mobile-nexus-6p) {
+  @include mobile-width(390px);
+}
+
+@media only screen and (max-width: $mobile-iphone-6-plus) {
+  @include mobile-width(369px);
+}
+
+@media only screen and (max-width: $mobile-iphone-6) {
+  @include mobile-width(330px);
+}
+
+@media only screen and (max-width: $mobile-galaxy-s6) {
+  @include mobile-width(315px);
+}
+
+@media only screen and (max-width: $mobile-iphone-5) {
+  @include mobile-width(275px);
+}

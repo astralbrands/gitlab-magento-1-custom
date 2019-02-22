@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<optionswatch_adminhtml_swatch_edit>
+		<reference name="head">
+			<action method="addItem"><type>skin_js</type><name>optionswatch/js/optionswatch.js</name><params/></action>
+		</reference>
+    </optionswatch_adminhtml_swatch_edit>
+	
+	<adminhtml_catalog_product_edit>
+		<reference name="head">
+			<action method="addItem"><type>skin_js</type><name>optionswatch/js/optionswatch.js</name><params/></action>
+		</reference>
+	
+	</adminhtml_catalog_product_edit>
+</layout>

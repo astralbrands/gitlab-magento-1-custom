@@ -1,0 +1,49 @@
+<?php 
+/*
+Fullbleed Field Attributes
+- Title
+- Description
+- CtaText
+- CtaLink
+- ProductSkus
+ */ 
+
+$hooks_helper = Mage::helper('borncmshooks');
+$object_collection = $this->getProductgridObjectCollection();
+?>
+
+
+<?php foreach ($object_collection as $block): ?>
+	<div class="title-block">
+		<?php if ($block->getTitle()): ?>
+			<h2 class="title"><?php echo $block->getTitle() ?></h2>
+		<?php endif ?>
+		<?php if ($block->getDescription()): ?>
+			<p class="description"><?php echo $block->getDescription() ?></p>
+		<?php endif ?>
+		<?php if ($block->getCtaText()): ?>
+			<a href="<?php echo Mage::getBaseUrl(). $block->getCtaLink(); ?>" class="btn">
+	            <span class="btn-text"><?php echo $block->getCtaText(); ?></span>
+	        </a>
+		<?php endif ?>
+	</div>
+	<?php if ($block->getProductSkus()): ?>
+		<div class="product-grid-wrapper" id="bestsellers">
+			<?php $_productSkuArray = explode(',', $block->getProductSkus()); ?>
+			<?php if (count($_productSkuArray) > 0): ?>
+				<?php $index=0; ?>
+				<?php foreach ($_productSkuArray as $_productSku): ?>
+					<div class="grid-item">
+						<div class="grid-item__outer <?php echo 'index-' . $index++ ?>">
+							<div class="grid-item__inner">
+								<div class="grid-item__middle">
+									<?php $this->renderProductView($hooks_helper->getProductBySku($_productSku)) ?>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php endforeach ?>
+			<?php endif ?>
+		</div>
+	<?php endif ?>
+<?php endforeach ?>

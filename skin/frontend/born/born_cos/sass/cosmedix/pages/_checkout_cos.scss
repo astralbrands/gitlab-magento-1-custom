@@ -1,0 +1,64 @@
+.checkout-onepage-index {
+  #checkout-progress-wrapper .block-title strong span {
+    letter-spacing: 0.15rem;
+    border-bottom-width: 2px;
+  }
+  #checkoutSteps {
+    .step-title {
+      border-bottom-width: 2px;
+      h2 {
+        letter-spacing: 0.15rem;
+      }
+
+    }
+    #checkout-payment-method-load .radio + label {
+      padding-left: 14px;
+    }
+  }
+  #co-shipping-method-form {
+    .button {
+      &:hover,
+      &:focus,
+      &:active {
+        box-shadow: none;
+        border-width: 2px;
+      }
+    }
+  }
+  .checkout-onepage-payment-additional-giftcardaccount {
+    .note a {
+      color: $light-text-color;
+      text-decoration: underline;
+    }
+  }
+  .usexist {
+    @include gotham;
+    @include setFont(1.3rem, 4.6rem, 500);
+    color: $light-text-color;
+    text-decoration: underline;
+  }
+  #dd_method_sagepaymentsprodirect {
+    padding-left: 45px;
+  }
+  #checkout-review-table {
+    .product-name {
+      color: $black;
+      @include gotham;
+      @include setFont(1.3rem, 2rem, 500);
+      letter-spacing: 0.18rem;
+      text-transform: uppercase;
+    }
+    .price {
+      @include whitneyBook;
+      @include setFont(1.6rem, 2rem, 400);
+      font-style: italic;
+    }
+  }
+}
+
+.checkout-onepage-success {
+  .buttons-set .button:hover {
+    border-width: 2px;
+  }
+}
+

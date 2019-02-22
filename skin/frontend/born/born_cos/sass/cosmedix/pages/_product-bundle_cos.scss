@@ -1,0 +1,107 @@
+.product-bundle-view {
+  .bundle-list-wrapper {
+    display: none;
+  }
+  #product-options-wrapper  {
+    display: block !important;
+    margin-bottom: 30px;
+  }
+  .shade-guide {
+    display: none;
+  }
+  .form-add-to-cart .product-name {
+    h2 {
+      @include setFont(3rem, 4.2rem, 200);
+      text-transform: none;
+      letter-spacing: -0.1rem;
+      margin-bottom: 20px;
+      .usage-icon {
+        display: none;
+      }
+    }
+    h4 {
+      @include gothamBook;
+      @include setFont(1.6rem, 2.4rem, 400);
+      margin-bottom: 10px;
+    }
+  }
+  .product-view .product-shop .price-box .price {
+    @include whitneyBook;
+    @include setFont(2rem, 2.4rem, 400);
+    font-style: italic;
+  }
+  .form-add-to-cart .product-options {
+    display: block;
+    padding: 0;
+  }
+  .bundle-item {
+    padding: 15px;
+    text-align: left;
+    &:last-child {
+      border-bottom: none;
+    }
+    .product-img {
+      float: left;
+      margin-right: 15px;
+      .img {
+        max-width: 100px;
+      }
+    }
+    .right-block {
+      overflow: hidden;
+      .product-title {
+        @include setFont(1.4rem, 2.4rem, 500);
+        letter-spacing: 0.15rem;
+        text-transform: uppercase;
+        margin-bottom: 0;
+      }
+      .product-subtitle {
+        @include gothamBook;
+        @include setFont(1.2rem, 2.4rem, 400);
+        letter-spacing: 0.15rem;
+        text-transform: uppercase;
+      }
+      .usage-icon {
+        margin-left: -3px;
+      }
+      .shade {
+        margin-bottom: 0;
+        margin-top: 10px;
+      }
+    }
+  }
+  .ampreorder_note {
+    margin-left: 15px;
+  }
+}
+
+
+@media only screen and (max-width: $mobile-m) {
+  .product-bundle-view {
+    .form-add-to-cart .product-name  {
+      h2 {
+        font-size: 2.2rem;
+        line-height: 2.4rem;
+        margin-bottom: 10px;
+      }
+      h4 {
+        font-size: 1.4rem;
+        line-height: 3rem;
+      }
+    }
+
+    .bundle-item {
+      .right-block {
+        .product-title {
+          font-size: 1.3rem;
+          line-height: 1.8rem;
+          margin-bottom: 4px;
+        }
+        .product-subtitle {
+          line-height: 1.8rem;
+          margin-bottom: 2px;
+        }
+      }
+    }
+  }
+}

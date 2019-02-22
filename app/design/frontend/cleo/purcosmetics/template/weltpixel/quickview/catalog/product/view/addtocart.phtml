@@ -1,0 +1,43 @@
+<?php
+$_product = $this->getProduct();
+$_qty = $this->getProductDefaultQty() * 1;
+?>
+
+<?php if ($_product->isSaleable()): ?>
+    <div class="add-to-cart">
+        <?php if ( ! $_product->isGrouped()): ?>
+            <div class="labels <?php echo $_product->getSize() ? 'narrow' : '' ?>">
+                <div class="qty-label">
+                    <label for="qty"><?php echo $this->__('Qty:'); ?></label>
+                </div>
+                <?php if ($_product->getSize()): ?>
+                    <div class="size-label">
+                        <label class="size"><?php echo $this->__('Size') ?></label>
+                    </div>
+                <?php endif; ?>
+            </div>
+            <div class="wrappers <?php echo $_product->getSize() ? 'narrow' : '' ?>">
+                <div class="qty-wrapper">
+                    <select name="qty" id="qty" class="qty">
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
+                            <option value="<?php echo $i ?>"><?php echo $i; ?></option>
+                        <?php endfor; ?>
+                    </select>
+                </div>
+                <?php if ($_product->getSize()): ?>
+                    <div class="size-wrapper">
+                        <div class="product-attribute size">
+                            <?php echo $_product->getAttributeText('size'); ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+        <div class="actions">
+            <button type="button" class="button" id="product-addtocart-button" onclick="productAddToCartForm.submit(this)">
+                <span><i class="icon icon-shopping-cart"></i><?php echo $this->__('Add to Cart'); ?></span>
+            </button>
+        </div>
+        <?php echo $this->getChildHtml('', true, true); ?>
+    </div>
+<?php endif; ?>

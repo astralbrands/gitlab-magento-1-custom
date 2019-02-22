@@ -1,0 +1,41 @@
+<?php 
+$_product = $this->getProduct();
+    if($_product->isConfigurable()){ 
+$_shadeAttribute = $this->getShadeAttribute();
+$_shadeInfo = $this->getShadeInfo();
+$_defaultShade = $this->getDefaultShade($_shadeInfo);
+?>
+<div class="shadeBlock shade">
+    <input type="hidden" name="super_attribute[<?php echo $_shadeAttribute->getAttributeId() ?>]" id="attribute<?php echo $_shadeAttribute->getAttributeId() ?>" value="<?php echo $_defaultShade['shadeValue'] ?>">
+    <div class="shade-top shadeTop">
+        <div class="shadeBlockCheckedText shade-checked-text">
+            NEW <?php echo $_shadeAttribute->getLabel() ?> :
+            <span class="shade-id"><?php echo $_defaultShade['sku'] ?></span> 
+            <span class="shade-label"><?php echo $_defaultShade['label'] ?></span> 
+            <span class="shade-product-skus"></span>
+        </div>
+    </div>
+    <ul class="shade-list shadeList">
+        <?php foreach ($_shadeInfo as $key => $shade): ?>
+        <li class="shade-item">
+            <a class="shade-option-item <?php echo $this->getStockClass($shade) . ' ' . $this->getDefaultSwatchClass($shade)?> " data-swatch="<?php echo $shade['sku'] ?>" data-id="<?php echo $shade['shadeValue'] ?>" data-instock="<?php echo $this->getStockClass($shade)?>" data-label="<?php echo $shade['label'] ?>" <?php echo $this->getProductImageHtml($shade) ?>>
+            <img class="shade-option-item-image " src="<?php echo $shade['optionSwatch'] ?>">
+            </a>
+        </li>
+        <?php endforeach ?>
+        <span data-coherent-modal="" data-modal-name="shade-guide" class="shade-guide" data-modal-binded="true">
+                shade guide 
+            <span class="icon-shadefinder">
+                <span class="path1"></span>
+                <span class="path2"></span>
+                <span class="path3"></span>
+                <span class="path4"></span>
+                <span class="path5"></span>
+            </span>
+        </span>
+        <div class="clear"></div>
+    </ul>
+</div>
+<?php 
+    } 
+?>

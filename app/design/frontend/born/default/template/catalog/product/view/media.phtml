@@ -1,0 +1,121 @@
+<?php
+$_product = $this->getProduct();
+$_helper = $this->helper('catalog/output');
+$product_data = $_product->getData();
+$sku = $_product->getSku();
+$pda = '{}';
+$imageCount = count($this->getGalleryImages());
+$i=0; 
+$media_element = '';
+$media_block = '';
+$splash_element = '';
+$splash_block = '';
+$product_block = '';
+    if( $_product->getTypeId() == 'configurable' ){
+    $configurable = true;    
+    }else{
+    $configurable = false;
+    }
+$media_image_array = array();
+$c = 0;
+echo "<script>";
+    if( $_product->getTypeId() == 'configurable' ){
+    $mediaGalleryImages = $this->getAllSimpleGalleryImages($_product);
+        foreach($mediaGalleryImages AS $key => $val){
+        $media_image_array['product_'.$key] = $val;
+        $c++;
+        }
+    echo "var product_media_object = {};";
+    echo "product_media_object.sku = '".$sku."';";
+    echo "product_media_object.mediaImages = JSON.parse('".json_encode($media_image_array, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE)."');";
+    }else{
+    echo "var product_media_object = {};";
+    echo "product_media_object.sku = '".$sku."';";        
+        $mediaGalleryImages = $this->getGalleryImages();
+        foreach($mediaGalleryImages AS $_image){
+        $media_image_array['product_'.$sku][] = array('file' => $this->getGalleryImageUrl($_image), 'label' => $_product->getName(), 'exclude' => 0, 'position' => $c);
+        $c++;
+        }        
+    echo "product_media_object.mediaImages = JSON.parse('".json_encode($media_image_array, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE)."');";      
+    }
+echo "</script>";
+    foreach ($this->getGalleryImages() as $_image){
+        if($i == 0 || !$configurable){
+    $_dataLabel = $this->getDataLabel($_image->getLabel());    
+        if ($_product->getData('video_image') == $_image->getFile()){
+        $media_element .='<div id="media-video-slot-'.$i.'" class="media-image-slot"> ';       
+        $media_element .= '<a id="media-video-link-'.$i.'" class="media-image-link" data-slide-index="'.$i.'" href data-image-id="'.$_image->getValueId().'" data-label="'.$_dataLabel.'" >';
+        $media_element .= '<img id="media-video-"'.$i.'" class="media-image" product-image-block-element-1" src="'.$this->getGalleryImageUrl($_image).'" video-src="'.$_product->getVideoLink().'"/>';
+        $media_element .= '</a>';
+        $media_element .='</div>'; 
+        
+        $splash_element .='<div id="splash-media-video-slot-'.$i.'" class="splash-media-image-slot"> ';       
+        $splash_element .= '<a id="splash-media-video-link-'.$i.'" class="splash-media-image-link" data-slide-index="'.$i.'" href data-image-id="'.$_image->getValueId().'" data-label="'.$_dataLabel.'" >';
+        $splash_element .= '<img id="splash-media-video-"'.$i.'" class="splash-media-image" splash-product-image-block-element-1" src="'.$this->getGalleryImageUrl($_image).'" video-src="'.$_product->getVideoLink().'"/>';
+        $splash_element .= '</a>';
+        $splash_element .='</div>';         
+        
+        
+        }else{
+        $media_element .='<div id="media-image-slot-'.$i.'" class="media-image-slot"> ';    
+        $media_element .= '<a id="media-image-link-'.$i.'" class="media-image-link" data-slide-index="'.$i.'" href data-image-id="'.$_image->getValueId().'" data-label="'.$_dataLabel.'" >';
+        $media_element .= '<img id="media-image-'.$i.'" class="media-image" product-image-block-element-2" src="'.$this->getGalleryImageUrl($_image).' " alt="'.$_product->getName().'" />';
+        $media_element .= '</a>';
+        $media_element .='</div>';     
+        
+        $splash_element .='<div id="splash-media-image-slot-'.$i.'" class="splash-media-image-slot"> ';    
+        $splash_element .= '<a id="splash-media-image-link-'.$i.'" class="splash-media-image-link" data-slide-index="'.$i.'" href data-image-id="'.$_image->getValueId().'" data-label="'.$_dataLabel.'" >';
+        $splash_element .= '<img id="splash-media-image-'.$i.'" class="splash-media-image" splash-product-image-block-element-2" src="'.$this->getGalleryImageUrl($_image).' " alt="'.$_product->getName().'" />';
+        $splash_element .= '</a>';
+        $splash_element .='</div>';
+        
+        }
+        }
+    $i++;
+    }
+    
+    if ($imageCount > 0){ 
+        $media_block .= '<div id="media-image-vertical-slider-panel" class="sliderv media-image-panel">'; 
+        $media_block .= $media_element;
+        $media_block .= '</div>';      
+    }
+?>
+
+<div id="product-media-splash-display" class="product-media-splash-display">
+<?php
+echo $media_block;
+?>    
+    <div class="product-media-splash-gallery">
+            <img id="image-main"
+             class="product-media-splash-gallery-image visible"
+             src="<?php echo $this->helper('catalog/image')->init($_product, 'image') ?>"
+             alt="<?php echo $this->escapeHtml($this->getImageLabel()) ?>"
+             title="<?php echo $this->escapeHtml($this->getImageLabel()); ?>" />
+
+    </div>
+</div>
+<?php
+    if ($imageCount > 0){ 
+        $splash_block .= '<div id="media-image-horizontal-slider-panel" class="sliderh horizontal-media-image-panel">'; 
+        $splash_block .= $splash_element; 
+        $splash_block .= '</div>';        
+    }
+echo $splash_block;
+?> 
+<div id="media_template_element" class="hide-image">
+<?php    
+        $media_template  ='<div id="default-media-video-slot-0" class="media-image-slot"> ';       
+        $media_template .= '<a id="media-video-link-0" class="media-image-link" data-slide-index="" href data-image-id="" data-label="" >';
+        $media_template .= '<img id="media-video-0" class="media-image" product-image-block-element-1" src="" video-src="" alt="" />';
+        $media_template .= '</a>';
+        $media_template .='</div>';             
+        $media_template .='<div id="default-media-image-slot-0" class="media-image-slot"> ';    
+        $media_template .= '<a id="media-image-link-0" class="media-image-link" data-slide-index="0" href data-image-id="" data-label="" >';
+        $media_template .= '<img id="media-image-0" class="media-image" product-image-block-element-2" src="" alt="" />';
+        $media_template .= '</a>';
+        $media_template .='</div>';
+
+    echo $media_template;
+?>            
+</div>
+<?php echo $this->getChildHtml('after'); ?>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Born_FreightCollect>
+            <version>1.0.0</version>
+        </Born_FreightCollect>
+    </modules>
+    <global>
+    	<helpers>
+            <born_freightcollect>
+                <class>Born_FreightCollect_Helper</class>
+            </born_freightcollect>
+        </helpers>
+		<models>
+			<born_freightcollect>
+				<class>Born_FreightCollect_Model</class>
+			</born_freightcollect>
+		</models>
+	</global>
+	<default>
+		<carriers>
+			<freightcollect>
+				<active>0</active>
+				<sallowspecific>0</sallowspecific>
+				<model>Born_FreightCollect_Model_FreightCollect</model>
+				<title>Freight Collect</title>
+				<specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
+			</freightcollect>
+		</carriers>
+	</default>
+</config>

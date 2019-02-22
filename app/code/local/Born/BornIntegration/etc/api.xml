@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <api>
+        <resources>
+            <sales_order_shipment>
+                <title>Shipment API</title>
+                <model>sales/order_shipment_api</model>
+                <acl>sales/order/shipment</acl>
+                <methods>
+                    <sageCreate translate="title" module="sales">
+                        <title>Create new shipment for order</title>
+                        <acl>sales/order/shipment/sageCreate</acl>
+                    </sageCreate>
+                </methods>
+            </sales_order_shipment>
+            <sales_order_invoice>
+                <title>Invoice API</title>
+                <model>sales/order_invoice_api</model>
+                <acl>sales/order/invoice</acl>
+                <methods>
+                    <sageCreate translate="title" module="sales">
+                        <title>Create new invoice for order</title>
+                        <acl>sales/order/invoice/sageCreate</acl>
+                    </sageCreate>
+                </methods>
+            </sales_order_invoice>
+            <customer>
+                <model>customer/customer_api</model>
+                <title>Customer API</title>
+                <acl>customer</acl>
+                <methods>
+                    <sageUpdate translate="title" module="customer">
+                        <title>Sage Customized Update customer data</title>
+                        <acl>customer/sageUpdate</acl>
+                    </sageUpdate>
+                    <sageCreate translate="title" module="customer">
+                        <title>Sage Customized Create customer data</title>
+                        <acl>customer/sageCreate</acl>
+                    </sageCreate>
+                </methods>
+            </customer>
+            <customer_address>
+                <model>customer/address_api</model>
+                <title>Customer Address API</title>
+                <acl>customer/address</acl>
+                <methods>
+                    <sageCreate translate="title" module="customer">
+                        <title>Create customer address</title>
+                        <acl>customer/address/sageCreate</acl>
+                    </sageCreate>
+                    <sageUpdate translate="title" module="customer">
+                        <title>Update customer address data</title>
+                        <acl>customer/address/sageUpdate</acl>
+                    </sageUpdate>
+                </methods>
+            </customer_address>
+            <catalog_product>
+                <title>Product API</title>
+                <model>catalog/product_api</model>
+                <acl>catalog/product</acl>
+                <methods>
+                    <sageCreate translate="title" module="catalog">
+                        <title>Create new product from Sage</title>
+                        <acl>catalog/product/sageCreate</acl>
+                    </sageCreate>
+                    <sageUpdate translate="title" module="catalog">
+                        <title>Update new product from Sage</title>
+                        <acl>catalog/product/sageUpdate</acl>
+                    </sageUpdate>
+                </methods>
+            </catalog_product>
+        </resources>
+        <resources_alias>
+            <order_shipment>sales_order_shipment</order_shipment>
+            <order_invoice>sales_order_invoice</order_invoice>
+            <product>catalog_product</product>
+        </resources_alias>
+        <v2>
+            <resources_function_prefix>
+                <order_shipment>salesOrderShipment</order_shipment>
+                <order_invoice>salesOrderInvoice</order_invoice>
+                <customer>customerCustomer</customer>
+                <customer_address>customerAddress</customer_address>
+                <product>catalogProduct</product>
+            </resources_function_prefix>
+        </v2>
+    </api>
+</config>

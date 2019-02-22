@@ -1,0 +1,51 @@
+<?php
+if($_SERVER['HTTP_HOST']=='www.purcosmetics.com'){
+$uri = 'www.purcosmetics.com';
+$domainstyle = 'pur';
+}elseif($_SERVER['HTTP_HOST']=='www.cosmedix.com'){
+$uri = 'www.cosmedix.com';
+$domainstyle = 'cos';
+}else{
+$uri = 'www.purcosmetics.com';
+$domainstyle = 'pur';
+}
+if(!isset($_COOKIE['visitor'])){
+$visitor = true;
+}
+
+if(isset($_COOKIE['visitor'])){
+$visitor = true;
+}
+//Mage::getModel(‘core/cookie’)->set("visitor", true, time()+86400,'/',$uri,0,0);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+
+<?php echo $this->getChildHtml('head') ?>
+</head>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <div class="page">
+        <?php echo $this->getChildHtml('header') ?>
+        <div class="main-container col2-right-layout">
+            <div class="main">
+                <?php echo $this->getChildHtml('breadcrumbs') ?>
+                <div class="col-main">
+                    <?php echo $this->getChildHtml('global_messages') ?>
+                    <?php echo $this->getChildHtml('content') ?>
+                </div>
+                <div class="col-right sidebar"><?php echo $this->getChildHtml('right') ?></div>
+            </div>
+        </div>
+        <?php echo $this->getChildHtml('footer_before') ?>
+        <?php echo $this->getChildHtml('footer') ?>
+        <?php echo $this->getChildHtml('global_cookie_notice') ?>
+        <?php echo $this->getChildHtml('before_body_end') ?>
+    </div>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>

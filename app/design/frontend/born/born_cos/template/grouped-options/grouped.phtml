@@ -1,0 +1,255 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Grouped product data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ * @see Born_Package_Block_Catalog_Product_View_Type_Cos_Grouped
+ */
+?>
+<?php $this->setPreconfiguredValue(); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php $_associatedProducts = $this->getAssociatedProducts(); ?>
+<?php $_hasAssociatedProducts = count($_associatedProducts) > 0; ?>
+<?php if ($this->helper('groupedoptions')->isProductAvailable($_product) && $_hasAssociatedProducts): ?>
+    <?php if ($this->getShowInStockMessage()): ?>
+        <p class="availability in-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('In stock') ?></span></p>
+    <?php endif ?>
+<?php else: ?>
+    <p class="availability out-of-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('Out of stock') ?></span></p>
+<?php endif; ?>
+<?php echo $this->getChildHtml('product_type_data_extra') ?>
+<div class="data-table grouped-items-table" id="super-product-table">
+
+    <?php if ($_hasAssociatedProducts): ?>
+    <?php $index = 0;  ?>
+        <?php foreach ($_associatedProducts as $_item): ?>
+            <?php $_finalPriceInclTax = $this->helper('tax')->getPrice($_item, $_item->getFinalPrice(), true) ?>
+            <?php 
+            $_formId = "product_addtocart_form_".$_item->getId();
+            $_formJsVar = "productAddToCartForm".$_item->getId();
+            ?>
+        <form action="<?php echo $this->helper('checkout/cart')->getAddUrl($_item) ?>" method="post" id="<?php echo $_formId ?>"<?php if($_item->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?> class="clear">
+              <div class="no-display">
+                    <input type="hidden" name="product" value="<?php echo $_item->getId() ?>" />
+	            <input type="hidden" id="product-id" name="product-id-value" value="<?php echo $_item->getId() ?>" />
+	        </div>  
+            <div class="data-table-item" id="product-<?php echo $_item->getId()?>">
+                <div class="data-table-item-top">
+                    <div class="data-table-item-top-content">
+                        <span class="data-table-item-step"><?php echo $this->__("Step") . ' ' . ++$index . '.'?></span>
+
+                        <?php if ($_purpose = $this->getPurpose($_item)): ?>
+                            <span class="data-table-item-custom-label"><?php echo $_purpose ?></span>
+                        <?php endif ?>
+
+                        <?php if ($_item->getUsage()): ?>
+                            <?php if ($_usageClass = Mage::helper('born_package/catalog_product_data')->getUsageIconClass($_item->getUsage())): ?>
+                                <div class="usage-icon">
+                                    <span class="<?php echo $_usageClass ?>"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></span>
+                                </div>
+                            <?php endif ?>
+                        <?php endif ?>
+
+                        <p class="data-table-item-text"><?php echo $this->htmlEscape($_item->getName()) ?></p>
+                        <?php if ($_item->getSubtitle()): ?>
+                            <p class="data-table-item-text"><?php echo $this->htmlEscape($_item->getSubtitle())?></p>
+                        <?php endif ?>
+                    </div>
+                    <div class="data-table-item-top-img-container">
+                        <!--<img src="http://placehold.it/103x103" alt="" class="data-table-item-img">-->
+                        <img class="fg" src="<?php echo Mage::helper('catalog/image')->init($_item, 'thumbnail')->resize(103, 103); ?>" alt="<?php echo $_item->getName() ?>" />
+                        <a href="<?php echo $_item->getProductUrl() ?>" class="data-table-item-more"><?php echo $this->__('View More Details') ?></a>
+                    </div>
+                </div>
+                <div class="data-table-item-about">
+                    <?php if ($this->helper('groupedoptions')->getCanShowProductPrice($this, $_product)): ?>
+                        <div class="data-table-item-price">
+                            <?php if ($this->helper('groupedoptions')->getCanShowProductPrice($this, $_item)): ?>
+                                <?php echo $this->getPriceHtml($_item, true) ?>
+                                <?php echo $this->getTierPriceHtml($_item) ?>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+<!--                    <span class="data-table-item-price">{$38.00}</span>-->
+<!--                    <span class="data-table-item-size">{0.34 fl oz}</span>-->
+                </div>
+                <div class="data-table-item-bottom">
+
+                    <div class="selects-attributes">
+                        <div class="selects-attribute-wrapper">
+                            <?php if ($_product->isSaleable()): ?>
+                                <?php if ($_item->isSaleable()) : ?>
+                                    <div class="qty-attribute">
+                                        <label class="label-text-up">Qty</label>
+                                        <div class="qty-wrapper">
+                                            <button class="qty-minus"><span class="icon-minus"></span> </button>
+                                            <input class="qty-input" name="qty" id="qty" type="text" data-cart-item-id="<?php echo $this->jsQuoteEscape($_product->getSku()) ?>" value="1">
+                                            <button class="qty-plus"><span class="icon-plus"></span> </button>
+                                        </div>
+                                    </div>
+                                <?php else: ?>
+                                    <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                            <?php if($_item->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE): ?>
+                                <div class="size-attribute" id="size-attribute-<?php echo $_item->getId() ?>">
+                                    <label class="label-text-up">Size</label>
+                                    <select name="super_attribute[<?php echo $sizeAttributeId ?>]" id="attribute<?php echo $sizeAttributeId ?>" class="super-attribute-select">
+                                        <option><?php echo $this->__('Choose an Option...') ?></option>
+                                    </select>
+                                </div>
+                                    <?php $jsonConfig = $this->getLayout()->createBlock('catalog/product_view_type_configurable')->setProduct($_item)->getJsonConfig() ?>
+                                <script type="text/javascript">
+                                    var spConfig = new CustomConfig(<?php echo $jsonConfig ?>, 'size-attribute-<?php echo $_item->getId() ?>');
+                                </script>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <!--<button type="button" title="" class="data-table-item-cart-btn" onclick="productAddToCartForm.submit(this)">
+                        <?php echo 'add to bag' ?>
+                    </button>-->
+                    <?php if($_product->isSaleable()): ?>
+                    <?php if($_item->isSaleable()): ?>
+                    <button type="button" title="<?php echo $this->__('Add to Bag') ?>" class="data-table-item-cart-btn" onclick="<?php echo $_formJsVar ?>.submit(this)"><?php echo $this->__('Add to Bag') ?></button>
+<!--                    <a href="--><?php //echo $_item->getProductUrl() ?><!--" class="data-table-item-more">--><?php //echo $this->__('View More Details') ?><!--</a>-->
+                            <script type="text/javascript">
+                                //<![CDATA[
+                                var <?php echo $_formJsVar ?> = new VarienForm('<?php echo $_formId ?>');
+                                <?php echo $_formJsVar ?>.submit = function(){
+                                    if (this.validator.validate()) {
+                                        //this.form.submit();
+                                        $j.post('<?php echo $this->getUrl('bornajax/checkout_cart/add') ?>', $('<?php echo $_formId ?>').serialize(true), function(data, status, xhr){
+                                            if (status !== 'success') {
+                                                alert('server error');
+                                                return;
+                                            }
+
+                                            var json = $j.parseJSON(data);
+                                            var timeForMinicart = 400; //ms
+                                            var popup = $j('#popup-minicart');
+
+                                            if ( json.status === "SUCCESS" || json.status === 1 || json.success ) {
+                                                $j('#toggleMiniCartBtn').find('.count').html(json.cart_qty);
+                                                $j('#toggleMiniCartBtn').removeClass('no-count');
+                                                $j('.show-on-mobile.skip-cart').find('.count').html(json.cart_qty);
+                                                $j('.show-on-mobile.skip-cart').removeClass('no-count');
+                                                if (window.innerWidth > 768) {
+                                                    $j('#popup-minicart').html(json.result_html);
+                                                    $j('.overlay').fadeOut('slow');
+                                                    $j('.overlay').find('.modal').hide();
+                                                    popup.addClass('slide-minicart').css('display', 'block')
+                                                        .addClass('skip-active')
+                                                        .animate({'right': 0}, timeForMinicart);
+                                                    $j('body').css('overflow', 'scroll');
+                                                    $j('body').addClass('overlay-menu');
+
+                                                    $j('.menu-overlay-element, span.btn-minicart-toggle').on('click', function () {
+                                                        popup.animate({ "right": "-425" }, timeForMinicart,
+                                                            function () {
+                                                                popup.removeClass('skip-active');
+                                                                $j('body').removeClass('overlay-menu');
+                                                            });
+                                                    });
+                                                } else {
+                                                    $j(button).addClass('added-successfully');
+                                                    $j(button).find('span').text('added to bag');
+                                                }
+                                                button.disabled = false;
+                                            }else{
+                                                alert("No");
+                                            }
+                                        });
+                                    }
+                                }.bind(<?php echo $_formJsVar ?>);
+                                //]]>
+                            </script>
+                            <?php else: ?>
+                                <?php if(Mage::helper('core')->isModuleEnabled('Amasty_Xnotif')): ?>
+                                    <?php echo Mage::helper('amxnotif')->getStockAlert(Mage::getModel('catalog/product')->load($_item->getId())); ?>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                            <?php endif ?>
+                </div>
+            </div>
+        </form>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <tr>
+            <td colspan="<?php if ($_product->isSaleable()): ?>4<?php else : ?>3<?php endif; ?>"><?php echo $this->__('No options of this product are available.') ?></td>
+        </tr>
+    <?php endif; ?>
+
+<!---->
+<?php //if ($_hasAssociatedProducts): ?>
+<!--        --><?php //$index = 0;  ?>
+<!--    --><?php //foreach ($_associatedProducts as $_item): ?>
+<!--        --><?php //$_finalPriceInclTax = $this->helper('tax')->getPrice($_item, $_item->getFinalPrice(), true) ?>
+<!--        <tr>-->
+<!--            <td class="a-left"><h2 class="table-heading">--><?php //echo $this->__("Step") . ' ' . ++$index?><!--</h2></td>-->
+<!--            <td class="a-left"><a href="--><?php //echo $_item->getProductUrl() ?><!--">--><?php //echo $this->htmlEscape($_item->getName()) ?><!--</a></td>-->
+<!--            <td class="b-left"><a href="--><?php //echo $_item->getProductUrl() ?><!--">--><?php //echo $this->__('View More Details') ?><!--</a></td>-->
+<!--            --><?php //if ($this->helper('groupedoptions')->getCanShowProductPrice($this, $_product)): ?>
+<!--            <td class="a-right">-->
+<!--                --><?php //if ($this->helper('groupedoptions')->getCanShowProductPrice($this, $_item)): ?>
+<!--                --><?php //echo $this->getPriceHtml($_item, true) ?>
+<!--                --><?php //echo $this->getTierPriceHtml($_item) ?>
+<!--                --><?php //endif; ?>
+<!--            </td>-->
+<!--            --><?php //endif; ?>
+<!--            --><?php //if ($_product->isSaleable()): ?>
+<!--            <td class="a-center">-->
+<!--            --><?php //if ($_item->isSaleable()) : ?>
+<!--                <select class="qty" name="super_group[--><?php //echo $_item->getId() ?><!--]" data-cart-item-id="--><?php //echo $this->jsQuoteEscape($_item->getSku()) ?><!--"  title="--><?php //echo $this->__('Qty') ?><!--" >-->
+<!--                --><?php //#TODO: Verify allowable max qty with client. ?>
+<!--                    --><?php //for ($i=1; $i <= $this->getMaxQty(); $i++): ?>
+<!--                        <option value="--><?php //echo $i ?><!--">--><?php //echo $i ?><!--</option>-->
+<!--                    --><?php //endfor; ?>
+<!--                </select>-->
+<!--            --><?php //else: ?>
+<!--                <p class="availability out-of-stock"><span>--><?php //echo $this->__('Out of stock') ?><!--</span></p>-->
+<!--            --><?php //endif; ?>
+<!--            </td>-->
+<!--            --><?php //endif; ?>
+<!--        </tr>-->
+<!--        --><?php //if ($_item->isSuper() || $_item->getHasOptions()) : ?>
+<!--        <tr class="grouped-options-row">-->
+<!--             Display Product Options if available-->
+<!--            <td colspan="3" class="grouped-options-cell">-->
+<!--                --><?php //echo $this->getChild('groupedoptions')->setProduct($_item)->toHtml(); ?>
+<!--            </td>-->
+<!--        </tr>-->
+<!--        --><?php //endif; ?>
+<!--    --><?php //endforeach; ?>
+<!--    --><?php //else: ?>
+<!--       <tr>-->
+<!--           <td colspan="--><?php //if ($_product->isSaleable()): ?><!--4--><?php //else : ?><!--3--><?php //endif; ?><!--">--><?php //echo $this->__('No options of this product are available.') ?><!--</td>-->
+<!--       </tr>-->
+<?php //endif; ?>
+
+</div>
+<!--<script type="text/javascript">decorateTable('super-product-table')</script>-->

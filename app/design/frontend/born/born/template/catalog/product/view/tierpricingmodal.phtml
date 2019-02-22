@@ -1,0 +1,33 @@
+<?php if ($this->getShowCustomTierPricingGuide()): ?>
+	<?php $_product = $this->getProduct(); ?>
+	<?php $_tierPrices = $this->getTierPrices(); ?>
+	<?php if (count($_tierPrices)): ?>
+		<div class="tier-pricing-guide">
+			<a data-coherent-modal data-modal-name="tierpricing-modal">
+				<?php $_tierPricingText = Mage::getStoreConfig('born_package/product_detail_page/tiered_pricing_text') ? Mage::getStoreConfig('born_package/product_detail_page/tiered_pricing_text') : 'Learn More About Tiered Pricing' ?>
+				<?php echo $_tierPricingText ?>
+			</a>
+			<div class="guide-modal">
+				<div class="modal-header">
+					<?php echo $this->getChildHtml('tier_pricing_guide') ?>
+				</div>
+				<div class="modal-body">
+					<?php $_baseImage = $this->helper('catalog/image')->init($_product, 'small_image') ?>
+					<img class="product-image <?php echo 'id-' . $_product->getId()?>" src="<?php echo $_baseImage ?>">
+					<div class="product-info">
+						<a href="<?php echo $_product->getProductUrl() ?>"><?php echo $_product->getName() ?></a>
+						<?php if ($_product->getTypeId() != Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE): ?>
+							<p class="product-sku"><?php echo '#' . $_product->getSku() ?></p>
+						<?php endif ?>
+					</div>
+
+					<?php if ($_tierPricingBlockHtml = $this->getTierPricingBlockHtml($_tierPrices)): ?>
+						<div class="tier-pricing">
+							<?php echo $_tierPricingBlockHtml ?>
+						</div>
+					<?php endif ?>	
+				</div>
+			</div>
+		</div>
+	<?php endif ?>
+<?php endif ?>

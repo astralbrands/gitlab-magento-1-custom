@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Xcoupon
+ */
+-->
+<config>
+    <modules>
+        <Amasty_Xcoupon>
+            <active>true</active>
+            <codePool>local</codePool>
+            <edition>enterprise</edition>
+        </Amasty_Xcoupon>
+    </modules>
+</config>

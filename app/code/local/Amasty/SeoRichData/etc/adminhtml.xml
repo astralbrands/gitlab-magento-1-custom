@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoRichData
+ */
+-->
+<!--
+    Copyright (c) 2013 Amasty (http://www.amasty.com)
+-->
+<config>
+    <menu>
+        <cms>
+            <children>
+                <amseotoolkit>
+                    <children>
+                        <amseorichdata translate="title" module="amseorichdata">
+                            <title>Rich Data</title>
+                            <action>adminhtml/system_config/edit/section/amseorichdata</action>
+                            <sort_order>14</sort_order>
+                        </amseorichdata>
+                    </children>
+                </amseotoolkit>
+            </children>
+        </cms>
+    </menu>
+
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <cms>
+                        <children>
+                            <amseotoolkit>
+                                <children>
+                                    <amseorichdata translate="title" module="amseorichdata">
+                                        <title>Rich Data</title>
+                                        <sort_order>14</sort_order>
+                                    </amseorichdata>
+                                </children>
+                            </amseotoolkit>
+                        </children>
+                    </cms>
+
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <amseorichdata translate="title" module="amseorichdata">
+                                        <title>SEO Rich Data</title>
+                                    </amseorichdata>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <translate>
+        <modules>
+            <Amasty_SeoRichData>
+                <files>
+                    <default>Amasty_SeoRichData.csv</default>
+                </files>
+            </Amasty_SeoRichData>
+        </modules>
+    </translate>
+</config> 

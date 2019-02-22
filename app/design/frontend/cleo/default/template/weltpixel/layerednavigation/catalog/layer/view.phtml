@@ -1,0 +1,65 @@
+<?php
+$showClearAll = $this->helper('weltpixel_layerednavigation')->showClearAll();
+
+$appliedFilters = array();
+
+$_layer = $this->getLayer();
+if (isset($_layer)) :
+    $_filters = $_layer->getState()->getFilters();
+    foreach ($_filters as $_filter):
+        $appliedFilters[] = $_filter->getFilter()->getRequestVar();
+    endforeach;
+endif;
+
+?>
+<?php if($this->canShowBlock()): ?>
+<?php if ($this->helper('weltpixel_layerednavigation')->isMobileOrTablet()) : ?>
+<div class="filter-button trigger-sign">
+            <i class="icon-filter"></i>
+            <?php echo $this->__('SHOP BY'); ?>
+            &nbsp;
+            <span class="toggle-sign">
+                <i class="icon-line-plus"></i>
+            </span>
+        </div>
+<?php endif; ?>
+    <div class="block block-layered-nav">
+    <?php if ($this->helper('weltpixel_layerednavigation')->isMobileOrTablet()) : ?>
+ <div class="filters-wrapper">
+    <?php endif ?>
+        <div class="block-content">
+            <?php
+            //do not show the filters on mobile or table
+            if (!$this->helper('weltpixel_layerednavigation')->isMobileOrTablet()) : ?>
+                <?php echo $this->getStateHtml() ?>
+            <?php endif; ?>
+            <?php if ($showClearAll && $this->getLayer()->getState()->getFilters()): ?>
+                <div class="actions"><a href="<?php echo $this->getClearUrl() ?>"><?php echo $this->__('Clear All') ?></a></div>
+            <?php endif; ?>
+            <?php if($this->canShowOptions()): ?>
+                <dl id="narrow-by-list">
+                    <?php $_filters = $this->getFilters() ?>
+                    <?php foreach ($_filters as $_filter): ?>
+                    <?php if($_filter->getItemsCount()): ?>
+                        <dt class="filter-title trigger-sign <?php if (!empty($appliedFilters) && in_array($_filter->_filter->getRequestVar(), $appliedFilters)) : echo 'filter-applied' ; endif; ?>">
+                			<span>
+                				<?php echo $this->__($_filter->getName()) ?>
+                			</span>
+                			<span class="toggle toggle-right">
+                				<i class="icon-line-minus"></i>
+                			</span>
+    					</dt>
+                        <dd class="trigger-content">
+                        	<?php echo $_filter->getHtml() ?>
+                        </dd>
+                    <?php endif; ?>
+                    <?php endforeach; ?>
+                </dl>
+                <script type="text/javascript">decorateDataList('narrow-by-list')</script>
+            <?php endif; ?>
+        </div>
+        <?php if ($this->helper('weltpixel_layerednavigation')->isMobileOrTablet()) : ?>
+            </div>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>

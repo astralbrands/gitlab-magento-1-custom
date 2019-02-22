@@ -1,0 +1,41 @@
+<?php $_product = $this->getProduct() ?>
+
+<!--  facebook open graph -->
+<?php if (Mage::getStoreConfig('weltpixel_schema/facebook_opengraph/enable')): ?>
+        <meta property="og:site_name" content="<?php echo Mage::app()->getStore()->getName(); ?>" />
+        <meta property="og:type" content="og:product" />
+        <meta property="og:title" content=" <?php echo htmlentities(strip_tags($_product->getName())) ?>" />
+        <meta property="og:image" content="<?php echo $this->getNonCachedImage($_product) ?>" />
+        <meta property="og:description" content="<?php echo htmlentities(strip_tags($this->getProductDescription($_product))) ?>" />
+        <meta property="og:url" content="<?php echo htmlentities(strip_tags(/* $_product->getProductUrl() */ $this->helper('core/url')->getCurrentUrl())) ?>" />
+        <meta property="og:price:amount" content="<?php echo $this->getProductPrice() ?>" />
+        <meta property="og:price:currency" content="<?php echo $this->getCurrencyCode() ?>" />
+        <meta property="og:availability" content="<?php echo ($_product->isAvailable()
+            ? 'in stock' : 'out of stock') ?>" />
+<?php endif ?>
+<!--  facebook open graph -->
+
+<!--  twitter product cards-->
+<?php if (Mage::getStoreConfig('weltpixel_schema/twitter_productcards/enable')): ?>
+        <meta name="twitter:card" content="product" />
+        <meta name="twitter:domain" content="<?php echo Mage::getBaseUrl() ?>" />
+        <meta name="twitter:site" content="@<?php echo Mage::getStoreConfig('weltpixel_schema/twitter_productcards/twittersite') ?>" />
+        <meta name="twitter:creator" content="@<?php echo Mage::getStoreConfig('weltpixel_schema/twitter_productcards/twittercreator') ?>" />
+        <meta name="twitter:title" content="<?php echo htmlentities(strip_tags($_product->getName())) ?>" />
+        <meta name="twitter:description" content="<?php echo htmlentities(strip_tags($this->getProductDescription($_product))) ?>" />
+        <meta name="twitter:image" content="<?php echo $this->getNonCachedImage($_product) ?>" />
+        <meta name="twitter:data1" content="<?php echo  $this->getCurrencyCode()  ?><?php echo $this->getProductPrice()  ?>" />
+        <meta name="twitter:label1" content="PRICE" />
+        <meta name="twitter:data2" content="<?php echo Mage::getStoreConfig('shipping/origin/country_id') ?>" />
+        <meta name="twitter:label2" content="LOCATION" />
+<?php endif ?>
+<!--  twitter product cards-->
+
+
+<!-- rich pins -->
+<?php $richPinsContent = "false"; ?>
+<?php if (Mage::getStoreConfig('weltpixel_schema/pinterest_richpins/enable')): ?>
+<?php $richPinsContent = 'enabled'; ?>
+<?php endif;  ?>
+<meta name="pinterest-rich-pin" content="<?php echo $richPinsContent ?>" />
+<!-- rich pins -->

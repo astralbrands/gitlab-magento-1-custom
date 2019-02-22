@@ -1,0 +1,48 @@
+<?php 
+/*
+Section Field Attributes
+- SectionId: 1,2,3
+- SectionTitle: text
+- SectionType: 3,6
+ */ 
+$hooks_helper = Mage::helper('borncmshooks');
+$section_object_collection = $this->getSectionObjectCollection();
+?>
+
+<?php foreach ($section_object_collection as $section): ?>
+	<?php if ($section->getSectionId()): ?>
+		<div class="section<?php echo '-' . $section->getSectionId()?>">
+	<?php else: ?>
+		<div class="section<?php echo '-1';//temp fix?>">
+	<?php endif ?>
+		<?php if ($section->getTitle()): ?>
+			<h2 class="section-title"> <?php echo $section->getTitle() ?></h2>
+		<?php endif ?>
+
+		<?php if ($section->getCtaText()): ?>
+			<div class="shop-link">
+				<a href="<?php echo Mage::getBaseUrl(). $section->getCtaLink(); ?>">
+		            <span class="btn-text"><?php echo $section->getCtaText(); ?></span>
+		        </a>
+	        </div>
+		<?php endif ?>
+
+		<?php if ($slots_object_collection = $this->getSlots($section->getSectionId())): ?>
+			<div class="slots">
+			<?php $index = 1 ?>
+				<?php foreach ($slots_object_collection as $slot): ?>
+					<?php $this->renderSubWidgets("slot", $slot, $index++) ?>
+				<?php endforeach; ?>
+			</div>
+		<?php endif ?>
+		<?php //Used for Homepage mobile?>
+		<?php if ($section->getCtaTextMobile()): ?>
+			<div class="shop-link mobile-button">
+				<a href="<?php echo Mage::getBaseUrl(). $section->getCtaLinkMobile(); ?>">
+					<span class="btn-text"><?php echo $section->getCtaTextMobile(); ?></span>
+				</a>
+			</div>
+		<?php endif ?>
+
+	</div>
+<?php endforeach ?>

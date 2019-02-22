@@ -1,0 +1,48 @@
+@mixin top-search-mobile($search-height: 45px) {
+  .form-search {
+    top: $search-height;
+    .form-search__input {
+      height: $search-height;
+      font-size: 1.6rem;
+      padding: 0 10px;
+      width: calc(100% - 40px);
+      @include placeholder {
+        color: $white;
+      }
+    }
+    &__close-btn {
+      width: 41px;
+      height: $search-height;
+      .icon-ex {
+        line-height: 4.5rem;
+      }
+    }
+    &:after {
+      right: $search-height;
+      font-size: 2.5rem;
+      height: 44px;
+      top: 8px;
+    }
+  }
+  .form-search-wrap {
+    order: 3;
+  }
+  #header-search {
+    padding: 0;
+    .form-search-toggle-btn {
+      height: $search-height;
+    }
+  }
+  .form-search-toggle-btn {
+    width: 40px;
+    height: $search-height;
+    .icon-search {
+      line-height: $search-height;
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet-m) {
+  @include top-search-mobile();
+}
+

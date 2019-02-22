@@ -1,0 +1,71 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition End User License Agreement
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magento.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     born_default
+ * @copyright Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license http://www.magento.com/license/enterprise-edition
+ */
+
+/**
+ * Shoping cart sidebar
+ *
+ * @see Mage_Checkout_Block_Cart_Sidebar
+ */
+
+?>
+
+<?php
+$_cartQty = $this->getSummaryCount();
+if(empty($_cartQty)) {
+	$_cartQty = 0;
+}
+?>
+<style>
+li.item.odd {
+    height: 150px;
+}    
+li.item.even {
+    height: 150px;
+}    
+div#minicart-list-block{
+overflow-y: scroll;
+}
+</style>
+<div class="header-minicart">
+	<!--<a href="--><?php //echo $this->helper('checkout/cart')->getCartUrl(); ?><!--"-->
+	<a id="toggleMiniCartBtn" class="skip-cart <?php if($_cartQty <= 0): ?>no-count<?php endif; ?>">
+		<span class="icon-shopping_bag"></span>
+		<span class="count"><?php echo $_cartQty; ?></span>
+	</a>
+
+	<div id="popup-minicart" class="skip-content block-cart slide-minicart-style">
+		<?php echo $this->getChildHtml('minicart_content');?>
+	</div>
+</div>
+
+
+<!-- Mobile ONLY -->
+<div class="header-minicart show-on-mobile skip-cart <?php if($_cartQty <= 0): ?>no-count<?php endif; ?>">
+	<a href="<?php echo Mage::helper('checkout/cart')->getCartUrl() ?>">
+		<span class="icon-shopping_bag"></span>
+		<span class="count"><?php echo $_cartQty; ?></span>
+	</a>
+</div>

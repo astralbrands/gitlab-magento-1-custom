@@ -1,0 +1,11 @@
+<config>
+    <modules>
+        <WeltPixel_MegaMenu>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Catalog />
+            </depends>
+        </WeltPixel_MegaMenu>
+    </modules>
+</config>

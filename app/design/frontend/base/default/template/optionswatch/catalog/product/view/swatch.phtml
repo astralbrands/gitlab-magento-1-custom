@@ -1,0 +1,38 @@
+<!-- swatch.phtml -->
+<?php
+$_product = $this->getProduct();
+$mediaUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK);
+    if($_product->isConfigurable()):
+    $configurable_sku = $_product->getSku();
+    Mage::log('configurable_sku: '.$configurable_sku);
+    $_shadeAttribute = $this->getShadeAttribute();
+    $_shadeInfo = $this->getShadeInfo();
+    $_defaultShade = $this->getDefaultShade($_shadeInfo);
+    $swatches = $this->getSwatches($configurable_sku);
+?>
+
+<div id="optionswatch" class="swatch-container">
+    <div class="swatch-information">
+        <div class="swatch-sku"></div>
+        <div class="swatch-name"></div>
+    </div>
+<?php
+$i = 1;
+    foreach($swatches AS $swatch):
+        if($i == 1){ $checked = $swatch['option_id']; }
+?>
+    <div id="swatch-container-row-<?php echo $i; ?>" class="swatch-container-row">
+        <div class="swatch-container-item">
+            <a id="swatch-container-image-<?php echo $swatch['option_id']; ?>" class="swatch-container-link <?php if($i == 1){ echo 'checked'; } ?>" title="<?php echo $swatch['option_value']; ?>">
+                <img id="swatch-container-image-<?php echo $swatch['option_id']; ?>" data-node="<?php echo $swatch['option_id']; ?>" class="swatch-container-image" src="<?php echo $swatch['image_file']; ?>" />
+            </a>
+        </div>
+    </div>
+<?php
+    $i++;
+    endforeach;
+?>
+</div>
+<?php
+    endif;
+?>

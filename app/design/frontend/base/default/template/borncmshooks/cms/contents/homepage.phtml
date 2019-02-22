@@ -1,0 +1,120 @@
+<?php $helper = Mage::helper('package/catalog');
+
+    $hooks_model = Mage::getModel('borncmshooks/borncmshooks');
+    $hooks_helper = Mage::helper('borncmshooks');
+
+    // @$code helps us link this block with the cms hook entity.
+    // @$code is set in the name attribute in the update layout where this block is used
+    $welcomeBanner = new Varien_Object;
+    $welcomeBannerData = $hooks_model->getRow('welcome_banner');
+    if(isset($welcomeBannerData['welcome_banner'])){
+    	$welcomeBanner->setData($welcomeBannerData['welcome_banner']);
+    }
+    $featuredProduct = new Varien_Object;
+    $featuredProductData = $hooks_model->getRow('featured_product');
+    if(isset($featuredProductData['featured_product'])){
+    	$featuredProduct->setData($featuredProductData['featured_product']);
+    }    
+    $deals = new Varien_Object;
+    $dealsData = $hooks_model->getRow('deals');
+    if(isset($dealsData['deals'])){
+    	$deals->setData($dealsData['deals']);
+    }    
+    
+?>
+<section class="welcome" style="background-image: url('<?php echo $hooks_helper->getImageUrl($welcomeBanner->getData('image')); ?>');">
+  <span>
+    <h3><?php echo $welcomeBanner->getData('title')?></h3>
+    <h6><?php echo $welcomeBanner->getData('sub_title')?></h6>
+    <p><?php echo $welcomeBanner->getData('description')?></p>
+    <a href="<?php echo $welcomeBanner->getData('cta_link')?>" class="button"><?php echo $welcomeBanner->getData('cta_text')?></a>
+  </span>
+</section>
+<section class="good-stuff">
+  <span>
+    <h3><?php echo $featuredProduct->getData('title')?></h3>
+    <p><?php echo $featuredProduct->getData('description')?></p>
+  </span>
+  <div class="elements">
+    <h3><?php echo $featuredProduct->getData('elements')?></h3>
+  </div>
+  <div class="carousel">
+    <div class="frame">
+      <ul class="overflow">
+
+    	<?php foreach ($helper->getFeaturedProducts() as $product):?>
+    		<li>
+          <a href="<?php echo $product->getProductUrl() ?>"  title="<?php echo $this->stripTags($product->getName()) ?>" ><img src="<?php  echo $this->helper('catalog/image')->init($product, 'small_image')->resize(200); ?>" alt="<?php echo $this->stripTags($product->getName()) ?>" border="0" /></a>
+        </li>
+      <?php endforeach ?>
+
+      </ul>
+    </div>
+    <ul class="nav">
+      <li class="left"></li>
+      <li class="right"></li>
+    </ul>
+  </div>
+  
+  <a class="learn-more" href="<?php echo $featuredProduct->getData('cta_link')?>"><?php echo $featuredProduct->getData('cta_text')?></a>
+
+</section>
+<section class="deals">
+  <span>
+    <h3><?php echo $deals->getData('title')?></h3>
+    <p><?php echo $deals->getData('description')?></p>
+    <a href="<?php echo $deals->getData('cta_link')?>" class="button white"><?php echo $deals->getData('cta_text')?></a>
+  </span>    
+</section>
+<section class='shopping' id="start-shopping">
+  <h3><?php echo $this->__('Start Shopping')?></h3>
+  <div class='top'>
+  <?php $featuredCategories = $helper->getFeaturedCategories(); ?>
+  <?php $max = count($featuredCategories); ?>
+  <?php 
+    if ($max%2 != 0) {
+      array_pop($featuredCategories);
+    }
+  ?>
+  <?php foreach ( $featuredCategories as $featuredCategory ):?>
+    <span>
+      <span>
+    		<?php $thumbnailImage = $helper->getCategoryThumbnail($featuredCategory);?>
+    		<?php if($thumbnailImage): ?>
+    			<a href="<?php echo $featuredCategory->getUrl() ?>"><img src="<?php echo $thumbnailImage ?>" /></a>
+    		<?php else: ?>
+    			<a href="<?php echo $featuredCategory->getUrl() ?>"><img src="http://placehold.it/485x350" /></a>
+    		<?php endif ?>
+        <p>
+          <strong><?php echo $featuredCategory->getName(); ?></strong>
+        </p>
+        <?php if ($featuredCategory->getDescription()): ?>
+        <p>
+          <?php echo $featuredCategory->getDescription()?>        
+        </p>
+        <?php endif ?>
+      </span>
+    </span>
+  <?php endforeach?>
+  </div>
+  <div class="bottom">
+  <?php $topCategories = $helper->getFeaturedBottomCategories()?>
+  <?php $i = 0; ?>
+  <?php foreach ( $topCategories as $topCategory ):?>
+    <?php ++$i; ?>
+    <span>
+      <span>
+    		<?php $thumbnailImage = $helper->getCategoryThumbnail($topCategory);?>
+    		<?php if($thumbnailImage): ?>
+    			<a href="<?php echo $topCategory->getUrl() ?>"><img src="<?php echo $thumbnailImage ?>" /></a>
+    		<?php else: ?>
+    			<a href="<?php echo $topCategory->getUrl() ?>"><img src="http://placehold.it/235x200" /></a>
+    		<?php endif ?>
+        <p>
+      		<strong><?php echo $topCategory->getName()?></strong>
+        </p>
+      </span>
+    </span>
+  <?php endforeach?>
+  </div>
+</section>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <WeltPixel_Weltpixel>
+            <active>true</active>
+            <codePool>community</codePool>
+        </WeltPixel_Weltpixel>
+    </modules>
+</config>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Idevaffiliate_Idevaffiliate>
+      <version>0.1.0</version>
+    </Idevaffiliate_Idevaffiliate>
+  </modules>
+  <global>
+    <helpers>
+      <idevaffiliate>
+        <class>Idevaffiliate_Idevaffiliate_Helper</class>
+      </idevaffiliate>
+    </helpers>
+	<models>
+	  <idevaffiliate>
+		<class>Idevaffiliate_Idevaffiliate_Model</class>
+		<resourceModel>idevaffiliate_mysql4</resourceModel>
+	  </idevaffiliate>
+	</models>
+    <events>
+	  <checkout_onepage_controller_success_action> <!-- identifier of the event we want to catch -->
+        <observers>
+          <checkout_onepage_controller_success_action_handler> <!-- identifier of the event handler -->
+            <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>idevaffiliate/observer</class> <!-- observers class alias -->
+            <method>track</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </checkout_onepage_controller_success_action_handler>
+        </observers>
+      </checkout_onepage_controller_success_action>
+    </events>
+  </global>
+</config> 

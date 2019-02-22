@@ -1,0 +1,108 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Xnotif
+ */
+?>
+<?php $productId = Mage::registry('product')->getId()?>
+<script type="text/javascript">
+    function send_alert_email_price(url, button)
+    {
+        var f = $('product_addtocart_form');
+        var productId = button.id.replace(/\D+/g,"");
+        var notification = $('amxnotif_guest_email_price-' + productId);
+        if(notification){
+            notification.addClassName("validate-email required-entry");
+        }
+        var gdpr = $('amxnotif-gdpr-price-' + productId);
+        if(gdpr){
+            gdpr.addClassName("required-entry");
+        }
+
+        var validator = new Validation(f);
+        if (validator.validate()) {
+            f.action = url;
+            f.id = 'am_product_addtocart_form';
+            f.submit();
+            button.remove();
+            return true;
+        }
+        if(notification){
+            notification.removeClassName("validate-email required-entry");
+        }
+        if(gdpr){
+            gdpr.removeClassName("required-entry");
+        }
+        return false;
+    }
+
+    function checkItPrice(evt,url, button) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode == 13) {
+            return send_alert_email_price(url, button);
+        }
+        return true;
+    }
+
+    function disableButtonPriceByGdpr(productId) {
+        if ($('amxnotif-gdpr-price-' + productId).checked) {
+            $('button-email-send-price-' + productId).disabled = false;
+        } else {
+            $('button-email-send-price-' + productId).disabled = true;
+        }
+    }
+</script>
+<div class="amxnotif-block-price" class="clear: both;">
+    <label style="color: #2F2F2F;font-weight: bold; float:none;" >
+        <?php echo $this->__('Sign up for price alert'); ?>
+    </label>
+    <br/>
+    <div class="amxnotif-input-fields">
+        <input type="text"
+               name="guest_email_price"
+               id="amxnotif_guest_email_price-<?php echo $productId;?>"
+               onKeyPress="return checkItPrice(
+                   event,
+                   '<?php echo $this->escapeHtml(Mage::helper('amxnotif')->getEmailUrl('price'));?>',
+                   $('button-email-send-price-<?php echo $productId;?>')
+               )"
+               class="input-text"
+               size="30"
+        />
+        <input type="hidden" name="product_id" value="<?php echo $productId;?>" />
+        <input type="hidden" name="type" value="email" />
+        <input type="hidden" name="parent_id" value="<?php echo Mage::registry('par_product_id')?>" />
+        <input type="hidden"
+               name="<?php echo Mage_Core_Controller_Front_Action::PARAM_NAME_URL_ENCODED ?>"
+               value="<?php echo Mage::helper('amxnotif')->getEncodedUrl()?>"
+        />
+        <?php if (Mage::helper('amxnotif')->isGdprEnabled()) : ?>
+            <div>
+                <input type="checkbox"
+                       name="amxnotif-gdpr-price"
+                       title="<?php echo $this->__('GDPR'); ?>"
+                       value="1"
+                       id="amxnotif-gdpr-price-<?php echo $productId; ?>"
+                       class="checkbox amgdpr-checkbox"
+                       onclick="disableButtonPriceByGdpr(<?php echo $productId; ?>)"
+                       required
+                />
+                <label for="amxnotif-gdpr-price-<?php echo $productId; ?>" class="amgdpr-label"><?php echo $this->__(Mage::helper('amxnotif')->getGdprText()); ?></label>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <div class="amxnotif-button-container">
+        <button type="button"
+            <?php echo Mage::helper('amxnotif')->isGdprEnabled() ? ' disabled="disabled" ' : '';?>
+                id="button-email-send-price-<?php echo $productId;?>"
+                class="button btn-cart amcart-ignore"
+                onclick="send_alert_email_price(
+                        '<?php echo $this->escapeHtml(Mage::helper('amxnotif')->getEmailUrl('price'));?>',
+                        this)" title="<?php echo $this->__('Subscribe'); ?>">
+            <span><span><?php echo $this->__('Subscribe'); ?></span></span>
+        </button>
+    </div>
+</div>

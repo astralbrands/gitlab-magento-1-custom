@@ -1,0 +1,65 @@
+<?php 
+/*
+Promo Field Attributes
+- TextColor: black, white
+- BackgroundImage
+- Icon Image
+- Text Background Color Hex - hex value
+- Title
+- Description
+- CtaText
+- CtaLink
+- Featured Image
+ */ 
+
+$hooks_helper = Mage::helper('borncmshooks');
+$object_collection = $this->getPromoObjectCollection();
+?>
+<?php foreach ($object_collection as $block): ?>
+	<?php $_textFontColor = ($block->getTextFontColor()) ? $block->getTextFontColor() : 'white'; ?>
+	<div class="promo-wrapper">
+		<?php if ($block->getBackgroundImage()): ?>
+			<div class="promo-background">
+				<img class="background-img" src="<?php echo $hooks_helper->getImageUrl($block->getBackgroundImage()); ?>">
+			</div>
+			<div class="promo-content">
+                    <div class="promo-content__wrapper">
+                        <div class="promo-item text-block <?php echo $_textFontColor ?>" <?php if ($block->getTextBackgroundColorHex()) { echo 'style="background-color: ' . $block->getTextBackgroundColorHex() .'"';} ?>>
+                            <div class="promo-item__outer">
+                                <div class="promo-item__inner">
+                                    <div class="promo-item__middle">
+                                        <?php if ($block->getIconImage()): ?>
+                                            <img class="icon-img" src="<?php echo $hooks_helper->getImageUrl($block->getIconImage()); ?>">
+                                        <?php endif ?>
+                                        <?php if ($block->getTitle()): ?>
+                                            <h2 class="title"><?php echo $block->getTitle() ?></h2>
+                                        <?php endif ?>
+                                        <?php if ($block->getDescription()): ?>
+                                            <p class="description"><?php echo $block->getDescription() ?></p>
+                                        <?php endif ?>
+                                        <?php if ($block->getCtaText()): ?>
+                                            <a href="<?php echo Mage::getBaseUrl(). $block->getCtaLink(); ?>" class="btn">
+                                                <span class="btn-text"><?php echo $block->getCtaText(); ?></span>
+                                            </a>
+                                        <?php endif ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php if ($block->getFeaturedImage()): ?>
+                            <div class="promo-item featured-block">
+                                <div class="promo-item__outer">
+                                    <div class="promo-item__inner">
+                                        <div class="promo-item__middle">
+                                            <img class="featured-img" src="<?php echo $hooks_helper->getImageUrl($block->getFeaturedImage()); ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif ?>
+                    </div>
+                </div>
+		<?php endif ?>
+	</div>
+</div>
+<?php endforeach ?>

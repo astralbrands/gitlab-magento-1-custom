@@ -1,0 +1,39 @@
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+
+<?php $position = $_product->getAttributeText('current_product_position'); ?>
+<?php if($position && $_product->getRoutineSkus()) : ?>
+    <?php $routineSkus = $this->orderRoutines(); ?>
+    <?php $counter = 1; ?>
+    <?php if(sizeof($routineSkus) === 3) : ?>
+        <div class="routines">
+            <?php if ($_product->getRoutineMainTitle()): ?>
+                <h2 class="routines__title"><?php echo $_product->getRoutineMainTitle() ?></h2>
+            <?php endif ?>
+            <div class="routines__wrap">
+                <?php foreach($routineSkus as $sku) : ?>
+                    <?php if($productRoutine = Mage::getModel('catalog/product')->loadByAttribute('sku', $sku)) : ?>
+                        <div class="routine">
+                            <div class="routine-outer <?php if ($_product->getSku() == $sku) {echo 'current-product';} ?>">
+                                <p class="routine-title"><?php echo $_product->getData('routine_title' . $counter); ?></p>
+                                <div class="routine-product">
+                                    <span class="number"><?php echo $counter++; ?></span>
+                                    <div class="routines__product-inner">
+                                        <a href="<?php echo $this->getUrl($productRoutine->getUrlKey()) ?>" title="<?php echo $productRoutine->getName(); ?>"><img class="alt" src="<?php echo $this->helper('catalog/image')->init($productRoutine, 'small_image'); ?>" width="" height="" alt="<?php $this->stripTags($productRoutine->getName(), null, true) ?>" /></a>
+                                        <p class="routines__product-name"><a href="<?php echo $this->getUrl($productRoutine->getUrlKey()) ?>" title="<?php echo $productRoutine->getName(); ?>"><?php echo $productRoutine->getName(); ?></a></p>
+                                        <span><?php echo $this->getPriceHtml($productRoutine); ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+            <?php if($_product->getRoutineCtaText() && $_product->getRoutineCtaLink()) : ?>
+                <a class="routines__button" href="<?php echo $_product->getRoutineCtaLink(); ?>">
+                    <?php echo $_product->getRoutineCtaText(); ?>
+                </a>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

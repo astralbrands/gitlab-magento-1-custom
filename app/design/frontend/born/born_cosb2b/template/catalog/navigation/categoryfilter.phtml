@@ -1,0 +1,59 @@
+<?php
+
+// $_categories = $this->getChildrenByLevel();
+
+// $_levelThreeCategory = $this->getLevelThreeCategory();
+// $_categories = $_levelThreeCategory->getChildrenCategories();
+// 
+
+$_customCategory = $this->getCustomCategory();
+$_categories = null;
+if ($_customCategory) {
+    $_categories = $_customCategory->getChildrenCategories();
+}
+
+?>
+<?php //if (sizeof($_categories)): ?>
+<!--    <ul class="category-filters" id="category-filters">-->
+<!--        <span class="title">--><?php //echo $this->__('Categories') ?><!--</span>-->
+<!--        --><?php //$index = 0; ?>
+<!---->
+<!--        --><?php //if ($_firstCategory = $this->getFirstCategory($_customCategory)): ?>
+<!--            <li class="--><?php //echo 'index-' . $index++ ?><!--">-->
+<!--                <a href="--><?php //echo $this->getCategoryUrl($_firstCategory) ?><!--"-->
+<!--                --><?php //if ($this->isCategoryActive($_firstCategory)): ?><!-- class="current"--><?php //endif; ?><!-->
+<!--                --><?php //echo $this->escapeHtml($_firstCategory->getName()) ?>
+<!--                </a>-->
+<!--            </li>-->
+<!--        --><?php //endif ?>
+<!--        --><?php //foreach ($_categories as $_category): ?>
+<!--            --><?php //if($_category->getIsActive() && $_category->getProductCount() > 0): ?>
+<!--            <li class="--><?php //echo 'index-' . $index++ ?><!--">-->
+<!--                <a class="category-link" href="--><?php //echo $this->getCategoryUrl($_category) ?><!--"--><?php //if ($this->isCategoryActive($_category)): ?><!-- class="current"--><?php //endif; ?><!-->
+<!--                    --><?php //echo $this->escapeHtml($_category->getName()) ?>
+<!--                </a>-->
+<!--            </li>-->
+<!--            --><?php //endif; ?>
+<!--        --><?php //endforeach ?>
+<!--     </ul>-->
+<?php //endif ?>
+
+<?php if (is_iterable($_categories) && sizeof($_categories)): ?>
+    <div class="category-select">
+        <label class="title"><?php echo $this->__('Categories') ?></label>
+        <select  onchange="setLocation(this.value)" id="category-select" data-placeholder="All Products">
+            <?php if ($_firstCategory = $this->getFirstCategory($_customCategory)): ?>
+                <option <?php if ($this->isCategoryActive($_firstCategory)): ?> selected="selected"<?php endif; ?> value="<?php echo $this->getCategoryUrl($_firstCategory) ?>">
+                    <?php echo $this->escapeHtml($_firstCategory->getName()) ?>
+                </option>
+            <?php endif ?>
+            <?php foreach ($_categories as $_category): ?>
+                <?php if($_category->getIsActive() && $_category->getProductCount() > 0): ?>
+                    <option <?php if ($this->isCategoryActive($_category)): ?> selected="selected" <?php endif; ?> value="<?php echo $this->getCategoryUrl($_category) ?>">
+                        <?php echo $this->escapeHtml($_category->getName()) ?>
+                    </option>
+                <?php endif; ?>
+            <?php endforeach ?>
+        </select>
+    </div>
+<?php endif ?>

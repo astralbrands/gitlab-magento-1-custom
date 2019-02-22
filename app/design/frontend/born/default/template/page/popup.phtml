@@ -1,0 +1,35 @@
+<?php
+if($_SERVER['HTTP_HOST']=='www.purcosmetics.com'){
+$uri = 'www.purcosmetics.com';
+$domainstyle = 'pur';
+}elseif($_SERVER['HTTP_HOST']=='www.cosmedix.com'){
+$uri = 'www.cosmedix.com';
+$domainstyle = 'cos';
+}else{
+$uri = 'www.purcosmetics.com';
+$domainstyle = 'pur';
+}
+if(!isset($_COOKIE['visitor'])){
+$visitor = true;
+}
+
+if(isset($_COOKIE['visitor'])){
+$visitor = true;
+}
+//Mage::getModel(‘core/cookie’)->set("visitor", true, time()+86400,'/',$uri,0,0);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+
+<?php echo $this->getChildHtml('head') ?>
+</head>
+<body class="page-popup<?php echo $this->getBodyClass()?$this->getBodyClass() : ''?>">
+<div>
+    <?php echo $this->getChildHtml('after_body_start') ?>
+    <?php echo $this->getChildHtml('content') ?>
+    <?php echo $this->getChildHtml('before_body_end') ?>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>

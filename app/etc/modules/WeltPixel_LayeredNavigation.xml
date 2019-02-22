@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <WeltPixel_LayeredNavigation>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <WeltPixel_Mobiledetect />
+                <WeltPixel_Setup />
+            </depends>
+        </WeltPixel_LayeredNavigation>
+    </modules>
+</config>

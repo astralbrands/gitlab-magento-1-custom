@@ -1,0 +1,227 @@
+title,root_template,meta_keywords,meta_description,identifier,content_heading,content,is_active,layout_update_xml,custom_theme,custom_root_template,custom_layout_update_xml,custom_theme_from,custom_theme_to
+"404 Not Found",one_column,"Page keywords","Page description",weltpixel_no-route,,"
+<style scoped>
+.search-form { width:50%; margin: 0 auto; }
+.form .field { display: block; width: 80%;  background: none; margin-right: 1%; padding: 8px 18px; padding: 0.53333rem 1.2rem; border: 1px solid #818181; float: left;}
+.form .submit { padding: 9px 18px; padding: 0.6rem 1.2rem;  color: white; text-align: center; }
+</style>
+
+<h1 style=""text-align: center; padding-top: 100px; font: 200px/200px 'Brandon Medium';"">404</h1>
+<p style=""text-align:center; text-transform:uppercase; font: 30px/20px 'Brandon Medium';"">Oops! That page can’t be found.</p>
+<p style=""text-align:center; padding-top: 50px; text-transform:uppercase; font: 16px/20px 'Brandon Medium';"">This may be because of a mistyped URL, faulty referral or out-of-date search engine listing. <br> You might want to check that URL again or head over to our <a href=""{{config path=""web/unsecure/base_url""}}"">homepage or maybe do a search?</a>
+<br/>
+<br/>
+<div class=""search-form"">
+	<div class=""form"">
+		<form method=""get"" id=""searchform"" class=""form-search"" action=""{{config path=""web/unsecure/base_url""}}/catalogsearch/result/"" role=""search"">
+			
+			<input type=""text"" class=""field input-medium search-query"" name=""q"" value="""" id=""q"" placeholder=""Search …"">
+			<button class=""button submit"" name=""submit"" id=""searchsubmit"">Search</button>
+		</form>
+	</div>				
+</div>
+<br/>
+<br/>
+<p style=""text-align:center; padding-top: 50px; text-transform:uppercase; font: 16px/20px 'Brandon Medium';"">
+WERE YOU LOOKING FOR SOMETHING SPECIAL?<br>
+Here are some suggestions that you might like....</p>
+
+<!-- FEATURED PRODUCTS BLOCK BEGIN -->
+{{block type=""weltpixel/product_list"" category_id=""13"" num_products=""5"" title=""Featured Products"" template=""catalog/product/featured_products.phtml""}}
+<!-- FEATURED PRODUCTS BLOCK END -->
+
+<!-- NEW PRODUCTS BLOCK BEGIN -->
+{{block type=""weltpixel/product_new"" num_products=""5"" title=""New Products"" template=""catalog/product/new_products.phtml""}}
+<!-- NEW PRODUCTS BLOCK END -->
+
+",1,,,,,,
+"Cleo Home Page V1",full_screen,,,weltpixel_home,,"        <section id=""slider"" class=""slider-parallax swiper_wrapper full-screen clearfix"">
+
+                        <div class=""swiper-container swiper-parent"">
+                <div class=""swiper-wrapper"">
+                <!-- SLIDE #1 BEGIN -->
+                    <div class=""swiper-slide dark"" style=""background-image: url('{{skin url='media/cleo/v1/home_1.jpg'}}');"">
+                                <a href=""#"" data-scrollto=""#content"" data-easing=""easeInOutExpo"" data-speed=""1250"" data-offset=""70"" class=""one-page-arrow""><i class=""icon-angle-down infinite animated fadeInDown""></i></a>
+                    </div>
+                    <!-- SLIDE #1 END -->
+                    <!-- SLIDE #2 BEGIN -->
+		<div class=""swiper-slide"" style=""background-image: url('{{skin url='media/cleo/v1/home_2.jpg'}}');"">
+                        <div class=""container clearfix"">
+                            <div class=""slider-caption slider-caption-left"">
+                                <h2 data-caption-animate=""fadeInUp"">Welcome to Cleo</h2>
+                                <p data-caption-animate=""fadeInUp"" data-caption-delay=""200"">Build the most amazing pages for your store</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- SLIDE #2 END -->
+                    <!-- SLIDE #3 BEGIN -->
+                    <div class=""swiper-slide"" style=""background-image: url('{{skin url='media/cleo/v1/home_3.jpg'}}'); background-position: center top;"">
+                                <a href=""#"" data-scrollto=""#content"" data-easing=""easeInOutExpo"" data-speed=""1250"" data-offset=""70"" class=""one-page-arrow""><i class=""icon-angle-down infinite animated fadeInDown""></i></a>
+                    </div>
+                    <!-- SLIDE #3 END -->
+                    <!-- SLIDE #4 BEGIN -->
+		            <div class=""swiper-slide"" style=""background-image: url('{{skin url='media/cleo/v1/home_4.jpg'}}');"">
+                        <div class=""container clearfix"">
+                            <div class=""slider-caption slider-caption-left"">
+                                <h2 data-caption-animate=""fadeInUp"">Great Performance</h2>
+                                <p data-caption-animate=""fadeInUp"" data-caption-delay=""200"">You'll be surprised to see the Final Results of your Creation &amp; would crave for more.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- SLIDE #4 END -->
+                </div>
+                <!-- SLIDER NAVIGATION START -->
+                <div id=""slider-arrow-left""><i class=""icon-angle-left""></i></div>
+                <div id=""slider-arrow-right""><i class=""icon-angle-right""></i></div>
+                <!-- SLIDER NAVIGATION END -->
+            </div>
+        </section>
+
+
+<div id=""content"">
+<div class=""w content-wrap"">
+                <!-- FEATUREBOX #1 BEGIN -->
+                <div class=""featured-box col-md-4 col-sm-12 col-xs-12"">
+                    <a href=""{{store url='women/dresses.html'}}"">
+                        <div class=""featured-box-content""><img  alt=""20% OFF Dresses"" src=""{{skin url='media/cleo/v1/mini-box-1.jpg'}}"" style=""width:100%""></div>
+                        <div class=""featured-box-overlay"">
+                            <span class=""featured-box-subtitle"">20% OFF</span>
+                            <span class=""featured-box-title"">Dresses</span>
+                        </div>
+                    </a>
+                </div>
+                <!-- FEATUREBOX #1 END -->
+                    
+                <!-- FEATUREBOX #2 BEGIN -->
+                <div class=""featured-box col-md-4 col-sm-12 col-xs-12"">
+                    	<a href=""{{store url='tech/bed-bath.html'}}"">
+                            <div class=""featured-box-content""><img  alt=""25% OFF Bad and Bath"" src=""{{skin url='media/cleo/v1/mini-box-2.jpg'}}"" style=""width:100%""></div>
+                            <div class=""featured-box-overlay"">
+                                <span class=""featured-box-subtitle"">25% OFF</span>     
+                                <span class=""featured-box-title"">Bad and Bath</span>
+                            </div>
+                        </a>     
+                    </div>
+                <!-- FEATUREBOX #2 END -->
+
+                <!-- FEATUREBOX #3 BEGIN -->
+                <div class=""featured-box col-md-4 col-sm-12 col-xs-12"">
+                    	<a href=""{{store url='women/accessories.html'}}"">
+                            <div class=""featured-box-content""><img  alt=""15% OFF Accessories"" src=""{{skin url='media/cleo/v1/mini-box-3.jpg'}}"" style=""width:100%""></div>
+                            <div class=""featured-box-overlay"">
+                                <span class=""featured-box-subtitle"">15% OFF</span>         
+                                <span class=""featured-box-title"">Accessories</span>
+                            </div>
+                        </a>     
+                    </div>
+                <!-- FEATUREBOX #3 END -->
+<div class=""clear""></div>
+<!-- FEATURED PRODUCTS BLOCK BEGIN -->
+{{block type=""weltpixel/product_list"" category_id=""60"" num_products=""15"" title=""Featured Products"" template=""catalog/product/featured_products.phtml""}}
+<!-- FEATURED PRODUCTCS BLOCK END -->
+
+<!-- NEW PRODUCTS BLOCK BEGIN -->
+{{block type=""weltpixel/product_new"" num_products=""10"" title=""New Products"" template=""catalog/product/new_products.phtml""}}
+<!-- NEW PRODUCTS BLOCK END -->
+</div>
+
+<!-- PARALLAX SECTION BEGIN -->
+<div class=""section parallax nomargin notopborder"" style=""background-image: url('{{skin url='media/cleo/v1/parallax_1.jpg'}}'); padding: 10% 0;"" data-stellar-background-ratio=""0.3"">
+                    <div class=""container clearfix"">
+
+                        <div class=""heading-block center"">
+                            <h2>Section with Parallax Background</h2>
+                        </div>
+
+                    </div>
+</div>
+<!-- PARALLAX SECTION END -->
+
+
+
+<!-- FASHION BOX SECTION BEGIN -->
+<div class=""w"">
+
+<!-- TECHNOLOGY SECTION BEGIN -->
+                <div class=""col-md-4 col-sm-12 col-xs-12"">
+
+<div class=""heading-title center"">
+                            <h2>Technology</h2>
+                            <span class=""center"">Lorem ipsum dolor sit amet, c-r adipiscing elit. In maximus ligula semper metus pellentesque mattis. Maecenas volutpat, diam enim.</span>
+</div> 
+<img alt=""Fashion Box"" class=""image-fade"" src=""{{skin url='media/cleo/v1/box-1.jpg'}}"">
+</div>
+<!-- TECHNOLOGY SECTION END -->
+<!-- BOOKS & MUSIC SECTION BEGIN -->
+                <div class=""col-md-4 col-sm-12 col-xs-12"">
+
+<div class=""heading-title center"">
+                            <h2>Books & Music</h2>
+                            <span class=""center"">Lorem ipsum dolor sit amet, c-r adipiscing elit. In maximus ligula semper metus pellentesque mattis. Maecenas volutpat, diam enim.</span>
+</div>
+<img alt=""Fashion Box"" class=""image-fade"" src=""{{skin url='media/cleo/v1/box-2.jpg'}}"">
+</div>
+<!-- BOOKS & MUSIC SECTION END -->
+<!-- BED & BATH SECTION BEGIN -->
+                <div class=""col-md-4 col-sm-12 col-xs-12"">
+
+<div class=""heading-title center"">
+                            <h2>Bed & Bath</h2>
+                            <span class=""center"">Lorem ipsum dolor sit amet, c-r adipiscing elit. In maximus ligula semper metus pellentesque mattis. Maecenas volutpat, diam enim.</span>
+</div> 
+<img alt=""Fashion Box"" class=""image-fade"" src=""{{skin url='media/cleo/v1/box-3.jpg'}}""> 
+</div>
+<!-- BED & BATH SECTION END -->
+</div>          
+<!-- FASHION BOX SECTION END -->
+
+
+<!-- FAVOURITE BRANDS SECTION BEGIN -->
+<div class=""w"">
+<div class=""heading-title center"">
+                            <h2>Favorite Brands</h2>
+</div>
+
+<!-- FAVOURITE BRANDS CAROUSEL & IMAGES SECTION BEGIN -->
+<div id=""owl-brand"" class=""owl-carousel"">
+  <div class=""item""><img class=""lazyOwl"" src=""{{skin url='media/cleo/v1/RosettaStone.jpg'}}"" data-src=""{{skin url='media/cleo/v1/RosettaStone.jpg'}}"" alt=""Lazy Owl Image""></div>
+  <div class=""item""><img class=""lazyOwl"" src=""{{skin url='media/cleo/v1/HarpersBazaar.jpg'}}"" data-src=""{{skin url='media/cleo/v1/HarpersBazaar.jpg'}}"" alt=""Lazy Owl Image""></div>
+  <div class=""item""><img class=""lazyOwl"" src=""{{skin url='media/cleo/v1/NicoleMiller.jpg'}}"" data-src=""{{skin url='media/cleo/v1/NicoleMiller.jpg'}}"" alt=""Lazy Owl Image""></div>
+  <div class=""item""><img class=""lazyOwl"" src=""{{skin url='media/cleo/v1/ChristianLouboutin.jpg'}}"" data-src=""{{skin url='media/cleo/v1/ChristianLouboutin.jpg'}}"" alt=""Lazy Owl Image""></div>
+  <div class=""item""><img class=""lazyOwl"" src=""{{skin url='media/cleo/v1/RebeccaMinkoff_1.jpg'}}"" data-src=""{{skin url='media/cleo/v1/RebeccaMinkoff_1.jpg'}}"" alt=""Lazy Owl Image""></div>
+  <div class=""item""><img class=""lazyOwl"" src=""{{skin url='media/cleo/v1/PaulSmith.jpg'}}"" data-src=""{{skin url='media/cleo/v1/PaulSmith.jpg'}}"" alt=""Lazy Owl Image""></div>
+  <div class=""item""><img class=""lazyOwl"" src=""{{skin url='media/cleo/v1/oneida_0.jpg'}}"" data-src=""{{skin url='media/cleo/v1/oneida_0.jpg'}}"" alt=""Lazy Owl Image""></div>
+  <div class=""item""><img class=""lazyOwl"" src=""{{skin url='media/cleo/v1/reedbarton_0.jpg'}}"" data-src=""{{skin url='media/cleo/v1/reedbarton_0.jpg'}}"" alt=""Lazy Owl Image""></div>
+  <div class=""item""><img class=""lazyOwl"" src=""{{skin url='media/cleo/v1/mikimoto_0.jpg'}}"" data-src=""{{skin url='media/cleo/v1/mikimoto_0.jpg'}}"" alt=""Lazy Owl Image""></div>
+</div>
+<!-- FAVOURITE BRANDS CAROUSEL & IMAGES SECTION END -->
+
+</div>
+<!-- FAVOURITE BRANDS SECTION END -->
+</div>
+
+<!-- FAVOURITE BRANDS CAROUSEL SETUP BEGIN -->
+    <script>
+        // <![CDATA[
+        jQuery(document).ready(function($) {
+            var owl = $(""#owl-brand"");
+            owl.owlCarousel({
+                items: 7,
+                pagination: false,
+                rewindNav: false,
+                lazyLoad : true,
+                navigation: true,
+                itemsDesktopSmall : [979,5],
+                itemsMobile : [479,2],
+                navigationText: [
+                    '<i class=""icon-angle-left""></i>',
+                    '<i class=""icon-angle-right""></i>'
+                ]
+            });
+        });
+        // ]]>
+    </script>
+<!-- FAVOURITE BRANDS CAROUSEL SETUP END -->
+
+",1,,,,,,

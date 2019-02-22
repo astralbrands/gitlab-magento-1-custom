@@ -1,0 +1,66 @@
+<?php $_code = 'sagepaytoken'; ?>
+<form id="frmRegCard" action="<?php echo $this->getUrl('sgusa/token/register'); ?>" method="post" onsubmit="postRegisterCard(this); return false;">
+    <ul class="form-list sp-methods" id="payment_form_<?php echo $_code ?>">
+        <li>
+            <div class="input-box">
+                <input type="text" title="<?php echo $this->__('Name on Card') ?>" class="input-text required-entry" id="<?php echo $_code ?>_cc_owner" name="CardHolder" value="" />
+                <label for="<?php echo $_code ?>_cc_owner" class="label-text required"><em>*</em><?php echo $this->__('Name on Card') ?></label>
+            </div>
+        </li>
+        <li>
+            <label for="<?php echo $_code ?>_cc_type" class="label-text-up required"><em>*</em><?php echo $this->__('Credit Card Type') ?></label>
+            <div class="input-box">
+                <select id="<?php echo $_code ?>_cc_type" name="CardType" class="required-entry validate-cc-type-select">
+                    <option value="0"><?php echo $this->__('--Please Select--')?></option>
+                    <?php foreach ($this->getCcAvailableTypes() as $_typeCode => $_typeName): ?>
+                        <option value="<?php echo $_typeCode ?>"><?php echo $_typeName ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+        </li>
+        <li>
+            <div class="input-box">
+                <input autocomplete="off" type="text" id="<?php echo $_code ?>_cc_number" name="CardNumber" title="<?php echo $this->__('Credit Card Number') ?>" class="input-text validate-cc-number validate-cc-type" value="" pattern="[0-9]{13,16}" />
+                <label for="<?php echo $_code ?>_cc_number" class="label-text required"><em>*</em><?php echo $this->__('Credit Card Number') ?></label>
+            </div>
+        </li>
+
+        <li id="<?php echo $_code ?>_cc_type_exp_div">
+            <label for="<?php echo $_code ?>_expiration" class="label-text-up required"><em>*</em><?php echo $this->__('Expiration Date') ?></label>
+            <div class="input-box">
+                <div class="v-fix">
+                    <select id="<?php echo $_code ?>_expiration" name="ExpiryMonth" class="month validate-cc-exp required-entry">
+                        <?php foreach ($this->getCcMonths() as $k=>$v): ?>
+                            <option value="<?php echo $k?$k:'0' ?>"><?php echo $v ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+                <div class="v-fix">
+                    <select id="<?php echo $_code ?>_expiration_yr" name="ExpiryYear" class="year required-entry">
+                        <?php foreach ($this->getCcYears() as $k=>$v): ?>
+                            <option value="<?php echo $k?$k:'0' ?>"><?php echo $v ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+            </div>
+        </li>
+
+        <li id="<?php echo $_code ?>_cc_type_cvv_div">
+            <div class="input-box">
+                <div class="v-fix">
+                    <input autocomplete="off" type="text" title="<?php echo $this->__('Card Verification Number') ?>" class="input-text  cvv required-entry validate-cc-cvn" id="<?php echo $_code ?>_cc_cid" name="CV2" value="" pattern="[0-9]{3,4}"/>
+                    <label for="<?php echo $_code ?>_cc_cid" class="label-text required"><em>*</em><?php echo $this->__('CVN') ?></label>
+                </div>
+            </div>
+        </li>
+        <li id="<?php echo $_code ?>_cc_post">
+            <div class="input-box">
+                <div class="v-fix">
+                    <button type="submit" class="button" title="<?php echo $this->__('Register'); ?>">
+                        <span><?php echo $this->__('Register'); ?></span>
+                    </button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</form>

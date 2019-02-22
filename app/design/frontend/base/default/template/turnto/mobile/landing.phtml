@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title><?php echo Mage::getStoreConfig('turnto_admin/mobileconfig/title'); ?></title>
+    <meta name="viewport" content="width=device-width,  initial-scale=1.0, maximum-scale=1.0,  user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <?php echo $this->getChildHtml('head') ?>
+
+    <?php $helper = Mage::helper('turnto_mobile_helper/data'); ?>
+
+    <?php if (intval(Mage::getStoreConfig('turnto_admin/singleSignOn/enabled')) == 1): ?>
+        <script type="text/javascript">
+            function localLogoutFunction(callbackFn) {
+                new Ajax.Request(
+                    '/index.php/turntologin/index/logout',
+                    {
+                        method:'post',
+                        onComplete:function (transport) {
+                            callbackFn(JSON.parse(transport.responseText));
+                        },
+                        parameters:""
+                    }
+                );
+                callbackFn();
+            }
+            function localGetLoginStatusFunction(callbackFn) {
+                localGetUserInfoFunction(callbackFn);
+            }
+            function localGetUserInfoFunction(callbackFn) {
+                new Ajax.Request(
+                    '/index.php/turntologin/index/getUserStatus',
+                    {
+                        method:'post',
+                        onComplete:function (transport) {
+                            var jsonResponse = JSON.parse(transport.responseText);
+                            if (jsonResponse.error) {
+                                callbackFn({user_auth_token:null});
+                            }
+                            else {
+                                callbackFn(jsonResponse);
+                            }
+                        },
+                        parameters:""
+                    }
+                );
+            }
+        </script>
+    <?php endif; ?>
+
+    <script type="text/javascript">
+        var turnToConfig = {
+            siteKey: "<?php echo Mage::getStoreConfig('turnto_admin/general/site_key'); ?>",
+            host: "<?php echo $helper->getHostWithoutProtocol(); ?>",
+            staticHost: "<?php echo $helper->getStaticHostWithoutProtocol(); ?>",
+            imageStoreBase:'<?php echo Mage::getStoreConfig('turnto_admin/general/image_store_base'); ?>',
+            setupType: "mobileTT"
+            <?php if (intval(Mage::getStoreConfig('turnto_admin/singleSignOn/enabled')) == 1): ?>
+            ,registration: {
+                localGetLoginStatusFunction:localGetLoginStatusFunction,
+                localRegistrationUrl:'/index.php/turntologin/index',
+                localGetUserInfoFunction:localGetUserInfoFunction,
+                localLogoutFunction:localLogoutFunction
+            }
+            <?php endif; ?>
+        };
+    </script>
+    <script type="text/javascript" src="//<?php echo $helper->getHostWithoutProtocol()?>/tra<?php echo $helper->getVersionForPath(); ?>/mobile-landing.js"></script>
+    <link rel="stylesheet" href="//<?php echo $helper->getStaticHostWithoutProtocol()?>/tra<?php echo $helper->getVersionForPath(); ?>/tra.css" type="text/css"/>
+</head>
+
+<body>
+<div id="mobileTT-content"></div>
+</body>
+</html>

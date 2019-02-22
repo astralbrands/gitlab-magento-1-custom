@@ -1,0 +1,4 @@
+<?php /* @var $this WeltPixel_Catalog_Block_Category_View_Attribute */ ?>
+<?php if ($this->getAttributeData()): ?>
+<div class="category-attribute-content"><?php  echo Mage::helper('cms')->getBlockTemplateProcessor()->filter($this->getAttributeData()); ?></div>
+<?php endif; ?>

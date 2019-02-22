@@ -1,0 +1,17 @@
+<?php
+        if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) { 
+        //Mage::log(__METHOD__, false, 'OptionSwatch.log');
+        }
+$_product = $this->getProduct(); 
+?>
+<?php $_associatedProducts = $this->getAssociatedProducts(); ?>
+<?php $_hasAssociatedProducts = count($_associatedProducts) > 0; ?>
+<?php if ($this->displayProductStockStatus()): ?>
+    <?php if ($_product->isAvailable() && $_hasAssociatedProducts): ?>
+
+    <?php else: ?>
+        <p class="availability out-of-stock">
+            <span class="value"><?php echo $this->helper('catalog')->__('Out of stock') ?></span>
+        </p>
+    <?php endif; ?>
+<?php endif; ?>

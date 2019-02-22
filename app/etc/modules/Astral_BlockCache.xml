@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Astral_BlockCache>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Astral_BlockCache>
+    </modules>
+</config>

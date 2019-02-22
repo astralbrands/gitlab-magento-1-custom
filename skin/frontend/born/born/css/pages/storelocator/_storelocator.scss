@@ -1,0 +1,407 @@
+// app\design\frontend\born\born\template\storelocator\view.phtml
+.map-pins {
+  width: 40px;
+  height: 40px;
+}
+.storelocator {
+  position: relative;
+}
+.mobile-search-result {
+  display: none;
+}
+.store-locator-form {
+  max-width: 395px;
+  width: 100%;
+  background: $white;
+  border: 1px solid $block-border-color;
+  padding: 40px 31px 55px 32px;
+  top: 125px;
+  position: absolute;
+  left: 4.8%;
+  z-index: 1;
+  &-title {
+    text-transform: uppercase;
+    font-weight: 500;
+    @include gotham();
+    font-size: 3.6rem;
+    text-align: center;
+    margin-bottom: 41px;
+  }
+  &-submit-btn {
+    background: transparent;
+    width: 100%;
+    @include gotham;
+    @include transparentButton(3.6rem, 1.3rem, $black, $white);
+    margin-top: 10px;
+
+  }
+  .input-box {
+    margin-bottom: 19px;
+    .input-text {
+      border: 1px solid $block-border-color;
+      height: 50px;
+    }
+    .label-text {
+      top: 13px;
+    }
+    &._filled {
+      .label-text {
+        top: 0;
+      }
+    }
+  }
+  .jq-selectbox {
+    width: 100%;
+    margin-bottom: 19px;
+    &__select {
+      height: 50px;
+      border: 1px solid $block-border-color;
+      padding: 0 36px 0 17px;
+      &-text {
+        line-height: 50px;
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: $black;
+      }
+    }
+    &__trigger-arrow:before {
+      font-family: "Icomoon";
+      font-size: 1.1em;
+      font-weight: bold;
+      content: "\e902";
+      top: 9px;
+      right: 7px;
+      position: relative;
+    }
+    &.opened .jq-selectbox__trigger {
+      right: 17px;
+    }
+  }
+  .button + .button {
+    margin-left: 0;
+  }
+  .button:focus,
+  .button:active {
+    background: $white;
+    color: $black;
+  }
+}
+.map-container {
+  max-height: 693px;
+  height: 100vh;
+}
+
+.marker-label {
+  font-size: 4rem;
+}
+
+.store-baloon {
+  background: $black;
+  padding: 15px 30px 15px;
+  width: 240px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 300;
+  color: $white;
+  position: relative;
+  @include gotham();
+  &:before {
+    @include hrp();
+    top: 100%;
+    width: 25px;
+    height: 12px;
+    border-top: 12px solid $black;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+  }
+  &-title {
+    font-weight: 500;
+    display: block;
+    & ~ div {
+      display: inline-block;
+    }
+  }
+  &-phone {
+    display: block;
+  }
+}
+.stores,
+.mobile-search-result {
+  h2 {
+    margin: 20px 0;
+    padding: 0 40px;
+    @include chronic();
+    font-size: 20px;
+    text-transform: none;
+  }
+}
+.store-list {
+  font-size: 0;
+  margin-bottom: 70px;
+
+  &-store {
+    padding-top: 25%;
+    width: 25%;
+    display: inline-block;
+    font-size: 16px;
+    line-height: 24px;
+    border: 1px solid $block-border-color;
+    border-left: 0;
+    border-top: 0;
+    position: relative;
+    &:first-child {
+      border-left: 1px solid $block-border-color;
+    }
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3),
+    &:nth-child(4) {
+      border-top: 1px solid $block-border-color;
+    }
+    &:nth-child(4n + 1) {
+      border-left: 1px solid $block-border-color;
+    }
+    &.dark {
+      background: $black;
+      border-bottom: 1px solid $black;
+      border-right: 1px solid $black;
+      position: relative;
+      z-index: 1;
+      &:first-child {
+        border-left: 1px solid $black;
+      }
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3),
+      &:nth-child(4) {
+        border-top: 1px solid $black;
+      }
+      &:nth-child(4n + 1) {
+        border-left: 1px solid $black;
+      }
+      div {
+        color: $white
+      }
+      .store-list-btn {
+        @include transparentButton(3.4rem, 1.2rem, $white, $black);
+        margin: 25px auto;
+      }
+    }
+  }
+  &-inner {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    @include display(flex);
+    @include flex-direction(column);
+    @include justify-content(center);
+  }
+  &-step {
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: $light-text-color;
+    margin-bottom: 30px;
+  }
+  &-text {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    font-weight: 300;
+  }
+  &-title {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    font-weight: 500;
+  }
+  &-btn {
+    @include transparentButton(3.4rem, 1.2rem, $black, $white);
+    margin: 25px auto;
+    align-self: center;
+  }
+  &-link {
+    font-size: 1.3rem;
+    text-decoration: underline;
+    color: $light-text-color;
+    &:hover {
+      text-decoration: none;
+      color: $light-text-color;
+    }
+  }
+}
+
+
+@media only screen and (max-width: $desktop-s) {
+  .store-list-store {
+    width: 33.33%;
+    padding-top: 33.33%;
+    &:nth-child(3n + 1) {
+      border-left: 1px solid $block-border-color;
+    }
+    &:nth-child(3n + 2) {
+      border-left: 0;
+    }
+    &:nth-child(4) {
+      border-top: 0;
+    }
+    &.dark {
+      &:nth-child(4) {
+        border-top: 0;
+      }
+      &:nth-child(4n + 1) {
+        border-left: 0;
+      }
+      &:nth-child(3n + 1) {
+        border-left: 1px solid $black;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet-m) {
+  .store-list-store {
+    width: 50%;
+    padding-top: 50%;
+    &:nth-child(3n + 1) {
+      border-left: 0;
+    }
+    &:nth-child(2n + 1) {
+      border-left: 1px solid $block-border-color;
+    }
+    &:nth-child(3) {
+      border-top: 0;
+    }
+    &.dark {
+      &:nth-child(3) {
+        border-top: 0;
+      }
+      &:nth-child(3n + 1) {
+        border-left: 0;
+      }
+      &:nth-child(2n + 1) {
+        border-left: 1px solid $black;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .map-container {
+    max-height: 500px;
+    margin-top: -545px;
+  }
+  .show-map .map-container {
+    max-height: 541px;
+    margin: 64px 0 100px;
+  }
+  .storelocator {
+    margin-bottom: 33px;
+  }
+  .store-locator-form-title {
+    font-size: 2.6rem;
+    margin-bottom: 35px;
+  }
+  .store-locator-form {
+    position: relative;
+    top: 50px;
+    left: 0;
+    margin-bottom: 89px;
+    width: 100%;
+    max-width: 100%;
+    padding: 33px 0 0 0;
+    border: none;
+    .form-content {
+      background: $grey-light-color;
+      border: 1px solid $block-border-color;
+      padding: 33px 19px 45px;
+      margin: 0 auto;
+      width: 397px;
+    }
+  }
+  .show-map .store-locator-form {
+    display: none;
+  }
+  .show-map .mobile-search-result {
+    display: block;
+    h2 {
+      font-size: 1.7rem;
+    }
+  }
+  .link-edit-search {
+    color: $light-text-color;
+    @include gotham;
+    @include setFont(1.3rem, 2.4rem, 400);
+    display: block;
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: $mobile-m) {
+  .stores h2 {
+    text-align: center;
+  }
+  .store-list {
+    max-width: 420px;
+    display: block;
+    margin: 0 auto 33px;
+    background: $grey-light-color;
+  }
+  .store-list-store {
+    width: 100%;
+    padding-top: 100%;
+    background: #fff;
+    border-left: 1px solid $block-border-color;
+    border-top: 1px solid $block-border-color;
+    &+& {
+      margin-top: 20px;
+    }
+    &:nth-child(3n + 1) {
+      border-left: 1px solid $block-border-color;
+    }
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3),
+    &:nth-child(4) {
+      border-top: 1px solid $block-border-color;
+    }
+    &.dark {
+      border-left: 1px solid $black;
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3),
+      &:nth-child(4) {
+        border-top: 1px solid $black;
+      }
+      &:nth-child(3n + 1) {
+        border-left: 1px solid $black;
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width: $mobile-s) {
+  .store-locator-form {
+    max-width: 100%;
+    .form-content {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-xs) {
+  .map-container {
+    max-height: 400px;
+    margin-top: -445px;
+  }
+  .show-map .map-container {
+    max-height: 441px;
+    margin: 64px 0 100px;
+  }
+}

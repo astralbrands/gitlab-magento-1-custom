@@ -1,0 +1,294 @@
+.checkout-cart {
+  .checkout-cart-content {
+    background: $menu-border-color;
+  }
+  .total-products {
+    display: none;
+  }
+  .item-list {
+    .head-row {
+      .table-cell:nth-child(2) {
+        display: none;
+      }
+    }
+    .row-item {
+      .product-cell {
+        width: 50%;
+      }
+      .product-cart-info {
+        padding: 15px 0;
+        .btn-remove {
+          display: none;
+        }
+        .product-name {
+          margin-bottom: 5px;
+          a {
+            @include gotham;
+            @include setFont(1.4rem, 1.8rem, 500);
+            letter-spacing: 0.18rem;
+            text-transform: uppercase;
+            &:hover {
+              @include gotham;
+              font-weight: 500;
+              text-transform: uppercase;
+              text-decoration: underline;
+            }
+          }
+        }
+        .product-subtitle {
+          @include gothamBook;
+          @include setFont(1.2rem, 1.7rem, 400);
+          letter-spacing: 0.15rem;
+          text-transform: uppercase;
+          margin-bottom: 28px;
+        }
+        .product-cart-sku {
+        }
+        .notice {
+          color: $icon-color;
+        }
+      }
+      .product-cart-total .price {
+        @include whitneyBook;
+        @include setFont(1.6rem, 2rem, 400);
+        font-style: italic;
+      }
+      .shade-cell {
+        display: none;
+      }
+    }
+
+  }
+  .right-block {
+    .discount h2,
+    .giftcard h2 {
+      @include gotham;
+      font-weight: 200;
+    }
+    .btns {
+      .promo {
+        background: $icon-color;
+      }
+      .method-checkout-cart-methods-onepage-bottom .button {
+        padding: 13px 15px;
+        span {
+          letter-spacing: 0.07rem;
+        }
+      }
+      .method-checkout-cart-methods-paypal_express-bottom {
+        .icon-paypal {
+          background: url(../images/paypal.png) no-repeat;
+          background-size: contain;
+          background-position: 50% 50%;
+        }
+        .btn-text > span {
+          line-height: 46px;
+        }
+      }
+      .method-checkout-cart-methods-multishipping {
+        a {
+          @include gotham;
+          @include setFont(1.3rem, 4.6rem, 500);
+          text-transform: uppercase;
+        }
+        &:hover a {
+          color: $white;
+          text-decoration: none;;
+        }
+      }
+    }
+    .totals .cart-totals {
+       tr .a-right {
+         @include gothamBook;
+         @include setFont(1.4rem, 2rem, 400);
+       }
+       tr .a-right span {
+         @include whitneyBook;
+         @include setFont(1.6rem, 2rem, 400);
+         font-style: italic;
+       }
+       .grand-total-cart {
+         letter-spacing: -0.03rem;
+         .a-right strong {
+           @include gotham;
+           font-weight: 200;
+         }
+         .price {
+           @include gotham;
+           font-style: normal;
+
+         }
+
+       }
+    }
+    .jq-selectbox__dropdown {
+      max-height: 210px;
+      overflow-y: auto;
+    }
+  }
+  .jq-selectbox__select,
+  .jq-selectbox__dropdown {
+    border-width: 1px;
+  }
+}
+.icon-btn {
+  height: 46px;
+}
+#ampromo-items {
+  .bx-wrapper {
+    .jq-selectbox.opened .jq-selectbox__select {
+      border-bottom: 1px solid $block-border-color;
+    }
+  }
+}
+
+/*Midbanner*/
+.cart-mid-banner {
+  margin-bottom: 45px;
+  .banner-title {
+    display: block;
+    color: $black;
+    @include gotham;
+    @include setFont(1.8rem, 11rem, 500);
+    letter-spacing: 0.15rem;
+    margin-bottom: 0;
+    text-align: center;
+  }
+  .banner-cart {
+    h2 {
+      @include gotham;
+      @include setFont(3rem, 4rem, 200);
+      text-transform: none;
+    }
+    p {
+      @include gotham;
+      @include setFont(1.6rem, 2.4rem, 200);
+    }
+  }
+}
+.cart-mid-banner-wrapper {
+  .product-name {
+    @include gotham;
+    @include setFont(1.4rem, 2.4rem, 500);
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+  }
+  .product-subtitle {
+    @include gothamBook;
+    @include setFont(1.2rem, 2.4rem, 400);
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+  }
+  .price {
+    @include whitneyBook;
+    @include setFont(1.6rem, 2.4rem, 400);
+    font-style: italic;
+  }
+  .banner-product {
+    &:hover {
+      .quickview,
+      .wishlist {
+        border: 1px solid $block-border-color;
+        font-size: 1.2rem;
+        position: relative;
+        &:before {
+          color: $icon-color;
+          font-size: 2rem;
+          height: 20px;
+          line-height: 2rem;
+          position: absolute;
+          bottom: 12px;
+        }
+      }
+      .quickview {
+        border-right: none;
+        &:before {
+          content: "\e936";
+        }
+      }
+      .wishlist {
+        &:before {
+          content: "\e90d";
+        }
+        &.favorite {
+          &:before {
+            content: "\e90e";
+            color: $black;
+          }
+          &:hover {
+            &:before {
+              color: $white;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.ie {
+  .cart-mid-banner-wrapper .banner-product:hover  {
+    .quickview:before,
+    .wishlist:before {
+      bottom: 0;
+    }
+  }
+}
+
+/*Crossel*/
+.crosssell {
+  .crosssell-title {
+    @include gotham;
+    @include setFont(1.8rem, 9.5rem, 500);
+    letter-spacing: 0.15rem;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width: $desktop-s){
+  .checkout-cart {
+    .checkout-cart-content {
+      padding: 20px;
+    }
+    .left-block {
+      width: 65%;
+    }
+    .right-block {
+      width: calc(35% - 20px);
+      margin-left: 20px;
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet-custom-4) {
+  .checkout-cart .item-list .row-item {
+    .product-cell {
+      width: 100%;
+    }
+    .product-cell {
+      padding-bottom: 20px;
+    }
+    .product-cart-actions {
+      position: absolute;
+      padding-bottom: 0;
+      padding-left: 15px;
+      bottom: 0;
+      .bottom-btn {
+        margin-left: 35px;
+      }
+    }
+    .product-cart-total {
+      order: -1;
+      margin-bottom: 10px;
+    }
+    .product-cart-remove {
+      height: initial;
+    }
+    .total-cell {
+      @include flex-direction(column);
+      &:last-child {
+        padding-bottom: 20px;
+      }
+    }
+  }
+}

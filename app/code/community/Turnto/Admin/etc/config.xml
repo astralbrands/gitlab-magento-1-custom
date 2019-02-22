@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Turnto_Admin>
+            <version>3.1.16</version>
+        </Turnto_Admin>
+    </modules> 
+
+    <global>
+        <blocks>
+            <adminblock1>
+            	<class>Turnto_Admin_Block</class>
+           	</adminblock1> 
+            <review>
+                <rewrite>
+                    <helper>Turnto_Admin_Block_Review_Helper</helper>
+                </rewrite>
+            </review> 
+        </blocks>
+        <helpers>
+            <adminhelper1>
+                <class>Turnto_Admin_Helper</class>
+            </adminhelper1>
+        </helpers>
+        <models>
+            <catalog>
+                <rewrite>
+                    <product>Turnto_Admin_Model_Catalog_Product</product>
+                </rewrite>
+            </catalog>
+            <turnto_admin>
+                <class>Turnto_Admin_Model</class>
+                <resourceModel>turnto_admin_resource</resourceModel>
+            </turnto_admin>
+            <turnto_admin_resource>
+                <class>Turnto_Admin_Model_Resource</class>
+                <entities>
+                    <rating>
+                        <table>turnto_products_ratings</table>
+                    </rating>
+                 </entities>
+            </turnto_admin_resource>
+        </models> 
+        <resources>
+            <turnto_admin_setup>
+                <setup>
+                    <module>Turnto_Admin</module>
+                </setup>
+            </turnto_admin_setup>
+        </resources>   
+	</global>    
+	
+	<frontend>
+        <routers>
+	        <turntoversion>
+                <use>standard</use>
+                <args>
+                    <module>Turnto_Admin_Adminhtml</module>
+                    <frontName>turntoversion</frontName>
+                </args>
+            </turntoversion>
+        </routers>
+    </frontend>
+	
+	<admin>
+		<routers>
+		   <adminhtml>
+                <args>
+                    <modules>
+		         		<turntorouter after="Mage_Adminhtml">Turnto_Admin_Adminhtml</turntorouter>
+		       		</modules>
+                </args>
+		   </adminhtml>
+	     </routers>    	
+	</admin>
+
+    <adminhtml>
+        <menu>
+            <turntoadminmenu translate="title" module="adminhelper1">
+                <title>TurnTo</title>
+                <sort_order>200</sort_order>
+                <children>
+                    <item1>
+                        <title>Integration</title>
+                        <action>adminhtml/turnto</action>
+                        <sort_order>1</sort_order>
+                    </item1>
+                    <item2>
+                        <title>Moderation</title>
+                        <action>adminhtml/turnto/redirect</action>
+                        <sort_order>2</sort_order>
+                    </item2>
+                    <item3>
+                        <title>Reporting</title>
+                        <action>adminhtml/turnto/redirect</action>
+                        <sort_order>3</sort_order>
+                    </item3>
+                </children>
+            </turntoadminmenu>
+        </menu>
+        <acl>
+        <resources>
+            <all>
+               <title>Allow Everything</title>
+            </all>
+            <admin>
+               <children>
+                       <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <turnto_admin>
+                                            <title>Turnto Products Ratings</title>
+                                        </turnto_admin>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+               </children>
+            </admin>
+         </resources>
+      </acl>
+	</adminhtml>
+    <default>
+        <turnto_admin>
+            <feedconfig>
+                <url>http://static.www.turnto.com/static/export/</url>
+            </feedconfig>
+            <historicalfeedconfig>
+                <enabled>false</enabled>
+            </historicalfeedconfig>
+            <general>
+                <static_url>http://static.www.turnto.com</static_url>
+                <url>http://www.turnto.com</url>
+                <image_store_base>wac.edgecastcdn.net/001A39/prod</image_store_base>
+                <static_cache_time>900</static_cache_time>
+                <teaser_cache_time>900</teaser_cache_time>
+                <cc_display_cache_time>900</cc_display_cache_time>
+                <vcgallery_cache_time>900</vcgallery_cache_time>
+                <version>4.3</version>
+                <skip_css_load>0</skip_css_load>
+                <upc_attribute nil="true"/>
+                <mpn_attribute nil="true"/>
+                <isbn_attribute nil="true"/>
+                <ean_attribute nil="true"/>
+                <jan_attribute nil="true"/>
+                <asin_attribute nil="true"/>
+                <brand_attribute nil="true"/>
+            </general>
+            <checkoutcomments>
+                <checkoutcomments_enabled>1</checkoutcomments_enabled>
+                <checkoutcomments_delivery_date_future>30</checkoutcomments_delivery_date_future>
+                <checkoutcomments_display_enabled>0</checkoutcomments_display_enabled>
+                <cc_columns>auto</cc_columns>
+                <cc_rows_collapsed>1</cc_rows_collapsed>
+                <cc_rows_expanded>4</cc_rows_expanded>
+                <cc_title>Why I Chose This:</cc_title>
+                <cc_expand_text>Read More</cc_expand_text>
+                <cc_collaped_text>Read Less</cc_collaped_text>
+                <cc_pagination_prev_text>Previous</cc_pagination_prev_text>
+                <cc_pagination_next_text>Next</cc_pagination_next_text>
+                <cc_minimum_comment_count>4</cc_minimum_comment_count>
+                <cc_minimum_comment_character_count>20</cc_minimum_comment_character_count>
+                <cc_minimum_comment_word_count>3</cc_minimum_comment_word_count>
+                <cc_truncate_length>200</cc_truncate_length>
+                <cc_include_syndicated>1</cc_include_syndicated>
+                <cc_sort_order>Most Recent</cc_sort_order>
+            </checkoutcomments>
+            <qa>
+                <qa_setup_type>overlay</qa_setup_type>
+                <qa_teaser_custom_enabled>1</qa_teaser_custom_enabled>
+                <qa_teaser_type>iTeaserFunc</qa_teaser_type>
+                <qa_teaser_custom><![CDATA[
+<script type="text/javascript">
+  /**
+   *
+   * This is a way to implement a teaser function that returns the html of the actual teaser.
+   * This is called with the parameter TurnToItemData, which contains the item counts.
+   * The clicks are calling clickQaTabFromTeaser() in this example.
+   *
+   */
+   function itemTeaserDisplay(data) {
+        var iteaserhtml = '<h2>Get FAST answers from customers</h2><a class="TurntoItemTeaserClick" href="javascript:clickQaTabFromTeaser()">Ask a Question</a>';
+        iteaserhtml += '<div id="TT2ILTcount-line">';
+        if (data.counts.q > 0 || data.counts.a > 0) {
+           iteaserhtml += '<p><a class="TurntoItemTeaserClick TurnToIteaSee" href="javascript:clickQaTabFromTeaser()">See ';
+           if (data.counts.q > 0) {
+               iteaserhtml += '<strong>' + data.counts.q + '</strong>' + (data.counts.q > 1 ? ' questions' : ' question');
+           }
+           if (data.counts.a > 0) {
+               iteaserhtml += ' <strong>' + data.counts.a + '</strong>' + (data.counts.a > 1 ? ' answers' : ' answer');
+           }
+           iteaserhtml += '</a></p>';
+        }
+        iteaserhtml += '</div>';
+        return iteaserhtml;
+   }
+
+   // todo: this should handle opening the tab if Q&A is under a tab.
+   function clickQaTabFromTeaser() {
+       var qa = jQuery('#TurnToContent')
+       window.scrollTo(0,qa.offset().top);
+   }
+</script>
+                ]]></qa_teaser_custom>
+                <qa_teaser_custom_function_name>itemTeaserDisplay</qa_teaser_custom_function_name>
+            </qa>
+            <reviews>
+                <reviews_setup_type>overlay</reviews_setup_type>
+                <reviews_teaser_custom_enabled>1</reviews_teaser_custom_enabled>
+                <reviews_teaser_custom><![CDATA[
+<script type="text/javascript">
+    /**
+     *
+     *
+     */
+    function reviewsItemTeaserDisplay(clazz, data) {
+        var clazzNam = clazz || "TurnToReviewsTeaser";
+
+        var iteasers = jQuery("." + clazzNam);
+
+        // round the average rating to the nearest tenth
+        var rating = Math.round((TurnToItemData.counts.ar + 0.25) * 100.0) / 100.0;
+        rating = rating.toString();
+        var decimal = parseInt(rating.substring(2, 3))
+        rating = rating.substring(0, 1) + "-" + (decimal >= 5 ? '5' : '0')
+
+        iteasers.html(TurnToHTML.reviewTeaser({rating: rating}));
+
+        //if in multi-sku page, TurnToItemData.sku is defined
+        var teaserSku = TurnToItemData.sku;
+
+        iteasers.find('.TTreadReviews').click(function() {clickReviewsTabFromTeaser();});
+        iteasers.find('.TTwriteReview').click(function(){clickReviewsTabFromTeaser();TurnTo.writeReview();});
+    }
+
+    // todo: this should handle opening the tab if reviews are under a tab AND scrolling to the content
+    function clickReviewsTabFromTeaser() {
+        var rev = jQuery('#TurnToReviewsContent')
+        window.scrollTo(0,rev.offset().top);
+    }
+</script>
+                ]]></reviews_teaser_custom>
+                <reviews_teaser_custom_function_name>reviewsItemTeaserDisplay</reviews_teaser_custom_function_name>
+            </reviews>
+            <vcgallery>
+                    <vc_gallery_enabled>0</vc_gallery_enabled>
+                    <title>Customer Gallery</title>
+                    <size>small</size>
+                    <modalSize>small</modalSize>
+                    <showCaptionsInline>0</showCaptionsInline>
+                    <truncateLength>40</truncateLength>
+                    <minimumContentCount>1</minimumContentCount>
+                    <minimumTextContentCharacterCount>0</minimumTextContentCharacterCount>
+                    <minimumTextContentWordCount>0</minimumTextContentWordCount>
+                    <sortOrder>mostvotes</sortOrder>
+            </vcgallery>
+            <vcpinboard>
+                <enabled>0</enabled>
+                <title>Customer Gallery</title>
+                <skus></skus>
+                <brands></brands>
+                <tags></tags>
+                <activeOnly>0</activeOnly>
+                <showDatestamp>1</showDatestamp>
+                <showCaption>1</showCaption>
+                <minCaptionCharCount>0</minCaptionCharCount>
+                <minCaptionWordCount>0</minCaptionWordCount>
+                <maxCaptionLength>85</maxCaptionLength>
+                <nameMaxLength>255</nameMaxLength>
+                <sortOrder>0</sortOrder>
+                <limit>20</limit>
+                <progressiveLoading>1</progressiveLoading>
+                <hSpacing>8</hSpacing>
+                <vSpacing>8</vSpacing>
+            </vcpinboard>
+            <ccpinboard>
+                <enabled>0</enabled>
+                <title>Customer Comments</title>
+                <skus></skus>
+                <brands></brands>
+                <tags></tags>
+                <activeOnly>0</activeOnly>
+                <includeSyndicated>0</includeSyndicated>
+                <titleMaxLength>255</titleMaxLength>
+                <maxDaysOld>30</maxDaysOld>
+                <maxCommentsPerBox>5</maxCommentsPerBox>
+                <nameMaxLength>255</nameMaxLength>
+                <commentMaxLength>200</commentMaxLength>
+                <limit>20</limit>
+                <progressiveLoading>1</progressiveLoading>
+                <hSpacing>8</hSpacing>
+                <vSpacing>8</vSpacing>
+            </ccpinboard>
+            <singleSignOn>
+                <enabled>0</enabled>
+            </singleSignOn>
+            <catalogfeedconfig>
+                <enabled>1</enabled>
+            </catalogfeedconfig>
+        </turnto_admin>
+    </default>   
+    <crontab>
+        <jobs>
+            <turnto_products_ratings>
+                <schedule>
+                    <cron_expr>0 4 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>turnto_admin/observer::getProductsRatingsFeed</model>
+                </run>
+            </turnto_products_ratings>
+            <turnto_historical_orders_feed>
+                <schedule>
+                    <cron_expr>0 1 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>turnto_admin/observer::pushHistoricalOrdersFeed</model>
+                </run>
+            </turnto_historical_orders_feed>
+            <turnto_catalog_feed>
+                <schedule>
+                    <cron_expr>0 2 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>turnto_admin/observer::pushCatalogFeed</model>
+                </run>
+            </turnto_catalog_feed>
+        </jobs>
+    </crontab>
+</config>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Astral_Payments>
+            <version>0.0.1</version>
+        </Astral_Payments>
+    </modules>
+    <events>
+        <payment_method_is_active>
+            <observers>
+                <storecredit_paymentfilter_payment_method_is_active>
+                    <type>singleton</type>
+                    <class>astral_payments/observer</class>
+                    <method>paymentMethodIsActive</method>
+                </storecredit_paymentfilter_payment_method_is_active>
+            </observers>
+        </payment_method_is_active>
+    </events>
+</config>

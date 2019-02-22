@@ -1,0 +1,151 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition End User License Agreement
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magento.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     born_default
+ * @copyright Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license http://www.magento.com/license/enterprise-edition
+ */
+?>
+<?php /** @var $this Mage_Checkout_Block_Cart_Shipping */ ?>
+<div class="shipping">
+    <h2><?php echo $this->__('Estimate shipping and tax') ?>
+        <span class="icon-arrow__down_small"></span>
+    </h2>
+    <div class="shipping-form">
+       <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="shipping-zip-form">
+           <?php echo $this->getBlockHtml('formkey'); ?>   
+            <ul class="form-list">
+                <li class="shipping-country">
+                    <?php echo Mage::getBlockSingleton('directory/data')->getCountryHtmlSelect($this->getEstimateCountryId()) ?>
+                </li>
+                <li>
+                    <label for="region_id"<?php if ($this->isStateProvinceRequired()) echo ' class="required"' ?>><?php if ($this->isStateProvinceRequired()) echo '<em>*</em>' ?><?php echo $this->__('State/Province') ?></label>
+                    <div class="input-box">
+                        <select id="region_id" name="region_id" title="<?php echo Mage::helper('core')->quoteEscape($this->__('State/Province')) ?>" style="display:none;"<?php echo ($this->isStateProvinceRequired() ? ' class="validate-select"' : '') ?>>
+                            <option value="0"><?php echo $this->__('Please select region, state or province') ?></option>
+                        </select>
+                       <script type="text/javascript">
+                       //<![CDATA[
+                           $('region_id').setAttribute('defaultValue',  "<?php echo $this->getEstimateRegionId() ?>");
+                       //]]>
+                       </script>
+                       <input type="text" id="region" name="region" value="<?php echo $this->escapeHtml($this->getEstimateRegion()) ?>"  title="<?php echo Mage::helper('core')->quoteEscape($this->__('State/Province')) ?>" class="input-text" style="display:none;" />
+                   </div>
+                </li>
+                <li class="shipping-zipcode">
+                    <div class="input-box">
+                        <input class="input-text <?php if ($this->isZipCodeRequired()):?> required-entry<?php endif;?> validate-country-zipcode" type="text" id="postcode"
+                               name="estimate_postcode" value="<?php echo $this->escapeHtml($this->getEstimatePostcode()) ?>"/>
+                        <label for="postcode" class="label-text required"><em>*</em><?php echo $this->__('Zipcode') ?></label>
+                    </div>
+
+                    <button type="button" title="<?php echo $this->quoteEscape($this->__('Apply')) ?>"
+                            onclick="coShippingMethodForm.submit()" class="btn">
+                        <span class="btn-text"><?php echo $this->__('Apply') ?></span>
+                    </button>
+                    <div class="clear"></div>
+                </li>
+            </ul>
+
+        </form>
+        <script type="text/javascript">
+        //<![CDATA[
+            new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>);
+        //]]>
+        </script>
+
+        <?php if (($_shippingRateGroups = $this->getEstimateRates())): ?>
+        <form id="co-shipping-method-form" action="<?php echo $this->getUpdateFormActionUrl() ?>">
+            <dl class="sp-methods">
+                <?php foreach ($_shippingRateGroups as $code => $_rates): ?>
+                    <dt><?php echo $this->escapeHtml($this->getCarrierName($code)) ?></dt>
+                    <dd>
+                        <ul>
+                        <?php foreach ($_rates as $_rate): ?>
+                            <li<?php if ($_rate->getErrorMessage()) echo ' class="error-msg"';?> class="input-box">
+                               <?php if ($_rate->getErrorMessage()): ?>
+                                    <?php echo $this->escapeHtml($_rate->getErrorMessage()) ?>
+                               <?php else: ?>
+                                    <input name="estimate_method" type="radio" value="<?php echo $this->escapeHtml($_rate->getCode()) ?>" id="s_method_<?php echo $_rate->getCode() ?>"<?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' checked="checked"' ?> class="radio" hidden/>
+                                    <label class="label-text" for="s_method_<?php echo $_rate->getCode() ?>"><?php echo $this->escapeHtml($_rate->getMethodTitle()) ?>
+                                    <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+                                    -
+                                    <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
+                                    <?php echo $_excl; ?>
+                                    <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                                        (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+                                    <?php endif; ?>
+                                    </label>
+                               <?php endif ?>
+                            </li>
+                        <?php endforeach; ?>
+                        </ul>
+                    </dd>
+                <?php endforeach; ?>
+            </dl>
+            <div class="buttons-set">
+                <button type="submit" title="<?php echo $this->quoteEscape($this->__('Update Total')) ?>" class="button btn-update" name="do" value="<?php echo $this->__('Update Total') ?>">
+                    <span><span class="btn-text"><?php echo $this->__('Update Total') ?></span></span>
+                </button>
+            </div>
+        </form>
+        <?php endif; ?>
+        <script type="text/javascript">
+        //<![CDATA[
+            var coShippingMethodForm = new VarienForm('shipping-zip-form');
+            var countriesWithOptionalZip = <?php echo $this->helper('directory')->getCountriesWithOptionalZip(true) ?>;
+
+            coShippingMethodForm.submit = function () {
+                var country = $F('country');
+                var optionalZip = false;
+
+                for (i=0; i < countriesWithOptionalZip.length; i++) {
+                    if (countriesWithOptionalZip[i] == country) {
+                        optionalZip = true;
+                    }
+                }
+                if (optionalZip) {
+                    $('postcode').removeClassName('required-entry');
+                }
+                else {
+                    $('postcode').addClassName('required-entry');
+                }
+                return VarienForm.prototype.submit.bind(coShippingMethodForm)();
+            }
+            
+            Validation.add('validate-country-zipcode', 'Please enter a valid zip code for selected country.', function(v) {
+                var countryValue = (typeof $('country') != 'undefined') ? $('country').getValue(): null;
+                switch(countryValue){
+                    case 'US':
+                            return Validation.get('IsEmpty').test(v) || /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(v);
+                            break;
+                    case 'CA':
+                            return Validation.get('IsEmpty').test(v) || /^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/.test(v);
+                            break;
+                    default:
+                        return Validation.get('IsEmpty').test(v);
+                        break;
+                }
+            });
+        //]]>
+        </script>
+    </div>
+</div>

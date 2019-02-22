@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <weltpixel translate="label">
+            <label>WeltPixel Extensions</label>
+            <sort_order>150</sort_order>
+        </weltpixel>
+    </tabs>
+    <sections>
+        <weltpixel_newsletter translate="label" module="weltpixel_newsletter">
+            <label>Newsletter Popup</label>
+            <tab>weltpixel</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="weltpixel_newsletter">
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label comment" module="weltpixel_newsletter">
+                            <label>Enable Newsletter</label>
+                            <comment></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <display_options translate="label comment" module="weltpixel_newsletter">
+                            <label>Display Mode</label>
+                            <comment></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>weltpixel_newsletter/adminhtml_system_config_source_display_options</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </display_options>
+                        <display_mobile translate="label comment" module="weltpixel_newsletter">
+                            <label>Display on mobile</label>
+                            <comment></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </display_mobile>
+                        <display_after_pages translate="label comment" module="weltpixel_newsletter">
+                            <label>Display after visited pages</label>
+                            <comment>The popup will be displayed after this number of visited pages</comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry validate-number</validate>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </display_after_pages>
+                        <display_after_seconds translate="label comment" module="weltpixel_newsletter">
+                            <label>Wait this seconds to display</label>
+                            <comment>The popup will be displayed after this number of seconds on the page</comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry validate-number</validate>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </display_after_seconds>
+                        <display_block translate="label comment" module="weltpixel_newsletter">
+                            <label>Displayed Static Block</label>
+                            <comment>Please select the weltpixel_newsletter static block</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>weltpixel_newsletter/adminhtml_system_config_source_display_block</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </display_block>
+                        <popup_cookie_lifetime translate="label comment" module="weltpixel_newsletter">
+                            <label>Popup Lifetime</label>
+                            <comment>In days</comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry validate-number</validate>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </popup_cookie_lifetime>
+                        <disable_popup translate="label comment" module="weltpixel_newsletter">
+                            <label>Disable newsletter pop-up</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>weltpixel_newsletter/adminhtml_system_config_source_display_disableoptions</source_model>                            
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable>1</enable></depends>
+                        </disable_popup>                       
+                    </fields>
+                </general>                
+            </groups>
+        </weltpixel_newsletter>
+    </sections>
+</config>

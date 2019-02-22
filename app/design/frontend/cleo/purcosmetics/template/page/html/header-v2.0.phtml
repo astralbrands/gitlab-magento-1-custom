@@ -1,0 +1,62 @@
+<header id="page-header" class="v2">
+    <?php echo $this->getChildHtml('global_promo_message_container'); ?>
+    <div id="page-header-section-02">
+		<div class="w">
+			<?php echo $this->getChildHtml('logo'); ?>
+			<?php echo $this->getChildHtml('topMenu'); ?>
+            <div class="header-right">
+                <span  class="header-settings">
+                    <i class="icon-user"></i>
+                </span>
+                <?php $loggedIn = Mage::getSingleton('customer/session')->isLoggedIn(); ?>
+                <div class="header-account-links <?php echo $loggedIn ? 'logged-in' : 'logged-out'; ?>">
+                    <?php if (!$loggedIn): ?>
+                        <a class="header-link" href="<?php echo Mage::getUrl('customer/account/'); ?>" title="<?php echo $this->__('Sign In') ?>">
+                            <?php echo $this->__('Sign In') ?>
+                        </a>
+                    <?php else: ?>
+                        <a class="header-link" href="<?php echo Mage::getUrl('customer/account/'); ?>" title="<?php echo $this->__('My Account') ?>">
+                            <?php echo $this->__('My Account') ?>
+                            <i class="icon icon-angle-down"></i>
+                        </a>
+                        <ul class="account-links">
+                            <li class="dashboard">
+                                <a class="customer-link" href="<?php echo Mage::getUrl('customer/account/'); ?>" title="<?php echo $this->__('My Dashboard') ?>">
+                                    <?php echo $this->__('My Dashboard') ?>
+                                </a>
+                            </li>
+                            <li class="orders">
+                                <a class="customer-link" href="<?php echo Mage::getUrl('sales/order/history/'); ?>" title="<?php echo $this->__('My Orders') ?>">
+                                    <?php echo $this->__('My Orders') ?>
+                                </a>
+                            </li>
+                            <li class="tickets">
+                                <a class="customer-link" href="<?php echo Mage::getUrl('zendesk/customer_tickets/index/'); ?>" title="<?php echo $this->__('My Tickets') ?>">
+                                    <?php echo $this->__('My Tickets') ?>
+                                </a>
+                            </li>
+                            <li class="gift-card">
+                                <a class="customer-link" href="<?php echo Mage::getUrl('giftcard/customer/'); ?>" title="<?php echo $this->__('Gift Card') ?>">
+                                    <?php echo $this->__('Gift Card') ?>
+                                </a>
+                            </li>
+                            <li class="favorites">
+                                <a class="customer-link" href="<?php echo Mage::getUrl('wishlist/'); ?>" title="<?php echo $this->__('My Favorites') ?>">
+                                    <?php echo $this->__('My Favorites') ?>
+                                </a>
+                            </li>
+                            <li class="sign-out">
+                                <a class="customer-link" href="<?php echo Mage::getUrl('customer/account/logout'); ?>" title="<?php echo $this->__('Sign Out') ?>">
+                                    <?php echo $this->__('Log Out') ?>
+                                </a>
+                            </li>
+                        </ul>
+                    <?php endif; ?>
+                </div>
+                <?php echo $this->getChildHtml('quickAccess'); ?>
+            </div>
+		</div>
+    </div>
+</header>
+<div id="endHeader" class="v2"></div>
+<?php echo $this->getChildHtml('topContainer'); ?>

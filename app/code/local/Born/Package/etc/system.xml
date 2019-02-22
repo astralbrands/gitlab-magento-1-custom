@@ -1,0 +1,1238 @@
+<config>
+    <sections>
+        <checkout>
+            <groups>
+                <cart>
+                    <fields>
+                        <max_select_qty translate="label">
+                            <label>Max Quantity for Select Drop Down</label>
+                            <comment>In number format. Default value: 10</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </max_select_qty>
+                        <display_handling_fee translate="label">
+                            <label>Display Handling Fee</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </display_handling_fee>
+                        <handling_fee_amount translate="label">
+                            <label>Handling Fee</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </handling_fee_amount>
+                        <handling_fee_autoselect translate="label">
+                            <label>Auto select handling fee</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </handling_fee_autoselect>
+                    </fields>
+                </cart>
+            </groups>
+        </checkout>
+        <born_general translate="label" module="born_package">
+            <label>General</label>
+            <tab>born</tab>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <country_setting translate="label" module="born_package">
+                    <label>Countries Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <additional_allow translate="label">
+                            <label>Allowed Countries For Specific Customer Groups</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </additional_allow>
+                        <customer_groups translate="label">
+                            <label>Customer Groups</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <comment><![CDATA[The selected customer groups with allowed countries will override the original Magento allowed country settings from General > General > Countries Options]]></comment>
+                            <source_model>adminhtml/system_config_source_customer_group_multiselect</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customer_groups>
+                    </fields>
+                </country_setting>
+            </groups>
+        </born_general>
+        <born_b2bprice translate="label" module="born_package">
+            <label>B2B Original Price</label>
+            <tab>born</tab>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <original_price_setting translate="label" module="born_package">
+                    <label>Hide original/strike through prices</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <hide_strikethrough_price translate="label">
+                            <label>Hide original/strike through prices</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment> Select yes to Hide original/strike through price of product. No to show original/strike through price </comment>
+                        </hide_strikethrough_price>
+                    </fields>
+                </original_price_setting>
+            </groups>
+        </born_b2bprice>
+        <shade_finder translate="label" module="born_package">
+            <label>Shade Finder</label>
+            <tab>born</tab>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                 <general translate="label" module="born_package">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>101</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <color_ranges translate="comment">
+                            <label>Color Ranges</label>
+                            <frontend_model>born_package/adminhtml_system_config_form_field_colorranges</frontend_model>
+                            <backend_model>born_package/adminhtml_system_config_backend_design_links</backend_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </color_ranges>
+                         <under_tone_title translate="label">
+                            <label>Under Tone Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </under_tone_title>
+                        <under_tone_video_link translate="label">
+                            <label>Under Tone Video Link</label>
+                            <comment>Accept Youtube video link</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </under_tone_video_link>
+                    </fields>
+                </general>
+            </groups>
+        </shade_finder>
+		<b2cpur_orderlimit translate="label" module="born_package">
+            <label>B2C and PUR Minimum order Limit</label>
+            <tab>born</tab>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                 <general translate="label" module="born_package">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>101</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                         <b2c_orderlimit translate="label">
+                            <label>B2C minimum order limit</label>
+							<comment>B2C minimum order limit</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </b2c_orderlimit>
+                        <pur_orderlimit translate="label">
+                            <label>PUR minimum order limit</label>
+                            <comment>PUR minimum order limit</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>101</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </pur_orderlimit>
+                    </fields>
+                </general>
+            </groups>
+        </b2cpur_orderlimit>
+        <born_package translate="label" module="born_package">
+            <label>CMS Settings</label>
+            <tab>born</tab>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <best_seller_setting translate="label" module="born_package">
+                    <label>Best Seller Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <category_id translate="label">
+                            <label>Best Seller Category ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </category_id>
+                    </fields>
+                </best_seller_setting>
+                <footer_links_nav translate="label" module="born_package">
+                    <label>Footer Links Navigation Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>101</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <footer_title1 translate="label">
+                            <label>Column 1 Main Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </footer_title1>
+                        <footer_links1 translate="comment">
+                            <label>Column 1 Links</label>
+                            <frontend_model>born_package/adminhtml_system_config_form_field_links</frontend_model>
+                            <backend_model>born_package/adminhtml_system_config_backend_design_links</backend_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </footer_links1>
+                        <footer_title2 translate="label">
+                            <label>Column 2 Main Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </footer_title2>
+                        <footer_links2 translate="comment">
+                            <label>Column 2 Links</label>
+                            <frontend_model>born_package/adminhtml_system_config_form_field_links</frontend_model>
+                            <backend_model>born_package/adminhtml_system_config_backend_design_links</backend_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </footer_links2>
+                    </fields>
+                </footer_links_nav>
+                <shade_guide_rules translate="label" module="born_package">
+                    <label>Shade Guide Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>101</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <static_block_id translate="label">
+                            <label>Static Block Id</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </static_block_id>
+                        <links translate="comment">
+                            <label>Category Id and Static Blocks</label>
+                            <comment>Rules to display shade guide: any products with the shade configurable attribute and belongs to the category id, then display the static blocks contents</comment>
+                            <frontend_model>born_package/adminhtml_system_config_form_field_shadeguide</frontend_model>
+                            <backend_model>born_package/adminhtml_system_config_backend_design_links</backend_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </links>
+                    </fields>
+                </shade_guide_rules>
+                <cart_promo translate="label" module="born_package">
+                    <label>Shopping Cart Promo</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <amount> translate="label">
+                            <label>Promo Amount</label>
+                            <comment>The amount that will be displayed on cart promo will be (subtotal - promo amount).</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </amount>
+                        <message translate="label">
+                            <label>Promo Message</label>
+                            <comment>%s will be replaced with (subtotal - promo amount). Ex: You are $%s away from a free lipstick!</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>26</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </message>
+                        <eligible_message translate="label">
+                            <label>Eligible Message</label>
+                            <comment>Message to display after cart amount exceeds the promo amount.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>28</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </eligible_message>
+                    </fields>
+                </cart_promo>
+                <product_detail_page translate="label" module="born_package">
+                    <label>Product Detail Page</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <tiered_pricing_text translate="label">
+                            <label>Tiered Pricing Text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>26</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </tiered_pricing_text>
+                    </fields>
+                </product_detail_page>
+                <cart_banner translate="label" module="born_package">
+                    <label>Shopping Cart Page Banner</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <title translate="label">
+                            <label>Banner Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <static_block_id translate="label">
+                            <label>Static Block Id</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </static_block_id>
+                        <product_sku translate="label">
+                            <label>Related Product SKU</label>
+                            <comment>SKU of the product that will be displayed next to the static block banner</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_sku>
+                    </fields>
+                </cart_banner>
+            </groups>
+        </born_package>
+        <born_affiliate translate="label" module="born_package">
+            <label>Affiliate Marketing</label>
+            <tab>born</tab>
+            <sort_order>1500</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <shareasale_tracking>
+                    <label>Share A Sale Affiliate Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>90</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>2</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <merchant_id translate="label">
+                            <label>Share A Sale Merchant ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </merchant_id>
+                        <transaction_type translate="label">
+                            <label>Transaction Type</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </transaction_type>
+                    </fields>
+                </shareasale_tracking>
+                <shareasale_settings>
+                    <label>Share A Sale Export Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <columns translate="comment">
+                            <label>Export Fields</label>
+                            <frontend_model>born_package/adminhtml_system_config_form_columns</frontend_model>
+                            <backend_model>born_package/adminhtml_system_config_backend_design_columns</backend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </columns>
+
+                    </fields>
+                </shareasale_settings>
+
+                <cj_tracking>
+                    <label>Comission Junction Export Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>2</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <merchant_id translate="label">
+                            <label>Merchant ID</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[A static numeric merchant ID constant provided to you by Commission Junction.
+                                Merchant site pays a percentage of the sale when the affiliate sends them a customer who purchases something.]]></comment>
+                                <sort_order>10</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </merchant_id>
+                            <merchant_type translate="label">
+                                <label>Merchant TYPE</label>
+                                <frontend_type>text</frontend_type>
+                                <comment><![CDATA[A static numeric merchant TYPE constant provided to you by Commission Junction.]]></comment>
+                                <sort_order>20</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </merchant_type>
+                            <container_id translate="label">
+                                <label>Container Tag ID</label>
+                                <frontend_type>text</frontend_type>
+                                <comment><![CDATA[A static numeric provided to you by Commission Junction.]]></comment>
+                                <sort_order>30</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </container_id>
+
+
+
+                            <export_file>
+                                <label>Export Fields</label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>200</sort_order>
+                                <frontend_model>born_package/adminhtml_system_config_form_columns</frontend_model>
+                                <backend_model>born_package/adminhtml_system_config_backend_design_columns</backend_model>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </export_file>
+                            <export_cid>
+                                <label>Export CID</label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>201</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </export_cid>
+                            <export_subid>
+                                <label>Export SUBID</label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>201</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </export_subid>
+                            <export_aid>
+                                <label>Export AID</label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>201</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </export_aid>
+                            <export_dateformat>
+                                <label>Export DATEFMT</label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>201</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </export_dateformat>
+                            <export_processtype>
+                                <label>Export PROCESSTYPE</label>
+                                <comment>Your data file must indicate either OVERWRITE or UPDATE </comment>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>201</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </export_processtype>
+                        </fields>
+                    </cj_tracking>
+                    <pixeleze_setting>
+                        <label>Pixeleze</label>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>100</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>0</show_in_store>
+                        <fields>
+                            <enable translate="label">
+                                <label>Enable Pixeleze </label>
+                                <frontend_type>select</frontend_type>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <sort_order>10</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </enable>
+                            <account_id translate="label">
+                                <label>Account Id</label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>30</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </account_id>
+                            <enable_product_level translate="label">
+                                <label>Enable Product Level Implementation </label>
+                                <frontend_type>select</frontend_type>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <sort_order>10</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </enable_product_level>
+                        </fields>
+                    </pixeleze_setting>
+
+                </groups>
+            </born_affiliate>
+
+            <customer translate="label" module="customer">
+                <class>separator-top</class>
+                <label>Customer Configuration</label>
+                <tab>customer</tab>
+                <sort_order>130</sort_order>
+                <show_in_default>1</show_in_default>
+                <show_in_website>1</show_in_website>
+                <show_in_store>1</show_in_store>
+                <groups>
+                    <b2b_settings>
+                        <label>B2B Limitations</label>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>900</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <fields>
+                            <active translate="label">
+                                <label>prevent B2B Customers from editing data </label>
+                                <frontend_type>select</frontend_type>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <sort_order>10</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </active>
+                            <customer_group>
+                                <label>B2B customer group ID</label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>20</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </customer_group>
+                        </fields>
+                    </b2b_settings>
+                    <account_page_link translate="label" module="born_package">
+                        <label>Customer Account Page Linkage</label>
+                        <comment>Defining the link between pages and navigation items, so items can be highlighted.</comment>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>1000</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <fields>
+                            <link_items translate="comment">
+                                <label>Link Items</label>
+                                <frontend_model>born_package/adminhtml_system_config_form_field_accountLinks</frontend_model>
+                                <backend_model>born_package/adminhtml_system_config_backend_design_links</backend_model>
+                                <sort_order>2</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </link_items>
+                        </fields>
+                    </account_page_link>
+                    <account_page_banner translate="label" module="born_package">
+                        <label>Customer Account Page Banner</label>
+                        <comment>Display banner for the following full action names:</comment>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>1000</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <fields>
+                            <items translate="comment">
+                                <label>Items</label>
+                                <frontend_model>born_package/adminhtml_system_config_form_field_fullactionnames</frontend_model>
+                                <backend_model>born_package/adminhtml_system_config_backend_design_links</backend_model>
+                                <sort_order>2</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </items>
+                        </fields>
+                    </account_page_banner>
+                    <startup translate="label">
+                        <fields>
+                            <login_text>
+                                <label>Login CTA Text</label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>20</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </login_text>
+                            <login_url>
+                                <label>Login CTA Link </label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>21</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </login_url>
+                            <professional_signup_text>
+                                <label>Professional Sign Up Text</label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>22</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </professional_signup_text>
+                            <professional_signup_url_key>
+                                <label>Professional Sign Up Page URL Key</label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>23</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </professional_signup_url_key>
+                            <professional_signup_anchor_tag>
+                                <label>Professional Sign Up Anchor Tag Value</label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>24</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </professional_signup_anchor_tag>
+                        </fields>
+                    </startup>
+                </groups>
+            </customer>
+            <payment>
+                <groups>
+                    <creditterms translate="label comment" module="born_package">
+                        <label>Credit Terms</label>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>900</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <fields>
+                            <active translate="label">
+                                <label>Enabled</label>
+                                <frontend_type>select</frontend_type>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <sort_order>10</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </active>
+                            <title translate="label">
+                                <label>Title</label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>20</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </title>
+                            <order_status translate="label">
+                                <label>New Order Status</label>
+                                <frontend_type>select</frontend_type>
+                                <source_model>adminhtml/system_config_source_order_status</source_model>
+                                <sort_order>50</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </order_status>
+                            <allowspecific translate="label">
+                                <label>Payment Applicable From</label>
+                                <frontend_type>select</frontend_type>
+                                <sort_order>60</sort_order>
+                                <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </allowspecific>
+                            <specificcountry translate="label">
+                                <label>Countries Payment Applicable From</label>
+                                <frontend_type>multiselect</frontend_type>
+                                <sort_order>70</sort_order>
+                                <source_model>adminhtml/system_config_source_country</source_model>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                                <depends>
+                                    <allowspecific>1</allowspecific>
+                                </depends>
+                            </specificcountry>
+                            <sort_order translate="label">
+                                <label>Sort Order</label>
+                                <frontend_type>text</frontend_type>
+                            </sort_order>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </fields>
+                    </creditterms>
+                </groups>
+            </payment>
+            <cataloginventory>
+                <groups>
+                    <new_version_check translate="label comment" module="born_package">
+                        <label>New Version Check</label>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>900</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <fields>
+                            <enable translate="label">
+                                <label>Enabled</label>
+                                <frontend_type>select</frontend_type>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <sort_order>10</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>0</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </enable>
+                            <disable_limit>
+                                <label>Qty Threshold</label>
+                                <comment><![CDATA[ Qty which trigers the check for New version SKU]]></comment>
+                                <frontend_type>text</frontend_type>
+                                <validate>validate-number</validate>
+
+                                <sort_order>50</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>0</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </disable_limit>
+                        </fields>
+                    </new_version_check>
+                </groups>
+            </cataloginventory>
+        </sections>
+
+        <sections>
+
+        </sections>
+        <sections>
+
+        </sections>
+        <sections>
+
+        </sections>
+
+        <sections>
+            <customer>
+                <tab>customer</tab>
+                <groups>
+                    <address>
+                        <fields>
+                            <require_name_registration translate="label">
+                                <label>Show Name on Registration</label>
+                                <comment>"No" will remove First and Last name from customer registration page.</comment>>
+                                <frontend_type>select</frontend_type>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <sort_order>10</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </require_name_registration>
+                        </fields>
+                    </address>
+                </groups>
+                <groups>
+                    <create_account>
+                        <fields>
+                            <brand_name>
+                                <label>Brand Name</label>
+                                <comment>Brand name to be displayed in customer registration success message</comment>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>200</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </brand_name>
+                        </fields>
+                    </create_account>
+                </groups>
+                <groups>
+                    <password>
+                        <fields>
+                            <hide_forgot_password_text>
+                                <label>Hide Forgot Password Text on Forgot Password Page</label>
+                                <frontend_type>select</frontend_type>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <sort_order>10</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </hide_forgot_password_text>
+                        </fields>
+                    </password>
+                </groups>
+            </customer>
+        </sections>
+
+        <sections>
+            <catalog>
+                <groups>
+                    <category_groups>
+                        <label>Category Groups</label>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>1000</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>0</show_in_website>
+                        <show_in_store>0</show_in_store>
+                        <fields>
+                            <links translate="comment">
+                                <label>Groups</label>
+                                <frontend_model>born_package/adminhtml_system_config_form_field_categoryGroupFields</frontend_model>
+                                <backend_model>born_package/adminhtml_system_config_backend_design_links</backend_model>
+                                <sort_order>2</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>0</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </links>
+                            <group_listing translate="comment">
+                                <label>Group Listing Page</label>
+                                <comment>Display Category Groups in Certain Category Listing Page</comment>
+                                <frontend_model>born_package/adminhtml_system_config_form_field_grouplisting</frontend_model>
+                                <backend_model>born_package/adminhtml_system_config_backend_design_links</backend_model>
+                                <sort_order>3</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>0</show_in_website>
+                                <show_in_store>0</show_in_store>
+                            </group_listing>
+
+                            <listing_display_product_once>
+                                <label>Display Same Product Once In Listing Page</label>
+                                <comment>If a product belongs to multiple category groups, it will only be displayed once in the same listing page.</comment>
+                                <frontend_type>select</frontend_type>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                                <sort_order>1</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </listing_display_product_once>
+                        </fields>
+                    </category_groups>
+                    <listing_page_sort>
+                        <label>Product Listing Page Sorting</label>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>1000</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <fields>
+                            <items translate="comment">
+                                <label>Product List Page Sorting Options</label>
+                                <comment>Code values: name, price, created_at, position. Direction values: asc, desc</comment>
+                                <frontend_model>born_package/adminhtml_system_config_form_field_listpagesort</frontend_model>
+                                <backend_model>born_package/adminhtml_system_config_backend_design_links</backend_model>
+                                <sort_order>3</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </items>
+                        </fields>
+                    </listing_page_sort>
+                    <category_nav_images>
+                        <label>Category Navigation Images</label>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>1000</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <fields>
+                         <enable translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                    </fields>
+                </category_nav_images>
+                <category_product_subtext>
+                    <label>Display Product Subtext in Listing Page</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                       <enable translate="label">
+                        <label>Enabled</label>
+                        <frontend_type>select</frontend_type>
+                        <source_model>adminhtml/system_config_source_yesno</source_model>
+                        <sort_order>1</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                    </enable>
+                    <subtext_attribute_id>
+                        <label>Subtext Attribute Id</label>
+                        <comment>Please do not change this field</comment>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>2</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>0</show_in_website>
+                        <show_in_store>0</show_in_store>
+                    </subtext_attribute_id>
+                </fields>
+            </category_product_subtext>
+            <display_cms_content_group_page>
+                <label>Display CMS Contents on Group Product Detail Page</label>
+                <frontend_type>text</frontend_type>
+                <sort_order>1000</sort_order>
+                <show_in_default>1</show_in_default>
+                <show_in_website>1</show_in_website>
+                <show_in_store>1</show_in_store>
+                <fields>
+                   <enable translate="label">
+                    <label>Enabled</label>
+                    <frontend_type>select</frontend_type>
+                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </enable>
+            </fields>
+        </display_cms_content_group_page>
+        <show_default_tier_message>
+            <label>Product Tier Price Message</label>
+            <comment>Display the default tier price message on prodcut detail page</comment>
+            <frontend_type>text</frontend_type>
+            <sort_order>1001</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <fields>
+             <enable_simple translate="label">
+                <label>Enable on Simple Product</label>
+                <frontend_type>select</frontend_type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+                <sort_order>1</sort_order>
+                <show_in_default>1</show_in_default>
+                <show_in_website>1</show_in_website>
+                <show_in_store>1</show_in_store>
+            </enable_simple>
+            <enable_configurable translate="label">
+                <label>Enable on Configurable Product</label>
+                <frontend_type>select</frontend_type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+                <sort_order>1</sort_order>
+                <show_in_default>1</show_in_default>
+                <show_in_website>1</show_in_website>
+                <show_in_store>1</show_in_store>
+            </enable_configurable>
+        </fields>
+    </show_default_tier_message>
+    <miscellaneous>
+        <label>Miscellaneous</label>
+        <frontend_type>text</frontend_type>
+        <sort_order>1001</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>0</show_in_website>
+        <show_in_store>0</show_in_store>
+        <fields>
+            <professional_category_id>
+                <label>Professional Category Id</label>
+                <comment>Default Value: 96</comment>
+                <frontend_type>text</frontend_type>
+                <sort_order>2</sort_order>
+                <show_in_default>1</show_in_default>
+                <show_in_website>0</show_in_website>
+                <show_in_store>0</show_in_store>
+            </professional_category_id>
+            <cos_usage_values>
+                <label>CosMedix Usage Values</label>
+                <comment>Comma separated value of the usage option values in the following order: am,pm,allday. Default: 88,89,90</comment>
+                <frontend_type>text</frontend_type>
+                <sort_order>2</sort_order>
+                <show_in_default>1</show_in_default>
+                <show_in_website>0</show_in_website>
+                <show_in_store>0</show_in_store>
+            </cos_usage_values>
+            <category_product_usage>
+                <label>CosMedix Usage Attribute Id</label>
+                <comment>Please do not change this field. Default attribute id value: 221</comment>
+                <frontend_type>text</frontend_type>
+                <sort_order>2</sort_order>
+                <show_in_default>1</show_in_default>
+                <show_in_website>0</show_in_website>
+                <show_in_store>0</show_in_store>
+            </category_product_usage>
+        </fields>
+    </miscellaneous>
+</groups>
+</catalog>
+</sections>
+
+<sections>
+    <zendesk>
+        <groups>
+            <general>
+                <fields>
+                    <brand_id translate="label">
+                        <label>Brand ID</label>
+                        <comment>Used to submit forms into certain brands</comment>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>8</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                    </brand_id>
+                    <cms_redirect>
+                      <label>Professional Form Redirect Url Key</label>
+                      <comment>Url key of the professional sign up page</comment>
+                      <frontend_type>text</frontend_type>
+                      <sort_order>9</sort_order>
+                      <show_in_default>1</show_in_default>
+                      <show_in_website>1</show_in_website>
+                      <show_in_store>1</show_in_store>
+                  </cms_redirect>
+                  <form_name>
+                    <label>Professional Form Name </label>
+                      <frontend_type>text</frontend_type>
+                      <sort_order>9</sort_order>
+                      <show_in_default>1</show_in_default>
+                      <show_in_website>1</show_in_website>
+                      <show_in_store>1</show_in_store>
+                  </form_name>
+                  <affiliate_form_name>
+                    <label>Affiliate Form Name </label>
+                      <frontend_type>text</frontend_type>
+                      <sort_order>9</sort_order>
+                      <show_in_default>1</show_in_default>
+                      <show_in_website>1</show_in_website>
+                      <show_in_store>1</show_in_store>
+                  </affiliate_form_name>
+              </fields>
+            </general>
+        </groups>
+    </zendesk>
+    </sections>
+<sections>
+    <giftcard>
+        <groups>
+            <cart_balance_lookup_form>
+                <label>Gift Card on Shopping Cart Page</label>
+                <frontend_type>text</frontend_type>
+                <sort_order>1000</sort_order>
+                <show_in_default>1</show_in_default>
+                <show_in_website>1</show_in_website>
+                <show_in_store>1</show_in_store>
+                <fields>
+                 <enable translate="label">
+                    <label>Show Gift Card Balance Lookup Form</label>
+                    <frontend_type>select</frontend_type>
+                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </enable>
+            </fields>
+        </cart_balance_lookup_form>
+    </groups>
+</giftcard>
+</sections>
+<sections>
+    <carriers>
+        <groups>
+            <usps>
+                <fields>
+                    <use_for_po_boxes_only>
+                        <label>Use for PO and APO Boxes ONLY </label>
+                        <frontend_type>select</frontend_type>
+                        <source_model>adminhtml/system_config_source_yesno</source_model>
+                        <sort_order>100</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                    </use_for_po_boxes_only>
+                </fields>
+            </usps>
+            <fedex>
+                <fields>
+                    <hide_for_po_boxes_only>
+                        <label>Hide for PO and APO Boxes</label>
+                        <frontend_type>select</frontend_type>
+                        <source_model>adminhtml/system_config_source_yesno</source_model>
+                        <sort_order>100</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                    </hide_for_po_boxes_only>
+                </fields>
+            </fedex>
+        </groups>
+    </carriers>
+</sections>
+    <sections>
+        <ampromo>
+            <groups>
+                <general>
+                    <fields>
+                    <cart_block_title translate="label">
+                       <label>Title For Cart Block</label>
+                       <comment>Default: Choose a free sample</comment>
+                       <frontend_type>text</frontend_type>
+                       <sort_order>20</sort_order>
+                       <show_in_default>1</show_in_default>
+                       <show_in_website>1</show_in_website>
+                       <show_in_store>1</show_in_store>
+                    </cart_block_title>
+                </fields>
+                </general>
+            </groups>
+        </ampromo>
+    </sections>
+    <sections>
+        <payment>
+            <groups>
+                <authorizenet>
+                     <fields>
+                        <web_login_id translate="label">
+                            <label>Authorize.net Web Login ID</label>
+                           <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </web_login_id>
+                    </fields>
+                </authorizenet>
+            </groups>
+        </payment>
+    </sections>
+</config>

@@ -1,0 +1,19 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoRichData
+ */
+?>
+<script type="application/ld+json">
+{
+   "@context": "https://schema.org",
+   "@type": "WebSite",
+   "url": "<?php echo $this->getUrl()?>",
+   "potentialAction": {
+     "@type": "SearchAction",
+     "target": "<?php echo $this->getUrl('catalogsearch/result')?>?q={search_term_string}",
+     "query-input": "required name=search_term_string"
+   }
+}
+</script>

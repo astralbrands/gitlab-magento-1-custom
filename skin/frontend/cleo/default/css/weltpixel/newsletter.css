@@ -1,0 +1,101 @@
+.weltpixel_newsletter_signup_section {
+    padding: 50px;
+    text-align: center;
+}
+#weltpixel_newsletter {
+    padding: 15px 0;
+    width: 100%;
+    float: left;
+}
+.weltpixel_newsletter input {
+    width: 75%;
+    height: 36px;
+    border: 0;
+    background: #f4f4f4;
+    padding: 8px;
+    font-size: 12px;
+    float: left;
+    line-height: 20px;
+    text-transform: uppercase;
+    text-align: center;
+}
+.weltpixel_newsletter .button {
+    height: 36px;
+    padding: 8px;
+    margin-left: 0px;
+    float: right;
+    font-size: 18px;
+    line-height: 22px;
+    background: #d83701;
+    color: #FFF;
+    text-transform: uppercase;
+}
+.weltpixel_newsletter .validation-advice {
+    clear: both;
+    min-height: 13px;
+    margin: 3px 0 0;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 13px;
+    top: 34px;
+}
+#lightbox-close-newsletter {
+display: block;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 5px;
+  font-weight: 400;
+  width: 30px;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
+  background: #000;
+  color: #fff;
+  vertical-align: middle;
+  cursor: pointer;
+  border-left: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+@media only screen and (max-width: 960px) {
+    .weltpixel_newsletter input {
+        width: 65%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .weltpixel_newsletter_signup_section {
+        width: 100%;
+        padding: 0;
+    }
+    .weltpixel_newsletter_signup_section #weltpixel_newsletter {
+        padding: 15px 0;
+        width: 100%;
+        float: left;
+    }
+    .weltpixel_newsletter .button {
+        float: right;
+    }
+    .weltpixel_newsletter input {
+        width: 75%;
+        float: left;
+    }
+    .weltpixel_newsletter .col-last {
+        display: none;
+    }
+}
+@media only screen and (max-width: 480px) {
+    .weltpixel_newsletter input {
+        width: 60%;
+    }
+}
+
+.block.block-subscribe {
+text-align: center;
+}
+
+.block.block-subscribe span {
+font-size: 17px;
+font-weight: bold;
+text-transform: uppercase;.
+font-family: 'Open Sans', sans-serif;
+}

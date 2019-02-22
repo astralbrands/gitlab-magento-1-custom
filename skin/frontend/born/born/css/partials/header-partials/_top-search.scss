@@ -1,0 +1,198 @@
+.form-search-wrap._open-form {
+  .form-search {
+    display: block;
+  }
+}
+
+#search_mini_form .search-button {
+  width: 67px;
+  height: 70px;
+  background: $black;
+  position: absolute;
+  right: 69px;
+  top: 0;
+  background: transparent;
+  z-index: 1;
+  transition: opacity .2s ease-out;
+  &:hover {
+    box-shadow: none;
+    opacity: .75;
+  }
+}
+
+.form-search-toggle-btn {
+  display: inline-block;
+  vertical-align: middle;
+  width: 68px;
+  height: 70px;
+  text-align: center;
+  font-family: $icomoon;
+  font-size: 2rem;
+  color: $black;
+  position: relative;
+  .icon-search {
+    font-size: 3rem;
+    line-height: 7rem;
+  }
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    text-decoration: none;
+    color: $black;
+    .icon-search {
+      color: $white;
+    }
+  }
+}
+
+.form-search {
+  display: none;
+  position: absolute;
+  overflow: hidden;
+  top: 70px;
+  background: $black;
+  z-index: 9;
+  width: 100%;
+  left: 0;
+  max-width: $page-width;
+  right: 0;
+  margin: 0 auto;
+  &:after {
+    text-align: center;
+    font-family: $icomoon;
+    font-size: 3rem;
+    display: block;
+    width: 30px;
+    height: 43px;
+    content: "\e93b";
+    color: $white;
+    left: auto;
+    position: absolute;
+    top: 0;
+    margin: auto 0;
+    right: 93px;
+    bottom: 0;
+  }
+  .form-search__input {
+    @include gotham();
+    font-size: 2.4rem;
+    font-weight: 300;
+    border: none;
+    background: none;
+    outline: none;
+    color: $white;
+    height: 70px;
+    padding: 0 30px;
+    width: calc(100% - 135px);
+    margin-right: 67px;
+    @include placeholder {
+      color: $white;
+    }
+    &:focus {
+      @include placeholder {
+        color: $light-text-color;
+      }
+    }
+  }
+}
+/*To remove “X” from all search input fields in IE*/
+input[type="search"]::-ms-clear {  display: none; width: 0; height: 0; }
+input[type="search"]::-ms-reveal {  display: none; width: 0; height: 0; }
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+.form-search__close-btn {
+  width: 71px;
+  height: 70px;
+  background: $black;
+  border-left: 1px solid $white;
+  @include position(absolute, 0 0 null null);
+  text-align: center;
+  .icon-ex {
+    font-size: 2.5rem;
+    line-height: 7rem;
+    color: $white;
+    transition: opacity .2s ease-out;
+  }
+  &:hover {
+    box-shadow: none;
+    &:after {
+      opacity: .75;
+    }
+  }
+}
+#header-search {
+  position: static;
+  width: auto;
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
+  top: auto;
+  margin-right: 1px;
+  .form-search-toggle-btn {
+    height: 70px;
+    border: 0;
+    display: block;
+    &:hover {
+      background: $black;
+    }
+    &:hover::before {
+      color: $white;
+    }
+  }
+}
+._fixed-header {
+  #search_mini_form .search-button {
+    height: 60px;
+  }
+  .form-search-toggle-btn {
+    height: 60px;
+    .icon-search {
+      line-height: 6rem;
+    }
+  }
+  .form-search {
+    top: 60px;
+    .form-search__input {
+      height: 60px;
+    }
+  }
+  .form-search__close-btn {
+    height: 60px;
+    .icon-ex {
+      line-height: 6rem;
+    }
+  }
+  #header-search  .form-search-toggle-btn {
+    height: 60px;
+  }
+}
+
+.icon-sprite, .btn-remove2, .sorter > .sort-by .sort-by-switcher, .sorter > .view-mode .grid, .sorter > .view-mode .list, .skip-nav .icon, .skip-search .icon, #search_mini_form .search-button:before, .skip-account .icon, .skip-cart .icon, .product-view, .review-summary-table .rating-box .rating-number:after, .ratings-table .rating-box{
+  background-image: none;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), not all, not all, not all, (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .icon-sprite, .btn-remove2, .ratings .rating-box, .ratings .rating-box .rating, .sorter > .sort-by .sort-by-switcher, .sorter > .view-mode .grid, .sorter > .view-mode .list, .skip-nav .icon, .skip-search .icon, #search_mini_form .search-button:before, .skip-account .icon, .skip-cart .icon, .product-view, .review-summary-table {
+    background-image: none;
+  }
+}
+
+@media only screen and  (max-width: $desktop-custom-3){
+  .form-search-toggle-btn,
+  .form-search__close-btn {
+    width: 60px;
+  }
+  .form-search .form-search__input {
+    width: calc(100% - 127px);
+  }
+  #search_mini_form .search-button {
+    right: 60px;
+  }
+  .form-search:after {
+    right: 76px;
+  }
+}

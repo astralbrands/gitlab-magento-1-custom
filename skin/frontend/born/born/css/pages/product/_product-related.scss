@@ -1,0 +1,146 @@
+//  \app\design\frontend\born\born\template\catalog\product\view.phtml
+// \app\design\frontend\born\born\template\catalog\product\list\related.phtml
+
+.catalog-product-view {
+    .block-related {
+      width: 100%;
+      float: none;
+      max-width: 90%;
+      margin: 0 auto;
+      padding-left: 0;
+      .block-title {
+        border-top: none;
+        h2 {
+          @include gotham;
+          @include setFont(2.4rem, 4.2rem, 500);
+          color: $black;
+          margin: 0;
+          text-align: center;
+          text-transform: uppercase;
+        }
+      }
+      .block-content {
+        margin-bottom: 40px;
+      }
+      .mini-products-list {
+        @include display(flex);
+        .item {
+          @include flex-basis(33.33%);
+          margin: 0;
+          &:first-child {
+            .item-outer {
+              border-left: 1px solid $block-border-color;
+            }
+          }
+          &-outer {
+            padding-top: 100%;
+            position: relative;
+            border-top: 1px solid $block-border-color;
+            border-bottom: 1px solid $block-border-color;
+            border-right: 1px solid $block-border-color;
+          }
+          &-inner {
+            @include position(absolute, 0 0 0 0);
+            width: 100%;
+            height: 100%;
+            font-size: 0;
+            text-align: center;
+            &:after {
+              height: 100%;
+              content: '';
+              width: 0;
+              display: inline-block;
+              vertical-align: middle;
+            }
+          }
+        }
+      }
+      .product {
+        text-align: center;
+        vertical-align: middle;
+        display: inline-block;
+        .product-image {
+          width: 100%;
+          float: none;
+          img {
+            width: 70%;
+            margin: 0 auto;
+            height: auto;
+          }
+        }
+        .special-price,
+        .regular-price {
+          float: none;
+          font-size: 1.4rem;
+          .price {
+            float: none;
+            color: $black;
+            font-weight: 500;
+            @include gotham();
+          }
+        }
+        .old-price {
+          font-size: 1.4rem;
+          .price {
+            @include chronic();
+          }
+        }
+        .product-name {
+          @include gothamBook;
+          @include setFont(1.6rem, 2.14rem, 400);
+          a {
+            font-weight: 200;
+            font-size: 1.6rem;
+            text-transform: none;
+            color: $black;
+          }
+        }
+      }
+      .product-details {
+        margin: 0;
+      }
+    }
+}
+
+
+@media only screen and (max-width: $tablet) {
+  .catalog-product-view {
+    .block-related {
+      max-width: 934px;
+      .mini-products-list {
+        @include flex-wrap(wrap);
+        .item {
+          @include flex-basis(50%);
+          &:nth-child(n + 3) {
+            .item-outer {
+              border-top: none;
+              border-left: 1px solid $block-border-color;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width: $mobile) {
+  .catalog-product-view {
+    .block-related {
+      max-width: 400px;
+      margin: 40px auto;
+      .mini-products-list {
+        @include flex-wrap(wrap);
+        .item {
+          @include flex-basis(100%);
+          &:nth-child(n + 2) {
+            .item-outer {
+              border-top: none;
+              border-left: 1px solid $block-border-color;
+            }
+          }
+        }
+      }
+    }
+  }
+}

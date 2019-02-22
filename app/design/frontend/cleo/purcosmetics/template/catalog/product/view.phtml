@@ -1,0 +1,673 @@
+<?php
+    $_helper = $this->helper('catalog/output');
+    $_customHelper = $this->helper('weltpixel_custom');
+    $_selectorHelper = $this->helper('weltpixel_selector');
+    $ajaxAddToCartEnabled = $_selectorHelper->getAjaxAddtoCart();
+    $ajaxConfirmationHide = $_selectorHelper->getAjaxAddtoCartConfirmationHide();
+    $_product = $this->getProduct();
+    $_productId = $_product->getId();
+    $_productName = $_helper->productAttribute($_product, $_product->getName(), 'name');
+    $_productSku = $_helper->productAttribute($_product, $_product->getSku(), 'sku');
+    $_productShortDescription = $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description');
+    $_productPrice = $this->getPriceHtml($_product, true);
+    $_productReviews = $this->getReviewsSummaryHtml($_product, false, true);
+    $_upsells = trim($this->getChildHtml('upsell_products'));
+    $_relatedRight = trim($this->getChildHtml('related_right'));
+    $_messages = trim($this->getMessagesBlock()->getGroupedHtml());
+    $_review_form = $this->getChildHtml('review_form');
+    $_reviews = $this->getChildHtml('reviews');
+    $_settings = Mage::getStoreConfig('weltpixel_selector/productpageoptions');
+    $_infoFormat = $_settings['product_info_format'] ? $_settings['product_info_format'] : "accordion";
+    $_infoLayout = $_settings['product_info_layout'] ? $_settings['product_info_layout'] : "twocolumns";
+    $_secondaryColumnLocation = $_settings['secondary_column_location'];
+    $_imageColumnWidth = $_settings['image_column_width'];
+    $_productInfoWidth = $_settings['product_info_width'];
+    $_secondaryColumnWidth = $_settings['secondary_column_width'];
+    $_relatedProductsCount = count($_product->getRelatedProductIds());
+    $_secondaryColumnOption = $_settings['secondary_column_options']; //related,cms,replace
+    $appTabsEnabled = '';
+    if ($ajaxAddToCartEnabled) :
+        $_productAction = $this->getSubmitUrl($_product, array());
+    else :
+        $_productAction = $this->getSubmitUrl($_product, array(), false);
+    endif;
+
+    $superAttributes = [];
+    if ($_product->getTypeId() == 'configurable') {
+        $attributes = $_product->getTypeInstance()->getConfigurableAttributes($_product);
+        foreach ($attributes as $attr) {
+            $superAttributes[] = $attr->getAttributeId();
+        }
+    }
+    $superAttributes = implode(',', $superAttributes);
+?>
+
+<script>var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig(); ?>);</script>
+
+<?php if ($_messages): ?>
+    <div id="messages_product_view"><?php echo $_messages; ?></div>
+<?php endif; ?>
+<style>
+    img.product-image {
+        height: 300px;
+    }
+</style>
+<div id="product-view">
+    <input type="hidden" id="super_attributes" name="super_attributes" value="<?php echo $superAttributes; ?>" />
+    <form action="<?php echo $_productAction; ?>" method="post" id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <?php echo $this->getBlockHtml('formkey'); ?>
+        <input type="hidden" name="product" value="<?php echo $_productId; ?>" />
+        <input type="hidden" name="related_product" id="related-products-field" value="" />
+        <div class="product-essential">
+            <div id="product-media" class="col-md-<?php echo $_imageColumnWidth; ?> col-sm-12 col-xs-12">
+                <?php echo $this->getChildHtml('media'); ?>
+            </div>
+            <div id="product-info" class="col-md-<?php echo $_productInfoWidth; ?> col-sm-12 col-xs-12">
+                <div class="product-info-main">
+                    <div class="panel-a">
+                        <h1><?php echo $_productName; ?></h1>
+                    </div>
+                    <div class="panel-b">
+                        <?php echo $_productPrice; ?>
+                        <?php // echo $_productReviews; ?>
+
+                        <div class="turnto_reviews_teaser">
+                            <?php echo $this->getChildHtml('turnto_reviews_teaser') ?>
+                        </div>
+
+                    </div>
+                    <div class="panel-c">
+                        <?php echo $this->getChildHtml('alert_urls'); ?>
+                        <?php echo $this->getTierPriceHtml(); ?>
+
+                        <?php if ($_product->getSubtitle()): ?>
+                            <h2 class="product-attribute subtitle">
+                                <?php echo $_helper->productAttribute($_product, $_product->getSubtitle(), 'subtitle'); ?>
+                            </h2>
+                        <?php endif; ?>
+                        <?php if ($_productShortDescription): ?>
+                            <div class="product-description"><?php echo $_productShortDescription; ?></div>
+                        <?php endif; ?>
+                    </div>
+
+                    <?php if (!$this->hasOptions()): ?>
+                        <div class="add-to-box">
+                            <?php if ($_product->isSaleable()): ?>
+                                <?php echo $this->getChildHtml('addtocart'); ?>
+                            <?php endif; ?>
+                            <?php echo $this->getChildHtml('addto'); ?>
+                        </div>
+                        <?php echo $this->getChildHtml('extra_buttons'); ?>
+                    <?php elseif (!$_product->isSaleable()): ?>
+                        <div class="add-to-box">
+                            <?php echo $this->getChildHtml('addto'); ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                        <?php echo $this->getChildHtml('product.info.swatch.shade'); ?>
+                        <?php echo $this->getChildChildHtml('container1', '', true, true); ?>
+                    <?php endif; ?>
+
+                    <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                        <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                    <?php endif; ?>
+                    <div class="additional-info">
+                        <?php if ($_settings['display_availability']): ?>
+                            <?php echo $this->getChildHtml('product_type_data'); ?>
+                        <?php endif; ?>
+                        <?php if ($_settings['display_sku'] && $_productSku): ?>
+                            <div class="product-sku"><?php echo $this->__('SKU'); ?>: <?php echo $_productSku; ?></div>
+                        <?php endif; ?>
+                    </div>
+                    <?php echo $this->getChildHtml('extrahint'); ?>
+                </div>
+            </div>
+
+            <?php if (($_secondaryColumnLocation == "right")): ?>
+                <div class="product-info-right col-md-<?php echo $_secondaryColumnWidth; ?> col-sm-12 col-xs-12">
+                    <div class="related other-products">
+                        <?php if (($_secondaryColumnOption == "related")): ?>
+                            <?php echo $_relatedRight; ?>
+                        <?php endif; ?>
+                        <?php if (($_secondaryColumnOption == "cms")): ?>
+                            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_replace_related')->toHtml(); ?>
+                        <?php endif; ?>
+                        <?php if ($_secondaryColumnOption == "replace"): ?>
+                            <?php if (($_relatedProductsCount > 0)): ?>
+                                <?php echo $_relatedRight; ?>
+                            <?php endif; ?>
+                            <?php if (($_relatedProductsCount == 0)): ?>
+                                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_replace_related')->toHtml(); ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php $cmsBlockCustom1 = $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_product_page_custom_block_1'); ?>
+
+            <?php if ($cmsBlockCustom1->toHtml() != ''): ?>
+                <div class="cms-block product-cms-block custom-cms-1">
+                    <?php echo $cmsBlockCustom1->toHtml(); ?>
+                </div>
+            <?php endif; ?>
+
+            <?php $cmsBlockCustom2 = $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_product_page_custom_block_2'); ?>
+            <?php if ($cmsBlockCustom1->toHtml() != ''): ?>
+                <div class="cms-block product-cms-block custom-cms-2">
+                    <?php echo $cmsBlockCustom2->toHtml(); ?>
+                </div>
+            <?php endif; ?>
+
+            <!-- CMS Contents - Tab Section -->
+            <?php
+            /* ha ha ha... we inherited this attribute :-) */
+            $showCmsContents = strtolower(trim($_product->getResource()->getAttribute('show_cms_contents')->getFrontend()->getValue($_product)));
+            $appTabsEnabled = $showCmsContents == 'enable' || strpos($appTabsEnabled, 'enable') !== false ? true : false;
+            ?>
+            <?php if ($appTabsEnabled): ?>
+                <?php $value = $_product->getDirections() ? 'custom' : null; ?>
+                <div class="cms-contents-section product-tabs">
+                    <?php
+                    $tabs = array(
+                        'highlights' => array(
+                            'title' => $this->__('Highlights'),
+                            'subtitle' => null,
+                            'value' => $_helper->productAttribute($_product, $_product->getDescription(), 'description'),
+                            'additional' => array(
+                                'image' => $_customHelper->getProductImage($_product, 'highlight_video_image', false, false, 750)
+                            ),
+                        ),
+                        'application' => array(
+                            'title' => $this->__('Application'),
+                            'subtitle' => null,
+                            'value' => $value,
+                            'additional' => array(
+                                'directions' => $_product->getResource()->getAttribute('directions')->getFrontend()->getValue($_product),
+                                'directions_product' => $_customHelper->getDirectionsSku($_product->getDirectionsSku()),
+                                'pro_tip_image' => $_customHelper->getProductImage($_product, 'pro_tip_image', true, true, 500, true),
+                                'image_tag' => $_product->getResource()->getAttribute('tag_text')->getFrontend()->getValue($_product),
+                                'pro_tip' => $_product->getResource()->getAttribute('pro_tip')->getFrontend()->getValue($_product),
+                                'how-to' => array(
+                                    'how-to-1' => array(
+                                        'title' => $_helper->productAttribute($_product, $_product->getHowToTitle1(), 'how_to_title1'),
+                                        'text' => $_helper->productAttribute($_product, $_product->getHowToText1(), 'how_to_text1'),
+                                        'instructions' => $_helper->productAttribute($_product, $_product->getHowToInstructions1(), 'how_to_instructions1'),
+                                        'image' => $_customHelper->getProductImage($_product, 'how_to_image1', true, true, 500, true),
+                                    ),
+                                    'how-to-2' => array(
+                                        'title' => $_helper->productAttribute($_product, $_product->getHowToTitle2(), 'how_to_title2'),
+                                        'text' => $_helper->productAttribute($_product, $_product->getHowToText2(), 'how_to_text2'),
+                                        'instructions' => $_helper->productAttribute($_product, $_product->getHowToInstructions2(), 'how_to_instructions2'),
+                                        'image' => $_customHelper->getProductImage($_product, 'how_to_image2', true, true, 500, true),
+                                    ),
+                                )
+                            ),
+                        ),
+                        'benefits' => array(
+                            'title' => $_customHelper->getAttributeDetails('benefits')->getFrontendLabel(),
+                            'subtitle' => null,
+                            'value' => $_customHelper->getSmartBoxes($_product, $_settings['smart_box']),
+                            'additional' => null,
+                        ),
+                        'ingredients' => array(
+                            'title' => $_customHelper->getAttributeDetails('ingredients')->getFrontendLabel(),
+                            'subtitle' => $this->__('All Ingredients'),
+                            'value' => $_product->getResource()->getAttribute('ingredients')->getFrontend()->getValue($_product),
+                            'additional' => null,
+                        ),
+                    );
+                    ?>
+
+                    <div class="tabs tabs-alt tabs-justify clearfix">
+                        <ul class="tab-nav clearfix">
+                            <?php foreach ($tabs as $identifier => $tab): ?>
+                                <?php if ($tab['value']): ?>
+                                    <li class="nav-<?php echo $identifier ?>">
+                                        <a href="#tab_<?php echo $identifier ?>">
+                                            <?php echo $tab['title'] ?>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                        <div class="tab-separator"></div>
+                        <div class="tab-container">
+                            <?php $tabCount = 1; foreach ($tabs as $identifier => $tab): ?>
+                                <?php if(!empty($tab['value'])): ?>
+                                    <div class="tab-accordion">
+                                        <h3 id="head_<?php echo $identifier ?>" class="accordion-heading head_<?php echo $identifier ?>">
+                                            <?php echo $tab['title'] ?>
+                                        </h3>
+                                        <?php $addClass = $identifier == 'ingredients' ? 'col-xs-12 col-md-8 col-md-push-2' : ''; ?>
+                                        <div class="tab-content clearfix tab-<?php echo $identifier ?>" id="tab_<?php echo $identifier ?>">
+                                            <?php if ($tab['subtitle'] && $tab['value']): ?>
+                                                <h3 class="tab-subtitle">
+                                                    <?php echo $tab['subtitle'] ?>
+                                                </h3>
+                                            <?php endif; ?>
+                                            <?php if ($identifier == 'highlights' && $tab['value']): ?>
+                                                <div class="description hightlights-wrap">
+                                                    <?php $class = $tab['additional']['image'] ? 'col-xs-12 col-md-6' : 'col-xs-12 col-md-12'; ?>
+                                                    <div class="description-text hightlights-side <?php echo $class ?>">
+                                                        <div class="hightlights-side-inner">
+                                                            <div class="hightlights-description">
+                                                                <?php echo $tab['value'] ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <?php if ($tab['additional']['image']): ?>
+                                                        <div class="description-image hightlights-side <?php echo $class ?>">
+                                                            <div class="image">
+                                                                <img class="highlight-image" src="<?php echo $tab['additional']['image']; ?>" alt="" title="" />
+                                                            </div>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </div>
+                                            <?php elseif ($identifier == 'application' && $tab['value']): ?>
+                                                <div class="tab-val application center">
+                                                    <div class="col-container">
+                                                        <?php if ($directionsText = $tab['additional']['directions']): ?>
+                                                            <div class="tab-section col-content directions text-wrapper">
+                                                                <div class="text-content">
+                                                                    <?php echo $directionsText; ?>
+                                                                </div>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                        <?php if ($_directionProduct = $tab['additional']['directions_product']): ?>
+                                                            <div class="tab-section col-content directions_sku product-wrapper">
+                                                                <?php
+                                                                $price = $_directionProduct->getPrice();
+                                                                $finalPrice = $_directionProduct->getFinalPrice();
+                                                                ?>
+                                                                <div class="image-wrapper">
+                                                                    <?php if ($imageTag = $tab['additional']['image_tag']): ?>
+                                                                        <div class="image_tag">
+                                                                            <p><?php echo $imageTag; ?></p>
+                                                                        </div>
+                                                                    <?php endif; ?>
+                                                                    <a class="product-url" href="<?php echo $_directionProduct->getProductUrl() ?>" title="<?php echo $_directionProduct->getName() ?>">
+                                                                        <img
+                                                                                class="product-image cms-product-image"
+                                                                                src="<?php echo $_customHelper->getProductImage($_directionProduct, 'image', true, true, 210); ?>"
+                                                                                alt="<?php echo $_directionProduct->getName(); ?>" />
+                                                                    </a>
+                                                                </div>
+                                                                <a class="product-url" href="<?php echo $_directionProduct->getProductUrl() ?>" title="<?php echo $_directionProduct->getName() ?>">
+                                                                    <h3 class="product-name"><?php echo $_directionProduct->getName(); ?></h3>
+                                                                </a>
+                                                                <div class="product-price">
+                                                                    <div class="price-box">
+                                                                        <p class="price">
+                                                                        <span class="price" id="product-price-copy-<?php echo $_directionProduct->getId(); ?>">
+                                                                            <?php echo Mage::helper('core')->currency($finalPrice, true, false) ?>
+                                                                        </span>
+                                                                        </p>
+                                                                        <?php if ($finalPrice < $price): ?>
+                                                                            <p class="old-price">
+                                                                            <span class="price" id="old-price-copy-<?php echo $_directionProduct->getId(); ?>">
+                                                                                <?php echo $this->__('- was') ?>
+                                                                                <?php echo Mage::helper('core')->currency($price, true, false) ?>
+                                                                            </span>
+                                                                            </p>
+                                                                        <?php endif; ?>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                    <div class="col-container">
+                                                        <?php if ($directionImage = $tab['additional']['pro_tip_image']): ?>
+                                                            <div class="tab-section col-content directions_image image-wrapper">
+                                                                <img class="directions-image" src="<?php echo $directionImage; ?>" alt="" />
+                                                            </div>
+                                                        <?php endif; ?>
+                                                        <?php if ($proTipText = $tab['additional']['pro_tip']): ?>
+                                                            <div class="tab-section col-content pro_tip text-wrapper">
+                                                                <span class="before"></span>
+                                                                <div class="text-content">
+                                                                    <?php echo $proTipText; ?>
+                                                                </div>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                    <!-- CMS Contents - How To Section -->
+                                                    <?php if ($_product->getHowToMainTitle()): ?>
+                                                        <div class="cms-contents-section how-to">
+                                                            <div class="how-to-title">
+                                                                <h2><?php echo $_helper->productAttribute($_product, $_product->getHowToMainTitle(), 'how_to_main_title'); ?></h2>
+                                                            </div>
+                                                            <div class="how-to-container">
+                                                                <?php $howToCount = 1; foreach ($tab['additional']['how-to'] as $section): ?>
+                                                                    <div class="how-to-card">
+                                                                        <div class="how-to-card-block-title">
+                                                                            <?php echo $section['title'] ?>
+                                                                        </div>
+                                                                        <div class="how-to-content toggle-parent">
+                                                                            <?php $placeholderClass = strpos($section['image'], 'placeholder') !== false ? 'placeholder' : ''; ?>
+                                                                            <div class="front <?php echo $placeholderClass ?>" style="background-image: url('<?php echo $section['image'] ?>')">
+                                                                            <span class="how-to-card-eye">
+                                                                                <?php echo $section['text'] ?>
+                                                                                <i class="icon icon-eye-open"></i>
+                                                                            </span>
+                                                                            </div>
+                                                                            <div class="back-container toggle-visibility how-to-<?php echo $howToCount ?>">
+                                                                                <div class="back-content">
+                                                                                    <?php echo $section['instructions'] ?>
+                                                                                    <span class="how-to-card-eye">
+                                                                                    <i class="icon icon-eye-close"></i>
+                                                                                </span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php $howToCount++; endforeach; ?>
+                                                            </div>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                    <!-- End CMS Contents - How To Section -->
+                                                </div>
+                                            <?php elseif ($identifier == 'benefits' && $tab['value']): ?>
+                                                <div class="tab-val benefits" style="display: flex">
+                                                    <?php $i = 0; foreach ($tab['value'] as $martBox): ?>
+                                                        <div class="benefit">
+                                                            <div class="benefit-outer">
+                                                                <div class="benefit-inner">
+                                                                    <div class="benefit-inner-middle">
+                                                                        <?php echo $martBox['cms']; ?>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            <?php elseif($identifier == 'ingredients' && $tab['value']): ?>
+                                                <div class="tab-val ingredients">
+                                                    <?php echo $tab['value'] ?>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                            <?php $tabCount++; endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <!-- End CMS Contents - Tab Section -->
+
+            <!-- Under / Over Section -->
+            <?php
+            $routines = array(
+                'routine_main_title' => $_helper->productAttribute($_product, $_product->getRoutineMainTitle(), 'routine_main_title'),
+                'current_product_position' => $_product->getResource()->getAttribute('current_product_position')->getFrontend()->getValue($_product),
+                'routine_products' => $_customHelper->getRoutineProducts($_product),
+                'routine_titles' => array(
+                    '1' => $_helper->productAttribute($_product, $_product->getRoutineTitle1(), 'routine_title1'),
+                    '2' => $_helper->productAttribute($_product, $_product->getRoutineTitle2(), 'routine_title2'),
+                    '3' => $_helper->productAttribute($_product, $_product->getRoutineTitle3(), 'routine_title3'),
+                ),
+                'routine_cta_text' => $_helper->productAttribute($_product, $_product->getRoutineCtaText(), 'routine_cta_text'),
+                'routine_cta_link' => $_helper->productAttribute($_product, $_product->getRoutineCtaLink(), 'routine_cta_link'),
+            );
+            ?>
+            <?php if ($routines['routine_main_title']): ?>
+                <div class="routines">
+                    <h2 class="routines-title"><?php echo $routines['routine_main_title'] ?></h2>
+                    <div class="routines-wrap col-container">
+                        <?php $routineClass = $_customHelper->getRoutineClass(count($routines['routine_products'])); ?>
+                        <?php $i = 1; foreach ($routines['routine_products'] as $_routineProduct): ?>
+                            <?php $currentClass = $_product->getSku() == $_routineProduct->getSku() ? 'current' : $i; ?>
+                            <div class="routine col-content routine-<?php echo $currentClass ?> col-xs-12 col-md-4 <?php echo $routineClass ?>">
+                                <p class="routine-title"><?php echo $routines['routine_titles'][$i] ?></p>
+                                <div class="routine-outer">
+                                    <div class="routine-product">
+                                        <span class="number"><?php echo $i ?></span>
+                                        <div class="routines-product-inner">
+                                            <?php $productName = $_helper->productAttribute($_routineProduct, $_routineProduct->getName(), 'name') ?>
+                                            <div class="routine-image">
+                                                <a href="<?php echo $_routineProduct->getProductUrl() ?>" title="<?php echo $productName ?>">
+                                                    <img src="<?php echo $_customHelper->getProductImage($_routineProduct, 'image', 500) ?>" alt="<?php echo $productName ?>" title="<?php echo $productName
+                                                    ?>" />
+                                                </a>
+                                            </div>
+                                            <p class="routines-product-name">
+                                                <a href="<?php echo $_routineProduct->getProductUrl() ?>" title="<?php echo $productName ?>">
+                                                    <?php echo $productName ?>
+                                                </a>
+                                            </p>
+                                            <?php //echo $this->getPriceHtml($_routineProduct, true); ?>
+                                            <?php
+                                                $price = $_routineProduct->getPrice();
+                                                $finalPrice = $_routineProduct->getFinalPrice();
+                                            ?>
+                                            <div class="price-box">
+                                                <p class="price">
+                                                    <span class="price" id="product-price-copy-<?php echo $_routineProduct->getId(); ?>">
+                                                        <?php echo Mage::helper('core')->currency($finalPrice, true, false) ?>
+                                                    </span>
+                                                </p>
+                                                <?php if ($finalPrice < $price): ?>
+                                                    <p class="old-price">
+                                                        <span class="price" id="old-price-copy-<?php echo $_routineProduct->getId(); ?>">
+                                                            <?php echo $this->__('- was') ?>
+                                                            <?php echo Mage::helper('core')->currency($price, true, false) ?>
+                                                        </span>
+                                                    </p>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php $i++; endforeach; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <!-- End Under / Over Section -->
+
+            <?php $cmsBlockCustom3 = $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_product_page_custom_block_3'); ?>
+            <?php if ($cmsBlockCustom1->toHtml() != ''): ?>
+                <div class="cms-block product-cms-block custom-cms-3">
+                    <?php echo $cmsBlockCustom3->toHtml(); ?>
+                </div>
+            <?php endif; ?>
+
+            <?php $cmsBlockCustom4 = $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_product_page_custom_block_4'); ?>
+            <?php if ($cmsBlockCustom1->toHtml() != ''): ?>
+                <div class="cms-block product-cms-block custom-cms-4">
+                    <?php echo $cmsBlockCustom4->toHtml(); ?>
+                </div>
+            <?php endif; ?>
+
+            <?php $cmsBlockCustom5 = $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_product_page_custom_block_5'); ?>
+            <?php if ($cmsBlockCustom1->toHtml() != ''): ?>
+                <div class="cms-block product-cms-block custom-cms-5">
+                    <?php echo $cmsBlockCustom5->toHtml(); ?>
+                </div>
+            <?php endif; ?>
+
+        </div>
+
+        <script>
+            //<![CDATA[
+            var productAddToCartForm = new VarienForm('product_addtocart_form');
+            var addOptions = {};
+            addOptions.submittedForm = false;
+            addOptions.confirmationHide = <?php echo $ajaxConfirmationHide ?>;
+            /*
+             *Enter on input to submit the form as well
+             */
+            jQuery('input#qty').keypress(function (e) {
+                if (e.which == 13) {
+                    e.preventDefault();
+                    productAddToCartForm.submit();
+                    return false;
+                }
+            });
+
+            <?php if ($ajaxAddToCartEnabled) : ?>
+                productAddToCartForm.submit = function(button, url) {
+                    if (this.validator.validate() &&  !addOptions.submittedForm) {
+                        var form = this.form;
+                        var url = form.action;
+
+                        if (weltpixel.quickview.inIframe) {
+                            parent.weltpixel.quickview.addToCart(url, $(form).serialize(true), addOptions);
+                        } else {
+                            weltpixel.quickview.addToCart(url, $(form).serialize(true), addOptions);
+                        }
+
+                        addOptions.submittedForm = true;
+                    } else {
+                        jQuery('html,body').animate({
+                            scrollTop: jQuery("#product-options-wrapper").offset().top -100
+                        });
+                    }
+                }.bind(productAddToCartForm);
+            <?php else : ?>
+                productAddToCartForm.submit = function(button, url) {
+                    if (this.validator.validate()) {
+                        var form = this.form;
+                        var oldUrl = form.action;
+
+                        if (url) {
+                            form.action = url;
+                        }
+                        var e = null;
+                        try {
+                            this.form.submit();
+                        } catch (e) {
+                        }
+                        this.form.action = oldUrl;
+                        if (e) {
+                            throw e;
+                        }
+
+                        if (button && button != 'undefined') {
+                            button.disabled = true;
+                        }
+                    } else {
+                        jQuery('html,body').animate({
+                            scrollTop: jQuery("#product-options-wrapper").offset().top -100
+                        });
+                    }
+                }.bind(productAddToCartForm);
+
+                productAddToCartForm.submitLight = function(button, url){
+                    if(this.validator) {
+                        var nv = Validation.methods;
+                        delete Validation.methods['required-entry'];
+                        delete Validation.methods['validate-one-required'];
+                        delete Validation.methods['validate-one-required-by-name'];
+                        // Remove custom datetime validators
+                        for (var methodName in Validation.methods) {
+                            if (methodName.match(/^validate-datetime-.*/i)) {
+                                delete Validation.methods[methodName];
+                            }
+                        }
+
+                        if (this.validator.validate()) {
+                            if (url) {
+                                this.form.action = url;
+                            }
+                            this.form.submit();
+                        }
+                        Object.extend(Validation.methods, nv);
+                    }
+                }.bind(productAddToCartForm);
+            <?php endif; ?>
+            //]]>
+        </script>
+    </form>
+    <?php if (($_secondaryColumnLocation == "bottom")): ?>
+        <div class="col-xs-12 col-md-12">
+            <div class="related other-products">
+                <?php if (($_secondaryColumnOption == "related")) {
+                    echo $_relatedRight;
+                } ?>
+                <?php if (($_secondaryColumnOption == "cms")) {
+                    echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_replace_related')->toHtml();
+                } ?>
+                <?php if ($_secondaryColumnOption == "replace"): ?>
+                    <?php if (($_relatedProductsCount > 0)) {
+                        echo $_relatedRight;
+                    } ?>
+                    <?php if (($_relatedProductsCount == 0)) {
+                        echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_replace_related')->toHtml();
+                    } ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($_upsells): ?>
+        <div class="upsell other-products">
+            <div class="w">
+                <?php echo $_upsells; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php echo $this->getChildHtml('product_additional_data'); ?>
+
+    <?php /* if ($_settings['display_reviews']) : ?>
+        <?php
+        <div id="product-reviews">
+            <div class="w">
+                <h3><span><?php echo $this->__('Reviews'); ?></span></h3>
+                <div class="row">
+                    <?php if ($_review_form): ?>
+                        <div class="col-md-6 col-sm-12 col-xs-12" id="reviews-write">
+                            <?php echo $_review_form; ?>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12" id="reviews-read">
+                             <?php echo $_reviews; ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <?php echo $_reviews; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+        ?>
+    <?php endif; */ ?>
+
+    <?php $cmsPixlee = $this->getLayout()->createBlock('cms/block')->setBlockId('pixlee_widget'); ?>
+    <?php if ($cmsPixlee->toHtml() != ''): ?>
+        <div class="cms-block pixlee-block">
+            <?php echo $cmsPixlee->toHtml(); ?>
+        </div>
+    <?php endif; ?>
+
+    <div class="turnto_reviews_content">
+        <?php echo $this->getChildHtml('turnto_reviews_content') ?>
+    </div>
+</div>
+
+<div class="targetrule-container col-xs-12">
+    <div class="target-related">
+        <div class="w">
+            <?php echo $this->getChildHtml('related_products') ?>
+        </div>
+    </div>
+    <div class="w">
+        <?php echo $this->getChildHtml('upsell_products_enterprise') ?>
+    </div>
+</div>
+
+<script>
+    jQuery(function($) {
+        $('.accordion').on('click', 'dt', function() {
+            $('#todo').find('dt').removeClass('active');
+            $('#todo').find('dd').removeClass('active');
+            $(this).addClass('active');
+            $(this).next('dd').addClass('active');
+        });
+        $('#qty').niceSelect();
+        $('.super-attribute-select').niceSelect();
+    });
+</script>

@@ -1,0 +1,7 @@
+<layout version="0.1.0">
+    <checkout_cart_index>
+         <reference name="checkout.cart">
+              <block type="astral_zipcodes/checkout_onepage" name="zipcodes" template="zipcodes/zipcode.phtml" />
+         </reference>
+    </checkout_cart_index>    
+</layout>

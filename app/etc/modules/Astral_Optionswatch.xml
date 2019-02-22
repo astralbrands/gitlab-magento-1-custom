@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Astral_Optionswatch>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Astral_Optionswatch>
+    </modules>
+</config> 

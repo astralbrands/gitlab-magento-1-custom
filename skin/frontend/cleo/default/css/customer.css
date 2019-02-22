@@ -1,0 +1,616 @@
+.customer-account-index .dashboard .col2-set .col-1 .box-title a, .dashboard .col2-set .col-2 .box-title a {
+    position: absolute;
+    top: -10px;
+    right: 5%;
+    padding: 10px;
+    line-height: 19.6px;
+    color: #d83701;
+}
+.customer-address-index .col2-set .col-1 h2, .customer-address-index .col2-set .col-2 h2 {
+    font-size: 15px;
+    margin: 10px 0;
+    border-bottom: 1px solid #cccccc;
+    font-weight: 600;
+}
+.review-customer-index .rating-box, .review-customer-view .rating-box, .review-product-list .rating-box {
+    width: 71px;
+    font-family: "font-icons";
+    font-size: 15px;
+    position: relative;
+    line-height: 15px;
+}
+.review-customer-index .rating-box .rating, .review-customer-view .rating-box .rating, .review-product-list .rating-box .rating {
+    font-size: 15px;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    line-height: 15px;
+}
+.customer-account-index .no-display {
+    display: none;
+}
+.customer-account-index .dashboard .welcome-msg {
+    margin-bottom: 10px;
+}
+.customer-account-index .dashboard .box-account {
+    margin-bottom: 45px;
+}
+.customer-account-index .dashboard .box-account .box-head {
+    margin: 10px 0;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 5px;
+}
+.customer-account-index .dashboard .box-account .box-head h2 {
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 0;
+}
+.customer-account-index .dashboard .box-account .box-head a {
+    margin-left: 15px;
+    color: #d83701;
+}
+.customer-account-index .dashboard .box-account .box-title {
+    margin: 5px 0;
+    position: relative;
+}
+.customer-account-index .dashboard .box-account .col2-set {
+    overflow: hidden;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 45px;
+}
+.customer-account-index .dashboard .box-account .col2-set .col-1 {
+    width: 50%;
+}
+.customer-account-index .dashboard .box-account .col2-set .col-2 {
+    width: 50%;
+}
+.customer-account-index .dashboard .box-account p {
+    font-style: italic;
+}
+.my-wishlist{
+    float: left;
+    width: 100%;
+}
+
+.my-wishlist #wishlist-view-form {
+    float: left;
+    width: 100%;
+}
+.my-wishlist #wishlist-view-form #wishlist-table{
+    float: left;
+    width: 100%;
+}
+@media screen and (max-width: 768px){
+    .customer-account-index .dashboard .col2-set .col-1 .box-title a, .dashboard .col2-set .col-2 .box-title a {
+        right: 0;
+    }
+    .customer-account-index .dashboard .box-account .col2-set .col-1, .customer-account-index .dashboard .box-account .col2-set .col-2 {
+        width: 100%;
+    }
+    /* Force table to not be like tables anymore */
+    .my-wishlist #wishlist-view-form #wishlist-table table,
+    .my-wishlist #wishlist-view-form #wishlist-table thead,
+    .my-wishlist #wishlist-view-form #wishlist-table tbody,
+    .my-wishlist #wishlist-view-form #wishlist-table th,
+    .my-wishlist #wishlist-view-form #wishlist-table td,
+    .my-wishlist #wishlist-view-form #wishlist-table tr {
+        display: block;
+    }
+    /* Hide table headers (but not display: none;, for accessibility) */
+    .my-wishlist #wishlist-view-form #wishlist-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    .my-wishlist #wishlist-view-form #wishlist-table tr { border: 1px solid #ccc; }
+    .my-wishlist #wishlist-view-form #wishlist-table td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    .my-wishlist #wishlist-view-form #wishlist-table td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 10px;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+
+    /*
+    Label the data
+    */
+    .my-wishlist #wishlist-view-form #wishlist-table td:nth-of-type(1):before { content: "Product image"; }
+    .my-wishlist #wishlist-view-form #wishlist-table td:nth-of-type(2):before { content: "Product details"; }
+    .my-wishlist #wishlist-view-form #wishlist-table td:nth-of-type(3):before { content: "Add to cart"; }
+    .my-wishlist #wishlist-view-form #wishlist-table td:nth-of-type(4):before { content: "Product remove"; }
+}
+@media screen and (max-width: 479px) {
+    .data-table.orders .link-reorder {
+        display: none;
+    }
+    .data-table.orders .date {
+        display: none;
+    }
+    .my-wishlist .buttons-set button.button{
+        margin: 5px auto;
+        clear: both;
+    }
+
+    .my-account .buttons-set .button {
+      float: none;
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+}
+.dashboard .box-account address {
+    font-style: italic;
+}
+.aside .block {
+    float: left;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.aside .block.block-tags ul {
+    float: left;
+    width: 100%;
+}
+.aside .block.block-tags ul li {
+    float: left;
+}
+.aside .block.block-tags ul li a {
+    float: left;
+}
+.aside .block.block-tags ul li a:after {
+    content: ",";
+    float: right;
+    padding-right: 3px;
+}
+.aside .block.block-tags ul li:last-of-type a:after {
+    display: none;
+}
+.aside .block .block-title {
+    text-align: center;
+    font-size: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    margin: 20px 0;
+}
+.aside .block .block-content{
+    float: left;
+    width: 100%;
+}
+.block .block-content ol,
+.block .block-content ol li{
+    float: left;
+    width: 100%;
+}
+.aside .block .mini-products-list .product-image {
+    float: left;
+    min-width: 50px;
+}
+.aside .block .mini-products-list .product-details {
+    margin-left: 60px;
+    clear: right;
+    height: 60px;
+}
+.aside .block p.product-name {
+    display: initial;
+}
+.aside .block a.btn-edit, .aside .block a.btn-remove {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-color: #002d56;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    font-size: 0px;
+}
+.aside .block a.btn-remove {
+    background-image: url("../images/btn_remove.png");
+}
+.aside .block a.btn-edit {
+    background-image: url("../images/btn_edit.png");
+}
+.aside .block .actions {
+    margin: 10px 0 0;
+    float: left;
+    width: 100%;
+}
+.aside .block .actions a {
+    float: left;
+    color: #444;
+    margin-right: 50px;
+}
+.aside .block button span {
+    color: #fff;
+    display: block;
+    font-weight: bold;
+    padding: 5px 25px;
+}
+.aside .block button span span {
+    padding: 0;
+}
+.aside .block #compare-items .btn-remove {
+    float: right;
+}
+@media screen and (max-width: 767px) {
+    .block.block-reorder {
+        display: none;
+    }
+    .block.block-compare {
+        display: none;
+    }
+    .data-table.orders .link-reorder {
+        display: none;
+    }
+    .data-table.orders .separator {
+        display: none;
+    }
+    .data-table.orders .ship {
+        display: none;
+    }
+}
+.customer-address-form .no-display {
+    display: none;
+}
+/*.customer-address-form .input-text {
+    width: 350px;
+}*/
+.customer-address-form .checkbox {
+    margin-right: 5px;
+}
+.customer-address-form .back-link {
+    float: right;
+}
+.customer-address-form select {
+/*    width: 350px;*/
+    padding: 5px;
+}
+.customer-address-form .validation-advice {
+    color: red;
+}
+.customer-address-form .validation-failed {
+    border: 1px solid red;
+}
+.customer-address-form .form-list label {
+    float: none;
+}
+.my-account .product-name {
+    font-size: 16px;
+    margin: 0px;
+    padding: 0px;
+}
+.my-account .back-link {
+    float: right;
+}
+.my-account button {
+    padding: 3px 8px;
+}
+.my-account li.control input.checkbox {
+    float: left;
+    margin-top: 10px;
+}
+.customer-account-edit .no-display {
+    display: none;
+}
+.customer-account-edit .checkbox {
+    margin-right: 10px;
+}
+.customer-account-edit .validation-advice {
+    color: red;
+}
+.customer-account-edit .validation-failed {
+    border: 1px solid red;
+}
+.customer-account-edit .form-list label {
+    float: none;
+}
+.customer-account-edit h2.legend {
+    font-size: 18px;
+    margin: 10px 0 5px;
+}
+.customer-address-index .col2-set {
+    overflow: hidden;
+}
+.customer-address-index .col2-set .col-1 {
+    width: 50%;
+	float: left;
+}
+.customer-address-index .col2-set .col-1 ol li.item {
+    margin: 0 0 15px 15px;
+}
+.customer-address-index .col2-set .col-1 ol li.item address {
+    margin: 0;
+}
+.customer-address-index .col2-set .col-2 {
+    width: 50%;
+	float: left;
+}
+.customer-address-index .col2-set .col-2 ol li.item {
+    margin: 0 0 15px 15px;
+}
+.customer-address-index .col2-set .col-2 ol li.item address {
+    margin: 0;
+}
+.customer-address-index .col-1.addresses-primary a {
+    color: #d83701;
+}
+@media screen and (max-width: 479px) {
+    .customer-address-index .col2-set .col-1 {
+        width: 100%;
+    }
+    .customer-address-index .col2-set .col-2 {
+        width: 100%;
+    }
+
+    .customer-address-form .input-text, .customer-address-form select  {
+        width: 100%;
+    }
+
+}
+#customer-reviews .reviews-list {
+    display: block;
+    height: 242px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+#customer-reviews .buttons-set {
+    display: none;
+}
+body.customer-account .data-table.orders th.ship {
+    display: none;
+}
+body.customer-account .data-table.orders td.ship {
+    display: none;
+}
+body.customer-account-login .customer-account {
+    padding: 180px 0 0;
+    min-height: 450px;
+}
+body.customer-account-forgotpassword #page-body-section-02 .main {
+    padding: 140px 0px 40px;
+    min-height: 450px;
+}
+body.customer-account-create .account-create {
+    padding: 60px 0 20px;
+}
+body.customer-account-login .account-panel {
+    width: 100%;
+    margin: 0 auto;
+}
+body.customer-account-login .account-panel .panel-details {
+    display: none;
+    background-color: #fff;
+    float: left;
+    width: 100%;
+    padding: 5%;
+}
+body.customer-account-login .account-panel .panel-details h4 {
+    font-weight: bold;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    float: left;
+    padding: 10px 0;
+}
+body.customer-account-login .account-panel .panel-link {
+    padding: 50px 10%;
+    float: left;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 24px;
+    border: 1px solid #eee;
+    background-color: #fff;
+}
+body.customer-account-login .account-panel .panel-link.active {
+    display: none;
+}
+body.customer-account-login .account-panel .panel-link.active + .panel-details {
+    display: block;
+    margin-bottom: 100px;
+}
+body.customer-account-login .account-panel .buttons-set {
+    border: none;
+}
+body.customer-account-login .account-panel .buttons-set .button {
+    float: left;
+    width: 100%;
+    text-align: center;
+    margin-left: 0;
+    padding: 10px 0;
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+body.customer-account-login .account-panel .buttons-set .button span {
+    padding: 0;
+    float: none;
+}
+body.customer-account-login .account-panel .utils .forgot-password {
+    float: right;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+body.customer-account-login .account-panel .utils input#is_subscribed {
+    float: left;
+    margin-right: 5px;
+    margin-top: 2px;
+}
+body.customer-account-login .account-panel .utils input#is_subscribed + label {
+    float: left;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+@media screen and (max-width: 960px) {
+    body.customer-account-login .customer-account {
+        min-height: 400px;
+    }
+    body.customer-account-login .customer-account .col-4 {
+        width: 66.66%;
+        margin-left: 16.6667%;
+        margin-right: 16.6667%;
+        margin-bottom: 20px;
+    }
+    body.customer-account-login .customer-account .col-4 .account-panel {
+        width: 100%;
+    }
+    body.customer-account-login .customer-account .col-4 .account-panel .panel-link {
+        padding: 10px 0%;
+        width: 100%;
+    }
+    body.customer-account-login .customer-account .col-4 .account-panel .panel-details {
+        border: 1px solid #EEE;
+    }
+}
+@media screen and (max-width: 480px) {
+    body.customer-account-login .customer-account .col-4 {
+        width: 94%;
+        margin-left: 3%;
+        margin-right: 3%;
+    }
+
+    .customer-account-index .dashboard .col2-set .col-1 .box-title a, .dashboard .col2-set .col-2 .box-title a {
+        position: relative;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .block-account {text-align: center;}
+}
+.sales-order-view .col2-set {
+    overflow: hidden;
+}
+.sales-order-view .col2-set .col-1 {
+    width: 50%;
+}
+.sales-order-view .col2-set .col-2 {
+    width: 50%;
+}
+.sales-order-history .pager-wrapper {
+    margin: 10px 0;
+}
+.sales-order-history .pager-wrapper .pages strong {
+    float: left;
+}
+.sales-order-history .pager-wrapper .pages ol {
+    display: inline-block;
+}
+.sales-order-history .pager-wrapper .pages ol li {
+    float: left;
+    display: block;
+    line-height: 22px;
+    margin-left: 10px;
+}
+.sales-order-history .pager-wrapper .pages ol li.current {
+    font-weight: bold;
+}
+.review-customer-index .rating-box:after {
+    content: "\e6c2\e6c2\e6c2\e6c2\e6c2";
+}
+.review-customer-index .rating-box .rating:after {
+    content: "\e6c1\e6c1\e6c1\e6c1\e6c1";
+}
+.review-customer-view .rating-box:after {
+    content: "\e6c2\e6c2\e6c2\e6c2\e6c2";
+}
+.review-customer-view .rating-box .rating:after {
+    content: "\e6c1\e6c1\e6c1\e6c1\e6c1";
+}
+.review-product-list .rating-box:after {
+    content: "\e6c2\e6c2\e6c2\e6c2\e6c2";
+}
+.review-product-list .rating-box .rating:after {
+    content: "\e6c1\e6c1\e6c1\e6c1\e6c1";
+}
+.tag-customer-index .tags-list {
+    margin: 10px 0;
+    overflow: hidden;
+}
+.tag-customer-index .tags-list li {
+    float: left;
+    margin-right: 5px;
+}
+.downloadable-customer-products .pager-wrapper {
+    margin: 10px 0;
+}
+.downloadable-customer-products .pager-wrapper .pages strong {
+    float: left;
+}
+.downloadable-customer-products .pager-wrapper .pages ol {
+    display: inline-block;
+}
+.downloadable-customer-products .pager-wrapper .pages ol li {
+    float: left;
+    display: block;
+    line-height: 22px;
+    margin-left: 10px;
+}
+.downloadable-customer-products .pager-wrapper .pages ol li.current {
+    font-weight: bold;
+}
+.sales-recurring-profile-view .col2-set {
+    overflow: hidden;
+    margin: 10px 0;
+}
+.sales-recurring-profile-view .col2-set .col-1 {
+    width: 50%;
+}
+.sales-recurring-profile-view .col2-set .col-1 .info-table {
+    margin: 10px 0;
+}
+.sales-recurring-profile-view .col2-set .col-1 .box-title h2 {
+    font-size: 18px;
+}
+.sales-recurring-profile-view .col2-set .col-2 {
+    width: 50%;
+}
+.sales-recurring-profile-view .col2-set .col-2 .info-table {
+    margin: 10px 0;
+}
+.sales-recurring-profile-view .col2-set .col-2 .box-title h2 {
+    font-size: 18px;
+}
+.sales-billing-agreement-index .col2-set {
+    overflow: hidden;
+    margin: 10px 0;
+}
+.sales-billing-agreement-index .col2-set .col-1 {
+    width: 50%;
+}
+.sales-billing-agreement-index .col2-set .col-1 .info-table {
+    margin: 10px 0;
+}
+.sales-billing-agreement-index .col2-set .col-1 .box-title h2 {
+    font-size: 18px;
+}
+.sales-billing-agreement-index .col2-set .col-2 {
+    width: 50%;
+}
+.sales-billing-agreement-index .col2-set .col-2 .info-table {
+    margin: 10px 0;
+}
+.sales-billing-agreement-index .col2-set .col-2 .box-title h2 {
+    font-size: 18px;
+}
+
+.my-account a.btn-edit, .my-account a.btn-remove {
+    border-radius: 0px;
+    font-size: 14px;
+    width: auto;
+    height: auto;
+}
+
+.account-create .input-box select, .customer-account .account-panel .input-box select {width: 100%;}

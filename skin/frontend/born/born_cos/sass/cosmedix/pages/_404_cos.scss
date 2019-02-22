@@ -1,0 +1,92 @@
+.cms-no-route {
+  .disc li {
+    @include whitneyBook;
+    font-style: italic;
+  }
+  .sidebar {
+    .block-title {
+      border-bottom-width: 2px;
+    }
+    .block-subtitle {
+      @include gotham;
+      @include setFont(1.5rem, 4.2rem, 500);
+    }
+    .price-box .price {
+      @include whitneyBook;
+      @include setFont(1.6rem, 2rem, 400);
+      font-style: italic;
+    }
+    .btn-remove:after {
+      content: "\e90b";
+    }
+    .block-reorder {
+      .product-name {
+        max-width: initial;
+      }
+      .label-text {
+        padding-left: 35px;
+        width: 100%;
+        @include display(flex);
+        @include justify-content(space-between);
+        &:before {
+          position: absolute;
+          left: 0;
+          line-height: 3rem;
+        }
+      }
+    }
+    .actions .button {
+      padding: 0 15px;
+      line-height: 5rem;
+      &:hover,
+      &:active,
+      &:focus {
+        box-shadow: inset 0 0 0 2px $black;
+      }
+    }
+  }
+}
+
+.cms-no-route .block-reorder .product-name,
+.mini-products-list .product-details .product-name  a {
+  @include gotham;
+  @include setFont(1.3rem, 1.5rem, 500);
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+}
+
+@media only screen and (max-width: $mobile){
+  .cms-no-route {
+    .main {
+      padding-top: 30px;
+    }
+    .sidebar {
+      .block:not(.block-layered-nav) .block-title {
+        border-bottom-width: 2px;
+        & > strong {
+          @include gotham;
+          @include setFont(1.3rem, 1.5rem, 500);
+          text-transform: uppercase;
+          letter-spacing: 0.15rem;
+        }
+      }
+      .block-reorder {
+        .label-text {
+          @include justify-content(flex-start);
+        }
+        .product-name {
+          line-height: 3rem;
+        }
+      }
+      .actions .button {
+        line-height: 4rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-xs){
+  .cms-no-route .sidebar .block-reorder .product-name {
+    line-height: 1.5rem;
+  }
+}

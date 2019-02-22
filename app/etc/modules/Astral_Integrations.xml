@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Astral_Integrations>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Astral_Integrations>
+    </modules>
+</config>

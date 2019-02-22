@@ -1,0 +1,23 @@
+<!-- BV Curation Gallery -->
+<?php $_bvBornModel = Mage::getModel('born_package/bazaarvoice'); ?>
+
+
+<script  type="text/javascript" src="<?php echo $_bvBornModel->getCurationLoadSource() ?>"></script>
+<script type="text/javascript">
+    try {
+        BVWidgets.display({
+        	<?php /*
+        	"groups": ["<?php echo $_bvBornModel->getGroupName() ?>-home"]
+        	 */ ?>
+    // "productId": 'some_product_id',
+    // Change this to a valid product ID with content to see that product's content.
+    // By default this implementation will pull in all content.
+});
+    } catch (e) {
+        console.log(e);
+    }
+</script>
+
+<div id="bv-large-gallery"></div>
+
+<!-- End -->

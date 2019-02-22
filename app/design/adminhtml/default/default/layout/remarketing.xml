@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!-- 
+	/**
+	* Listrak Remarketing Magento Extension Ver. 1.0.0 - Copyright (c) 2011 Listrak, Inc. 
+	*/
+-->
+<layout>
+    <default>
+        <reference name="notifications">
+            <block type="remarketing/adminhtml_notifications"
+                   name="remarketing_notifications"
+                   as="remarketing_notifications"/>
+        </reference>
+    </default>
+    
+    <adminhtml_remarketing_emailcapture_index>
+        <reference name="content">
+            <block type="remarketing/adminhtml_emailcapture" name="remarketing_emailcapture" />
+        </reference>
+    </adminhtml_remarketing_emailcapture_index>
+    <adminhtml_remarketing_emailcapture_edit>
+        <reference name="left">
+            <block type="remarketing/adminhtml_emailcapture_edit_tabs" name="remarketing_emailcapture_tabs"/>
+        </reference>
+        <reference name="content">
+            <block type="remarketing/adminhtml_emailcapture_edit" name="remarketing_emailcapture_edit" />
+        </reference>
+    </adminhtml_remarketing_emailcapture_edit>
+    
+    <adminhtml_remarketing_productattributes_index>
+        <reference name="content">
+            <block type="remarketing/adminhtml_productattributes" name="remarketing_attributes" template="listrak/remarketing/productattributes.phtml">
+                <block type="remarketing/adminhtml_productattributes_grid" name="remarketing_attributes_grid" />
+                <block type="core/template" name="remarketing_attributes_init" template="listrak/remarketing/productattributes/form/initbrands.phtml">
+                    <block type="remarketing/adminhtml_productattributes_init_brands_form" name="remarketing_attributes_init_form" />
+                </block>
+            </block>
+        </reference>
+    </adminhtml_remarketing_productattributes_index>
+    <adminhtml_remarketing_productattributes_edit>
+        <reference name="left">
+            <block type="remarketing/adminhtml_productattributes_edit_tabs" name="remarketing_attribute_tabs">
+                <block type="remarketing/adminhtml_productattributes_edit_tab_form_brand" name="remarketing_attribute_tab_brand" />
+                <block type="remarketing/adminhtml_productattributes_edit_tab_form_categories" name="remarketing_attribute_tab_categories"
+                    template="listrak/remarketing/productattributes/form/categories.phtml" />
+            </block>
+        </reference>
+        <reference name="content">
+            <block type="remarketing/adminhtml_productattributes_edit" name="remarketing_attribute_edit" />
+        </reference>
+    </adminhtml_remarketing_productattributes_edit>
+</layout>

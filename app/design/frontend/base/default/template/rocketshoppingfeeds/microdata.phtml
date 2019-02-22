@@ -1,0 +1,22 @@
+<!-- gsf microdata start -->
+<?php
+/** @var $this RocketWeb_ShoppingFeeds_Block_Product_View_Microdata */
+$microdata_list = $this->getMicrodata();
+?>
+<?php foreach($microdata_list as $microdata): ?>
+    <div itemscope itemtype="http://schema.org/Product">
+        <meta itemprop="name" content="<?php echo $microdata->getName()?>" />
+        <meta itemprop="sku" content="<?php echo $microdata->getId()?>" />
+
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <meta itemprop="priceCurrency" content="<?php echo $microdata->getCurrency()?>" />
+            <meta itemprop="price" content="<?php echo $microdata->getPrice()?>" />
+            <meta itemprop="availability" content="<?php echo $microdata->getAvailability()?>" />
+        <?php $condition = $microdata->getCondition(); ?>
+        <?php if (!empty($condition)): ?>
+            <meta itemprop="itemCondition" itemtype="http://schema.org/OfferItemCondition" content="<?php echo $condition?>" />
+        <?php endif; ?>
+        </div>
+    </div>
+<?php endforeach;?>
+<!-- gsf microdata end -->

@@ -1,0 +1,45 @@
+<?php $_product = $this->getProduct() ?>
+<!-- rich snippets -->
+<?php if (Mage::getStoreConfig('weltpixel_schema/rich_snippets/enable')): ?>
+    <?php if (Mage::getStoreConfig('weltpixel_schema/rich_snippets/wrap')): ?>
+        <div class="hide-rich-snippets">
+        <?php endif ?>
+        <div itemscope itemtype="http://schema.org/Product">
+            <meta itemprop="name" content="<?php echo htmlentities(strip_tags($_product->getName())) ?>" />
+            <meta itemprop="image" content="<?php echo $this->getNonCachedImage($_product) ?>" />
+            <meta itemprop="description" content="<?php echo htmlentities(strip_tags($this->getProductDescription($_product))) ?>" />
+            <meta itemprop="url" content="<?php echo htmlentities(strip_tags(/* $_product->getProductUrl() */ $this->helper('core/url')->getCurrentUrl())) ?>" />
+            <meta itemprop="sku" content="<?php echo htmlentities(strip_tags($_product->getSku())) ?>" />
+
+            <div itemtype="http://schema.org/AggregateRating" itemscope itemprop="aggregateRating">
+                <?php $review = $this->getReviewSummary() ?>
+                <?php
+                $reviewCount = $review->getReviewsCount();
+                if (!$reviewCount) {
+                    $reviewCount = 0;
+                }
+		$ratingSummary = ($review->getRatingSummary()) ? $review->getRatingSummary() : 20;
+                ?>
+                <meta itemprop="worstRating" content="1" />
+                <meta itemprop="bestRating" content="5" />
+                <meta itemprop="ratingValue" content="<?php echo $ratingSummary / 20 ?>" />
+                <meta itemprop="reviewCount" content="<?php echo $reviewCount ?>" />
+            </div>
+
+            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                <meta itemprop="priceCurrency" content="<?php echo $this->getCurrencyCode() ?>" />
+                <meta itemprop="price" content="<?php echo $this->getProductPrice() ?>" />
+                <?php if ($_product->isAvailable()): ?>
+                    <link itemprop="availability" href="http://schema.org/InStock" />
+                <?php else : ?>
+                    <link  itemprop="availability" href="http://schema.org/OutOfStock" />
+                <?php endif ?>
+            </div>
+        </div>
+        <?php if (Mage::getStoreConfig('weltpixel_schema/rich_snippets/wrap')): ?>
+        </div>
+        <style>
+            .hide-rich-snippets {display:none;}
+        </style>
+    <?php endif ?>
+<?php endif ?>

@@ -1,0 +1,131 @@
+<?php
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+$_product = $this->getProduct();
+$_imageHelper = $this->helper('catalog/image');
+$_baseImage = ($_product->getImage() != 'no_selection' && $_product->getImage()) ? $_product->getImage() : false;
+$_galleryImages = array();
+$_settings = Mage::getStoreConfig('weltpixel_selector/productpageoptions');
+$_imageWidth = $_settings['imagewidth'];
+
+$productNewToDate = $_product->getNewsToDate();
+if (!$productNewToDate && $_product->getNewsFromDate()) {
+    $productNewToDate = date("Y-m-d", strtotime('+1 years'));
+}
+
+$_isNew = date("Y-m-d") >= substr($_product->getNewsFromDate(), 0, 10) && date("Y-m-d") <= substr($productNewToDate, 0, 10);
+$rightNow = time() ;
+$_isSale = $_product->getSpecialPrice() && ($rightNow >= strtotime($_product->getSpecialFromDate()) && $rightNow <= strtotime($_product->getSpecialToDate()) || $rightNow >= strtotime($_product->getSpecialFromDate()) && is_null($_product->getSpecialToDate()));
+;
+
+$_useRetina = Mage::getStoreConfig('weltpixel_selector/customization_settings/retina');
+
+// Process the gallery images
+foreach ($this->getGalleryImages() as $_image) {
+    $_galleryImages[] = $_image;
+}
+
+
+$_imagesCount = count($_galleryImages);
+?>
+
+
+<?php if ($_baseImage): ?>
+    <div id="mobile-carousel">
+        <div id="weltpixel_quickview"></div>
+        <div id="mobile-carousel-images">
+            <?php
+            foreach ($_galleryImages as $_image) {
+                ?>
+                <div class="item">
+                    <div class="product-image"
+                         >
+                            <img
+                                src = "<?php echo $_imageHelper->init($_product, 'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)->resize($_imageWidth); ?>"
+                                data-src = "<?php echo $_imageHelper->init($_product, 'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)->resize($_imageWidth); ?>"
+                                <?php if ($_useRetina): ?>
+                                    data-src-retina = "<?php echo $_imageHelper->init($_product, 'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)->resize(2 * $_imageWidth); ?>"
+                                <?php endif; ?>
+                                alt       = ""
+                                title     = ""
+                                />
+                        </div>
+                </div>
+                <?php
+            }
+            ?>
+        </div>
+        <div class="product-tags">
+            <div class="product-tags">
+                <?php if ($_isNew) : ?>
+                    <div class="tag tag-new"><?php echo $this->__('New'); ?></div>
+                <?php endif; ?>
+                <?php if ($_isSale): ?>
+                    <div class="tag tag-sale"><?php echo $this->__('Sale'); ?></div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+
+<?php endif; ?>
+
+<?php if ($_baseImage): ?>
+    <script>
+        // <![CDATA[
+
+        var mobileOwl = null;
+        var mobileOwlInitialised = false;
+        jQuery(document).ready(function($) {
+
+
+            mobileOwl = jQuery("#mobile-carousel-images");
+            mobileOwl.owlCarousel({
+
+                navigation : true, // Show next and prev buttons
+                slideSpeed : 300,
+                paginationSpeed : 400,
+                singleItem:true,
+                afterInit: afterOWLinit
+
+            });
+
+
+            function afterOWLinit() {
+                <?php if($_imagesCount > 1): ?>
+
+                if (!mobileOwlInitialised) {
+                    jQuery('#mobile-carousel').prepend('<div class="carousel-left icon-angle-left"></div><div class="carousel-right icon-angle-right"></div>');
+
+                    jQuery(".carousel-right").click(function () {
+                        removeDynamicElement();
+                        mobileOwl.trigger('owl.next');
+                        return false;
+                    });
+                    jQuery(".carousel-left").click(function () {
+                        removeDynamicElement();
+                        mobileOwl.trigger('owl.prev');
+                        return false;
+                    });
+
+                    mobileOwlInitialised = true;
+                }
+
+                <?php endif; ?>
+            }
+
+             function removeDynamicElement() {
+                if (jQuery('.dynamic-thumb-owl-item').length) {
+                    mobileOwl.data('owlCarousel').removeItem();
+                }
+            }
+
+        });
+
+        // ]]>
+    </script>
+<?php endif; ?>
+
+<?php echo $this->getChildHtml('after'); ?>

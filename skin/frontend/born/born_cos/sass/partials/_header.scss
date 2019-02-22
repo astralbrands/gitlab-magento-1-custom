@@ -1,0 +1,197 @@
+.header-language-container, .page-header {
+  @include gotham();
+}
+
+.page-header {
+  max-width: 100%;
+  width: 100%;
+  position: relative;
+  padding: 0;
+  background: $white;
+  z-index: 12;
+  box-shadow: 0 1px 0 0 $block-border-color;
+  vertical-align: middle;
+  max-height: 70px;
+}
+
+.page-header-container {
+  position: relative;
+  z-index: 10;
+  max-width: $page-width;
+  margin: 0 auto;
+  padding: 0 0 0 27px;
+  @include display(flex);
+  @include align-items(center);
+  background: $white;
+}
+
+._fixed-header {
+  .icon-PUR_logo_with_slogan:before {
+    content: '\e937';
+  }
+}
+
+  .COS_logo_desktop {
+    height: 45px;
+    width: 76px;    
+    background: url('../images/CosMedix_LogoIcon_black76x45.png');
+  }
+  
+    .COS_logo_mobile {
+    height: 15px;
+    width: 181px;    
+    background: url('../images/CosMedix_Logo_silver181x15.png');
+  }
+
+.skip-links {
+  overflow: visible;
+  margin-left: auto;
+  .skip-link {
+    float: none;
+  }
+}
+
+.menu-overlay-element {
+  background: $black;
+  opacity: 0;
+  width: 200%;
+  height: 100%;
+  z-index: 11;
+  position: fixed;
+  top: 1000000px;
+  -webkit-transition: opacity 0.4s 0s, top 0s 0.4s;
+  -moz-transition: opacity 0.4s 0s, top 0s 0.4s;
+  transition: opacity 0.4s 0s, top 0s 0.4s;
+}
+
+.overlay-menu {
+  .page-header:before {
+    z-index: 5;
+  }
+
+  .menu-overlay-element {
+    top: 0;
+    opacity: 0.65;
+    -webkit-transition: opacity 0.2s, top 0s;
+    -moz-transition: opacity 0.2s, top 0s;
+    transition: opacity 0.2s, top 0s;
+  }
+}
+
+@import "header-partials/cart";
+@import "header-partials/logo";
+@import "header-partials/nav";
+@import "header-partials/sign-in";
+@import "header-partials/top-search";
+
+@media only screen and (max-width: $desktop-m) {
+  #header-nav .nav-primary {
+    li.level0 .level-top,
+    li.level0 > span {
+      padding: 0 22px;
+    }
+  }
+}
+
+@media only screen and (max-width: $desktop-s) {
+  #header-nav .nav-primary {
+    li.level0 .level-top,
+    li.level0 > span {
+      padding: 0 15px;
+    }
+  }
+  ._fixed-header {
+    #header-nav {
+      margin-left: 0;
+      .nav-primary {
+        li.level0 .level-top,
+        li.level0 > span {
+          padding: 0 17px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $desktop-custom-2) {
+  .logo {
+    &__text {
+      display: none;
+    }
+  }
+  .menu-links-wrap {
+    margin-right: 30px;
+  }
+}
+
+@media only screen and (max-width: $desktop-custom-3) {
+  #header-nav {
+    .nav-primary {
+      li.level0 .level-top,
+      li.level0 > span {
+        padding: 0 13px;
+      }
+    }
+  }
+  ._fixed-header {
+    #header-nav {
+      margin-left: 0;
+      .nav-primary {
+        li.level0 .level-top,
+        li.level0 > span {
+          padding: 0 15px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $desktop-xs) {
+  .page-header-container {
+    padding: 0 0 0 10px;
+  }
+  #header-nav {
+    margin-left: 0;
+    .nav-primary {
+      li.level0 .level-top,
+      li.level0 > span {
+        padding: 0 8px;
+      }
+    }
+  }
+  .thumbnail-image02,
+  .thumbnail-image01 {
+    max-width: 350px;
+  }
+  .nav-primary {
+    .nav-4 .category-thumbnail,
+    .nav-5 .category-thumbnail {
+      height: 350px;
+      width: 700px;
+    }
+  }
+  .menu-links-wrap {
+    margin-right: 20px;
+  }
+  ._fixed-header {
+    #header-nav {
+      margin-left: 0px;
+      .nav-primary {
+        li.level0 .level-top,
+        li.level0 > span {
+          padding: 0 12px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $desktop-custom-6) {
+  #header-nav {
+    margin-left: 0;
+  }
+}
+
+@import "header-partials/top-search_m";
+@import "header-partials/nav_m";
+@import "header_m";

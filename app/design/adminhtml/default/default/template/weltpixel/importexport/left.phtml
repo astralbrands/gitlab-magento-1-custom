@@ -1,0 +1,45 @@
+<style>
+    .hor-scroll-simple {
+        height: 400px;
+    }
+</style>
+
+<div class="importexport_left_container">
+    <div class="content-header"><h3 class="">WeltPixel Import/Export</h1></div>
+    <ul class="tabs">
+        <li class="import_export_option" id="import_export_block">
+            <a class="active"><span>Block</span></a>
+        </li>
+        <li class="import_export_option" id="import_export_page">
+            <a><span>Page</span></a>
+        </li>
+        <li class="import_export_option" id="import_export_setting">
+            <a><span>Settings</span></a>
+        </li>
+    </ul>
+</div>
+
+<script>
+    jQuery(document).ready(function() {
+    
+        var activeTab = '<?php echo $this->getRequest()->getParam('tab'); ?>';
+        if (activeTab) {
+            jQuery('.importexport_content_container').hide();
+            jQuery('#import_export_'+ activeTab + '_container').show(); 
+            jQuery('.importexport_left_container ul li a').removeClass('active');
+            jQuery('#import_export_' + activeTab).find('a').addClass('active');
+        }
+        
+        
+    
+        jQuery('.import_export_option').bind('click', function() {
+            jQuery('.importexport_left_container ul li a').removeClass('active');
+            jQuery(this).find('a').addClass('active');
+
+            jQuery('.importexport_content_container').hide();
+            jQuery("#" + jQuery(this).find('a').parent().attr('id') + "_container").show();
+        });
+
+
+    });
+</script>

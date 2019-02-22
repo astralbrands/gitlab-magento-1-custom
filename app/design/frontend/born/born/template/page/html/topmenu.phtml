@@ -1,0 +1,38 @@
+<?php $_menu = $this->getHtml('level-top') ?>
+<?php $isLoggedIn = Mage::getSingleton('customer/session')->isLoggedIn(); ?>
+
+<?php if($_menu): ?>
+    <nav id="nav" class="site-menu">
+        <ol class="nav-primary">
+            <?php echo $_menu ?>
+            <!--  professional link   -->
+            <li><?php echo strip_tags($this->getLayout()->getBlock('professional_category')->toHtml(),'<a><span>') ?></li>
+        </ol>
+    </nav>
+    <?php if($isLoggedIn) : ?>
+        <div class="m-account-dropdown level0">
+            <a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" class="m-account-dropdown-main-link level-top"><?php echo $this->__('My Account'); ?></a>
+            <a href="#" class="arrow"></a>
+            <div class="m-account-dropdown-drop">
+                <a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" class="m-account-dropdown-link"><?php echo $this->__('My Dashboard') ?></a>
+                <a href="<?php echo Mage::getUrl('sgusa/token') ?>" class="m-account-dropdown-link"><?php echo $this->__('Payment Methods') ?></a>
+                <a href="<?php echo Mage::getUrl('sales/order/history/') ?>" class="m-account-dropdown-link"><?php echo $this->__('My Orders') ?></a>
+                <a href="<?php echo Mage::getUrl('zendesk/customer_tickets/index') ?>" class="m-account-dropdown-link"><?php echo $this->__('My Tickets') ?></a>
+                <a href="#" class="m-account-dropdown-link"><?php echo $this->__('Gift Cards') ?></a>
+                <a href="<?php echo Mage::getUrl('wishlist/') ?>" class="m-account-dropdown-link"><?php echo $this->__('My Favorites') ?></a>
+                <a href="#" class="m-account-dropdown-link"><?php echo $this->__('My Rewards') ?></a>
+                <a href="#" class="m-account-dropdown-link"><?php echo $this->__('In Stock Notifications') ?></a>
+                <a href="<?php echo Mage::getUrl('customer/account/logout') ?>" class="m-account-dropdown-link"><?php echo $this->__('Sign Out') ?></a>
+            </div>
+        </div>
+    <?php else : ?>
+        <a class="m-account-dropdown-main-link sign-in mobile-only" href="<?php echo $this->helper('customer')->getAccountUrl(); ?>">
+            <span class="label"><?php echo $this->__('Sign In'); ?></span>
+        </a>
+    <?php endif; ?>
+    <a class="wishlist-link-mobile" href="<?php echo $this->getUrl('wishlist'); ?>">
+        <span class="label"><?php echo $this->__('Favorites') ?></span>
+    </a>
+    <a href="<?php echo $this->getUrl('store-locator'); ?>" class="store-locator"><?php echo $this->__('store locator') ?></a>
+    <a href="#" class="sale-label"><?php echo $this->__('now on sale') ?></a>
+<?php endif ?>

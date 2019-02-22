@@ -1,0 +1,152 @@
+.cms-index {
+  .half {
+    &:first-child .box-inner__middle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      @include display(flex);
+      @include flex-direction(column);
+      @include justify-content(center);
+    }
+  }
+  .one-third {
+    border: 0;
+    .box-outer {
+      border: 0;
+    }
+    .box-inner__middle {
+      padding: 30px;
+    }
+    .slot-title {
+      font-size: 2.6rem;
+      line-height: 3rem;
+      text-transform: none;
+      @include chronic();
+    }
+    .slot-text {
+      font-size: 1.6rem;
+      line-height: 3rem;
+      margin: 0;
+    }
+  }
+  .section-1 .one-third:nth-child(3n) .box-outer {
+    border: 0;
+  }
+}
+
+
+@media only screen and (max-width: $desktop-custom-4) {
+  .about-us-template {
+    .slots {
+      .one-third {
+        @include flex-basis(50%);
+        &:nth-child(5){
+          order: 2;
+        }
+        &:nth-child(6){
+          order: 1;
+        }
+        &:nth-child(7){
+          order: 3;
+        }
+        &:nth-child(8){
+          order: 4;
+        }
+        &:nth-child(9){
+          order: 5;
+        }
+        &:nth-child(10){
+          display: none;
+          // todo add image block and show only tablet
+        }
+        &:nth-child(11){
+          order: 6;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet) {
+  .about-us-template {
+    .section-1 .half .box-inner__middle {
+      padding: 40px;
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet-s) {
+  .about-us-template {
+    .section-1 {
+      .one-third:nth-child(4) {
+        order: 0;
+      }
+      .half .box-inner__middle {
+        padding: 30px;
+      }
+    }
+    .slot-text {
+      font-size: 1.4rem;
+      line-height: 2.4rem;
+    }
+    .half {
+      .slot-title {
+        font-size: 1.8rem;
+        line-height: 3rem;
+      }
+    }
+    .one-third {
+
+      .slot-title {
+        font-size: 2.4rem;
+      }
+      .slot-text {
+        font-size: 1.4rem;
+        line-height: 2.4rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-m) {
+  .about-us-template {
+    .slots {
+      border-top: 0;
+      max-width: 420px;
+      margin: 0 auto;
+      .half {
+        @include flex-basis(100%);
+        &:first-child .box-inner__middle {
+          position: static;
+          border-right: 0;
+          border-left: 0;
+        }
+        .box-inner__middle {
+          border-left: 1px solid $block-border-color;
+        }
+      }
+      .one-third {
+        @include flex-basis(100%);
+        &:nth-child(3) {
+          order: 1;
+        }
+        .box-outer {
+          padding-top: 0;
+        }
+        .box-inner {
+          position: static;
+        }
+      }
+      .one-third:nth-child(4) {
+        display: block;
+        .box-inner__middle {
+          padding: 100% 0 0 0;
+        }
+      }
+    }
+  }
+}

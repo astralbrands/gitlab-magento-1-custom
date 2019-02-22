@@ -1,0 +1,284 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <catalog_category_view>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/layerednavigation.js</name>
+            </action>
+            <action method="addItem" ifconfig="weltpixel_layerednavigation/ajax/enable_ajax">
+                <type>skin_js</type>
+                <name>js/weltpixel/layerednavigation-ajax.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/jquery-ui.js</name>
+            </action>
+            <action method="addItem" >
+                <type>skin_css</type>
+                <name>css/weltpixel/jquery-ui.min.css</name>
+            </action>
+        </reference>
+    </catalog_category_view>
+    <catalog_category_default>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/layerednavigation.js</name>
+            </action>
+            <action method="addItem" ifconfig="weltpixel_layerednavigation/ajax/enable_ajax">
+                <type>skin_js</type>
+                <name>js/weltpixel/layerednavigation-ajax.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/jquery-ui.js</name>
+            </action>
+            <action method="addItem" >
+                <type>skin_css</type>
+                <name>css/weltpixel/jquery-ui.min.css</name>
+            </action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="core/template" name="weltpixel_ajax_setup" template="weltpixel/layerednavigation/ajaxsetup.phtml"/>
+        </reference>
+    </catalog_category_default>
+    <catalog_category_layered>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/layerednavigation.js</name>
+            </action>
+            <action method="addItem" ifconfig="weltpixel_layerednavigation/ajax/enable_ajax">
+                <type>skin_js</type>
+                <name>js/weltpixel/layerednavigation-ajax.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/jquery-ui.js</name>
+            </action>
+            <action method="addItem" >
+                <type>skin_css</type>
+                <name>css/weltpixel/jquery-ui.min.css</name>
+            </action>
+        </reference>
+        <reference name="catalog.leftnav" >
+            <action method="setTemplate">
+                <template>weltpixel/layerednavigation/catalog/layer/view.phtml</template>
+            </action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="core/template" name="weltpixel_ajax_setup" template="weltpixel/layerednavigation/ajaxsetup.phtml"/>
+        </reference>
+    </catalog_category_layered>
+    <catalogsearch_result_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/layerednavigation.js</name>
+            </action>
+            <action method="addItem" ifconfig="weltpixel_layerednavigation/ajax/enable_ajax">
+                <type>skin_js</type>
+                <name>js/weltpixel/layerednavigation-ajax.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/jquery-ui.js</name>
+            </action>
+            <action method="addItem" >
+                <type>skin_css</type>
+                <name>css/weltpixel/jquery-ui.min.css</name>
+            </action>
+        </reference>
+        <reference name="catalogsearch.leftnav" >
+            <action method="setTemplate">
+                <template>weltpixel/layerednavigation/catalog/layer/view.phtml</template>
+            </action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="core/template" name="weltpixel_ajax_setup" template="weltpixel/layerednavigation/ajaxsetup.phtml"/>
+        </reference>
+    </catalogsearch_result_index>
+
+    <top_layered_navigation_handle>
+        <reference name="catalog.leftnav">
+            <action method="setTemplate">
+                <template>weltpixel/layerednavigation/catalog/layer/topview.phtml</template>
+            </action>
+        </reference>
+    </top_layered_navigation_handle>
+    <top_layered_catalogsearch_handle>
+        <reference name="catalogsearch.leftnav">
+            <action method="setTemplate">
+                <template>weltpixel/layerednavigation/catalog/layer/topview.phtml</template>
+            </action>
+        </reference>
+    </top_layered_catalogsearch_handle>
+
+    <catalog_category_weltpixel_ajax_extra>
+        <reference name="product_list">
+            <action method="addPriceBlockType">
+                <type>bundle</type>
+                <block>bundle/catalog_product_price</block>
+                <template>bundle/catalog/product/price.phtml</template>
+            </action>
+        </reference>
+    </catalog_category_weltpixel_ajax_extra>
+    <catalog_searchresult_weltpixel_ajax_extra>
+        <reference name="search_result_list">
+            <action method="addPriceBlockType">
+                <type>bundle</type>
+                <block>bundle/catalog_product_price</block>
+                <template>bundle/catalog/product/price.phtml</template>
+            </action>
+        </reference>
+    </catalog_searchresult_weltpixel_ajax_extra>
+
+    <catalog_category_weltpixel_ajax translate="label">
+        <label>Catalog Category (Anchor)</label>
+        <block type="core/template" name="root" output="toHtml" template="page/html/wrapper.phtml">
+            <action method="setId">
+                <id>weltpixel-ajax-layered-container</id>
+            </action>
+            <block type="page/html_head" name="head" as="head"></block>
+            <block type="core/template" name="weltpixel-ajax-filters-container" template="page/html/wrapper.phtml" id="layered-nav-container">
+                <action method="setId">
+                    <id>weltpixel-ajax-filters-container</id>
+                </action>
+                <block type="catalog/layer_view" name="catalog.leftnav" after="currency" template="weltpixel/layerednavigation/catalog/layer/view.phtml"/> <!-- For top the new template should be added ;) -->
+            </block>
+            <block type="core/template" name="weltpixel-ajax-list-container" template="page/html/wrapper.phtml">
+                <action method="setId">
+                    <id>weltpixel-ajax-list-container</id>
+                </action>
+                <block type="weltpixel_quickview/catalog_product_list" name="product_list" template="catalog/product/list.phtml">
+                    <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                    </block>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>empty</layout>
+                        <count>6</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>one_column</layout>
+                        <count>5</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>two_columns_left</layout>
+                        <count>4</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>two_columns_right</layout>
+                        <count>4</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>three_columns</layout>
+                        <count>3</count>
+                    </action>
+                    <action method="setToolbarBlockName">
+                        <name>product_list_toolbar</name>
+                    </action>
+                </block>
+            </block>
+        </block>
+    </catalog_category_weltpixel_ajax>
+    <catalog_category_default_weltpixel_ajax>
+        <label>Catalog Category (Default)</label>
+        <block type="core/template" name="root" output="toHtml" template="page/html/wrapper.phtml">
+            <action method="setId">
+                <id>weltpixel-ajax-layered-container</id>
+            </action>
+            <block type="page/html_head" name="head" as="head"></block>
+            <block type="core/template" name="weltpixel-ajax-filters-container" template="page/html/wrapper.phtml" id="layered-nav-container">
+                <action method="setId">
+                    <id>weltpixel-ajax-filters-container</id>
+                </action>
+                <block type="catalog/navigation" name="catalog.leftnav" after="currency" template="catalog/navigation/left.phtml"/>
+            </block>
+            <block type="core/template" name="weltpixel-ajax-list-container" template="page/html/wrapper.phtml">
+                <action method="setId">
+                    <id>weltpixel-ajax-list-container</id>
+                </action>
+                <block type="weltpixel_quickview/catalog_product_list" name="product_list" template="catalog/product/list.phtml">
+                    <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                    </block>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>empty</layout>
+                        <count>6</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>one_column</layout>
+                        <count>5</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>two_columns_left</layout>
+                        <count>4</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>two_columns_right</layout>
+                        <count>4</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>three_columns</layout>
+                        <count>3</count>
+                    </action>
+                    <action method="setToolbarBlockName">
+                        <name>product_list_toolbar</name>
+                    </action>
+                </block>
+            </block>
+        </block>
+    </catalog_category_default_weltpixel_ajax>
+    <catalog_searchresult_weltpixel_ajax translate="label">
+        <label>Quick Search Form</label>
+        <block type="core/template" name="root" output="toHtml" template="page/html/wrapper.phtml">
+            <block type="page/html_head" name="head" as="head"></block><!-- Must be here because the CatalogSearch Result Block references the head block :( To not rewrite that block is just added here. It can be removed and then the block needs to be rewriten -->
+            <action method="setId">
+                <id>weltpixel-ajax-layered-container</id>
+            </action>
+            <block type="core/template" name="weltpixel-ajax-filters-container" template="page/html/wrapper.phtml" id="layered-nav-container">
+                <action method="setId">
+                    <id>weltpixel-ajax-filters-container</id>
+                </action>
+                <block type="catalogsearch/layer" name="catalogsearch.leftnav" after="currency" template="weltpixel/layerednavigation/catalog/layer/view.phtml"/>
+            </block>
+            <block type="core/template" name="weltpixel-ajax-list-container" template="page/html/wrapper.phtml">
+                <action method="setId">
+                    <id>weltpixel-ajax-list-container</id>
+                </action>
+                <block type="catalogsearch/result" name="search.result" template="weltpixel/layerednavigation/catalogsearch/result.phtml"> <!-- To not show title twice, and to not add extra logic to the js -->
+                    <block type="weltpixel_quickview/catalog_product_list" name="search_result_list" template="catalog/product/list.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                        <action method="addColumnCountLayoutDepend">
+                            <layout>empty</layout>
+                            <count>6</count>
+                        </action>
+                        <action method="addColumnCountLayoutDepend">
+                            <layout>one_column</layout>
+                            <count>5</count>
+                        </action>
+                        <action method="addColumnCountLayoutDepend">
+                            <layout>two_columns_left</layout>
+                            <count>4</count>
+                        </action>
+                        <action method="addColumnCountLayoutDepend">
+                            <layout>two_columns_right</layout>
+                            <count>4</count>
+                        </action>
+                        <action method="addColumnCountLayoutDepend">
+                            <layout>three_columns</layout>
+                            <count>3</count>
+                        </action>
+                        <action method="setToolbarBlockName">
+                            <name>product_list_toolbar</name>
+                        </action>
+                    </block>
+                    <action method="setListOrders"/>
+                    <action method="setListModes"/>
+                    <action method="setListCollection"/>
+                </block>
+            </block>
+        </block>
+    </catalog_searchresult_weltpixel_ajax>
+</layout>

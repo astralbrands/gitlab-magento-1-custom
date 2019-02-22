@@ -1,0 +1,190 @@
+// \app\design\frontend\born\born\template\sales\order\info\buttons.phtml
+
+.sales-order-history + .customer-account {
+  .main {
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+}
+body.customer-account .my-account .title-buttons a {
+  top: 0;
+  color: $light-text-color;
+  font-size: 1.3rem;
+  text-decoration: underline;
+}
+body.customer-account .my-account .title-buttons span.separator {
+  top: 0;
+}
+.order-details {
+  margin-bottom: 40px;
+}
+.order-date {
+  @include gotham;
+}
+.default-grey-link {
+  color: $light-text-color;
+  font-size: 1.3rem;
+  text-decoration: underline;
+}
+.order-info-box {
+  h2 {
+    font-weight: 700;
+    color: $black;
+    font-size: 1.4rem;
+    text-transform: none;
+    margin-bottom: 20px;
+  }
+  address,
+  .box-content {
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+    font-weight: 200;
+    color: $black;
+    font-style: normal;
+    margin-bottom: 15px;
+    font-family: "Gotham A", "Gotham B", sans-serif;
+  }
+}
+.count-container {
+  .amount {
+    @include gotham;
+    @include setFont(1.3rem, 3.0rem, 500);
+  }
+  .limiter {
+    label {
+      @include gothamBook;
+      text-transform: uppercase;
+    }
+  }
+}
+
+
+body.customer-account .data-table td.view a {
+  color: $light-text-color;
+  text-decoration: underline;
+  text-transform: none;
+  @include gotham;
+  &:hover {
+    color: $black;
+  }
+}
+
+.block-reorder {
+  .input-box {
+    height: 50px;
+  }
+  .label-text {
+    left: 0;
+    top: 0;
+    .product-name {
+      font-size: 1.4rem;
+      padding-right: 15px;
+    }
+    a.view-item {
+      color: $light-text-color;
+      text-decoration: underline;
+      text-transform: none;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+}
+
+.sales-order-history {
+  .title-buttons {
+    @include clearfix;
+    h1 {
+      padding: 6px 0;
+    }
+  }
+  .title-buttons-wrapper {
+    float: right;
+  }
+  .order-info {
+    dd {
+      font-size: 1.4rem;
+    }
+  }
+  .order-date {
+    @include gothamBook;
+  }
+  .box-title {
+    h2 {
+      @include gotham;
+      @include setFont(1.4rem, 2.1rem, 500);
+    }
+  }
+  .box-content {
+    @include gotham;
+    @include setFont(1.4rem, 2.4rem, 200);
+  }
+  .table-caption {
+    text-transform: uppercase;
+  }
+  .data-table {
+    .product-name {
+      @include gotham;
+      text-transform: uppercase;
+    }
+    td[data-born-label]:before {
+      color: $light-text-color;
+      font-style: italic;
+      text-transform: uppercase;
+    }
+    .price {
+      @include gotham;
+      color: $black;
+    }
+  }
+}
+
+@media only screen and  (max-width: $tablet-m) {
+  body.customer-account .my-account .title-buttons {
+    text-align: right;
+  }
+}
+
+@media only screen and  (max-width: $mobile-xs) {
+  body.customer-account .my-account .page-title h1 {
+    padding-top: 30px;
+    text-align: left;
+    width: 77%;
+  }
+  .sales-order-history {
+    .table-caption {
+      font-size: 1.8rem;
+    }
+    .my-account .page-title h1 {
+      padding-top: 30px;
+      text-align: left;
+      width: 80%;
+    }
+    .title-buttons-wrapper {
+      width: 20%;
+      text-align: right;
+      .separator {
+        display: none;
+      }
+    }
+  }
+}
+
+
+@media only screen and  (max-width: 420px){
+  body.customer-account .my-account .page-title h1 {
+    width: 65%;
+  }
+  .sales-order-history {
+    .title-buttons-wrapper {
+      padding-top: 15px;
+      width: 24%;
+    }
+  }
+  body.customer-account .my-account .title-buttons {
+    a,
+    span.separator {
+      top: 30px;
+    }
+  }
+}

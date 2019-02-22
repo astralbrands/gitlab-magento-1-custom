@@ -1,0 +1,203 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition End User License Agreement
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magento.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     born_default
+ * @copyright Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license http://www.magento.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @var $this Mage_Checkout_Block_Cart
+ */
+
+?>
+<?php $_priceDisplay = ($this->helper('tax')->displayCartBothPrices()) ? 'display-both-prices' : 'display-single-price'; ?>
+<?php $itemsQty = (int)Mage::getSingleton('checkout/cart')->getItemsQty() ?>
+<div class="checkout-cart <?php echo $_priceDisplay; ?>">
+    <div class="title-wrapper">
+        <div class="page-title title-buttons">
+            <h1><?php echo $this->__('Shopping Bag') ?></h1>
+        </div>
+       
+       <div class="total-products">
+           <?php  if($itemsQty > 1): ?>
+            <?php echo $this->__('%d Products', $itemsQty) ?>
+           <?php elseif($itemsQty == 1): ?>
+            <?php echo $this->__('%d Product', $itemsQty) ?>
+           <?php endif; ?>
+       </div>
+        <div class="clear"></div>
+    </div>
+    <?php echo $this->getMessagesBlock()->toHtml() ?>
+    <?php echo $this->getChildHtml('form_before') ?>
+
+
+
+    <div class="checkout-cart-content">
+        <div class="left-block">
+            <form class="item-list-form" action="<?php echo $this->getFormActionUrl() ?>" method="post">
+                <?php echo $this->getBlockHtml('formkey'); ?>
+                <div id="shopping-cart-table" class="table item-list">
+
+                    <div class="table-row head-row">
+                        <div class="table-cell"><?php echo $this->__('Product') ?></div>
+                        <div class="table-cell center"><?php echo $this->__('Shade') ?></div>
+                        <div class="table-cell center"><?php echo $this->__('Qty') ?></div>
+                        <div class="table-cell"><?php echo $this->__('Total') ?></div>
+                    </div>
+
+                    <?php foreach($this->getItems() as $_item): ?>
+                        <?php echo $this->getItemHtml($_item) ?>
+                        <tr class="spacer">
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    <?php endforeach ?>
+
+
+                    <!-- Make first button the first responder rather than empty cart -->
+                    <!--<div class="a-right cart-footer-actions">
+
+                <button type="submit" style="visibility:hidden;" data-cart-item-update name="update_cart_action" value="update_qty" title="<?php /*echo $this->quoteEscape($this->__('Update Shopping Cart')); */?>" class="button2 btn-update"><span><span><?php /*echo $this->__('Update Shopping Cart'); */?></span></span></button>
+
+                <button type="submit" name="update_cart_action" data-cart-empty value="empty_cart" title="<?php /*echo $this->quoteEscape($this->__('Empty Cart')); */?>" class="button2 btn-empty" id="empty_cart_button"><span><span><?php /*echo $this->__('Empty Cart'); */?></span></span></button>
+
+                <button type="submit" name="update_cart_action" data-cart-item-update value="update_qty" title="<?php /*echo $this->quoteEscape($this->__('Update Shopping Cart')); */?>" class="button2 btn-update"><span><span><?php /*echo $this->__('Update Shopping Cart'); */?></span></span></button>
+
+                <span class="or">-<?php /*echo $this->__('or'); */?>-</span>
+
+                <?php /*if($this->getContinueShoppingUrl()): */?>
+                    <button type="button" title="<?php /*echo $this->quoteEscape($this->__('Continue Shopping')) */?>" class="button2 btn-continue" onclick="setLocation('<?php /*echo Mage::helper('core')->quoteEscape($this->getContinueShoppingUrl()) */?>')"><span><span><?php /*echo $this->__('Continue Shopping') */?></span></span></button>
+                <?php /*endif; */?>
+
+            </div>-->
+
+
+                </div>
+                <!--        <script type="text/javascript">decorateTable('shopping-cart-table')</script>-->
+            </form>
+
+            <?php /* //Moved to checkout page
+
+            <div class="gift-block">
+                <div class="input-box">
+                    <input id="is_gift" type="checkbox" name="is_gift" hidden />
+                    <label for="is_gift"><?php echo $this->__('Gift wrap this order?') ?></label>
+                </div>
+            </div>
+
+            */ ?>
+
+
+            <?php echo $this->getChildHtml('ampromo.items') ?>
+        </div>
+        
+        <?php echo $this->getChildHtml('shopping.cart.table.after'); ?>
+
+        <div class="right-block">
+            <?php /* Extensions placeholder */ ?>
+            <?php echo $this->getChildHtml('checkout_cart_widget') ?>
+            <?php echo $this->getChildHtml('coupon') ?>
+            <?php echo $this->getChildHtml('checkout.cart.extra') ?>
+            <?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
+
+            <div class="totals">
+                <?php echo $this->getChildHtml('totals'); ?>
+            </div>
+            <div class="btns">
+            <?php if ($_promoMsg = Mage::helper('born_package/checkout_cart')->getPromoMessage(Mage::helper('checkout/cart')->getQuote()->getSubtotal())): ?>
+                    <a href="#" class="promo"><?php echo $_promoMsg?></a>
+            <?php endif ?>
+
+                <?php if(!$this->hasError()): ?>
+                    <ul class="checkout-types bottom">
+                        <?php foreach ($this->getMethods('methods') as $method): ?>
+                            <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+                                <li class="btn block method-<?php echo preg_replace("/[^_a-zA-Z0-9-]/", '-', $method); ?>"><?php echo $methodHtml; ?></li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+<!--                <button class="btn invert block">-->
+<!--                    <span class="btn-text">proceed to checkout</span>-->
+<!--                </button>-->
+<!--                <button class="btn block btn-paypal">-->
+<!--                    <span class="btn-text"><span>checkout with </span><i class="icon-btn icon-paypal"></i></span>-->
+<!--                </button>-->
+
+                <a data-coherent-modal data-modal-name="shippingReturns" id="shipping-modal" class="a-link block center"><?php echo $this->__('Shipping & Returns') ?></a>
+                
+                <div id="shipping-return">
+                    <?php echo $this->getChildHtml('shipping.and.return'); ?>
+                </div>
+
+                <a href="<?php echo Mage::getUrl('contacts/') ?>" class="a-link block center"><?php echo $this->__('Contact Us') ?></a>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <?php if ($this->getBannerEnabled()): ?>
+        <div class="cart-mid-banner">
+            <?php if ($_bannerTitle = $this->getBannerTitle()): ?>
+                <h2 class="banner-title"><?php echo $_bannerTitle ?></h2>
+            <?php endif ?>
+
+            <div class="cart-mid-banner-wrapper">
+                <div class="<?php if ($this->getBannerProduct()): ?>two-third<?php else: ?>full<?php endif ?> banner-cart">
+                    <div class="banner-outer">
+                        <div class="banner-inner">
+                            <?php echo $this->getChildHtml('banner') ?>
+                        </div>
+                    </div>
+                </div>
+                <?php if ($_bannerProductHtml = $this->getBannerProduct()): ?>
+                    <div class="one-third banner-product">
+                        <div class="banner-outer">
+                            <div class="banner-inner">
+                                <?php echo $_bannerProductHtml; ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif ?>
+            </div>
+        </div>
+    <?php endif ?>
+
+    <?php echo $this->getChildHtml('crosssell') ?>
+
+</div>
+<script type="text/javascript">
+	function updateb2btierprice(element,qty){
+		var qtyValue = $(element).value;
+		if(qtyValue > qty) {
+			alert('Please reduce order qty to '+qty+' units to place an order.');
+			$(element).value = qty;
+		}
+	}
+</script>

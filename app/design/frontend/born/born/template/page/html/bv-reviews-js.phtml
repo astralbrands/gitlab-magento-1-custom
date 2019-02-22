@@ -1,0 +1,12 @@
+<?php if ($this->getIsEnabled()):?>
+<?php
+$doShowContentJs = Mage::getStoreConfig('bazaarvoice/rr/do_show_content_js');
+?>
+<script type="text/javascript">
+  $BV.ui( 'rr', 'show_reviews', {
+    doShowContent : function () {
+      <?php echo $doShowContentJs ?>
+    }
+  });    
+</script>
+<?php endif; ?>

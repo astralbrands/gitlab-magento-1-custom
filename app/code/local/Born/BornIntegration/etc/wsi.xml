@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:typens="urn:{{var wsdl.name}}"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             name="{{var wsdl.name}}"
+                  targetNamespace="urn:{{var wsdl.name}}">
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:{{var wsdl.name}}">
+            <xsd:complexType name="customerCustomerSageEntityToCreate">
+                <xsd:sequence>
+                    <xsd:element name="customer_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="increment_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="email" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="firstname" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="lastname" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="middlename" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="password" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="website_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="store_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="group_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="prefix" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="suffix" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="dob" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="taxvat" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="gender" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="company" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="tax_exempt_number" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="credit_terms" type="xsd:int" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="catalogProductSageCreateEntity">
+                <xsd:sequence>
+                    <xsd:element name="categories" type="typens:ArrayOfString" minOccurs="0" />
+                    <xsd:element name="websites" type="typens:ArrayOfString" minOccurs="0" />
+                    <xsd:element name="name" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="description" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="short_description" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="weight" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="status" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="url_key" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="url_path" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="visibility" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="category_ids" type="typens:ArrayOfString" minOccurs="0" />
+                    <xsd:element name="website_ids" type="typens:ArrayOfString" minOccurs="0" />
+                    <xsd:element name="has_options" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="gift_message_available" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="price" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="special_price" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="special_from_date" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="special_to_date" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="tax_class_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="tier_price" type="typens:catalogProductTierPriceEntityArray" minOccurs="0" />
+                    <xsd:element name="meta_title" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="meta_keyword" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="meta_description" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="custom_design" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="custom_layout_update" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="options_container" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="size" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="color" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="benefits" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="coverage" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="purpose" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="finish" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="color_family" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="form" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="usage" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="application_area" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="product_type" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="manufacturer" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="shade" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="skin_tone" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="skin_type" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="undertone" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="upc" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="directions" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="ingredients" type="xsd:string" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="customerAddressSageEntityCreate">
+                <xsd:sequence>
+                    <xsd:element name="city" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="company" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="country_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="fax" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="firstname" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="lastname" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="middlename" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="postcode" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="prefix" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="region_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="region" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="street" type="typens:ArrayOfString" minOccurs="0" />
+                    <xsd:element name="suffix" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="telephone" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="is_default_billing" type="xsd:boolean" minOccurs="0" />
+                    <xsd:element name="is_default_shipping" type="xsd:boolean" minOccurs="0" />
+                    <xsd:element name="address_code" type="xsd:string" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="customerAddressSageCreateRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="incrementId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="addressData" type="typens:customerAddressSageEntityCreate" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="customerAddressSageCreateResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:int" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="customerAddressSageUpdateRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="incrementId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sageAddressCode" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="addressData" type="typens:customerAddressSageEntityCreate" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="customerAddressSageUpdateResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:boolean" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="salesOrderInvoiceSageCreateRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="invoiceIncrementId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="itemsQty" type="typens:orderItemSkuQtyArray" />
+                        <xsd:element minOccurs="0" maxOccurs="1" name="comment" type="xsd:string" />
+                        <xsd:element minOccurs="0" maxOccurs="1" name="email" type="xsd:string" />
+                        <xsd:element minOccurs="0" maxOccurs="1" name="includeComment" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="salesOrderInvoiceSageCreateResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="salesOrderShipmentSageCreateRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="orderIncrementId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="itemsQty" type="typens:orderItemSkuQtyArray" />
+                        <xsd:element minOccurs="0" maxOccurs="1" name="comment" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="email" type="xsd:int" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="includeComment" type="xsd:int" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="salesOrderShipmentSageCreateResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:complexType name="orderItemSkuQty">
+                <xsd:sequence>
+                    <xsd:element name="parent_sku" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="parent_qty" type="xsd:double" minOccurs="0" /> 
+                    <xsd:element name="order_item_sku" type="xsd:string" />
+                    <xsd:element name="qty" type="xsd:double" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="orderItemSkuQtyArray">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="complexObjectArray" type="typens:orderItemSkuQty" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="customerCustomerSageUpdateRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="customerIncrementId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="customerData" type="typens:customerCustomerSageEntityToCreate" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="customerCustomerSageUpdateResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:boolean" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="customerCustomerSageCreateRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="customerData" type="typens:customerCustomerSageEntityToCreate" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="customerCustomerSageCreateResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:anyType" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="catalogProductSageCreateRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="type" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="set" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sku" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="productData" type="typens:catalogProductSageCreateEntity" />
+                        <xsd:element minOccurs="0" maxOccurs="1" name="store" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="catalogProductSageCreateResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:int" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="catalogProductSageUpdateRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="productId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="productData" type="typens:catalogProductSageCreateEntity" />
+                        <xsd:element minOccurs="0" maxOccurs="1" name="store" type="xsd:string" />
+                        <xsd:element minOccurs="0" maxOccurs="1" name="identifierType" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="catalogProductSageUpdateResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:boolean" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="salesOrderShipmentSageCreateRequest">
+        <wsdl:part name="parameters" element="typens:salesOrderShipmentSageCreateRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="salesOrderShipmentSageCreateResponse">
+        <wsdl:part name="parameters" element="typens:salesOrderShipmentSageCreateResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="salesOrderInvoiceSageCreateRequest">
+        <wsdl:part name="parameters" element="typens:salesOrderInvoiceSageCreateRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="salesOrderInvoiceSageCreateResponse">
+        <wsdl:part name="parameters" element="typens:salesOrderInvoiceSageCreateResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="customerCustomerSageUpdateRequest">
+        <wsdl:part name="parameters" element="typens:customerCustomerSageUpdateRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="customerCustomerSageUpdateResponse">
+        <wsdl:part name="parameters" element="typens:customerCustomerSageUpdateResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="customerCustomerSageCreateRequest">
+        <wsdl:part name="parameters" element="typens:customerCustomerSageCreateRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="customerCustomerSageCreateResponse">
+        <wsdl:part name="parameters" element="typens:customerCustomerSageCreateResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="catalogProductSageCreateRequest">
+        <wsdl:part name="parameters" element="typens:catalogProductSageCreateRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="catalogProductSageCreateResponse">
+        <wsdl:part name="parameters" element="typens:catalogProductSageCreateResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="catalogProductSageUpdateRequest">
+        <wsdl:part name="parameters" element="typens:catalogProductSageUpdateRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="catalogProductSageUpdateResponse">
+        <wsdl:part name="parameters" element="typens:catalogProductSageUpdateResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="customerAddressSageCreateRequest">
+        <wsdl:part name="parameters" element="typens:customerAddressSageCreateRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="customerAddressSageCreateResponse">
+        <wsdl:part name="parameters" element="typens:customerAddressSageCreateResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="customerAddressSageUpdateRequest">
+        <wsdl:part name="parameters" element="typens:customerAddressSageUpdateRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="customerAddressSageUpdateResponse">
+        <wsdl:part name="parameters" element="typens:customerAddressSageUpdateResponseParam" />
+    </wsdl:message>
+    <wsdl:portType name="{{var wsdl.handler}}PortType">
+        <wsdl:operation name="salesOrderShipmentSageCreate">
+            <wsdl:documentation>Create new shipment for order</wsdl:documentation>
+            <wsdl:input message="typens:salesOrderShipmentSageCreateRequest" />
+            <wsdl:output message="typens:salesOrderShipmentSageCreateResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="salesOrderInvoiceSageCreate">
+            <wsdl:documentation>Create new shipment for order</wsdl:documentation>
+            <wsdl:input message="typens:salesOrderInvoiceSageCreateRequest" />
+            <wsdl:output message="typens:salesOrderInvoiceSageCreateResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="customerCustomerSageUpdate">
+            <wsdl:documentation>Update customer data</wsdl:documentation>
+            <wsdl:input message="typens:customerCustomerSageUpdateRequest" />
+            <wsdl:output message="typens:customerCustomerSageUpdateResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="customerCustomerSageCreate">
+            <wsdl:documentation>Update customer data</wsdl:documentation>
+            <wsdl:input message="typens:customerCustomerSageCreateRequest" />
+            <wsdl:output message="typens:customerCustomerSageCreateResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="catalogProductSageCreate">
+            <wsdl:documentation>Create new product and return product id</wsdl:documentation>
+            <wsdl:input message="typens:catalogProductSageCreateRequest" />
+            <wsdl:output message="typens:catalogProductSageCreateResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="catalogProductSageUpdate">
+            <wsdl:documentation>Update product</wsdl:documentation>
+            <wsdl:input message="typens:catalogProductSageUpdateRequest" />
+            <wsdl:output message="typens:catalogProductSageUpdateResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="customerAddressSageCreate">
+            <wsdl:documentation>Create customer address</wsdl:documentation>
+            <wsdl:input message="typens:customerAddressSageCreateRequest" />
+            <wsdl:output message="typens:customerAddressSageCreateResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="customerAddressSageUpdate">
+            <wsdl:documentation>Update customer address data</wsdl:documentation>
+            <wsdl:input message="typens:customerAddressSageUpdateRequest" />
+            <wsdl:output message="typens:customerAddressSageUpdateResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="salesOrderShipmentSageCreate">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="salesOrderInvoiceSageCreate">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="customerCustomerSageUpdate">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="customerCustomerSageCreate">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="catalogProductSageCreate">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="catalogProductSageUpdate">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="customerAddressSageCreate">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="customerAddressSageUpdate">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="{{var wsdl.name}}Service">
+        <wsdl:port name="{{var wsdl.handler}}Port" binding="typens:{{var wsdl.handler}}Binding">
+            <soap:address location="{{var wsdl.url}}" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

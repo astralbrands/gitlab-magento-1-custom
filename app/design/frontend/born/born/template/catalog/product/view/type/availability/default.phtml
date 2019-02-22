@@ -1,0 +1,18 @@
+<?php
+        if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) { 
+        //Mage::log(__METHOD__, false, 'OptionSwatch.log');
+        }
+$_product = $this->getProduct();
+    if ($this->displayProductStockStatus()):
+        if ($_product->isInStock()): ?>
+        <p class="availability in-stock">
+            <span class="label"></span>
+            <span class="value"></span>
+        </p>
+    <?php else: ?>
+        <p class="availability out-of-stock">
+            <span class="value"><?php echo $this->helper('catalog')->__('Out of stock') ?></span>
+        </p>
+    <?php endif; ?>
+
+<?php endif; ?>

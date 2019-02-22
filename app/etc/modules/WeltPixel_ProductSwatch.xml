@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <WeltPixel_ProductSwatch>
+            <active>true</active>
+            <codePool>community</codePool>        
+            <depends>
+                <WeltPixel_Setup />
+            </depends>
+        </WeltPixel_ProductSwatch>
+    </modules>
+</config>

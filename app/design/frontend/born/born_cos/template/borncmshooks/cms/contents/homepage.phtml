@@ -1,0 +1,32 @@
+<div class="homepage">
+    <div class="hero">
+        <?php $this->renderWidgets('hero'); ?>
+    </div>
+    <div class="fullbleed">
+        <?php $this->renderWidgets('fullbleed'); ?>
+    </div>
+    <div class="section">
+        <?php $this->renderWidgets('section'); ?>
+    </div>
+    <div class="product-grid">
+        <?php $this->renderWidgets('productgrid'); ?>
+    </div>
+    <div class="promo">
+        <?php $this->renderWidgets('promo'); ?>
+    </div>
+    <div class="press">
+        <?php $this->renderWidgets('press'); ?>
+    </div>
+
+
+</div>
+
+<?php
+$ur = $_SERVER["REQUEST_URI"];
+$sn = str_ireplace("www.","",$_SERVER['HTTP_HOST']);
+
+$ar = explode("?",$ur);
+$vc = $ar[0];
+	if($vc=="/" || $vc ==""){
+
+}

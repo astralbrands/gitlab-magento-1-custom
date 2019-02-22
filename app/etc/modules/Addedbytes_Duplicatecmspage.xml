@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * This module provides a quick way to duplicate a CMS page
+ *
+ * By Added Bytes
+ * http://www.addedbytes.com
+ */
+-->
+<config>
+    <modules>
+        <Addedbytes_Duplicatecmspage>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Addedbytes_Duplicatecmspage>
+    </modules>
+</config>

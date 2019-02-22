@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<layout version="0.0.1">
+    <catalog_product_view translate="label">
+    <label>Catalog Product View</label>
+    <reference name="head">
+        <action method="addItem"><type>skin_js</type><name>optionswatch/js/optionswatch.js</name></action>
+        <action method="addItem"><type>skin_js</type><name>optionswatch/js/slick.min.js</name></action>
+        <action method="addItem"><type>skin_css</type><name>optionswatch/css/styles.css</name></action>
+    </reference>
+    <reference name="product.info.media">
+        <action method="setTemplate">
+            <template>optionswatch/catalog/product/view/media.phtml</template>
+        </action>
+    </reference>
+        <reference name="content">
+        <block type="optionswatch/catalog_product_view_swatch" name="product.info.swatch.shade" template="optionswatch/catalog/product/view/swatch.phtml" before="product.info" />
+        </reference>
+
+    </catalog_product_view>
+</layout>

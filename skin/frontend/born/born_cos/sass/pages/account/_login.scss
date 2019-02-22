@@ -1,0 +1,472 @@
+// core of html in  app\design\frontend\born\born\template\persistent\customer\form\login.phtml
+
+.customer-account-login,
+.checkout-onepage-index,
+.customer-account-forgotpassword {
+  .main {
+  }
+  .col-main {
+    .background-image {
+      position: relative;
+      p {
+        overflow: hidden;
+      }
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .account-wrappper {
+    padding: 70px 0 107px;
+    @include position(absolute, 0 0 0 0);
+    width: 100%;
+  }
+  .tabs {
+    background: transparent;
+    margin-bottom: 0;
+    .tabs-login {
+      @include display(flex);
+      @include justify-content(center);
+      .tab-members, .tab-professionals {
+        width: 50%;
+        text-align: center;
+        text-transform: uppercase;
+        @include gotham();
+        @include setFont(1.6rem, 4.2rem,700);
+        a {
+          color: #b7b7b7;
+          display: block;
+          text-decoration: none;
+          width: 100%;
+          &:hover {
+            color: $black;
+          }
+        }
+      }
+      .tab-active {
+        a {
+          color: $black;
+          border-bottom: 4px solid $black;
+        }
+      }
+    }
+  }
+  .account-login {
+    width: 461px;
+    margin: 0 auto;
+  }
+  .account-content {
+    background: $white;
+    padding: 35px 46px 40px 50px;
+  }
+  .account-page-title {
+    border-bottom: none;
+    color: $black;
+    @include gotham;
+    @include setFont(2.8rem, 4.2rem, 200);
+    letter-spacing: -0.07rem;
+    text-align: center;
+    text-transform: none;
+  }
+  .col2-set {
+    .col-2 {
+      border: none;
+      padding: 0;
+      margin-top: 13px;
+    }
+    .buttons-set {
+      max-width: none;
+    }
+  }
+  .new-users {
+    display: none;
+  }
+  .registered-users {
+    width: 100%;
+    border: none;
+    margin-top: 0;
+  }
+  .remember-me-box {
+    float: left;
+    margin-top: 10px;
+    .input-box, a {
+      display: inline-block;
+    }
+    a {
+      color: $page-width;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+  .remember-me-popup {
+    z-index: 10;
+    background: $white;
+    margin-top: 74px;
+  }
+  .remember-me-popup-head {
+    h3 {
+      text-align: center;
+    }
+  }
+  .remember-me-popup-close {
+    font-size: 0;
+    padding: 0px 5px;
+    &:before {
+      font-family: $icomoon;
+      font-size: 3rem;
+      color: $black;
+      content: "\e917";
+      &:hover {
+        color: $page-width;
+      }
+    }
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .remember-me-popup-body {
+    p {
+      @include gotham();
+      @include setFont(1.3rem, 2.4rem, 400);
+    }
+  }
+  .form-list {
+    li:first-child {
+      .validation-advice {
+        border-top: 1px solid $block-border-color;
+      }
+    }
+  }
+  #email {
+    border-bottom: none !important;
+  }
+  .forgot-pass{
+    color: $page-width;
+    @include gotham();
+    @include setFont(1.29rem, 2.39rem, 500);
+    float: right;
+    margin: 25px 0;
+    text-decoration: underline;
+    &:hover {
+      color: $black;
+    }
+  }
+  .buttons-set {
+    padding: 0;
+    margin: 0;
+    .button {
+      @include gotham();
+      @include setFont(1.3rem, 4.2rem, 500);
+      background: $black;
+      color: $white;
+      padding: 4px 15px;
+      width: 100%;
+
+      &:hover, &:active {
+        background: $white;
+        color: $black;
+        box-shadow: inset 0 0 0 3px $black;
+        @include transition(all $fast ease);
+      }
+    }
+  }
+  .create-account {
+    .members-title, .professionals-title {
+      @include gotham();
+      @include setFont(2.4rem, 4.2rem, 200);
+      text-align: center;
+      text-transform: none;
+    }
+    .professionals-title {
+      display: none;
+    }
+    .button {
+      color: $black;
+      background: $white;
+      box-shadow: inset 0 0 0 3px $black;
+      &:hover {
+        background: $black;
+        color: $white;
+      }
+    }
+    .btn-professionals {
+      display: none;
+    }
+    .buttons-set .button {
+      line-height: 4.1rem;
+    }
+  }
+  .professionals-view {
+    .login-via-socials {
+      display: none;
+    }
+    .buttons-set {
+      margin-bottom: 18px;
+    }
+    .create-account {
+      .members-title, .professionals-title {
+        margin-bottom: 18px;
+      }
+      .members-title {
+        display: none;
+      }
+      .professionals-title {
+        display: block;
+      }
+      .btn-members {
+        display: none;
+      }
+      .btn-professionals {
+        display: block;
+      }
+    }
+  }
+}
+
+.customer-account-login,
+.checkout-onepage-index {
+  .login-via-socials {
+    margin-bottom: 30px;
+    text-align: center;
+    p {
+      @include gothamBook();
+      @include setFont(1.4rem, 4.2rem, 400);
+    }
+    .socials-list {
+      li {
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 10px;
+        width: 54px;
+        &:hover {
+          background: $black;
+          @include transition(all $fast ease);
+          .social-commerce-signin-facebook,
+          .social-commerce-signin-google,
+          .social-commerce-signin-instagram {
+            color: $white;
+            text-decoration: none;
+          }
+        }
+        & > * {
+          border: 3px solid $black;
+        }
+      }
+      .social-commerce-signin-facebook, .social-commerce-signin-google, .social-commerce-signin-instagram {
+        .share-buttons {
+          .socialsignin .small {
+            width: 48px;
+            text-align: center;
+            vertical-align: middle;
+          }
+          .small {
+            margin-right: 0;
+          }
+        }
+        .textonly .textonly span {
+          font-size: 0;
+          &:before {
+            color: $black;
+            font-family: $icomoon;
+            font-size: 3.1rem;
+            position: relative;
+            top: 7px;
+          }
+        }
+        &:hover {
+          .textonly .textonly span {
+            &:before {
+              @include transition(all $fast ease);
+              color: $white;
+            }
+          }
+        }
+      }
+      .social-commerce-signin-facebook {
+        .textonly .textonly span {
+          &:before {
+            content: "\e91a";
+          }
+        }
+      }
+      .social-commerce-signin-google {
+        .textonly .textonly span {
+          &:before {
+            content: "\e91d";
+          }
+        }
+      }
+      .social-commerce-signin-instagram {
+        .textonly .textonly span {
+          &:before {
+            content: "\e920";
+          }
+        }
+      }
+    }
+  }
+}
+
+.checkout-onepage-index .opc {
+  .buttons-set button.button {
+    float: none;
+    width: 100%;
+    margin: 0 auto 10px;
+    &:hover {
+      border: none;
+    }
+  }
+  #opc-login {
+    .col-2 {
+      margin-top: 20px;
+    }
+    .buttons-set {
+      max-width: 330px;
+      .required {
+        display: none;
+      }
+    }
+  }
+  .login-via-socials {
+    text-align: left;
+    .socials-list li:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.social-commerce-signin-facebook .share-buttons  .socialsignin {
+  .textonly_logout span {
+    font-size: 0;
+    &:before {
+      content: "\e91a";
+      color: $black;
+      font-family: 'Icomoon';
+      font-size: 3.1rem;
+      position: relative;
+      top: 7px;
+    }
+  }
+}
+.social-commerce-signin-google .share-buttons  .socialsignin {
+  .textonly_logout span {
+    font-size: 0;
+    &:before {
+      content: "\e91d";
+      color: $black;
+      font-family: 'Icomoon';
+      font-size: 3.1rem;
+      top: 7px;
+      position: relative;
+    }
+  }
+}
+.social-commerce-signin-instagram .share-buttons  .socialsignin {
+  .textonly_logout span {
+    font-size: 0;
+    &:before {
+      content: "\e920";
+      color: $black;
+      font-family: 'Icomoon';
+      font-size: 3.1rem;
+      position: relative;
+      top: 7px;
+    }
+  }
+}
+li:hover .social-commerce-signin-facebook .share-buttons  .socialsignin .textonly_logout span:before,
+li:hover .social-commerce-signin-google .share-buttons  .socialsignin .textonly_logout span:before,
+li:hover .social-commerce-signin-instagram .share-buttons  .socialsignin .textonly_logout span:before {
+  color: $white;
+}
+
+.customer-account-logoutsuccess {
+  .page-title h1 {
+    margin: 30px 20px;
+  }
+  .main-container p {
+    margin: 0 20px 30px;
+  }
+}
+
+.checkout-onepage-index.opc-has-progressed-from-login {
+  .remember-me-box {
+    width: 100%;
+  }
+  .customer-dob {
+    width: 330px;
+    @include display(flex);
+    .dob-month,
+    .dob-day {
+      @include flex-basis(30%);
+    }
+    .dob-year {
+      @include flex-basis(40%);
+    }
+  }
+  .customer-dob-title {
+    @include gothamBook;
+    @include setFont(1.4rem, 2.4rem, 400);
+    margin-bottom: 0;
+    margin-top: -10px;
+  }
+}
+
+@media only screen and (max-width: $desktop-m) {
+  .customer-account-login,
+  .customer-account-forgotpassword {
+    .col-main {
+      .background-image {
+        img {
+          width: inherit;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-m) {
+  .customer-account-login {
+    .tabs {
+      display: block;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-s) {
+   .customer-account-login {
+     .account-wrappper {
+       padding: 55px 0 66px;
+     }
+     .tabs .tabs-login {
+       .tab-members, .tab-professionals {
+         font-size: 1.4rem;
+       }
+     }
+     .account-content {
+       padding: 22px 20px 49px;
+     }
+   }
+  .customer-account-logoutsuccess {
+    .page-title h1 {
+      font-size: 2rem;
+      margin: 20px 19px;
+    }
+    .main-container p {
+      font-size: 1.4rem;
+      margin: 0px 19px 30px;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-xs) {
+  .customer-account-login {
+    .account-login{
+      width: 100%;
+    }
+  }
+}
+
+

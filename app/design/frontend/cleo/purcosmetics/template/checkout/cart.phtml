@@ -1,0 +1,118 @@
+<?php
+/**
+ * Shopping cart template
+ *
+ * @var $this Mage_Checkout_Block_Cart
+ */
+
+$wishlistActive = $this->isWishlistActive();
+$items = $this->getItems();
+$productsCount = count($items) ? count($items) : false;
+?>
+<?php $_priceDisplay = ($this->helper('tax')->displayCartBothPrices()) ? 'display-both-prices' : 'display-single-price'; ?>
+<div class="cart <?php echo $_priceDisplay; ?>">
+    <div class="page-title title-buttons">
+        <h1>
+            <?php echo $this->__('Shopping Bag') ?>
+            <?php if(Mage::getStoreConfig('weltpixel_selector/customization_settings/freeshipping')) : ?>
+                <span><?php echo $this->helper('weltpixel_custom')->getRemainingAmount(); ?></span>
+            <?php endif; ?>
+            <?php if ($productsCount): ?>
+                <span class="items-count">
+                    <?php echo count($items) > 1 ? count($items) . $this->__(' Products') : count($items) . $this->__(' Product');  ?>
+                </span>
+            <?php endif; ?>
+        </h1>
+        <?php if(!$this->hasError()): ?>
+            <ul class="checkout-types top">
+                <?php foreach ($this->getMethods('top_methods') as $method): ?>
+                    <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+                        <li><?php echo $methodHtml; ?></li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+    </div>
+
+    <?php echo $this->getMessagesBlock()->toHtml() ?>
+    <?php echo $this->getChildHtml('form_before') ?>
+
+    <div class="table-wrapper">
+        <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
+            <?php echo $this->getBlockHtml('formkey'); ?>
+            <table id="shopping-cart-table" class="cart-table data-table">
+                <thead>
+                    <tr>
+                        <th class="cart-image-head">
+                            <span class="nobr"><?php echo $this->__('Product') ?></span>
+                        </th>
+                        <th class="cart-name-head">&nbsp;</th>
+                        <th class="cart-shade-head a-center">
+                            <?php echo $this->__('Shade') ?>
+                        </th>
+                        <th class="cart-qty-head a-center">
+                            <?php echo $this->__('Qty') ?>
+                        </th>
+                        <th class="a-center cart-total-head">
+                            <?php echo $this->__('Total') ?>
+                        </th>
+                        <th class="cart-remove-head a-center">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($this->getItems() as $_item): ?>
+                        <?php echo $this->getItemHtml($_item) ?>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+            <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+        </form>
+        <div class="cart-forms-wrapper">
+            <div class="cart-forms">
+                <?php /* Extensions placeholder */ ?>
+                <?php echo $this->getChildHtml('checkout_cart_widget') ?>
+                <?php echo $this->getChildHtml('coupon') ?>
+                <?php echo $this->getChildHtml('checkout.cart.extra') ?>
+                <?php if (!$this->getIsVirtual()): ?>
+                    <?php echo $this->getChildHtml('shipping'); ?>
+                <?php endif; ?>
+            </div>
+            <div class="cart-totals-wrapper">
+                <div class="cart-totals">
+                    <?php echo $this->getChildHtml('totals'); ?>
+                    <?php if(!$this->hasError()): ?>
+                        <ul class="checkout-types bottom">
+                            <?php foreach ($this->getMethods('methods') as $method): ?>
+                                <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+                                    <li class="method-<?php echo preg_replace("/[^_a-zA-Z0-9-]/", '-', $method); ?>"><?php echo $methodHtml; ?></li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('weltpixel_shopping_cart_security')->toHtml() ?>
+                </div>
+            </div>
+            <div class="extra-links">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('shopping_cart_after_total')->toHtml() ?>
+            </div>
+        </div>
+    </div>
+
+    <?php echo $this->getChildHtml('shopping.cart.table.after'); ?>
+
+    <?php echo $this->getChildHtml('crosssell') ?>
+</div>
+
+<script type="text/javascript">
+    function submitFormOnkeyPress(e, updateButton) {
+        if (e.keyCode == 13) {
+            jQuery(updateButton).trigger('click');
+            return false;
+        }
+    }
+    jQuery('.cart-qty-select').niceSelect();
+    jQuery('.cart-update').on('click', function() {
+        var form = jQuery(this).closest('form');
+        form.submit();
+    });
+</script>

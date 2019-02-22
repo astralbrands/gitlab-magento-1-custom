@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+
+    <wp_owl_carousel>
+        <reference name="head">
+            <!-- Owl Carousel -->
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/vendor/owl/owl-carousel.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/vendor/owl/owl-theme.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/jquery.owl.carousel-1.3.3.js</name>
+            </action>
+        </reference>
+    </wp_owl_carousel>
+
+    <cms_page>
+        <update handle="wp_owl_carousel" />
+        <reference name="head">
+
+            <!-- Interactive -->
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/interactive.css</name>
+            </action>
+
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/cms.css</name>
+                <group>data-group="cms"</group>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/catalog.css</name>
+                <group>data-group="catalog"</group>
+            </action>
+
+
+        </reference>
+    </cms_page>
+    <catalog_category_layered>
+        <update handle="wp_owl_carousel" />
+    </catalog_category_layered>
+    <catalog_category_default>
+        <update handle="wp_owl_carousel" />
+    </catalog_category_default>
+
+    <!--  PAGE  -->
+    <default>
+        <block type="weltpixel_selector/head" name="customLayoutSetup"/>
+        <reference name="root">
+            <action method="addBodyClass">
+                <classname helper="weltpixel_selector/getLoginClass" />
+            </action>
+            <reference name="head">
+
+                <action method="removeItem">
+                    <type>js</type>
+                    <name>varien/menu.js</name>
+                </action>
+                <action method="removeItem">
+                    <type>skin_css</type>
+                    <name>css/styles.css</name>
+                </action>
+                <action method="removeItem">
+                    <type>skin_css</type>
+                    <name>css/styles-ie.css</name>
+                </action>
+                <action method="removeItem">
+                    <type>skin_css</type>
+                    <name>css/print.css</name>
+                </action>
+
+                <!-- Ionicons -->
+                <action method="addItem" ifconfig="weltpixel_selector/customization_settings/ionicons">
+                    <type>skin_css</type>
+                    <name>css/vendor/ionicons/ionicons.css</name>
+                </action>
+
+                <action method="addItem">
+                    <type>skin_js</type>
+                    <name>js/doubletaptogo.js</name>
+                </action>
+
+                <!-- Main -->
+                <action method="addItem">
+                    <type>skin_css</type>
+                    <name>css/main.css</name>
+                </action>
+                <action method="addItem">
+                    <type>skin_js</type>
+                    <name>js/wp.main.js</name>
+                </action>
+
+                <!-- Enterprise  -->
+                <action method="addItem">
+                    <type>skin_css</type>
+                    <name>css/enterprise.css</name>
+                </action>
+                <action method="addItem">
+                    <type>skin_js</type>
+                    <name>js/scripts.js</name>
+                </action>
+                <action method="addItem">
+                    <type>skin_js</type>
+                    <script>js/enterprise/wishlist.js</script>
+                </action>
+
+                <!-- Feature -->
+                <action method="addItem">
+                    <type>skin_css</type>
+                    <name>css/vendor/features/bootstrap.css</name>
+                </action>
+                <action method="addItem">
+                    <type>skin_css</type>
+                    <name>css/vendor/features/style.css</name>
+                </action>
+                <action method="addItem">
+                    <type>skin_css</type>
+                    <name>css/vendor/features/dark.css</name>
+                </action>
+                <action method="addItem">
+                    <type>skin_css</type>
+                    <name>css/vendor/features/font-icons.css</name>
+                </action>
+                <action method="addItem">
+                    <type>skin_css</type>
+                    <name>css/vendor/features/magnific-popup.css</name>
+                </action>
+                <action method="addItem">
+                    <type>skin_css</type>
+                    <name>css/vendor/features/animate.css</name>
+                </action>
+                <action method="addItem">
+                    <type>skin_css</type>
+                    <name>css/vendor/features/responsive.css</name>
+                </action>
+
+                <!-- Animation -->
+                <action method="addItem">
+                    <type>skin_js</type>
+                    <name>js/poi.js</name>
+                </action>
+                
+
+            </reference>
+
+            <reference name="header">
+                <action method="unsetChild">
+                    <name>topLinks</name>
+                </action>
+                <action method="unsetChild">
+                    <name>store_language</name>
+                </action>
+                <action method="unsetChild">
+                    <name>topContainer</name>
+                </action>
+                <action method="unsetChild">
+                    <name>welcome</name>
+                </action>
+                <block type="page/html_header" name="logo" as="logo" template="page/html/links/logo.phtml" />
+                <block type="page/template_links" name="top.links" as="topLinks">
+                    <action method="setName">
+                        <name>top-links</name>
+                    </action>
+                </block>
+                <block type="core/template" name="global_promo_message_container" as="global_promo_message_container" template="page/html/promo_message.phtml">
+                    <block type="cms/block" name="global_promo_message">
+                        <action method="setBlockId"><block_id>weltpixel_global_promo_message</block_id></action>
+                    </block>
+                </block>
+                <block type="core/template" name="quick_access" as="quickAccess" template="page/html/quick-access.phtml" />
+                <block as="store_language_flag" name="store_language_flag" template="page/switch/flags.phtml" type="page/switch" />
+                <block type="directory/currency" name="custom_currency_selector" template="page/switch/currency.phtml"/>
+                <block type="page/html_wrapper" name="top.container" as="topContainer" translate="label">
+                    <label>Page Header</label>
+                    <action method="setElementClass">
+                        <value>top-container</value>
+                    </action>
+                </block>
+            </reference>
+
+            <block type="core/text_list" name="intro" as="intro" translate="label">
+                <label>Intro Area</label>
+            </block>
+
+            <block type="core/text_list" name="outro" as="outro" translate="label">
+                <label>Outro Area</label>
+            </block>
+
+            <reference name="footer">
+                <action method="unsetChild">
+                    <name>bottomContainer</name>
+                </action>
+                <action method="unsetChild">
+                    <name>store_switcher</name>
+                </action>
+                <action method="unsetChild">
+                    <name>footer_links</name>
+                </action>
+                <block type="core/template" name="features" as="features" template="page/html/footer/features.phtml" />
+                <block type="core/template" name="social" as="social" template="page/html/footer/social.phtml" />
+                <block type="core/template" name="contact" as="contact" template="page/html/footer/contact.phtml" />
+                <block type="page/html_footer" name="copyright" as="copyright" template="page/html/footer/copyright.phtml" />
+            </reference>
+
+        </reference>
+    </default>
+
+
+    <!--  PAGE  -->
+
+    <default>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/jquery.easydropdown.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/weltpixel/easydropdown.css</name>
+            </action>
+        </reference>
+
+        <remove name="left.permanent.callout" />
+        <remove name="right.permanent.callout" />
+
+    </default>
+    <customer_account_logoutsuccess translate="label">
+        <label>Customer Account Logout Success</label>
+        <reference  name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/customer.css</name>
+                <group>data-group="customer"</group>
+            </action>
+        </reference>
+    </customer_account_logoutsuccess>
+    <customer_account_login translate="label">
+        <label>Customer Account Login Form</label>
+        <reference name="root">
+            <action method="setTemplate">
+                <template helper="weltpixel_selector/getLoginPageTemplate" />
+            </action>
+        </reference>
+        <reference  name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/customer.css</name>
+                <group>data-group="customer"</group>
+            </action>
+        </reference>
+    </customer_account_login>
+    <customer_account_create>
+        <label>Customer Account Registration Form</label>
+        <reference  name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/customer.css</name>
+                <group>data-group="customer"</group>
+            </action>
+        </reference>
+    </customer_account_create>
+    <customer_account_forgotpassword>
+        <label>Customer Forgot Password Form</label>
+        <reference  name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/customer.css</name>
+                <group>data-group="customer"</group>
+            </action>
+        </reference>
+    </customer_account_forgotpassword>
+    <customer_account>
+        <reference  name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/customer.css</name>
+                <group>data-group="customer"</group>
+            </action>
+        </reference>
+    </customer_account>
+    <customer_logged_out>
+        <reference name="top.links">
+            <action method="removeLinkByUrl">
+                <url helper="customer/getLoginUrl"/>
+            </action>
+            <action method="addLink" translate="label title" module="customer">
+                <label>Login</label>
+                <url helper="customer/getLoginUrl"/>
+                <title>Login</title>
+                <prepare/>
+                <urlParams/>
+                <position>70</position>
+            </action>
+        </reference>
+    </customer_logged_out>
+
+    <customer_logged_in>
+        <action method="addLink" translate="label title" module="wishlist" ifconfig="wishlist/general/active">
+            <label>wishlist</label>
+            <name>wishlist</name>
+            <path>wishlist/</path>
+            <position>20</position>
+        </action>
+    </customer_logged_in>
+
+    <default>
+
+        <reference name="before_body_end">
+            <block type="weltpixel_selector/instagram" name="weltpixel_instagram_setup" template="weltpixel/instagram/setup.phtml"/>
+        </reference>
+
+        <reference name="quick_access">
+            <block type="core/template" name="top.search" as="search" template="weltpixel/ajaxsearch/form.mini.phtml" />
+            <block type="catalog/product_compare_sidebar" name="product_compare_block" as="product_compare_block" template="page/html/links/compare.phtml" />
+        </reference>
+
+        <reference name="top.links">
+            <action method="removeLinkByUrl">
+                <url helper="customer/getAccountUrl"/>
+            </action>
+            <remove name="wishlist_link"/>
+
+            <action method="addLink" translate="label title" module="customer">
+                <label>Account</label>
+                <url helper="customer/getAccountUrl"/>
+                <title>Account</title>
+                <prepare/>
+                <urlParams/>
+                <position>15</position>
+            </action>
+
+        </reference>
+
+        <reference  name="head">
+            <!-- jQuery -->
+            <action method="addJs">
+                <script>weltpixel/jquery-1.11.1.js</script>
+            </action>
+            <action method="addJs">
+                <script>weltpixel/features/plugins.js</script>
+            </action>
+            <action method="addJs">
+                <script>weltpixel/jquery.noconflict.js</script>
+            </action>
+            <action method="addJs">
+                <script>weltpixel/features/bootstrap.noconflict.js</script>
+            </action>
+        </reference>
+
+        <reference name="catalog.topnav">
+            <action method="setTemplate" ifconfig="weltpixel_megamenu/general/enable">
+                <template>weltpixel/page/html/topmenu.phtml</template>
+            </action>
+        </reference>
+
+        <reference name="footer">
+            <block type="newsletter/subscribe" name="footer.newsletter" as="newsletter" template="newsletter/footer.phtml" />
+        </reference>
+    </default>
+
+
+    <checkout_cart_index>
+        <update handle="wp_owl_carousel" />
+        <reference  name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/checkout.css</name>
+                <group>data-group="checkout"</group>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/catalog.css</name>
+                <group>data-group="catalog"</group>
+            </action>
+            <action method="addItem" ifconfig="weltpixel_selector/productpageoptions/ajax_add_to_compare">
+                <type>skin_css</type>
+                <name>css/weltpixel/lightbox.css</name>
+            </action>
+            <action method="addItem" ifconfig="weltpixel_selector/productpageoptions/ajax_add_to_compare">
+                <type>skin_css</type>
+                <name>css/weltpixel/quickview.css</name>
+            </action>
+            <action method="addItem" ifconfig="weltpixel_selector/productpageoptions/ajax_add_to_compare">
+                <type>skin_js</type>
+                <name>js/weltpixel/lightbox.js</name>
+            </action>
+            <action method="addItem" ifconfig="weltpixel_selector/productpageoptions/ajax_add_to_compare">
+                <type>skin_js</type>
+                <name>js/weltpixel/ajaxcompare.js</name>
+            </action>
+        </reference>
+        <reference name="checkout.cart">
+            <block type="cms/block" name="checkout_cart_empty_widget" as="checkout_cart_empty_widget">
+                <action method="setBlockId">
+                    <block_id>weltpixel_empty_cart</block_id>
+                </action>
+            </block>
+        </reference>
+        <reference name="content">
+            <block name="checkout.cart">
+                <action method="unsetChild"  ifconfig="weltpixel_selector/customization_settings/remove_shipping_estimator">
+                    <name>shipping</name>
+                </action>
+            </block>
+        </reference>
+    </checkout_cart_index>
+    <checkout_onepage_index>
+        <reference  name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/checkout.css</name>
+                <group>data-group="checkout"</group>
+            </action>
+        </reference>
+    </checkout_onepage_index>
+    <checkout_onepage_success translate="label">
+        <label>One Page Checkout Success</label>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference  name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/checkout.css</name>
+                <group>data-group="checkout"</group>
+            </action>
+        </reference>
+    </checkout_onepage_success>
+    <catalog_product_view>
+        <update handle="wp_owl_carousel" />
+        <reference name="head">
+            <!-- Cloud Zoom -->
+            <action method="addItem" ifconfig="weltpixel_selector/productpageoptions/enable_cloud_zoom">
+                <type>skin_css</type>
+                <name>css/vendor/cloudzoom/cloudzoom.css</name>
+            </action>
+            <action method="addItem" ifconfig="weltpixel_selector/productpageoptions/enable_cloud_zoom">
+                <type>skin_js</type>
+                <name>js/jquery.cloud-zoom-1.0.3.js</name>
+            </action>
+
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/rtabs.js</name>
+            </action>
+
+            <!-- Magnific Popup -->
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/vendor/magnific-popup/magnific-popup.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/jquery.magnific-popup-0.9.9.js</name>
+            </action>
+
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/vertical-carousel.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/rtabs.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/catalog.css</name>
+                <group>data-group="catalog"</group>
+            </action>
+             <!-- Interactive -->
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/interactive.css</name>
+            </action>
+
+        </reference>
+    </catalog_product_view>
+    <catalog_category_layered>
+        <reference name="root">
+            <action method="setTemplate">
+                <template helper="weltpixel_selector/getCategoryTemplate" />
+            </action>
+        </reference>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/jquery.nouislider.all.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/catalog.css</name>
+                <group>data-group="catalog"</group>
+            </action>
+             <!-- Interactive -->
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/interactive.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/weltpixel/jquery.nouislider.css</name>
+            </action>
+        </reference>
+    </catalog_category_layered>
+    <catalog_category_default>
+        <reference name="root">
+            <action method="setTemplate">
+                <template helper="weltpixel_selector/getCategoryTemplate" />
+            </action>
+        </reference>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/jquery.nouislider.all.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/catalog.css</name>
+                <group>data-group="catalog"</group>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/weltpixel/jquery.nouislider.css</name>
+            </action>
+             <!-- Interactive -->
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/interactive.css</name>
+            </action>
+        </reference>
+    </catalog_category_default>
+    <catalogsearch_result_index>
+        <update handle="wp_owl_carousel" />
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/catalog.css</name>
+                <group>data-group="catalog"</group>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/weltpixel/jquery.nouislider.all.js</name>
+            </action>
+             <!-- Interactive -->
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/interactive.css</name>
+            </action>
+        </reference>
+    </catalogsearch_result_index>
+
+    <!-- CATALOG -->
+
+    <catalog_product_view>
+        <reference name="root">
+            <action method="setTemplate">
+                <template helper="weltpixel_selector/getProductTemplate" />
+            </action>
+        </reference>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/catalog.css</name>
+                <group>data-group="catalog"</group>
+            </action>
+             <!-- Interactive -->
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/interactive.css</name>
+            </action>
+        </reference>
+        <reference name="product.info">
+            <action method="unsetChild">
+                <name>upsell_products</name>
+            </action>
+            <action method="unsetChild">
+                <name>description</name>
+            </action>
+            <action method="unsetChild">
+                <name>additional</name>
+            </action>
+            <block type="catalog/product_view_description" name="product.description" as="description" template="catalog/product/view/description.phtml">
+                <action method="addToParentGroup">
+                    <group>detailed_info</group>
+                </action>
+                <action method="setTitle" translate="value">
+                    <value>Details</value>
+                </action>
+                <action method="setIcon">
+                    <value>icon-select</value>
+                </action>
+            </block>
+            <block type="catalog/product_view_attributes" name="product.attributes" as="additional" template="catalog/product/view/attributes.phtml">
+                <action method="addToParentGroup">
+                    <group>detailed_info</group>
+                </action>
+                <action method="setTitle" translate="value">
+                    <value>Additional Info</value>
+                </action>
+                <action method="setIcon">
+                    <value>icon-line-align-left</value>
+                </action>
+            </block>
+            <block type="catalog/product_list_related" name="catalog.product.related.right" as="related_right" template="catalog/product/list/related-right.phtml" />
+            <block type="catalog/product_list_upsell" name="product.info.upsell" as="upsell_products" template="catalog/product/list/upsell.phtml" />
+            <block type="catalog/product_view_additional" name="product.info.additional" as="product_additional_data" />
+        </reference>
+    </catalog_product_view>
+
+    <!-- CATALOG -->
+
+
+    <!-- TAGS -->
+    <catalog_product_view>
+        <reference name="product.info.additional">
+            <action method="unsetChild">
+                <name>product_tag_list</name>
+            </action>
+        </reference>
+        <reference name="product.info">
+            <block type="tag/product_list" name="product_tag_list" as="tags" template="tag/list.phtml">
+                <action method="addToParentGroup">
+                    <group>detailed_info</group>
+                </action>
+                <action method="setTitle" translate="value">
+                    <value>Tags</value>
+                </action>
+                <action method="setIcon">
+                    <value>icon-tags</value>
+                </action>
+            </block>
+        </reference>
+    </catalog_product_view>
+    <!-- TAGS -->
+
+    <!-- CHECKOUT -->
+    <default>
+        <reference name="right">
+            <action method="unsetChild">
+                <name>cart_sidebar</name>
+            </action>
+        </reference>
+        <reference name="top.links">
+            <remove name="checkout_cart_link"/>
+        </reference>
+        <reference name="quick_access">
+            <block type="checkout/cart_sidebar" name="cart_sidebar" as="cart" template="checkout/cart/header.phtml" before="-">
+                <action method="addItemRender">
+                    <type>simple</type>
+                    <block>checkout/cart_item_renderer</block>
+                    <template>checkout/cart/sidebar/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>checkout/cart_item_renderer_grouped</block>
+                    <template>checkout/cart/sidebar/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>configurable</type>
+                    <block>checkout/cart_item_renderer_configurable</block>
+                    <template>checkout/cart/sidebar/default.phtml</template>
+                </action>
+                <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label" module="checkout">
+                    <label>Shopping Cart Header Extra Actions</label>
+                </block>
+            </block>
+        </reference>
+    </default>
+    <!-- CHECKOUT -->
+
+
+    <!-- REVIEW -->
+    <reviews>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+    </reviews>
+    <review_product_list>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="product.info">
+            <action method="unsetChild">
+                <name>product_additional_data</name>
+            </action>
+            <block type="review/product_view_list" name="product.reviews" as="reviews" template="review/product/view/list.phtml" />
+        </reference>
+    </review_product_list>
+    <catalog_product_view>
+        <reference name="product.info">
+            <block type="review/product_view_list" name="product.reviews" as="reviews" template="review/product/view/list.phtml" />
+            <block type="review/form" name="product.review.form" as="review_form" template="review/form.phtml">
+                <block type="page/html_wrapper" name="product.review.form.fields.before" as="form_fields_before" translate="label">
+                    <label>Review Form Fields Before</label>
+                    <action method="setMayBeInvisible">
+                        <value>1</value>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </catalog_product_view>
+    <!-- REVIEW -->
+
+    <!-- CONTACT -->
+    <contacts_index_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/full-screen.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <reference name="contactForm">
+                <action method="setTemplate">
+                    <template helper="weltpixel_selector/getContactTemplate" />
+                </action>
+            </reference>
+        </reference>
+    </contacts_index_index>
+    <!-- CONTACT -->
+
+</layout>

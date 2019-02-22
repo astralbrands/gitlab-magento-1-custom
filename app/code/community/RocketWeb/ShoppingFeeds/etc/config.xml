@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * RocketWeb
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category   RocketWeb
+ * @package    RocketWeb_ShoppingFeeds
+ * @copyright  Copyright (c) 2016 RocketWeb (http://rocketweb.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author     RocketWeb
+ */
+-->
+<config>
+    <modules>
+        <RocketWeb_ShoppingFeeds>
+            <version>1.0.4</version>
+            <extension_version>2.1.4</extension_version>
+        </RocketWeb_ShoppingFeeds>
+    </modules>
+
+    <global>
+        <models>
+            <rocketshoppingfeeds>
+                <class>RocketWeb_ShoppingFeeds_Model</class>
+                <resourceModel>rocketshoppingfeeds_mysql4</resourceModel>
+            </rocketshoppingfeeds>
+
+            <rocketshoppingfeeds_mysql4>
+                <class>RocketWeb_ShoppingFeeds_Model_Mysql4</class>
+                <entities>
+                    <shipping>
+                        <table>rw_gfeed_shipping</table>
+                    </shipping>
+                    <process>
+                        <table>rw_gfeed_process</table>
+                    </process>
+                    <feed>
+                        <table>rw_gfeed_feed</table>
+                    </feed>
+                    <feed_config>
+                        <table>rw_gfeed_feed_config</table>
+                    </feed_config>
+                    <feed_store>
+                        <table>rw_gfeed_feed_store</table>
+                    </feed_store>
+                    <feed_schedule>
+                        <table>rw_gfeed_feed_schedule</table>
+                    </feed_schedule>
+                    <queue>
+                        <table>rw_gfeed_queue</table>
+                    </queue>
+                    <feed_ftp>
+                        <table>rw_gfeed_feed_ftp</table>
+                    </feed_ftp>
+                </entities>
+            </rocketshoppingfeeds_mysql4>
+        </models>
+
+        <resources>
+            <rocketshoppingfeeds_setup>
+                <setup>
+                    <module>RocketWeb_ShoppingFeeds</module>
+                    <class>RocketWeb_ShoppingFeeds_Model_Resource_Eav_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </rocketshoppingfeeds_setup>
+            <rocketshoppingfeeds_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </rocketshoppingfeeds_write>
+            <rocketshoppingfeeds_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </rocketshoppingfeeds_read>
+        </resources>
+
+        <blocks>
+            <rocketshoppingfeeds>
+                <class>RocketWeb_ShoppingFeeds_Block</class>
+            </rocketshoppingfeeds>
+        </blocks>
+
+        <helpers>
+            <rocketshoppingfeeds>
+                <class>RocketWeb_ShoppingFeeds_Helper</class>
+            </rocketshoppingfeeds>
+        </helpers>
+
+        <!--<events>
+            <controller_front_init_before>
+                <observers>
+                    <amasty_amseotoolkit_model_observer>
+                        <type>disabled</type>
+                    </amasty_amseotoolkit_model_observer>
+                </observers>
+            </controller_front_init_before>
+        </events>-->
+        <events>
+            <admin_system_config_changed_section_carriers>
+                <observers>
+                    <rocketshoppingfeeds_system_config_carriers_after_save>
+                        <type>singleton</type>
+                        <class>rocketshoppingfeeds/observer</class>
+                        <method>systemConfigCarriersAfterSave</method>
+                    </rocketshoppingfeeds_system_config_carriers_after_save>
+                </observers>
+            </admin_system_config_changed_section_carriers>
+            <controller_action_postdispatch_adminhtml_system_currency_saveRates>
+                <observers>
+                    <rocketshoppingfeeds_currency_save_rates_action_after>
+                        <type>singleton</type>
+                        <class>rocketshoppingfeeds/observer</class>
+                        <method>adminCurrencySaveRatesActionAfter</method>
+                    </rocketshoppingfeeds_currency_save_rates_action_after>
+                </observers>
+            </controller_action_postdispatch_adminhtml_system_currency_saveRates>
+        </events>
+    </global>
+
+    <default>
+        <rocketweb_shoppingfeeds>
+            <general>
+                <simple_pricing>2</simple_pricing>
+                <enable_mage_cron>1</enable_mage_cron>
+                <skip_log>0</skip_log>
+            </general>
+        </rocketweb_shoppingfeeds>
+
+        <!-- General configs -->
+        <general>
+            <microdata_turned_on>0</microdata_turned_on>
+            <license_key></license_key>
+            <batch_mode>0</batch_mode>
+            <batch_limit>5000</batch_limit>
+        </general>
+        <debug>
+            <sku></sku>
+        </debug>
+
+        <!-- Feed default data -->
+        <feed>
+            <log_filename><![CDATA[feed_%s.log]]></log_filename>
+            <feed_filename><![CDATA[feed_%s.txt]]></feed_filename>
+            <test_filename><![CDATA[test_%s.txt]]></test_filename>
+            <lock_filename><![CDATA[feed_%s.lock]]></lock_filename>
+            <batch_lock_filename><![CDATA[batch_%s.lock]]></batch_lock_filename>
+            <promotion_filename><![CDATA[promotion_%s.txt]]></promotion_filename>
+            <category_depth>10</category_depth>
+            <auto_skip>1</auto_skip>
+            <exclude_attributes><![CDATA[gallery,image,small_image,price,special_price,special_from_date,special_to_date,price_view,url_key]]></exclude_attributes>
+            <type>generic</type>
+            <type_extend>
+                <google_shopping>google_promotions</google_shopping>
+            </type_extend>
+        </feed>
+    </default>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <rocketweb_shoppingfeeds before="Mage_Adminhtml">RocketWeb_ShoppingFeeds_Adminhtml</rocketweb_shoppingfeeds>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <frontend>
+        <layout>
+            <updates>
+                <rocketweb_shoppingfeeds>
+                    <file>rocketweb_shoppingfeeds.xml</file>
+                </rocketweb_shoppingfeeds>
+            </updates>
+        </layout>
+    </frontend>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <rocketweb_shoppingfeeds_admin>
+                    <file>rocketweb_shoppingfeeds.xml</file>
+                </rocketweb_shoppingfeeds_admin>
+            </updates>
+        </layout>
+    </adminhtml>
+
+    <crontab>
+        <jobs>
+            <rw_feeds_schedule>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <run><model>rocketshoppingfeeds/observer::processScheduleCron</model></run>
+            </rw_feeds_schedule>
+            <rw_feeds_queue>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <run><model>rocketshoppingfeeds/observer::processQueueCron</model></run>
+            </rw_feeds_queue>
+        </jobs>
+    </crontab>
+    <phpunit>
+        <suite>
+            <modules>
+                <RocketWeb_ShoppingFeeds />
+            </modules>
+        </suite>
+    </phpunit>
+</config>

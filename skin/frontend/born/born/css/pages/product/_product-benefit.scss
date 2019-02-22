@@ -1,0 +1,112 @@
+// app\design\frontend\born\born\template\catalog\product\view.phtml
+.benefits {
+  @include display(flex);
+  @include flex-wrap(wrap);
+  @include justify-content(center);
+  text-align: center;
+  max-width: 936px;
+  margin: 0 auto 75px;
+  .benefit-img {
+    margin: 0 auto 20px;
+  }
+  .non-svg-file {
+    max-width: 45px;
+    width: 100%;
+    height: auto;
+  }
+  .benefit-description {
+    font-size: 1.6rem;
+    line-height: 2.1rem;
+  }
+  .benefit {
+    @include flex-basis(33.33%);
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3) {
+      .benefit-outer {
+        border-top: 1px solid $block-border-color;
+      }
+    }
+    &:nth-child(3n-2) {
+      .benefit-outer {
+        border-left: 1px solid $block-border-color;
+      }
+    }
+    &-outer {
+      position: relative;
+      padding-top: 100%;
+      border-right: 1px solid $block-border-color;
+      border-bottom: 1px solid $block-border-color;
+    }
+    &-inner {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      padding: 25px;
+      font-size: 0;
+      &:after {
+        vertical-align: middle;
+        display: inline-block;
+        content: '';
+        height: 100%;
+      }
+      &-middle {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width: $tablet) {
+  .benefits {
+    //max-width: 624px;
+    margin: 0 auto 50px;
+    .benefit {
+      @include flex-basis(50%);
+      &:nth-child(3) {
+        .benefit-outer {
+          border-top: none;
+        }
+      }
+      &:nth-child(3n-2) {
+        .benefit-outer {
+          border-left: 0;
+        }
+      }
+      &:nth-child(odd) {
+        .benefit-outer {
+          border-left: 1px solid $block-border-color;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-m) {
+  .benefits {
+    max-width: 280px;
+    margin: 20px auto 20px;
+    .benefit {
+      @include flex-basis(100%);
+      .benefit-outer {
+        border-right: 1px solid $block-border-color;
+        border-bottom: 1px solid $block-border-color;
+        border-left: 1px solid $block-border-color;
+      }
+      &:nth-child(2) {
+        .benefit-outer {
+          border-top: none;
+        }
+      }
+      &:nth-child(3n-2) {
+        .benefit-outer {
+          border-left: 1px solid $block-border-color;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,260 @@
+._show-to-top-btn {
+  .footer {
+    .page-up {
+      //display: block;
+      visibility: visible;
+      opacity:1;
+
+    }
+  }
+}
+.footer-container {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  .footer-content {
+    max-width: $page-width;
+    margin: 0 auto;
+  }
+}
+.footer {
+  @include gotham();
+  border: 1px solid $block-border-color;
+  @include border-width(1px 0 1px 0);
+  padding-top: 10px;
+  .page-up {
+    //display: none;
+    visibility: hidden;
+    opacity: 0;
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    font-size: 0;
+    position: fixed;
+    bottom: 30px;
+    right: 18px;
+    z-index: 10;
+    @include transition(all $slower ease-in-out);
+    background: url("../images/back-to-top.png") no-repeat;
+    //background: $black;
+    //color: $white;
+    //@include transform(rotate(90deg));
+    //&:after {
+    //  font-family: $icomoon;
+    //  font-size: 2.7rem;
+    //  content: "\e946";
+    //  position: relative;
+    //  top: 3px;
+    //  left: 7px;
+    //}
+    //&:hover {
+    //  text-decoration: none;
+    //  &:after {
+    //    text-decoration: none;
+    //  }
+    //}
+  }
+
+  .footer-content {
+    @include display(flex);
+    @include justify-content(space-between);
+    @include flex-wrap(wrap);
+    padding: 0 35px 0 53px;
+
+    .footer-links {
+      @include flex(1);
+    }
+
+    .footer-media {
+      @include flex(1.5);
+
+      .footer-media-wrap {
+        @include display(flex);
+        @include flex-flow(row wrap);
+        @include justify-content(flex-end);
+      }
+    }
+
+    .social-links {
+      padding-bottom: 20px;
+      li {
+        display: inline-block;
+        padding-right: 7px;
+      }
+
+      .fb, .tw, .pi, .in, .yt {
+        color: $black;
+        font-family: $icomoon;
+        font-size: 2.7rem;
+        &:hover {
+          text-decoration: none;
+          color: $placeholder-color;
+          @include transition(all $slow $ease-out-quad);
+        }
+      }
+      .fb {
+        &:before {
+          content: "\e91a";
+        }
+      }
+      .tw {
+        &:before {
+          content: "\e948";
+        }
+      }
+      .pi {
+        &:before {
+          content: "\e933";
+        }
+      }
+      .in {
+        &:before {
+          content: "\e920";
+        }
+      }
+      .yt {
+        &:before {
+          content: "\e94a";
+        }
+      }
+    }
+
+    .newsletter {
+      padding-left: 4%;
+
+      .block-subscribe {
+        .block-content {
+          padding-top: 0;
+        }
+
+        .input-box{
+          width: 200px;
+
+          #newsletter {
+            height: 50px;
+            color: $black;
+            border-top-width: 1px;
+            @include gotham();
+            @include setFont(1.3rem,2.4rem, 500);
+          }
+        }
+
+        .actions {
+          width: 120px;
+          .button {
+            height: 50px;
+            width: 100%;
+            background: $black;
+            color: $white;
+            @include gotham();
+            @include setFont(1.3rem, 2rem, 500);
+
+            &:hover, &:active {
+              background: none;
+              color: $black;
+              font-weight: 500;
+              @include transition(all $fast ease);
+            }
+          }
+        }
+      }
+    }
+
+    .footer-tag {
+      width: 100%;
+      margin-top: 70px;
+      margin-bottom: 5px;
+      .footer-tag-wrap {
+        @include display(flex);
+        @include justify-content(flex-end);
+      }
+
+      p {
+        @include align-self(center);
+        @include setFont(1.6rem, 2.4rem, 300);
+        display: inline-block;
+        color: $black;
+        padding-left: 20px;
+      }
+    }
+  }
+
+  .block-title {
+    border-top: none;
+    padding: 0;
+    strong {
+      color:  $black;
+      @include gotham();
+      @include setFont(1.3rem, 4.2rem, bold);
+      letter-spacing: 0.25rem;
+    }
+  }
+
+  .links {
+    float: none;
+    display: inline-block;
+    margin-bottom: 15px;
+    vertical-align: top;
+    width: 210px;
+    li {
+      padding: 0;
+    }
+    a {
+      color: $black;
+      @include setFont(1.3rem, 3.5rem, 500);
+      text-transform: none;
+
+      &:hover {
+        color: silver;
+        text-decoration: none;
+        @include transition(all $slow $ease-out-quint);
+      }
+    }
+  }
+
+  .bottom_links {
+    border-top: 1px solid $block-border-color;
+    &-inner {
+      @include display(flex);
+      @include justify-content(flex-end);
+      height: 40px;
+      padding: 0 35px;
+      max-width: $page-width;
+      margin: 0 auto;
+    }
+
+    address, .bottom-links {
+      border: none;
+      display: inline-block;
+      text-align: right;
+    }
+
+    address {
+      color: $black;
+      @include setFont(1.2rem, 4.0rem, 500);
+      padding: 0;
+      margin: 0;
+    }
+
+    .bottom-links {
+      min-width: 150px;
+      li {
+        display: inline-block;
+        padding-left: 30px;
+        line-height: 37px;
+      }
+      a {
+        color: $placeholder-color;
+        font-size: 12px;
+        text-decoration: underline;
+
+        &:hover {
+          color: $black;
+          @include transition(all $slow $ease-out-quad);
+        }
+      }
+    }
+  }
+}
+
+@import "footer_m";

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <WeltPixel_ConfigurableSwatches>
+            <version>0.0.1</version>
+        </WeltPixel_ConfigurableSwatches>
+    </modules>
+    <global>               
+        <helpers>
+            <weltpixel_configurableswatches>
+                <class>WeltPixel_ConfigurableSwatches_Helper</class>
+            </weltpixel_configurableswatches>            
+        </helpers>
+        <blocks>
+            <weltpixel_configurableswatches>
+                <class>WeltPixel_ConfigurableSwatches_Block</class>
+            </weltpixel_configurableswatches>
+            <configurableswatches>
+                <rewrite>
+                    <catalog_media_js_list>WeltPixel_ConfigurableSwatches_Block_Catalog_Media_Js_List</catalog_media_js_list>
+                </rewrite>
+            </configurableswatches>
+        </blocks>
+    </global>   
+    <default>
+        <weltpixel_productswatch>
+            <general>
+                <deactivate>0</deactivate>
+            </general>
+        </weltpixel_productswatch>
+        <weltpixel_selector>
+            <categoryoptions>
+                <activate>1</activate>
+            </categoryoptions>
+        </weltpixel_selector>
+    </default>     
+</config>

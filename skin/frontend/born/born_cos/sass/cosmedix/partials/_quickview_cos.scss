@@ -1,0 +1,44 @@
+.quickveiw-modal {
+  .product-view .product-shop .price-info {
+    @include align-items(center);
+    .regular-price {
+      line-height: 24px;
+    }
+    .tier-pricing-guide {
+      padding-top: 5px;
+    }
+  }
+  .add-to-links {
+    left: initial;
+    right: initial;
+    @include flex-direction(row);
+    @include justify-content(flex-start);
+    .share-link {
+      margin-right: 35px;
+    }
+  }
+  .product-description {
+    font-size: 2.6rem;
+  }
+  #product-options-wrapper.show-it {
+   .last dd {
+      border-bottom: none;
+    }
+  }
+  .show-it dl.last {
+    display: block;
+  }
+  .product-view .product-options dl.last > dd.last:last-child .jq-selectbox {
+    max-width: 31%;
+    margin-left: 0;
+  }
+  .jq-selectbox__dropdown {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  .form-add-to-cart {
+    .add-to-cart {
+      position: static;
+    }
+  }
+}

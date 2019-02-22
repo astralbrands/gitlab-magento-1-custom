@@ -1,0 +1,231 @@
+// \app\design\frontend\born\born\template\borncmshooks\cms\contents\proartistprogram.phtml
+// \app\design\frontend\born\born\template\borncmshooks\blocks\proartist.phtml
+// \app\design\frontend\born\born\template\borncmshooks\blocks\leftnav.phtml
+
+@import "./contact-us";
+
+.footer-link-template,
+.footer-links-template{
+  .breadcrumbs {
+    display: none;
+  }
+  .col2-left-layout .col-main {
+    display: block;
+    float: none;
+    max-width: 935px;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 26px;
+    .std {
+      display: none;
+    }
+  }
+  .left-navigation {
+    width: 215px;
+    float: left;
+    .block-title {
+      border: none;
+      padding-top: 15px;
+      margin-bottom: 12px;
+      strong {
+        color: $black;
+        @include gotham;
+        @include setFont(1.2rem, 4.2rem, 500);
+        letter-spacing: 0.4rem;
+        text-transform: uppercase;
+        span {
+          display: inline-block;
+          line-height: 4.5rem;
+          border-bottom: 4px solid $black;
+
+        }
+      }
+    }
+    .item {
+      @include gothamBook;
+      @include setFont(1.4rem, 4.0rem, 400);
+      a {
+        color: $black;
+      }
+      &.active {
+        @include gotham;
+        font-weight: 500;
+      }
+      &:hover {
+        a {
+          text-decoration: none;
+          color: $light-text-color;
+        }
+      }
+    }
+    .jq-selectbox__select {
+      height: 50px;
+      width: 280px;
+      padding: 10px 45px 10px 20px;
+    }
+    .jq-selectbox__trigger-arrow {
+      top: 10px;
+      right: 25px;
+    }
+  }
+  .page-title {
+    padding-top: 20px;
+    h1 {
+      @include gotham;
+      @include setFont(3.0rem, 4.2rem, 200);
+      margin-bottom: 18px;
+      text-transform: none;
+    }
+  }
+  .mobile-only {
+    display: none;
+    margin-top: 20px;
+  }
+  .press {
+    margin-left: 215px;
+    padding-top: 0;
+    width: calc(100% - 215px);
+    .image {
+      max-width: 100%;
+      width: 100%;
+      height: auto;
+      margin-bottom: 25px;
+    }
+    .body {
+      margin-bottom: 30px;
+      h2 {
+        @include gotham;
+        @include setFont(1.8rem, 4.2rem, 500);
+        text-transform: uppercase;
+      }
+      p {
+        @include gothamBook;
+        @include setFont(1.6rem, 3.0rem, 400);
+        strong:first-child {
+          display: inline-block;
+          padding-top: 25px;
+        }
+      }
+      a {
+        color: $light-text-color;
+        text-decoration: underline;
+        &:hover {
+          color: $black;
+        }
+      }
+      ul {
+        @include gotham;
+        @include setFont(1.6rem, 3.0rem, 500);
+        margin: 30px 0 50px;
+        padding-left: 17px;
+        li {
+          list-style: initial;
+        }
+      }
+    }
+    .title {
+      @include gotham;
+      @include setFont(1.8rem, 4.2rem, 500);
+      text-transform: uppercase;
+    }
+  }
+}
+
+.cms-careers {
+  .CareersText {
+    h5 {
+      margin-top: 40px;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile + 2px) {
+  .footer-link-template,
+  .footer-links-template {
+    .col-main {
+      padding: 19px;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-m) {
+  .footer-link-template,
+  .footer-links-template {
+    .main-container {
+      padding-top: 0;
+    }
+    .col2-left-layout .col-main {
+      width: 100%;
+      margin: 10px auto;
+      padding-top: 0;
+    }
+    .page-title {
+      padding-top: 15px;
+      h1 {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+      }
+    }
+    .left-navigation {
+      width: 100%;
+      float: none;
+      padding: 0;
+      .jq-selectbox,
+      .jq-selectbox__select {
+        width: 100%;
+      }
+      .jq-selectbox li {
+        padding-left: 20px;
+      }
+      .block-title {
+        margin-bottom: 5px;
+        strong span {
+          width: 100%;
+        }
+      }
+      .items-list {
+        display: none;
+      }
+      .mobile-only {
+        display: block;
+      }
+    }
+    .press {
+      margin: 0;
+      width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+      .image {
+        margin-bottom: 17px;
+      }
+      .body {
+         h2 {
+          font-size: 1.6rem;
+        }
+        p, ul {
+          font-size: 1.4rem;
+          line-height: 2.4rem;
+        }
+        ul {
+          margin: 27px 0 37px;
+        }
+      }
+      .title {
+        font-size: 1.6rem;
+        line-height: 2.4rem;
+      }
+    }
+  }
+  .cms-ingredients {
+    .page-title {
+      padding-top: 50px;
+      padding-left: 20px;
+    }
+    .press {
+      margin: 0;
+      padding-left: 20px;
+      padding-right: 20px;
+      width: 100%
+    }
+  }
+}

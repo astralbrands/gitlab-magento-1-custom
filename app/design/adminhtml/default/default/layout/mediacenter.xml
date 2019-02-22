@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+<mediacenter_adminhtml_subsection_gallerygrid>
+       <block type="core/text_list" name="root" output="toHtml">
+           <block type="mediacenter/adminhtml_subsections_gallerygrid" name="gallery.grid"/>
+           <block type="adminhtml/widget_grid_serializer" name="grid_serializer">
+               <reference name="grid_serializer">
+                   <action method="initSerializerBlock">
+                       <grid_block_name>gallery.grid</grid_block_name>
+                       <data_callback>getGallery</data_callback>
+                       <hidden_input_name>links[gallery]</hidden_input_name>
+                       <reload_param_name>gallery</reload_param_name>
+                   </action>
+                   <action method="addColumnInputName">
+                       <input_name>position</input_name>
+                   </action>                  
+               </reference>
+           </block>
+       </block>
+   </mediacenter_adminhtml_subsection_gallerygrid>
+   <mediacenter_adminhtml_subsection_edit>
+        <!--<reference name='head'>
+            <action method="addItem"><type>skin_js</type><name>uploadify/jquery-1.4.2.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>uploadify/noconflict.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>uploadify/jquery.uploadify.v2.1.4.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>uploadify/swfobject.js</name></action>
+        </reference>-->
+		<reference name="head">
+            <action method="addJs">
+                <js>lib/flex.js</js>
+            </action>
+            <action method="addJs">
+                <js>lib/FABridge.js</js>
+            </action>
+            <action method="addJs">
+                <js>mage/adminhtml/flexuploader.js</js>
+            </action>
+        </reference>
+		<reference name="js">
+				<block type="core/template" template="mediacenter/inline-edit.phtml" />
+		</reference>
+   </mediacenter_adminhtml_subsection_edit>
+
+</layout>

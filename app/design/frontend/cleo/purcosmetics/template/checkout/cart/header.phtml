@@ -1,0 +1,72 @@
+<?php
+    $cartUrl = $this->getUrl('checkout/cart');
+    $checkoutUrl = $this->getCheckoutUrl();
+    // $_items = $this->getRecentItems();
+    $_items = $this->getItems();
+
+    $cartQty = (int)$this->getSummaryCount();
+    if (is_null($cartQty)) {
+        $cartQty = 0;
+    }
+
+    $itemsCount = count($_items);
+    $itemsText = $cartQty > 1 ? 'items' : 'item';
+?>
+<a href="<?php echo $cartUrl; ?>" class="summary qa-link <?php echo $itemsCount ? 'has-items' : 'no-items' ?>">
+    <i class="icon icon-line2-handbag"></i>
+    <span><?php echo $cartQty; ?></span>
+</a>
+
+<div class="minicart-overlay"></div>
+<div class="minicart-wrapper details">
+    <p class="minicart-title">
+        <?php echo $this->__('Shopping Bag') ?>
+        <span class="btn-minicart-toggle" title="<?php echo $this->__('Close') ?>"></span>
+    </p>
+    <p class="summary-items">
+        <span class="cart-qty"><?php echo $cartQty; ?></span>
+        <?php echo $this->__($itemsText); ?>
+    </p>
+    <?php if ($itemsCount == 0): ?>
+        <div class="empty-cart">
+            <p><?php echo $this->__('You have no items in your shopping cart.'); ?></p>
+        </div>
+    <?php else: ?>
+        <div class="product-list-wrapper">
+            <ol class="mini-products-list">
+                <?php foreach ($_items as $_item): ?>
+                    <?php echo $this->getItemHtml($_item); ?>
+                <?php endforeach; ?>
+            </ol>
+        </div>
+        <div class="bottom-wrapper">
+            <div class="minicart-bottom">
+                <div class="subtotal-wrapper">
+                    <div class="subtotal">
+                        <?php if ($this->canApplyMsrp()): ?>
+                            <span class="map-cart-sidebar-total">
+                        <?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?>
+                    </span>
+                        <?php else: ?>
+                            <span class="label"><?php echo $this->__('Total:') ?></span>
+                            <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()); ?>
+                            <?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?>
+                                (<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true); ?>)
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    </div>
+                    <div class="buttons clearfix">
+                        <a class="mini-cart-view-cart simple-button" href="<?php echo $cartUrl; ?>" title="<?php echo $this->quoteEscape($this->__('View Cart')); ?>">
+                            <?php echo $this->__('View Bag / Checkout'); ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        customJs.init();
+    });
+</script>

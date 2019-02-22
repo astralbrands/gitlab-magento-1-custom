@@ -1,0 +1,204 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Locator
+ */
+-->
+
+<config>
+    <modules>
+        <Amasty_Locator>
+            <version>1.5.9</version>
+        </Amasty_Locator>
+    </modules>
+
+    <default>
+        <amlocator>
+            <geoip>
+                <usebrowserip>1</usebrowserip>
+            </geoip>
+
+            <locator>
+                <template><![CDATA[
+<div class="amasty-popup" >
+<h2>{{name}}</h2>
+{{photo}}
+City: {{city}} <br>
+Zip: {{zip}} <br>
+Address: {{address}} <br>
+{{ifstate}}State: {{state}} <br>{{/ifstate}}
+Description: {{description}} <br>
+</div>]]></template>
+                <url>locator</url>
+                <resp>1</resp>
+                <use>1</use>
+                <linktext>Available in Stores</linktext>
+                <new_page>0</new_page>
+            </locator>
+
+        </amlocator>
+    </default>
+
+    <frontend>
+        <translate>
+            <modules>
+                <Amasty_Locator>
+                    <files>
+                        <default>Amasty_Locator.csv</default>
+                    </files>
+                </Amasty_Locator>
+            </modules>
+        </translate>
+        <routers>
+            <amlocator>
+                <use>standard</use>
+                <args>
+                    <module>Amasty_Locator</module>
+                    <frontName>amlocator</frontName>
+                </args>
+            </amlocator>
+        </routers>
+        <layout>
+            <updates>
+                <amlocator>
+                    <file>amasty_locator.xml</file>
+                </amlocator>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Amasty_Locator after="Mage_Adminhtml">Amasty_Locator_Adminhtml</Amasty_Locator>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Amasty_Locator>
+                    <files>
+                        <default>Amasty_Locator.csv</default>
+                    </files>
+                </Amasty_Locator>
+            </modules>
+        </translate>
+        <menu>
+            <cms>
+                <children>
+                    <amlocator module="amlocator">
+                        <title>Store Locator</title>
+                        <sort_order>79</sort_order>
+                        <action>adminhtml/amlocator_location</action>
+                    </amlocator>
+                </children>
+            </cms>
+        </menu>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <cms>
+                            <children>
+                                <amlocator>
+                                    <title>Store Locator</title>
+                                </amlocator>
+                            </children>
+                        </cms>
+
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <amlocator translate="title" module="amlocator">
+                                            <title>Store Locator</title>
+                                        </amlocator>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+
+        <layout>
+            <updates>
+                <amlocator>
+                    <file>amasty/amlocator.xml</file>
+                </amlocator>
+            </updates>
+        </layout>
+
+    </adminhtml>
+
+    <global>
+        <models>
+            <amlocator>
+                <class>Amasty_Locator_Model</class>
+                <resourceModel>amlocator_resource</resourceModel>
+            </amlocator>
+            <amlocator_resource>
+
+                <class>Amasty_Locator_Model_Resource</class>
+                <entities>
+                    <block>
+                        <table>amasty_amlocator_block</table>
+                    </block>
+                    <ip_location>
+                        <table>amasty_amlocator_ip_location</table>
+                    </ip_location>
+                    <table_location>
+                        <table>amasty_amlocator_location</table>
+                    </table_location>
+                    <table_location_store>
+                        <table>amasty_amlocator_location_store</table>
+                    </table_location_store>
+                    <table_location_product>
+                        <table>amasty_amlocator_location_product</table>
+                    </table_location_product>
+                    <table_location_category>
+                        <table>amasty_amlocator_location_category</table>
+                    </table_location_category>
+                </entities>
+            </amlocator_resource>
+        </models>
+        <blocks>
+            <amlocator>
+                <class>Amasty_Locator_Block</class>
+            </amlocator>
+        </blocks>
+        <resources>
+            <amlocator_setup>
+                <setup>
+                    <module>Amasty_Locator</module>
+                </setup>
+            </amlocator_setup>
+        </resources>
+        <helpers>
+            <amlocator>
+                <class>Amasty_Locator_Helper</class>
+            </amlocator>
+        </helpers>
+        <events>
+            <controller_front_init_routers>
+                <observers>
+                    <amlocator>
+                        <type>singleton</type>
+                        <class>Amasty_Locator_Controller_Router</class>
+                        <method>initControllerRouters</method>
+                    </amlocator>
+                </observers>
+            </controller_front_init_routers>
+        </events>
+    </global>
+</config>

@@ -1,0 +1,29 @@
+<?php  if ($this->getAvailableQuantity($this->getProduct()) <= $this->getStockThresholdQuantity($this->getProduct())) { ?>
+    <div class="amxnotif-block">
+        <?php $_productId = $this->getProduct()->getId() ?>
+        <?php if ($this->getAvailableQuantity($this->getProduct()) <= 0) { ?>
+            <label><?php echo "This product is currently out of stock."; ?></label><br/>
+        <?php } else { ?>
+            <label><?php echo "Only " . $this->getAvailableQuantity($this->getProduct()) . " left in stock."; ?></label><br/>
+        <?php } ?>
+        <label><?php echo $this->__('Notify me when this product is in stock'); ?> </label><br/>
+        <input type="text" name="guest_email"
+               id="amxnotif_guest_email-<?php echo $_productId; ?>"
+               onKeyPress="return checkIt(event, '<?php echo $this->escapeHtml(Mage::helper('amxnotif')->getEmailUrl('stock')); ?>', $('button-email-send-<?php echo $_productId; ?>'))"
+               class="input-text" size="30"
+               value="<?php if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+                   if ($_email = Mage::getSingleton('customer/session')->getCustomer()->getEmail()) {
+                       echo $_email;
+                   }
+               } ?>"/>
+        <input type="hidden" name="product_id"
+               value="<?php echo $_productId; ?>"/>
+        <button type="button"
+                id="button-email-send-<?php echo $_productId; ?>"
+                class="btn btn-notify btn-cart amcart-ignore"
+                onclick="send_alert_email('<?php echo $this->escapeHtml(Mage::helper('amxnotif')->getEmailUrl('stock')); ?>', this,<?php echo $_productId; ?>,'amxnotif_guest_email-<?php echo $_productId; ?>')"
+                title="<?php echo $this->__('Subscribe'); ?>">
+            <span class="btn-text"><?php echo $this->__('Notify Me'); ?></span>
+        </button>
+    </div>
+<?php } ?>

@@ -1,0 +1,50 @@
+<?php 
+//Criteo
+$criteoId = Mage::helper('astral_integrations_helper')->getCriteoId();
+if(isset($criteoId) && !empty($criteoId)): ?>
+    <?php 
+    if(!isset($_product) || empty($_product)) {
+        $_product = Mage::registry('current_product');
+    }
+    $criteoViewProductEvent = Mage::helper('astral_integrations_helper/productDecorator')->getCriteoViewItemEventArray($_product); ?>
+
+    <script type="text/javascript">
+        if(typeof siteType === 'undefined') {
+            var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+
+            if (windowWidth > 768) {
+                var siteType = 'd';
+            } else if (windowWidth > 480) {
+                var siteType = 't';
+            } else {
+                var siteType = 'm';
+            }
+        }
+        var viewProductEvent = <?php echo json_encode($criteoViewProductEvent)?>;
+        window.criteo_q = window.criteo_q || [];
+        window.criteo_q.push(
+            { event: "setAccount", account: "<?php echo $criteoId; ?>" },
+            { event: "setSiteType", type: siteType },
+            <?php echo json_encode($criteoViewProductEvent)?>
+        );
+    </script>
+<?php endif; ?>
+
+<?php 
+//Pixel
+$pixelId = Mage::helper('astral_integrations_helper')->getFacebookPixelId();
+if(isset($pixelId) && !empty($pixelId)): ?>
+    <?php 
+    
+    if(!isset($_product) || empty($_product)) {
+        $_product = Mage::registry('current_product');
+    }
+
+    $pixelViewContentEvent = Mage::helper('astral_integrations_helper/productDecorator')->getPixelViewContentEventArray($_product);   ?>
+
+    <script type="text/javascript">
+        var pixelEvent = <?php echo json_encode($pixelViewContentEvent) ?>;
+        fbq('track', 'ViewContent', pixelEvent);
+    </script>
+
+<?php endif; ?>

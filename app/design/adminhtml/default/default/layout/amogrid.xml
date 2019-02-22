@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Ogrid
+ */
+-->
+<layout>
+    <adminhtml_sales_order_index>
+        <reference name="head">
+            <action method="addJs"><file>amasty/amogrid/carousel.js</file></action>
+            <action method="addJs"><file>amasty/amogrid/main.js</file></action>
+            
+            <action method="addItem"><type>js</type><name>prototype/window.js</name></action>
+            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/magento.css</name></action>
+
+            <action method="addJs"><stylesheet>amasty/amogrid/lightbox/js/lightbox.js</stylesheet></action>
+            <action method="addItem"><type>js_css</type><name>amasty/amogrid/lightbox/css/lightbox.css</name><params/></action>
+            <action method="addItem"><type>js_css</type><name>amasty/amogrid/main.css</name><params/></action>
+        </reference>
+        <reference name="content">
+            <block type="amogrid/adminhtml_order_jsinit" name="amogrid_jsinit"></block>
+        </reference>
+    </adminhtml_sales_order_index>
+</layout>

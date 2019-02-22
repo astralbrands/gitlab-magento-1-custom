@@ -1,0 +1,17 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoRichData
+ */
+?>
+<meta property="og:type" content="product" />
+<meta property="og:title" content="<?php echo $this->getProduct()->getName() ?>" />
+<meta property="og:description" content="<?php echo strip_tags(Mage::helper('amseorichdata')->getProductDescription($this->getProduct())) ?>" />
+<meta property="og:url" content="<?php echo Mage::helper('core/url')->getCurrentUrl() ?>"/>
+<meta property="og:site_name" content="<?php echo Mage::app()->getStore()->getFrontendName(); ?>" />
+<meta property="og:price:amount" content="<?php echo $this->getPrice() ?>" />
+<meta property="og:price:currency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode() ?>" />
+<?php if (Mage::getStoreConfig('amseorichdata/product/show_availability')): ?>
+<meta property="og:availability" content="<?php echo $this->getProduct()->isAvailable() ? 'instock' : 'outofstock' ?>" />
+<?php endif; ?>

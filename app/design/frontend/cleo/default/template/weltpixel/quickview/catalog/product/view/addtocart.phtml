@@ -1,0 +1,19 @@
+<?php
+$_product = $this->getProduct();
+$_qty = $this->getProductDefaultQty() * 1;
+?>
+
+<?php if ($_product->isSaleable()): ?>
+    <div class="add-to-cart">
+        <?php if ( ! $_product->isGrouped()): ?>
+        <label for="qty"><?php echo $this->__('Quantity:'); ?></label>
+        <a href="javascript: void(0);" class="qty-dec qty-disabled"><i class="icon-angle-left"></i></a><input type="number" name="qty" id="qty" value="<?php echo $_qty; ?>" title="" class="input-text qty" /><a href="javascript: void(0);" class="qty-inc"><i class="icon-angle-right"></i></a>
+        <?php endif; ?>
+        <div class="actions">
+            <button type="button" class="button" id="product-addtocart-button" onclick="productAddToCartForm.submit(this)">
+                <span><i class="icon icon-shopping-cart"></i><?php echo $this->__('Add to Cart'); ?></span>
+            </button>
+        </div>
+        <?php echo $this->getChildHtml('', true, true); ?>
+    </div>
+<?php endif; ?>

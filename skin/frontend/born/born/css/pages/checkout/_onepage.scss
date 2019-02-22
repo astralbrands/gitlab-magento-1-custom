@@ -1,0 +1,531 @@
+// \app\design\frontend\born\born\template\persistent\checkout\onepage\billing.phtml
+// \app\design\frontend\born\born\template\checkout\onepage\shipping.phtml
+// \app\design\frontend\born\born\template\checkout\onepage\review\info.phtml
+// \app\design\frontend\born\born\template\ebizmarts\sagepaymentspro\payment\form\sagepaymentsprowithtoken.phtml
+// \app\design\frontend\born\born\template\checkout\onepage\payment.phtml
+
+.checkout-onepage-index {
+  .col-main {
+    padding: 30px 28px;
+    width: 65%;
+  }
+  .col-right {
+    padding: 30px 28px 30px 0;
+    width: 26%;
+  }
+  #login-form .f-left {
+    @include gotham;
+    @include setFont(1.3rem, 2.4rem, 400);
+    color: $light-text-color;
+    text-decoration: underline;
+    &:hover {
+      color: $black;
+    }
+  }
+  .block-progress {
+    border-left: none;
+  }
+  .changelink {
+    a {
+      color: $light-text-color;
+      text-decoration: underline;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+  .page-title {
+    h1 {
+      @include gotham;
+      @include setFont(3rem, 4.2rem, 200);
+      text-transform: none;
+    }
+  }
+  .fields {
+    .field {
+      margin-bottom: 0;
+    }
+  }
+  .input-box {
+    max-width: 330px;
+    margin-bottom: 19px;
+    .input-text[name='billing[region]'],
+    .input-text[name='shipping[region]']{
+      margin-top: 19px;
+    }
+    .input-text {
+      border-width: 1px;
+    }
+  }
+  .back-link {
+    a {
+      @include gotham;
+      @include setFont(1.3rem, 4.4rem, 400);
+      color: $light-text-color;
+      text-decoration: underline;
+    }
+  }
+  .label-text-up {
+    margin-bottom: 15px;
+    @include gotham;
+    @include setFont(1.3rem, 2.3rem, 400);
+    &:after {
+      display: none;
+    }
+  }
+  .jq-selectbox {
+    width: 100%;
+    ul {
+      height: 100%;
+      max-height: 200px;
+    }
+  }
+  .jq-selectbox.month {
+    display: flex !important;
+    @include flex-direction(column);
+  }
+  .jq-selectbox__select {
+    height: 46px;
+    padding: 0 45px 0 15px;
+    border: 1px solid $block-border-color;
+  }
+  .jq-selectbox__select-text {
+    line-height: 44px;
+    font-size: 1.3rem;
+    color: $light-text-color;
+  }
+  .jq-selectbox__trigger-arrow {
+    top: 7px;
+    right: 28px;
+  }
+  .jq-selectbox__dropdown {
+    max-width: 100%;
+    width: 100%;
+    border-color: $block-border-color !important;
+  }
+  #checkoutSteps {
+    .step-title {
+      border-bottom: 4px solid $black;
+      border-top: none;
+      .number {
+        background: transparent;
+        color: $black;
+        font-weight: bold;
+      }
+      h2 {
+        color: $black;
+        @include gotham;
+        @include setFont(1.2rem, 4.2rem, 500);
+        letter-spacing: 0.4rem;
+        text-transform: uppercase;
+      }
+      a {
+        color: $light-text-color;
+        @include gotham;
+        @include setFont(1.3rem, 4.4rem, 400);
+        text-decoration: underline;
+        &:hover {
+          color: $black;
+          @include transition(all $fast ease);
+        }
+      }
+    }
+    .control {
+      height: 40px;
+      .label-text {
+        top: 0;
+      }
+    }
+    .control,
+    #checkout-payment-method-load,
+    #checkout-shipping-method-load {
+      .radio {
+       display: none;
+        & + label {
+          color: $black;
+          background: transparent;
+          @include gotham;
+          @include setFont(1.3rem, 2.4rem, 500);
+          z-index: 1;
+          &::before {
+            display: inline-block;
+            background: $white;
+            width: 14px;
+            height: 14px;
+            content: '';
+            border-radius: 50%;
+            border: 2px solid $white;
+            box-shadow: 0 0 0 1px $light-text-color;
+            margin: 0 10px 1px 0;
+            vertical-align: middle;
+          }
+          &:hover {
+            background: transparent;
+          }
+        }
+        &:checked + label::before {
+          background: $black;
+        }
+      }
+    }
+  }
+  #co-shipping-method-form, .buttons-set,
+  .buttons-set  {
+    border-top: none;
+    .button {
+      box-sizing: border-box;
+      background: $black;
+      height: 50px;
+      width: 144px;
+      @include gotham;
+      @include setFont(1.3rem, 2rem, 500);
+      &:hover,
+      &:focus,
+      &:active {
+        background: $white;
+        color: $black;
+        border: 3px solid $black;
+        @include transition(all, $slow ease);
+      }
+    }
+    .f-left {
+      @include gothamBook;
+      @include setFont(1.3rem, 4.4rem, 500);
+    }
+    .edit-cart-link {
+      @include gotham;
+      font-weight: 400;
+      color: $light-text-color;
+      text-decoration: underline;
+      &:hover {
+        color: $black;
+        @include transition(all 0$fast ease);
+      }
+    }
+  }
+  #checkout-step-billing,
+  #checkout-step-shipping,
+  #checkout-step-shipping_method,
+  #checkout-step-payment,
+  #checkout-step-review {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  #checkout-progress-wrapper {
+    .block-title {
+      margin-bottom: 12px;
+      strong {
+        color: $black;
+        @include gotham;
+        @include setFont(1.2rem, 4.2rem, 500);
+        letter-spacing: 0.4rem;
+        text-transform: uppercase;
+        span {
+          display: inline-block;
+          line-height: 4.5rem;
+          border-bottom: 4px solid $black;
+        }
+      }
+    }
+  }
+  #billing-progress-opcheckout,
+  #shipping-progress-opcheckout,
+  #shipping_method-progress-opcheckout,
+  #payment-progress-opcheckout {
+    dt {
+      @include gothamBook;
+      @include setFont(1.4rem, 4.0rem, 400);
+      color: $black;
+      text-transform: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  #co-shipping-method-form {
+    #checkout-shipping-method-load {
+      .sp-methods {
+        margin: 0 0 25px;
+        dt {
+          @include gothamBook;
+          @include setFont(1.8rem, 4.2rem, 400);
+          margin: 0 0 7px;
+        }
+        dd {
+          label,
+          .no-display + label {
+            @include gotham;
+            @include setFont(1.3rem, 2.4rem, 500);
+            color: $black;
+          }
+        }
+      }
+      .price {
+        @include gotham;
+      }
+    }
+    .gift-messages,
+    .gift-messages-form {
+      margin-bottom: 35px;
+      h3 {
+        font-weight: 400;
+        text-transform: none;
+      }
+    }
+    #allow-gift-messages-for-items-container {
+      p {
+        @include gothamBook;
+        font-size: 1.3rem;
+      }
+      .number {
+        font-size: 1.3rem;
+      }
+      .product-name {
+        @include gotham;
+        @include setFont(1.3rem, 1.8rem, 500);
+        color: $black;
+      }
+      textarea {
+        height: 110px;
+      }
+    }
+  }
+  #checkout-step-payment{
+    .sp-methods {
+      label {
+        img {
+          display: inline;
+          float: none;
+          vertical-align: middle;
+          cursor: pointer;
+        }
+        a {
+          float: none;
+          color: $light-text-color;
+          &:hover {
+            color: $black;
+          }
+        }
+      }
+    }
+    #payment_form_paypal_express {
+      @include gothamBook;
+      font-size: 1.3rem;
+    }
+  }
+  .checkout-review-table {
+    tbody,
+    tfoot {
+      td {
+        @include gothamBook;
+      }
+      tr {
+        background: $white;
+      }
+    }
+  }
+  .paymentsage,
+  #payment_form_authorizenet {
+    padding-left: 0;
+    .input-box {
+      .v-fix {
+        width: 49%;
+        margin-right: 0;
+        &:first-child {
+          margin-right: 2%;
+        }
+
+      }
+      .cvv-what-is-this {
+        float: none;
+        color: $light-text-color;
+        line-height: 4.6rem;
+        &:hover {
+          color: $black;
+        }
+      }
+    }
+  }
+  #advice-required-entry-sagepaymentsprodirect_cc_cid {
+    position: absolute;
+  }
+  #sagepaymentsprodirect_cc_type_cvv_div {
+    .input-box {
+      .v-fix {
+        width: 25%;
+      }
+    }
+  }
+  .tool-tip {
+    .btn-close {
+      position: relative;
+      left: 435px;
+      padding: 5px;
+      a {
+        color: $black;
+        &:hover {
+          color: $light-text-color;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .remember-for-next-time {
+    height: 105px;
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    .label-text {
+      @include setFont(1.3rem, 2.3rem, 400);
+      color:$black;
+    }
+  }
+  .order-review {
+    .buttons-set {
+      .button {
+        &:hover {
+          border: 0;
+        }
+      }
+    }
+  }
+  .complete {
+    .payment-info {
+      dd {
+        line-height: 4.0rem;
+        margin-bottom: 0;
+      }
+    }
+  }
+  .block-progress dd.complete address,
+  .block-progress dd.complete {
+    @include gotham;
+    font-style: normal;
+  }
+  .tokensage {
+    padding: 10px 0 20px;
+    .tokencard-radio {
+      margin-bottom: 5px;
+      label.token {
+        font-style: italic;
+        font-weight: 300;
+      }
+      img {
+        display: inline-block;
+        margin-left: 10px;
+        vertical-align: middle;
+      }
+      .oncheckout {
+        color: $light-text-color;
+        font-size: 1.3rem;
+        text-decoration: underline;
+        &:hover {
+          color: $black;
+        }
+      }
+    }
+  }
+  .addnew {
+    color: $light-text-color;
+    font-size: 1.3rem;
+    text-decoration: underline;
+    &:hover {
+      color: $black;
+    }
+  }
+  .opc .step .buttons-set button.button {
+    width: initial;
+  }
+}
+
+.sp-methods {
+  input.cvv {
+    width: 6em !important;
+  }
+}
+
+@media only screen and (max-width: $desktop-s) {
+  .checkout-onepage-index {
+    .col-right {
+      width: 34%;
+    }
+
+  }
+}
+
+@media only screen and (max-width: $tablet-m) {
+  .checkout-onepage-index {
+    .col-main {
+      width: 100%;
+    }
+  }
+}
+
+
+@media only screen and (max-width: $mobile) {
+  .checkout-onepage-index {
+    .page-title h1 {
+      font-size: 2.2rem;
+    }
+    #co-shipping-method-form,
+    .buttons-set {
+      .button {
+        height: 34px;
+        @include setFont(1.2rem, 3.4rem, 500);
+        padding: 0;
+      }
+    }
+    #co-shipping-method-form {
+      .gift-messages h3{
+        font-size: 1.6rem;
+      }
+      .gift-messages-form h4 {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-xs) {
+  .checkout-onepage-index {
+    .col-main {
+      padding-left: 19px;
+      padding-right: 19px;
+    }
+    .col2-set .col-1 {
+      margin-bottom: 30px;
+    }
+    .scaffold-form .fieldset ul {
+      margin-bottom: 0;
+      .control {
+        margin-top: 0;
+
+      }
+    }
+    #checkoutSteps {
+      .step-title {
+        .number {
+          left: 0;
+        }
+        h2 {
+          margin-left: 30px;
+        }
+        a {
+          padding: 0;
+        }
+      }
+      .control {
+        height: 35px;
+      }
+    }
+    .input-box {
+      margin-bottom: 10px;
+    }
+    #onepage-checkout-shipping-method-additional-load {
+      input[type="checkbox"] + label {
+        padding-left: 0;
+        font-size: 1.22rem;
+      }
+    }
+
+  }
+}

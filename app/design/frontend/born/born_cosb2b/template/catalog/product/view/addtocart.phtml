@@ -1,0 +1,90 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition End User License Agreement
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magento.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     born_default
+ * @copyright Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license http://www.magento.com/license/enterprise-edition
+ */
+$_cartMaxSelectQty = Mage::getStoreConfig('checkout/cart/max_select_qty', Mage::app()->getStore());
+?>
+<?php $_product = $this->getProduct(); ?>
+
+<?php $buttonTitle = Mage::helper('core')->quoteEscape($this->__('Add to Bag')); ?>
+<?php //if($_product->isSaleable()): ?>
+<?php if(($_product->getTypeId() == Mage_Catalog_Model_Product_Type::DEFAULT_TYPE && $_product->getStockItem()->getQty() > 0) || ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE && $_product->isSaleable()) || $_product->getTypeId() == 'giftcard'): ?>
+    <div class="add-to-cart">
+        <?php if(!$_product->isGrouped()): ?>
+            <!--<select class="qty" name="super_group[<?php /*echo $_item->getId()*/ ?>]" data-cart-item-id="<?php /*echo $this->jsQuoteEscape($_item->getSku())*/ ?>"  title="<?php echo $this->__('Qty') ?>" >-->
+        <!-- Fixed the qty dropdown element for apply valid selected value on cart page -->
+            <div class="qty-attribute">
+                <label class="label-text-up">Qty</label>
+                <div class="qty-wrapper">
+                    <button class="qty-minus"><span class="icon-minus"></span> </button>
+                    <input class="qty-input" name="qty" id="qty" type="text" data-cart-item-id="<?php echo $this->jsQuoteEscape($_product->getSku()) ?>" value="1">
+                    <button class="qty-plus"><span class="icon-plus"></span> </button>
+                </div>
+
+<!--                <select name="qty" id="qty" data-cart-item-id="--><?php //echo $this->jsQuoteEscape($_product->getSku()) ?><!--" title="--><?php //echo $this->__('Qty') ?><!--">-->
+<!--                    --><?php //#TODO: Verify allowable max qty with client. ?>
+<!---->
+<!--                    --><?php //$_cartMaxSelectQty = $_cartMaxSelectQty ? $_cartMaxSelectQty : 10; ?>
+<!--                    --><?php //for ($i=1; $i <= $_cartMaxSelectQty; $i++): ?>
+<!--                        <option value="--><?php //echo $i ?><!--" --><?php ///*if($i == $this->getQty()){ echo 'selected="selected"';} */?><!-- >--><?php //echo $i ?><!--</option>-->
+<!--                    --><?php //endfor; ?>
+<!--                </select>-->
+            </div>
+        <?php endif; ?>
+
+        <?php if ($this->getSizeValue()): ?>
+            <div class="size-wrapper">
+                <label class="label-text-up">Size</label>
+                <span><?php echo $this->getSizeValue() ?></span>
+            </div>
+        <?php endif ?>
+
+        <?php  
+        /* //Size will be display from configurable option block when applicable
+        <?php if(true): ?>
+            <!-- todo BE-->
+            <select name="" id="">
+                <option value="0">0.34 oz</option>
+                <option value="1">0.34 oz</option>
+                <option value="2">0.34 oz</option>
+                <option value="3">0.34 oz</option>
+            </select>
+        <?php endif; ?>
+        */
+        ?>
+        <?php if($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE): ?>
+            <?php echo $this->getChildHtml('', true, true) ?>
+        <?php endif; ?>
+        <div class="add-to-cart-buttons">
+            <button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this)">
+                <span><span><?php echo $buttonTitle ?></span></span>
+            </button>
+            <?php if($_product->getTypeId() !== Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE): ?>
+            <?php echo $this->getChildHtml('', true, true) ?>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php else: ?>
+<?php echo $this->getLayout()->createBlock('productalert/product_view', 'configurable.alert')->setTemplate('amasty/amxnotif/product/view_email_simple.phtml')->toHtml(); ?>
+<?php endif; ?>

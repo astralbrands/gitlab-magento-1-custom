@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<layout version="1.0.0">
+    <catalog_product_view>
+        <reference name="head">
+            <block type="weltpixel_googlecards/googlecards" name="weltpixel_googlecards_head">
+                <action method="setTemplate">
+                    <template>weltpixel/googlecards/meta_head.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </catalog_product_view>
+</layout>

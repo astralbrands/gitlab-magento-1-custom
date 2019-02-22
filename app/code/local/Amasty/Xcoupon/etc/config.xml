@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Xcoupon
+ */
+-->
+<config>
+    <modules>
+        <Amasty_Xcoupon>
+            <version>1.1.9</version>
+        </Amasty_Xcoupon>
+    </modules>
+
+    <global>
+        <resources>
+            <amxcoupon_setup>
+                <setup>
+                    <module>Amasty_Xcoupon</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amxcoupon_setup>
+            <amxcoupon_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </amxcoupon_write>
+            <amxcoupon_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </amxcoupon_read>
+        </resources>
+
+        <models>
+            <amxcoupon>
+                <class>Amasty_Xcoupon_Model</class>
+                <resourceModel>amxcoupon_mysql4</resourceModel>
+            </amxcoupon>
+            <amxcoupon_mysql4>
+                <class>Amasty_Xcoupon_Model_Mysql4</class>
+            </amxcoupon_mysql4>
+
+            <salesrule_mysql4>
+                <rewrite>
+                    <rule_collection>Amasty_Xcoupon_Model_Salesrule_Mysql4_Rule_Collection</rule_collection>
+                </rewrite>
+            </salesrule_mysql4>
+        </models>
+        <helpers>
+            <amxcoupon>
+                <class>Amasty_Xcoupon_Helper</class>
+            </amxcoupon>
+        </helpers>
+        <blocks>
+            <amxcoupon>
+                <class>Amasty_Xcoupon_Block</class>
+            </amxcoupon>
+            <adminhtml>
+                <rewrite>
+                    <promo_quote_edit_tabs>Amasty_Xcoupon_Block_Adminhtml_Promo_Quote_Edit_Tabs</promo_quote_edit_tabs>
+                    <promo_quote_edit_form>Amasty_Xcoupon_Block_Adminhtml_Promo_Quote_Edit_Form</promo_quote_edit_form>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+    </global>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Amasty_Xcoupon after="Mage_Adminhtml">Amasty_Xcoupon_Adminhtml</Amasty_Xcoupon>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <frontend>
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <amxcoupon>
+                        <type>singleton</type>
+                        <class>amxcoupon/observer</class>
+                        <method>handleControllerActionPredispatch</method>
+                    </amxcoupon>
+                </observers>
+            </controller_action_predispatch>
+            <sales_quote_collect_totals_before>
+                <observers>
+                    <amxcoupon>
+                        <type>singleton</type>
+                        <class>amxcoupon/observer</class>
+                        <method>handleQuoteTotalsBefore</method>
+                    </amxcoupon>
+                </observers>
+            </sales_quote_collect_totals_before>
+            <sales_quote_collect_totals_after>
+                <observers>
+                    <amxcoupon>
+                        <type>singleton</type>
+                        <class>amxcoupon/observer</class>
+                        <method>handleQuoteTotalsAfter</method>
+                    </amxcoupon>
+                </observers>
+            </sales_quote_collect_totals_after>
+
+        </events>
+    </frontend>
+
+    <adminhtml>
+        <events>
+            <salesrule_rule_save_after>
+                <observers>
+                    <amxcoupon>
+                        <type>singleton</type>
+                        <class>amxcoupon/observer</class>
+                        <method>handleSalesruleRuleSaveAfter</method>
+                    </amxcoupon>
+                </observers>
+            </salesrule_rule_save_after>
+
+            <salesrule_rule_delete_after>
+                <observers>
+                    <amxcoupon>
+                        <type>singleton</type>
+                        <class>amxcoupon/observer</class>
+                        <method>handleSalesruleRuleDeleteAfter</method>
+                    </amxcoupon>
+                </observers>
+            </salesrule_rule_delete_after>
+
+        </events>
+
+        <menu>
+            <promo>
+                <children>
+                    <amxcoupon translate="title" module="amxcoupon">
+                        <title>Coupons Usage Report</title>
+                        <action>adminhtml/amxcoupon_report</action>
+                        <sort_order>900</sort_order>
+                    </amxcoupon>
+                </children>
+            </promo>
+        </menu>
+
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <promo>
+                            <children>
+                                <amxcoupon translate="title" module="amxcoupon">
+                                    <title>Coupons Usage Report</title>
+                                </amxcoupon>
+                            </children>
+                        </promo>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <translate>
+            <modules>
+                <Amasty_Xcoupon>
+                    <files>
+                        <default>Amasty_Xcoupon.csv</default>
+                    </files>
+                </Amasty_Xcoupon>
+            </modules>
+        </translate>
+    </adminhtml>
+</config>

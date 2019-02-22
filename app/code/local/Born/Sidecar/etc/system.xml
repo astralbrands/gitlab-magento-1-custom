@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config>
+	  <tabs>
+		<sidecar translate="label" module="sidecar">
+            <label>Sidecar Configuration</label>
+            <sort_order>1</sort_order>
+        </sidecar>
+	  </tabs>
+	  <sections>
+		<sidecar_pdp  translate="label" module="sidecar">                    
+		<label>Sidecar Product Page configuration</label>
+		<tab>sidecar</tab>
+		<frontend_type>text</frontend_type>
+		<sort_order>0</sort_order>
+		<show_in_default>1</show_in_default>
+		<show_in_website>1</show_in_website>
+		<show_in_store>1</show_in_store>            
+					<groups>
+				      <sidecar_pdp_group translate="label"> 
+					  <label>Sidecar Product Page configuration</label>
+					  <frontend_type>text</frontend_type>
+					  <sort_order>0</sort_order>
+					  <show_in_default>1</show_in_default>
+					  <show_in_website>1</show_in_website>
+					  <show_in_store>1</show_in_store>
+				       <fields>
+                          <product_id translate="label">
+                            <label>Select Product ID Field</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>born_sidecar/system_config_source_options</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Please select type of product Id Field</comment>
+                          </product_id>
+					   </fields>
+					   </sidecar_pdp_group>
+					</groups>
+		</sidecar_pdp>
+	  </sections>
+</config>

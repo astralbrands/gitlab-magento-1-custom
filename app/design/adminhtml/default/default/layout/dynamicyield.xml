@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <dynamicyield_adminhtml_dynamicyieldbackend_index>
+	<reference name="content">
+	  <block type="dynamicyield/adminhtml_dynamicyieldbackend" name="dynamicyieldbackend" template="dynamicyield/dynamicyieldbackend.phtml"/>
+	</reference>
+  </dynamicyield_adminhtml_dynamicyieldbackend_index>
+</layout>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <weltpixel translate="title">
+            <title>WeltPixel</title>
+            <sort_order>300</sort_order>
+            <children>                
+                <layerednavigation translate="title" module="weltpixel_layerednavigation">
+                    <title>Layered Navigation</title>
+                    <action>adminhtml/system_config/edit/section/weltpixel_layerednavigation</action>
+                    <sort_order>10</sort_order>
+                </layerednavigation>
+            </children>
+        </weltpixel>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <weltpixel_layerednavigation translate="title" module="weltpixel_layerednavigation">
+                                        <title>WeltPixel Layered Navigation</title>
+                                        <sort_order>1200</sort_order> 
+                                    </weltpixel_layerednavigation>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

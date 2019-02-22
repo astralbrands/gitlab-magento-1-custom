@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+    /**
+     * Astral Brands
+     *
+     * @category    design
+     * @author      Josh Adams - Astral Brands <webdeveloper@astralbrands.com>
+     * @package     base_default
+     */
+-->
+
+<layout version="0.1.0">
+    <default>
+        <reference name='head'>
+            <action method="addJs"><script>astral/lookup.min.js</script></action>
+        </reference>
+    </default>
+</layout>

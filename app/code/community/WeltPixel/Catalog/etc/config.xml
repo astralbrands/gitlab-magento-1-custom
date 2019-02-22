@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <WeltPixel_Catalog>
+            <version>0.0.1</version>
+        </WeltPixel_Catalog>
+    </modules>
+    <global>
+        <blocks>
+            <weltpixel_catalog>
+                <class>WeltPixel_Catalog_Block</class>
+            </weltpixel_catalog>
+        </blocks>
+        <resources>
+            <weltpixel_catalog_setup>
+                <setup>
+                    <module>WeltPixel_Catalog</module>
+                    <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+                </setup>
+            </weltpixel_catalog_setup>
+        </resources>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <weltpixel_catalog>
+                    <file>weltpixel/catalog.xml</file>
+                </weltpixel_catalog>
+            </updates>
+        </layout>
+    </frontend>
+</config>

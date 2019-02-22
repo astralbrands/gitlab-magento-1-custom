@@ -1,0 +1,194 @@
+<?php
+$_helper = $this->helper('catalog/output');
+$_selectorHelper = $this->helper('weltpixel_selector');
+$ajaxAddToCartEnabled = $_selectorHelper->getAjaxAddtoCart();
+$ajaxConfirmationHide = $_selectorHelper->getAjaxAddtoCartConfirmationHide();
+$_product = $this->getProduct();
+$_productId = $_product->getId();
+$_productName = $_helper->productAttribute($_product, $_product->getName(),
+        'name');
+$_productSku = $_helper->productAttribute($_product, $_product->getSku(), 'sku');
+$_productShortDescription = $_helper->productAttribute($_product,
+        nl2br($_product->getShortDescription()), 'short_description'); ///
+$_productPrice = $this->getPriceHtml($_product, true); ///
+$_productReviews = $this->getReviewsSummaryHtml($_product, false, true); ///
+$_messages = trim($this->getMessagesBlock()->getGroupedHtml()); ///
+
+if ($ajaxAddToCartEnabled) :
+    $_productAction = $this->getSubmitUrl($_product, array());
+else :
+    $_productAction = $this->getSubmitUrl($_product, array(), false);
+endif;
+
+$superAttributes = [];
+if ($_product->getTypeId() == 'configurable') {
+    $attributes = $_product->getTypeInstance()->getConfigurableAttributes($_product);
+    foreach ($attributes as $attr) {
+        $superAttributes[] = $attr->getAttributeId();
+    }
+}
+$superAttributes = implode(',', $superAttributes);
+?>
+
+<script>var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig(); ?>);</script>
+
+<?php if ($_messages): ?>
+    <div id="messages_product_view"><?php echo $_messages; ?></div>
+<?php endif; ?>
+
+<div id="product-view">
+    <input type="hidden" id="super_attributes" name="super_attributes" value="<?php echo $superAttributes; ?>" />
+    <form target="_parent" action="<?php echo $_productAction; ?>" method="post" id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+<?php echo $this->getBlockHtml('formkey'); ?>
+        <input type="hidden" name="product" value="<?php echo $_productId; ?>" />
+        <input type="hidden" name="related_product" id="related-products-field" value="" />
+        <div class="product-essential">
+            <div id="product-media" class="col-sm-6 col-xs-12">
+<?php echo $this->getChildHtml('media'); ?>
+            </div>
+            <div id="product-info" class="col-sm-6 col-xs-12">
+                <div class="product-info-left">
+                    <div class="panel-a">
+                        <h1><?php echo $_productName; ?></h1>
+                    </div>
+                    <div class="panel-b">
+<?php echo $_productPrice; ?>
+                        <?php echo $_productReviews; ?>
+                    </div>
+                    <div class="panel-c">
+                        <?php echo $this->getChildHtml('alert_urls'); ?>
+                        <?php echo $this->getTierPriceHtml(); ?>
+                        <?php if ($_productShortDescription): ?>
+                            <div class="product-description"><?php echo $_productShortDescription; ?></div>
+                        <?php endif; ?>
+                        <?php if ($_productSku): ?>
+                            <div class="product-sku"><?php echo $this->__('SKU'); ?>: <?php echo $_productSku; ?></div>
+                        <?php endif; ?>
+                    <?php echo $this->getChildHtml('extrahint'); ?>
+                    <?php echo $this->getChildHtml('product_type_data'); ?>
+                    </div>
+                        <?php if (!$this->hasOptions()): ?>
+                        <div class="add-to-box">
+                            <?php if ($_product->isSaleable()): ?>
+                                <?php echo $this->getChildHtml('addtocart'); ?>
+                        <?php endif; ?>
+                        <?php echo $this->getChildHtml('addto'); ?>
+                        </div>
+                            <?php echo $this->getChildHtml('extra_buttons'); ?>
+                        <?php elseif (!$_product->isSaleable()): ?>
+                        <div class="add-to-box">
+                        <?php echo $this->getChildHtml('addto'); ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                        <?php echo $this->getChildHtml('product.info.swatch.shade'); ?>
+                        <?php echo $this->getChildChildHtml('container1', '', true, true); ?>
+                    <?php endif; ?>
+                    <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                        <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                    <?php endif; ?>
+
+                    <div class="more-details"><a target="_parent" href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product,
+        'small_image'), null, true) ?>" class="wp-button wp-button-large wp-button-border wp-button-rounded"><?php echo $this->__('more details'); ?></a></div>
+
+                </div>
+
+
+
+            </div>
+            <script>
+                //<![CDATA[
+
+                var productAddToCartForm = new VarienForm('product_addtocart_form');
+                var addOptions = {};
+                addOptions.submittedForm = false;
+                addOptions.confirmationHide = <?php echo $ajaxConfirmationHide ?>;
+
+
+                /*
+                 *Enter on input to submit the form as well
+                 */
+                jQuery('input#qty').keypress(function (e) {
+                  if (e.which == 13) {
+		    e.preventDefault();
+                    productAddToCartForm.submit();
+		    return false;
+                  }
+                });
+
+<?php if ($ajaxAddToCartEnabled) : ?>
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate() &&  !addOptions.submittedForm) {
+                var form = this.form;
+                var url = form.action;
+
+                if (weltpixel.quickview.inIframe) {
+                    parent.weltpixel.quickview.addToCart(url, $(form).serialize(true), addOptions);
+                } else {
+                    weltpixel.quickview.addToCart(url, $(form).serialize(true), addOptions);
+                }
+
+                addOptions.submittedForm = true;
+            }
+        }.bind(productAddToCartForm);
+<?php else : ?>
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                    form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                // Remove custom datetime validators
+                for (var methodName in Validation.methods) {
+                    if (methodName.match(/^validate-datetime-.*/i)) {
+                        delete Validation.methods[methodName];
+                    }
+                }
+
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+<?php endif; ?>
+
+
+    //]]>
+            </script>
+        </div>
+    </form>
+
+</div>
+<script>
+    jQuery(function($) {
+        $('#qty').niceSelect();
+    });
+</script>

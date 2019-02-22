@@ -1,0 +1,137 @@
+// \app\design\frontend\born\born\template\catalog\product\compare\list.phtml
+
+.catalog-product-compare-index {
+  .page-title {
+    h1 {
+      @include setFont(3.0rem, 4.0rem, 200);
+      text-transform: none;
+    }
+  }
+  .link-print {
+    @include setFont(1.3rem, 3.6rem, 500);
+    color: $light-text-color;
+    text-decoration: underline;
+    &:hover {
+      color: $black;
+    }
+  }
+  .buttons-set {
+    border-top: none;
+    .btn-close {
+      @include gotham;
+      @include transparentButton(5.0rem, 1.3rem, $white, $black);
+      background: $black;
+      border: 3px solid $black;
+      box-sizing: border-box;
+    }
+  }
+
+  .data-table {
+    thead tr th {
+      border-bottom: none;
+    }
+    th {
+      font-size: 1.3rem;
+    }
+    .btn-remove {
+      border: none;
+      &:after {
+        content: '\e917';
+        color: $light-text-color;
+        font-family: $icomoon;
+        font-size: 1.4rem;
+      }
+      &:hover {
+        background: transparent;
+        text-decoration: none;
+        &:after {
+          color: $black;
+        }
+      }
+    }
+    .link-wishlist {
+      @include setFont(1.3rem, 3.6rem, 500);
+      color: $light-text-color;
+      text-decoration: underline;
+      &:hover {
+        color: $black;
+      }
+    }
+    .product-name {
+      @include gothamBook;
+      @include setFont(1.6rem, 2.14rem, 400);
+      color: $black;
+      text-transform: none;
+      &:hover {
+        a {
+          color: $light-text-color;
+        }
+      }
+    }
+    .btn-cart {
+      @include gotham;
+      @include transparentButton(5.0rem, 1.3rem, $black, $white);
+      background: $white;
+      margin: 0;
+    }
+    .price-box {
+      .price {
+        @include gotham;
+        color: $black;
+        font-size: 1.4rem;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile){
+  .catalog-product-compare-index {
+    .page-title {
+      h1 {
+        font-size: 2.3rem;
+      }
+    }
+
+    .data-table {
+      table-layout: fixed;
+      width: auto;
+      th {
+        @include position(absolute, null null null 0);
+        padding-left: 0;
+        width: 100px;
+        span {
+          white-space: normal;
+        }
+      }
+      td {
+        width: 200px;
+      }
+      .product-image {
+        width: 100%;
+        a {
+          width: 100%;
+          height: auto;
+        }
+      }
+      .btn-cart {
+        line-height: 3.4rem;
+      }
+    }
+    .table-outer {
+      position: relative;
+    }
+    .table-inner {
+      overflow-x: scroll;
+      overflow-y: visible;
+      width: calc(100vw - 140px);
+      margin-left: 100px;
+    }
+    .buttons-set {
+      .btn-close {
+        line-height: 3.4rem;
+      }
+    }
+
+  }
+}

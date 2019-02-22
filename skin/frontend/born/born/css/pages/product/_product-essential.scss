@@ -1,0 +1,62 @@
+.product-view {
+  .product-shop {
+    .product-name {
+      float: none;
+      .h1 {
+        float: none;
+        font-weight: 300;
+        font-size: 4.2rem;
+        color: $black;
+        @include gotham();
+      }
+      #BVRRSummaryContainer,
+      #BVRRInlineRating-new-test-configurable {
+        margin-bottom: 20px;
+      }
+    }
+    .price-box {
+      .special-price, .regular-price, .full-product-price {
+        padding: 0;
+         .price {
+          font-size: 1.8rem;
+          font-weight: 500;
+          @include gotham();
+          color: $black;
+        }
+      }
+      .price {
+        font-size: 1.8rem;
+        font-weight: 500;
+        @include gotham();
+        color: $black;
+      }
+      .old-price .price {
+        @include chronic();
+      }
+    }
+  }
+  .product-shop .short-description {
+    font-size: 1.6rem;
+    font-weight: 200;
+    @include gotham();
+  }
+  .product-shop .price-info {
+    float: none;
+    text-align: left;
+    padding: 0;
+  }
+
+}
+@media only screen and (max-width: $mobile-s) {
+  .product-view {
+    .product-shop .extra-info,
+    .product-shop .price-info {
+      max-width: 100%;
+    }
+    .product-pricing,
+    .tier-prices,
+    .tier-prices-grouped {
+      width: 100%;
+    }
+  }
+}

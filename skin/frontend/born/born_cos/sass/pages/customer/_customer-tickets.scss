@@ -1,0 +1,88 @@
+//  \app\design\frontend\born\born\template\zendesk\customer\tickets\list.phtml
+
+.zendesk-customer-tickets-index {
+  .head-account {
+    @include gotham;
+    font-size: 1.4rem;
+    text-transform: none;
+  }
+  .data-table .border a {
+    @include gotham;
+  }
+}
+
+body.customer-account {
+  .data-table td a {
+    @include gotham;
+  }
+}
+
+.storecredit {
+  .account-balance {
+    margin-bottom: 20px;
+    .sub-title {
+      @include gotham;
+      font-size: 1.6rem;
+      font-weight: 500;
+      text-transform: none;
+    }
+    .price {
+      @include gotham;
+      font-weight: 500;
+    }
+    a {
+      color: $light-text-color;
+      text-decoration: underline;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+  .table-caption {
+    font-size: 2rem;
+    margin-top: 10px;
+  }
+}
+
+#giftcard-form {
+  .buttons-set .button {
+    margin-bottom: 20px;
+  }
+}
+
+.my-rewards {
+  .box {
+    margin-bottom: 25px;
+  }
+  .sub-title {
+    font-size: 2rem;
+  }
+  .input-box {
+    height: 50px;
+    display: block;
+    .label-text {
+      left: 0;
+      padding-left: 0;
+    }
+  }
+}
+
+
+@media only screen and (max-width: $mobile){
+  .zendesk-customer-tickets-index {
+    .button {
+      min-width: 144px;
+      line-height: 3.4rem;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+  }
+  .storecredit {
+    .data-table td {
+      padding: 10px 5px;
+    }
+    .data-table th {
+      white-space: initial;
+    }
+  }
+}

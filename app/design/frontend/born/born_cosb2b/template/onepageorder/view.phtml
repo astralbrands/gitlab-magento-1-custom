@@ -1,0 +1,701 @@
+<?php if (!$this->isLoggedIn()): ?>
+
+<?php
+// COSPOS
+// $_redirectUrl = Mage::getUrl('customer/account/login');
+// Mage::getSingleton('core/session')->addError('Please login first to access One Page Order Form.');
+// Mage::app()->getResponse()->setRedirect($_redirectUrl)->sendResponse();
+    ?>
+
+    <div class="restricted">
+        <p><?php echo $this->__('Please login first to access this page.') ?></p>
+    </div>
+
+<?php elseif (Mage::getStoreConfig('onepageorder/general/enabled')): ?>
+	<style>
+		.amxnotif-block {
+			float:right;
+		}
+	</style>
+    <?php
+    $navigations = $this->getNavigations();
+    $activeCategoryId = $this->getActiveNavId();
+    $urlHelper = Mage::helper('core/url');
+    $currentUrl = $urlHelper->getCurrentUrl();
+    $activeCategory = $this->getActivecategory();
+    $refinements = $this->getRefinements($activeCategory);
+    $childCategories = $this->getChildCategories($filterOnePageOrder = true);
+    $imageHelper = Mage::helper('catalog/image');
+	//Changed $clearUrl to get Url without Params. 
+	//$clearUrl = $urlHelper->removeRequestParam($urlHelper->removeRequestParam($currentUrl, 'category_id'), 'refinement_id');
+	$clearUrl = $this->getUrl('*/*/*', array('_use_rewrite' => true));
+    $coreHelper = Mage::helper('core');
+    $qtySteps = $this->getQtySteps();
+    $calculationTierPriceQty = $this->getCalculationQty();
+    $jsonConfig = array();
+    $jsonConfig[$activeCategoryId] = array();
+	
+    $sizeAttribute = Mage::getModel('eav/config')->getAttribute(Mage_Catalog_Model_Product::ENTITY, 'size');
+
+    $refinementIds = $this->getRefinementId($currentUrl);
+    ?>
+    <div class="one-page-form">
+        <h2 class="section-title"><?php echo Mage::getStoreConfig('onepageorder/general/title'); ?></h2>
+
+        <div class="one-page-nav">
+            <ul class="one-page-menu">
+                <?php foreach ($navigations as $_navigation): ?>
+                    <li <?php if ($_navigation->getId() == $activeCategoryId): ?>class="current"<?php endif; ?>>
+                        <a href="<?php echo $clearUrl . '?category_id=' . $_navigation->getId() ?>"
+                           title="<?php echo $_navigation->getName() ?>"><?php echo $_navigation->getName() ?></a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+
+            <div class="one-page-menu-mobile">
+                <span class="label-text-up">View</span>
+                <select class="one-page-menu-select" onchange="setLocation(this.value)">
+                    <?php foreach ($navigations as $_navigation): ?>
+                        <option <?php if ($_navigation->getId() == $activeCategoryId): ?> selected="selected" <?php endif; ?>
+                            value="<?php echo $clearUrl . '?category_id=' . $_navigation->getId() ?>">
+                            <?php echo $_navigation->getName() ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <a class="link-how-to" data-coherent-modal
+               data-modal-name="proform-manual-modal"><?php echo $this->__('How to Use this Form') ?> <span
+                    class="icon-info"></span> </a>
+
+            <div id="how-to-use-block-contents">
+                <?php echo $this->getHowToUseContents(); ?>
+            </div>
+        </div>
+        <form name="onepageorder<?php echo $activeCategoryId ?>" id="onepageorder<?php echo $activeCategoryId ?>"
+              method="post" action="<?php echo $this->getSubmitUrl('void') ?>">
+            <div class="one-page-block promotions">
+                <h3 class="block-title"><?php echo $activeCategory->getName() ?></h3>
+
+                <?php if (!is_null($refinements) && count($refinements) > 0): ?>
+                    <ul class="refinements">
+                        <li class="input-box">
+                            <input <?php if ($this->getIsActiveRefinments()): ?>checked="checked"<?php endif; ?>
+                                   type="checkbox" id="refinements" name="refinements"/>
+                            <label for="refinements"
+                                   onclick="window.location='<?php echo $clearUrl . '?category_id=' . $activeCategoryId ?>'"><?php echo $this->__('All') ?></label>
+                        </li>
+
+                        <?php foreach ($refinements as $_refinement): 
+                        	$refinementurl = $this->getCategoryRefinementUrl($clearUrl, $activeCategoryId, $_refinement->getId());
+                        	?>
+                            <li class="input-box">
+                                <input
+                                    <?php if ($this->getIsActiveRefinments($_refinement->getId())): ?>checked="checked"<?php endif; ?>
+                                    type="checkbox" id="refinements_<?php echo $_refinement->getId() ?>"
+                                    name="refinements_<?php echo $_refinement->getId() ?>"/>
+                                <label for="refinements_<?php echo $_refinement->getId() ?>"
+                                       onclick="window.location='<?php echo $refinementurl; ?>'"><?php echo $_refinement->getName() ?></label>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif ?>
+
+                <?php if (!is_null($childCategories) && count($childCategories) > 0): ?>
+                    <div class="block-content">
+                        <div class="block-content-wrap">
+
+                            <?php foreach ($childCategories as $_child): ?>
+                                <?php
+                                $products = $_child->getProductCollection()->addAttributeToSelect(Mage::getSingleton('catalog/config')->getProductAttributes())->setFlag('require_stock_items', true);
+                                if (count($products) <= 0) {
+                                    continue;
+                                }
+                                ?>
+
+                                <ul class="tier-pricing">
+                                    <?php foreach ($qtySteps as $_step): ?>
+                                        <li><?php echo $_step ?></li>
+                                    <?php endforeach; ?>
+                                    <li><?php echo $this->__('QTY') ?></li>
+                                    <li><?php echo $this->__('Total') ?></li>
+                                </ul>
+                                <?php if (count($products) > 0): ?>
+
+                                    <ul class="products-list">
+                                        <li class="skincare-subtitle"><?php echo $_child->getName() ?></li>
+                                        <?php foreach ($products as $_product): ?>
+                                            <?php $jsonConfig[$activeCategoryId][$_product->getId()] = array(); ?>
+                                            <?php $children = $this->getChildProducts($_product); ?>
+                                            <li class="skincare-product">
+                                                <div class="product-image left">
+                                                    <a href="<?php echo $_product->getProductUrl() ?>"
+                                                       title="<?php echo $_product->getName() ?>"><img
+                                                            src="<?php echo $imageHelper->init($_product, 'small_image')->resize(210) ?>"/></a>
+                                                </div>
+                                                <div class="product-name left">
+                                                    <a href="<?php echo $_product->getProductUrl() ?>"
+                                                       title="<?php echo $_product->getName() ?>"><?php echo $_product->getName() ?></a>
+                                                </div>
+                                                <?php if ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE): ?>
+                                                    <?php $totalBundlePrice = $this->getTotalBundlePrice($_product, $children) ?>
+                                                    <div class="product-pricing-table right">
+                                                        <div class="table-row">
+                                                            <div class="table-column sku-cell">
+                                                                <div class="product-sku"></div>
+                                                            </div>
+
+                                                            <?php foreach ($qtySteps as $_step): ?>
+                                                                <div class="table-column mobile-only">
+                                                                    <div><?php echo $_step ?></div>
+                                                                </div>
+                                                            <?php endforeach; ?>
+
+                                                            <?php foreach ($calculationTierPriceQty as $_qty): ?>
+
+                                                                <?php $tierPrice = $this->getTierPricesB2B($_product, $_qty, $totalBundlePrice); ?>
+                                                                <div class="table-column price-cell">
+                                                                    <div><?php echo '$' . $tierPrice ?></div>
+                                                                </div>
+                                                                <?php $jsonConfig[$activeCategoryId][$_product->getId()][$childProduct->getId()][$_qty] = $tierPrice; ?>
+                                                            <?php endforeach ?>
+
+                                                            <div class="table-column qty-cell">
+                                                                <span class="label-text-up">Qty</span>
+                                                                <?php $index = 0; ?>
+
+                                                                <?php foreach ($children as $key => $child): ?>
+                                                                    <?php
+                                                                    $exploded = explode('_', $key);
+                                                                    $optionId = $exploded[0];
+                                                                    $selectionId = $exploded[1];
+                                                                    ?>
+																	
+                                                                    <input
+                                                                        <?php echo ($index != 0) ? 'style="display: none"' : '' ?>type="text"
+                                                                        class="qty-promotion validate-zero-or-greater"
+																		available_qty="<?php echo $this->getAvailableQuantity($_product); ?>"
+																		threshold_qty="<?php echo $this->getStockThresholdQuantity($_product); ?>"
+																		product_type = "<?php echo $_product->getTypeId() ?>"
+                                                                        value="" pattern="^[0-9]+$"
+                                                                        id="product_<?php echo $activeCategoryId ?>_<?php echo $_product->getId() ?>_<?php echo $childProduct->getId() ?>"
+                                                                        name="bundle_option[<?php echo $_product->getId() ?>][<?php echo $optionId ?>][<?php echo $selectionId ?>]"/>
+                                                                    <?php $index++; ?>
+                                                                <?php endforeach ?>
+                                                            </div>
+                                                            <div class="table-column total-cell">
+                                                                <span class="label-text-up">Total</span>
+
+                                                                <div class="total-price"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <?php elseif (count($children) > 0): ?>
+                                                    <?php $priceInfo = $this->getPriceInfo($_product) ?>
+                                                    <div class="product-pricing-table right">
+                                                        <?php foreach ($children as $key => $childProduct): ?>
+
+                                                            <?php if ($this->isRefinementProduct($childProduct, $refinementIds)): ?>
+                                                                <?php $preOrderNote = $this->getPreOrderLabel($childProduct) ?>
+                                                                <div class="table-row">
+                                                                    <div class="table-column sku-cell">
+                                                                        <div class="product-sku">
+                                                                            <?php echo $this->getProductSkuColumnData($childProduct) ?>
+                                                                        </div>
+                                                                        <?php $productType = null ?>
+                                                                        <?php if ($preOrderNote): ?>
+                                                                            <span
+                                                                                class="ampreorder_note"><?php echo $preOrderNote ?></span>
+                                                                        <?php endif; ?>
+                                                                    </div>
+
+                                                                    <?php foreach ($qtySteps as $_step): ?>
+                                                                        <div class="table-column mobile-only">
+                                                                            <div><?php echo $_step ?></div>
+                                                                        </div>
+                                                                    <?php endforeach; ?>
+
+                                                                    <?php if ($childProduct->getCanShowPrice() === false): ?>
+                                                                        <?php foreach ($calculationTierPriceQty as $_qty): ?>
+                                                                            <div class="table-column price-cell"></div>
+                                                                        <?php endforeach ?>
+                                                                        <div class="table-column qty-cell">
+                                                                            <span class="label-text-up">Qty</span>
+                                                                        </div>
+                                                                    <?php else: ?>
+                                                                        <?php foreach ($calculationTierPriceQty as $_qty): ?>
+                                                                            <?php if ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE): ?>
+                                                                                <div class="table-column price-cell">
+                                                                                    <div><?php echo $coreHelper->formatPrice($childProduct->getTierPrice($_qty), false) ?></div>
+                                                                                </div>
+                                                                            <?php else: ?>
+																		<?php /* condition to check whether product has tier price or not, if there display tier price otherwise show final price*/ ?>
+                                                                        <?php 
+																		$tierPriceFlag = $_product->getTierPrice();
+																		if(empty($tierPriceFlag))
+																			$productPrice = $this->getPriceValueByIndex($_product, $childProduct, $priceInfo, $_product->getFinalPrice());
+																		else
+																			$productPrice = $this->getPriceValueByIndex($_product, $childProduct, $priceInfo, $_product->getTierPrice($_qty)); ?> 
+                                                                                <div class="table-column price-cell">
+                                                                                    <div><?php echo $coreHelper->formatPrice($productPrice, false) ?></div>
+                                                                                </div>
+                                                                            <?php endif; ?>
+
+                                                                            <?php if (count($children) > 1): ?>
+                                                                                <?php $jsonConfig[$activeCategoryId][$_product->getId()][$childProduct->getId()][$_qty] = ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE) ? $childProduct->getTierPrice($_qty) : $productPrice; ?>
+                                                                            <?php else: ?>
+																				<?php $tierPriceFlag = $_product->getTierPrice(); ?>
+                                                                                <?php $jsonConfig[$activeCategoryId][$_product->getId()][$_qty] = ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE) ? $childProduct->getTierPrice($_qty) : (empty($tierPriceFlag) ? $_product->getFinalPrice() : $_product->getTierPrice($_qty)) ?>
+                                                                            <?php endif; ?>
+                                                                        <?php endforeach; ?>
+
+                                                                        <div class="table-column qty-cell">
+                                                                            <span class="label-text-up">Qty</span>
+                                                                            <?php if (!$childProduct->getDisableAddToCart()): ?>
+                                                                                <?php if ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::DEFAULT_TYPE): ?>
+																					
+                                                                                    <input type="text"
+                                                                                           class="qty-promotion validate-zero-or-greater"
+																						   available_qty="<?php echo $this->getAvailableQuantity($_product); ?>"
+																						   threshold_qty="<?php echo $this->getStockThresholdQuantity($_product); ?>"
+																						   product_type = "<?php echo $_product->getTypeId() ?>"
+                                                                                           value="" pattern="^[0-9]+$"
+                                                                                           id="product_<?php echo $activeCategoryId ?>_<?php echo $_product->getId() ?>"
+                                                                                           name="simple[<?php echo $_product->getId() ?>]"/>
+                                                                                <?php elseif ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE): ?>
+																					
+                                                                                    <input type="text"
+                                                                                           class="qty-promotion validate-zero-or-greater"
+																						   available_qty="<?php echo $this->getAvailableQuantity($_product); ?>"
+																						   threshold_qty="<?php echo $this->getStockThresholdQuantity($_product); ?>"
+																						   product_type = "<?php echo $_product->getTypeId() ?>"
+                                                                                           value="" pattern="^[0-9]+$"
+                                                                                           id="product_<?php echo $activeCategoryId ?>_<?php echo $_product->getId() ?>_<?php echo $childProduct->getId() ?>"
+                                                                                           name="super_attribute[<?php echo $_product->getId() ?>][<?php echo $sizeAttribute->getId() ?>][<?php echo $childProduct->getSize() ?>]"/>
+                                                                                <?php elseif ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE): ?>
+                                                                                    <?php
+                                                                                    $exploded = explode('_', $key);
+                                                                                    $optionId = $exploded[0];
+                                                                                    $selectionId = $exploded[1];
+                                                                                    ?>
+																					
+                                                                                    <input type="text"
+                                                                                           class="qty-promotion validate-zero-or-greater"
+																						   available_qty="<?php echo $this->getAvailableQuantity($_product); ?>"
+																						   threshold_qty="<?php echo $this->getStockThresholdQuantity($_product); ?>"
+																						   product_type = "<?php echo $_product->getTypeId() ?>"
+                                                                                           value="" pattern="^[0-9]+$"
+                                                                                           id="product_<?php echo $activeCategoryId ?>_<?php echo $_product->getId() ?>_<?php echo $childProduct->getId() ?>"
+                                                                                           name="bundle_option[<?php echo $_product->getId() ?>][<?php echo $optionId ?>][<?php echo $selectionId ?>]"/>
+                                                                                <?php endif; ?>
+                                                                            <?php endif ?>
+                                                                        </div>
+                                                                    <?php endif ?>
+
+                                                                    <div class="table-column total-cell">
+                                                                        <span class="label-text-up">Total</span>
+
+                                                                        <div class="total-price"></div>
+                                                                    </div>
+
+                                                                </div>
+                                                            <?php endif ?>
+                                                        <?php endforeach; ?>
+                                                    </div>
+													<?php if($_product->getTypeId() == 'simple') { ?>
+														<?php echo $this->getAlertBlock($_product); ?>
+													<?php } ?>
+                                                <?php endif; ?>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+
+                                <?php else: ?>
+                                    <ul class="products-list">
+                                        <li class="skincare-subtitle"><?php echo $_child->getName() ?></li>
+                                        <li class="skincare-product">
+                                            <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+                                        </li>
+                                    </ul>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    <div class="button-set">
+                        <div class="block-content-wrap">
+                            <button type="submit" class="button btn-checkout" name="action" value="add"
+                                    title="<?php echo $this->__('Add to Bag') ?>"><?php echo $this->__('Add to Bag') ?></button>
+                            <button type="submit" class="button btn-checkout" name="action" value="checkout"
+                                    title="<?php echo $this->__('Check Out') ?>"><?php echo $this->__('Check Out') ?></button>
+                        </div>
+                    </div>
+
+                <?php else: ?>
+                    <div class="block-content">
+                        <div class="block-content-wrap">
+                            <?php
+                            $products = $activeCategory->getProductCollection()->addAttributeToSelect(Mage::getSingleton('catalog/config')->getProductAttributes())->setFlag('require_stock_items', true);
+                            ?>
+                            <ul class="tier-pricing">
+                                <?php foreach ($qtySteps as $_step): ?>
+                                    <li><?php echo $_step ?></li>
+                                <?php endforeach; ?>
+                                <li><?php echo $this->__('QTY') ?></li>
+                                <li><?php echo $this->__('Total') ?></li>
+                            </ul>
+                            <?php if (count($products) > 0): ?>
+
+                                <ul class="products-list">
+                                    <li class="skincare-subtitle"></li>
+                                    <?php foreach ($products as $_product): ?>
+                                        <?php $jsonConfig[$activeCategoryId][$_product->getId()] = array(); ?>
+                                        <?php $children = $this->getChildProducts($_product); ?>
+                                        <li class="skincare-product">
+                                            <div class="product-image left">
+                                                <a href="<?php echo $_product->getProductUrl() ?>"
+                                                   title="<?php echo $_product->getName() ?>"><img
+                                                        src="<?php echo $imageHelper->init($_product, 'small_image')->resize(210) ?>"/></a>
+                                            </div>
+                                            <div class="product-name left">
+                                                <a href="<?php echo $_product->getProductUrl() ?>"
+                                                   title="<?php echo $_product->getName() ?>"><?php echo $_product->getName() ?></a>
+                                            </div>
+                                            <?php if ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE): ?>
+                                                <?php $totalBundlePrice = $this->getTotalBundlePrice($_product, $children) ?>
+                                                <div class="product-pricing-table right">
+                                                    <div class="table-row">
+                                                        <div class="table-column sku-cell">
+                                                            <div class="product-sku"></div>
+                                                        </div>
+
+                                                        <?php foreach ($qtySteps as $_step): ?>
+                                                            <div class="table-column mobile-only">
+                                                                <div><?php echo $_step ?></div>
+                                                            </div>
+                                                        <?php endforeach; ?>
+
+                                                        <?php foreach ($calculationTierPriceQty as $_qty): ?>
+
+                                                            <?php $tierPrice = $this->getTierPricesB2B($_product, $_qty, $totalBundlePrice); ?>
+                                                            <div class="table-column price-cell">
+                                                                <div><?php echo '$' . $tierPrice ?></div>
+                                                            </div>
+                                                            <?php $jsonConfig[$activeCategoryId][$_product->getId()][$childProduct->getId()][$_qty] = $tierPrice; ?>
+                                                        <?php endforeach ?>
+
+                                                        <div class="table-column qty-cell">
+                                                            <span class="label-text-up">Qty</span>
+                                                            <?php $index = 0; ?>
+
+                                                            <?php foreach ($children as $key => $child): ?>
+                                                                <?php
+                                                                $exploded = explode('_', $key);
+                                                                $optionId = $exploded[0];
+                                                                $selectionId = $exploded[1];
+                                                                ?>
+																
+                                                                <input
+                                                                    <?php echo ($index != 0) ? 'style="display: none"' : '' ?>type="text"
+                                                                    class="qty-promotion validate-zero-or-greater"
+                                                                    available_qty="<?php echo $this->getAvailableQuantity($_product); ?>"
+																	threshold_qty="<?php echo $this->getStockThresholdQuantity($_product); ?>"
+																	product_type = "<?php echo $_product->getTypeId() ?>"
+                                                                    value="" pattern="^[0-9]+$"
+                                                                    id="product_<?php echo $activeCategoryId ?>_<?php echo $_product->getId() ?>_<?php echo $childProduct->getId() ?>"
+                                                                    name="bundle_option[<?php echo $_product->getId() ?>][<?php echo $optionId ?>][<?php echo $selectionId ?>]"/>
+                                                                <?php $index++; ?>
+                                                            <?php endforeach ?>
+                                                        </div>
+
+                                                        <div class="table-column total-cell">
+                                                            <span class="label-text-up">Total</span>
+
+                                                            <div class="total-price"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php elseif (count($children) > 0): ?>
+                                                <?php $priceInfo = $this->getPriceInfo($_product) ?>
+                                                <div class="product-pricing-table right">
+                                                    <?php foreach ($children as $key => $childProduct): ?>
+                                                        <div class="table-row">
+                                                            <div class="table-column sku-cell">
+                                                                <div class="product-sku">
+                                                                    <?php echo $this->getProductSkuColumnData($childProduct) ?>
+                                                                </div>
+                                                            </div>
+
+                                                            <?php foreach ($qtySteps as $_step): ?>
+                                                                <div class="table-column mobile-only">
+                                                                    <div><?php echo $_step ?></div>
+                                                                </div>
+                                                            <?php endforeach; ?>
+
+                                                            <?php if ($_product->getCanShowPrice() === false): ?>
+                                                                <?php foreach ($calculationTierPriceQty as $_qty): ?>
+                                                                    <div class="table-column price-cell"></div>
+                                                                <?php endforeach ?>
+                                                                <div class="table-column qty-cell">
+                                                                    <span class="label-text-up">Qty</span>
+                                                                </div>
+                                                            <?php else: ?>
+
+                                                                <?php foreach ($calculationTierPriceQty as $_qty): ?>
+                                                                    <?php if ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE): ?>
+                                                                        <div class="table-column price-cell">
+                                                                            <div><?php echo $coreHelper->formatPrice($childProduct->getTierPrice($_qty), false) ?></div>
+                                                                        </div>
+                                                                    <?php else: ?>
+																	<?php /* condition to check whether product has tier price or not, if there display tier price otherwise show final price*/ ?>
+                                                                        <?php 
+																		$tierPriceFlag = $_product->getTierPrice();
+																		if(empty($tierPriceFlag))
+																			$productPrice = $this->getPriceValueByIndex($_product, $childProduct, $priceInfo, $_product->getFinalPrice());
+																		else
+																			$productPrice = $this->getPriceValueByIndex($_product, $childProduct, $priceInfo, $_product->getTierPrice($_qty)); ?>
+                                                                        <div class="table-column price-cell">
+                                                                            <div><?php echo $coreHelper->formatPrice($productPrice, false) ?></div>
+                                                                        </div>
+                                                                    <?php endif; ?>
+                                                                    <?php if (count($children) > 1): ?>
+                                                                        <?php $jsonConfig[$activeCategoryId][$_product->getId()][$childProduct->getId()][$_qty] = ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE) ? $childProduct->getTierPrice($_qty) : $productPrice; ?>
+                                                                    <?php else: ?>
+                                                                        <?php $jsonConfig[$activeCategoryId][$_product->getId()][$_qty] = ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE) ? $childProduct->getTierPrice($_qty) : $_product->getTierPrice($_qty) ?>
+                                                                    <?php endif; ?>
+                                                                <?php endforeach; ?>
+
+                                                                <div class="table-column qty-cell">
+                                                                    <span class="label-text-up">Qty</span>
+                                                                    <?php if (!$_product->getDisableAddToCart()): ?>
+                                                                        <?php if ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::DEFAULT_TYPE): ?>
+																				
+                                                                            <input type="text"
+                                                                                   class="qty-promotion validate-zero-or-greater"
+                                                                                   value="" pattern="^[0-9]+$"
+																				   available_qty="<?php echo $this->getAvailableQuantity($_product); ?>"
+																				   threshold_qty="<?php echo $this->getStockThresholdQuantity($_product); ?>"
+																				   product_type = "<?php echo $_product->getTypeId() ?>"
+                                                                                   id="product_<?php echo $activeCategoryId ?>_<?php echo $_product->getId() ?>"
+                                                                                   name="simple[<?php echo $_product->getId() ?>]"/>
+                                                                        <?php elseif ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE): ?>
+																			
+                                                                            <input type="text"
+                                                                                   class="qty-promotion validate-zero-or-greater"
+                                                                                   value="" pattern="^[0-9]+$"
+																				   available_qty="<?php echo $this->getAvailableQuantity($_product); ?>"
+																				   threshold_qty="<?php echo $this->getStockThresholdQuantity($_product); ?>"
+																				   product_type = "<?php echo $_product->getTypeId() ?>"
+                                                                                   id="product_<?php echo $activeCategoryId ?>_<?php echo $_product->getId() ?>_<?php echo $childProduct->getId() ?>"
+                                                                                   name="super_attribute[<?php echo $_product->getId() ?>][<?php echo $sizeAttribute->getId() ?>][<?php echo $childProduct->getSize() ?>]"/>
+                                                                        <?php elseif ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE): ?>
+                                                                            <?php
+                                                                            $exploded = explode('_', $key);
+                                                                            $optionId = $exploded[0];
+                                                                            $selectionId = $exploded[1];
+                                                                            ?>
+																			
+                                                                            <input type="text"
+                                                                                   class="qty-promotion validate-zero-or-greater"
+                                                                                   value="" pattern="^[0-9]+$"
+																				   available_qty="<?php echo $this->getAvailableQuantity($_product); ?>"
+																				   threshold_qty="<?php echo $this->getStockThresholdQuantity($_product); ?>"
+																				   product_type = "<?php echo $_product->getTypeId() ?>"
+                                                                                   id="product_<?php echo $activeCategoryId ?>_<?php echo $_product->getId() ?>_<?php echo $childProduct->getId() ?>"
+                                                                                   name="bundle_option[<?php echo $_product->getId() ?>][<?php echo $optionId ?>][<?php echo $selectionId ?>]"/>
+                                                                        <?php endif; ?>
+                                                                    <?php endif ?>
+                                                                </div>
+                                                            <?php endif ?>
+
+                                                            <div class="table-column total-cell">
+                                                                <span class="label-text-up">Total</span>
+
+                                                                <div class="total-price"></div>
+                                                            </div>
+
+                                                        </div>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            <?php endif; ?>
+												<?php if($_product->getTypeId() == 'simple') { ?>
+													<?php echo $this->getAlertBlock($_product); ?>
+												<?php } ?>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php else: ?>
+                                <ul class="products-list">
+                                    <li class="skincare-subtitle"></li>
+                                    <li class="skincare-product">
+                                        <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+                                    </li>
+                                </ul>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="button-set">
+                        <div class="block-content-wrap">
+                            <button type="submit" class="button btn-add-to-bag" name="action" value="add"
+                                    title="<?php echo $this->__('Add to Bag') ?>"><?php echo $this->__('Add to Bag') ?></button>
+                            <button type="submit" class="button btn-checkout" name="action" value="checkout"
+                                    title="<?php echo $this->__('Check Out') ?>"><?php echo $this->__('Check Out') ?></button>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        var onePageOrderForm = new VarienForm('onepageorder<?php echo $activeCategoryId ?>', true);
+        $('how-to-use-block-contents').hide();
+
+        OnePageOrder = Class.create();
+        OnePageOrder.prototype = {
+            initialize: function (config) {
+                this.config = config;
+                this.priceFormat = <?php echo $coreHelper->jsonEncode(Mage::app()->getLocale()->getJsPriceFormat()); ?>;
+                this.template = '<?php echo str_replace('%s', '#{price}', Mage::app()->getStore()->getCurrentCurrency()->getOutputFormat()); ?>';
+                this.priceTemplate = new Template(this.template);
+
+                $$('.qty-promotion').each(function (element) {
+					var availableQty = $(element).readAttribute('available_qty');
+					if($(element).readAttribute('product_type') != 'bundle' && availableQty <= 0) {
+							$(element).disable();
+					}
+                    Event.observe(element, 'change', this.reloadPrice.bind(this));
+                }.bind(this));
+                document.observe("dom:loaded", this.configureValues.bind(this));
+            },
+            configureValues: function (event) {
+                var initialPriceFormated = this.formatPrice(0);
+                $$('.qty-promotion').each(function (element) {
+                    $(element).value = 0;
+                    var totalPriceDiv = $(element).up(1).select('.total-price');
+                    if (totalPriceDiv.length > 0) {
+                        totalPriceDiv[0].update(initialPriceFormated);
+                    }
+                });
+            },
+            formatPrice: function (price) {
+                var str = '';
+                price = parseFloat(price);
+                var roundedPrice = (Math.round(price * 100) / 100).toString();
+                str += this.priceTemplate.evaluate({price: price.toFixed(2)});
+                return str;
+            },
+            reloadPrice: function (event) {
+                var element = Event.element(event);
+                var totalPriceDiv = $(element).up(1).select('.total-price');
+                var elementId = $(element).id;
+                var currentValue = parseInt($(element).value);
+                var splittedParts = elementId.split('_');
+                var currentConfig = this.config[splittedParts[1]];
+                var reloadedPrice = 0;			
+				var availableQty = $(element).readAttribute('available_qty');
+				var thresholdQty = $(element).readAttribute('threshold_qty');
+				if($(element).readAttribute('product_type') != 'bundle') {
+					if(availableQty < currentValue && availableQty <= thresholdQty) {
+						alert('Please reduce order qty to '+availableQty+' units to place an order.');
+						$(element).value = 0;
+						currentValue = 0;
+					} else if(availableQty < currentValue && availableQty > thresholdQty) {
+						alert('Please reduce order qty to '+availableQty+' units to place an order.');
+						$(element).value = availableQty;
+						currentValue = parseInt($(element).value);
+					}
+				}
+                for (var j = 2; j < splittedParts.length; j++) {
+                    currentConfig = currentConfig[splittedParts[j]];
+                }
+                var prevValue = 0;
+                var processed = false;
+                var qtySteps = [];
+                for (var qty in currentConfig) {
+                    qtySteps.push(qty);
+                }
+                var maxQty = qtySteps.max();
+                for (var qty in currentConfig) {
+
+                    if ((currentValue > parseInt(prevValue)) && (currentValue <= parseInt(qty))) {
+                        reloadedPrice = this.formatPrice(currentValue * currentConfig[qty]);
+                    } else {
+                        if (currentValue <= 0) {
+                            reloadedPrice = this.formatPrice(0);
+                        } else if (currentValue > maxQty) {
+                            reloadedPrice = this.formatPrice(currentValue * currentConfig[maxQty]);
+                        }
+                    }
+                    prevValue = qty;
+                }
+                if (totalPriceDiv.length > 0) {
+                    totalPriceDiv[0].update(reloadedPrice);
+                }
+            }
+        };
+        var currentOnePageObj = new OnePageOrder(<?php echo $coreHelper->jsonEncode($jsonConfig) ?>);
+    </script>
+
+    <script type="text/javascript">
+        function send_alert_email(url, button, pid, email) {
+            var f = document.createElement('form');
+            var productId = button.id.replace(/\D+/g, "");
+            var block = button.up('.amxnotif-block');
+            email = $(email).value;
+            if ($('amxnotif_guest_email-' + productId)) {
+                $('amxnotif_guest_email-' + productId).addClassName("validate-email required-entry");
+            }
+            if (block) {
+                block.childElements().each(function (child) {
+                    f.appendChild(Element.clone(child, true));
+                });
+            }
+
+            var validator = new Validation(block);
+            if (validator.validate()) {
+				button.disabled = true;
+                SubmitRequest(pid, email,button);
+                return true;
+            }
+            if ($('amxnotif_guest_email-' + productId)) {
+                $('amxnotif_guest_email-' + productId).removeClassName("validate-email required-entry");
+            }
+            return false;
+        }
+
+        function checkIt(evt, url, button) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode == 13) {
+                return send_alert_email(url, button);
+            }
+            return true;
+        }
+        function SubmitRequest(pid, email,button) {
+            new Ajax.Request("<?php echo $this->getUrl('born_onepageorder/index/ajaxSubscribe/') ?>", {
+                method: 'get',
+                parameters: {product_id: pid, email: email},
+                onSuccess: function(response) {
+											if (200 == response.status) {
+												var content = response.responseText;
+												alert(content);
+												button.disabled =false;
+											}
+										},
+				onFailure: function(response) {
+									alert("Something went wrong. Please try again.");
+				}
+            });
+        }
+        function successFunc(response) {
+            if (200 == response.status) {
+                var content = response.responseText;
+                alert(content);
+            }
+        }
+        function failureFunc(response) {
+            alert("Something went wrong. Please try again.");
+        }
+    </script>
+
+<?php endif; ?>

@@ -1,0 +1,470 @@
+<?php
+/**
+ * RocketWeb
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category  RocketWeb
+ * @package   RocketWeb_ShoppingFeeds
+ * @copyright Copyright (c) 2012 RocketWeb (http://rocketweb.com)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author    RocketWeb
+ */
+
+/** @var RocketWeb_ShoppingFeeds_Block_Adminhtml_Catalog_Google_Promotions $this */
+$id = $this->getId();
+$helper = Mage::helper('rocketshoppingfeeds');
+$rules = $this->getMagentoCartRules();
+$values = $this->getPromotionData('promotion');
+$element = $this->getElement();
+$counter = 0;
+?>
+<div class="google_promotions" id="div_<?php echo $id; ?>">
+    <div class="f-left" style="padding-right: 50px;"><?php echo $helper->__('If you already have an approved Google Promotions feed, and you need to update promotions,<br /> use <b>Submit new promotion</b> to increment promotions IDs with next feed file.'); ?></div>
+    <span id="increment-counter">Submit as new promotion</span>
+    <input type="hidden" name="<?php echo $element->getName() ?>[counter]" value="<?php echo $this->getPromotionData('counter', '0'); ?>" />
+    <ul class="messages">
+        <li id="increment-success" class="warning-msg">Promotion ID has been incremented. Please <b>Save Config</b> for changes to take effect with next feed generation.</li>
+    </ul>
+    <script>
+        var clicked = 0,
+            format = "<?php echo $this->getPromotionModel()->getDateFormat()?>";
+        $('increment-counter').observe('click', function(){
+            var initialValue = $(this).next().value;
+            if(clicked == 0){
+                $(this).addClassName('disabled');
+                $(this).next().value = parseInt(initialValue, 10) + 1;
+                $('increment-success').addClassName('visible');
+                $('form_tabs_rocketshoppingfeeds_google_promotions').addClassName('changed');
+                clicked++;
+            }
+        });
+    </script>
+    <br />
+    <p><?php echo $helper->__('Select which promotion cart rules should be included with the feed.'); ?></p>
+    <table id="promotion" cellpadding="0" cellspacing="0" class="grid">
+        <tbody>
+        <tr class="headings">
+            <th>Include</th>
+            <th>Cart Promotion Rule Name</th>
+            <th>Promotion Title <div id="title-helper">? <span><?php echo $helper->__('Promotion Title must follow <a href="https://support.google.com/merchants/answer/2877578" target="_blank">strict editorial requirements</a>!'); ?></span></div></th>
+            <th>Effective Date (From / To)</th>
+            <th>Display Date (From / To)</th>
+            <th>Coupon Code</th>
+        </tr>
+        <?php foreach ($rules as $rule): ?>
+            <?php /** @var Mage_SalesRule_Model_Rule  $rule */
+            $id = $rule->getId();
+            $name = $element->getName() . '[promotion][' . $id . ']';
+            $row = isset($values[$id]) ? $values[$id] : array();
+            $row = $this->getPromotionRow($rule, $row);
+            $isShippingWithoutCupon = $this->isShippingWithoutCoupon($rule);
+            $counter++;
+            ?>
+            <tr<?php echo $row['include'] ? ' class="disabled-check"' : ''; ?>>
+                <td>
+                    <input  type="checkbox" name="<?php echo $name ?>[include]" value="1" <?php echo $row['include'] ? ' checked="checked"' : ''; ?> onclick="addRowClass(this)"/>
+                </td><td>
+                    <p<?php if($isShippingWithoutCupon):?> title="Shipping without cupon is not allowed"<?php endif; ?>>
+                    <?php echo $this->escapeHtml($rule->getName()); ?>
+                    </p>
+                </td><td class="promotion-title">
+                    <input type="text" name="<?php echo $name ?>[title]" value="<?php echo $row['title'] ?>" class="input-text" style="width:400px" maxlength="60" onblur="validateText(this)">
+                </td><td class="date-cell">
+                    <?php //TODO: JS - Make sure that "from" is before "to" date ?>
+                    <input id="start-effective-<?php echo $counter?>" type="text" name="<?php echo $name ?>[date][from]" value="<?php echo $row['date']['from'] ?>" class="input-text first" style="width:90px" onchange="checkDate(this);">
+                    <img src="<?php echo  Mage::getBaseUrl('skin')?>adminhtml/default/default/images/grid-cal.gif" alt="" id="start-effective-<?php echo $counter?>-trigger">
+                    <script>
+                        //<![CDATA[
+                        Calendar.setup({
+                            inputField: "start-effective-<?php echo $counter?>",
+                            ifFormat: "<?php echo $this->getCalendarDate(); ?>",
+                            showsTime: false,
+                            button: "start-effective-<?php echo $counter?>-trigger",
+                            align: "Bl",
+                            singleClick : true
+                        });
+                        //]]>
+
+                    </script>
+                    <br>
+                    <input id="end-effective-<?php echo $counter?>" type="text" name="<?php echo $name ?>[date][to]" value="<?php echo $row['date']['to'] ?>" class="input-text second" style="width:90px" onchange="checkDate(this);">
+                    <img src="<?php echo  Mage::getBaseUrl('skin')?>adminhtml/default/default/images/grid-cal.gif" alt="" id="end-effective-<?php echo $counter?>-trigger">
+                    <script>
+                        //<![CDATA[
+                        Calendar.setup({
+                            inputField: "end-effective-<?php echo $counter?>",
+                            ifFormat: "<?php echo $this->getCalendarDate(); ?>",
+                            showsTime: false,
+                            button: "end-effective-<?php echo $counter?>-trigger",
+                            align: "Bl",
+                            singleClick : true
+                        });
+                        //]]>
+
+                    </script>
+                </td><td class="date-cell">
+                    <input id="start-display-<?php echo $counter?>" type="text" name="<?php echo $name ?>[display][from]" value="<?php echo $row['display']['from'] ?>" class="input-text first" style="width:90px" onchange="checkDate(this);">
+                    <img src="<?php echo  Mage::getBaseUrl('skin')?>adminhtml/default/default/images/grid-cal.gif" alt="" id="start-display-<?php echo $counter?>-trigger">
+                    <script>
+                        //<![CDATA[
+                        Calendar.setup({
+                            inputField: "start-display-<?php echo $counter?>",
+                            ifFormat: "<?php echo $this->getCalendarDate(); ?>",
+                            showsTime: false,
+                            button: "start-display-<?php echo $counter?>-trigger",
+                            align: "Bl",
+                            singleClick : true
+                        });
+                        //]]>
+
+                    </script>
+                    <br>
+                    <input id="end-display-<?php echo $counter?>" type="text" name="<?php echo $name ?>[display][to]" value="<?php echo $row['display']['to'] ?>" class="input-text second" style="width:90px" onchange="checkDate(this);">
+                    <img src="<?php echo  Mage::getBaseUrl('skin')?>adminhtml/default/default/images/grid-cal.gif" alt="" id="end-display-<?php echo $counter?>-trigger">
+                    <script>
+                        //<![CDATA[
+                        Calendar.setup({
+                            inputField: "end-display-<?php echo $counter?>",
+                            ifFormat: "<?php echo $this->getCalendarDate(); ?>",
+                            showsTime: false,
+                            button: "end-display-<?php echo $counter?>-trigger",
+                            align: "Bl",
+                            singleClick : true
+                        });
+                        //]]>
+
+                    </script>
+                </td>
+                <?php $code = $this->escapeHtml($rule->getCode()); ?>
+                <td <?php echo empty($code) ? 'class="no-cupon"' : '' ?>>
+                    <?php echo $this->escapeHtml($rule->getCode());?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+
+
+        </tbody>
+    </table>
+<?php  ?>
+
+</div>
+<script>
+    window.onload = function() {
+//        document.getElementById('form_tabs_rocketshoppingfeeds_google_promotions_content').style.display='block';
+//        document.getElementById('form_tabs_rocketshoppingfeeds_google_promotions_content').style.opacity= 0;
+//        var container, inputs, index;
+//
+//        // Get the container element
+//        container = document.getElementsByClassName('promotion-title');
+//        for (var cont = 0; cont < container.length; cont++){
+//            inputs = container[cont].getElementsByTagName('input');
+//            inputs[0].focus();
+//        }
+//        document.getElementById('form_tabs_rocketshoppingfeeds_google_promotions_content').style.display='none';
+//        document.getElementById('form_tabs_rocketshoppingfeeds_google_promotions_content').style.opacity= 1;
+    };
+
+    var charCount = 0;
+
+
+    var validateText = function(element){
+        var parentCell = element.parentNode,
+            parentEl = element.parentNode,
+            numCount = 0;
+        if(!parentCell.parentNode.classList.contains('disabled-check')){
+            if(parentEl.getElementsByClassName("special").length){
+                var el = parentEl.getElementsByClassName("special");
+                el[0].parentNode.removeChild(el[0]);
+            }
+            if(parentEl.getElementsByClassName("text-length").length){
+                var el = parentEl.getElementsByClassName("text-length");
+                el[0].parentNode.removeChild(el[0]);
+            }
+            if(parentEl.getElementsByClassName("exclamation").length){
+                var el = parentEl.getElementsByClassName("exclamation");
+                el[0].parentNode.removeChild(el[0]);
+            }
+            if(parentEl.getElementsByClassName("uppercase").length){
+                var el = parentEl.getElementsByClassName("uppercase");
+                el[0].parentNode.removeChild(el[0]);
+            }
+            if(parentEl.getElementsByClassName("duplicate").length){
+                var el = parentEl.getElementsByClassName("duplicate");
+                el[0].parentNode.removeChild(el[0]);
+            }
+            if(parentEl.getElementsByClassName("camelcase").length){
+                var el = parentEl.getElementsByClassName("camelcase");
+                el[0].parentNode.removeChild(el[0]);
+            }
+            var parent = document.getElementById('promotion');
+            var floatingDiv = document.getElementsByClassName('content-header-floating');
+            if(!parent.getElementsByClassName('error').length){
+                document.getElementsByClassName('scalable save')[0].disabled=false;
+                floatingDiv[0].getElementsByClassName('scalable save')[0].disabled = false;
+                $('form_tabs_rocketshoppingfeeds_google_promotions').removeClassName('error');
+                $('form_tabs_rocketshoppingfeeds_google_promotions').addClassName('changed');
+            }
+        }else{
+            charCount = 0;
+            var currentEl = element.value,
+                separators = ['%', ',', '.'];
+
+            //Check string for duplicate special characters
+            var specialCharPattern = /[\?\,\.\*]{2,}/;
+            if(specialCharPattern.test(currentEl)){
+                if(parentEl.getElementsByClassName("special").length){
+                    var el = parentEl.getElementsByClassName("special");
+                    el[0].parentNode.removeChild(el[0]);
+                }
+                var duplicateCharParagraph = document.createElement("P");
+                var duplicateCharText = document.createTextNode('The following characters can\'t be duplicated: * , . ?');
+                var duplicateStringLink = document.createElement('a');
+                var duplicateStringLinkText = document.createTextNode('See Google Editorial Requirements');
+                duplicateCharParagraph.appendChild(duplicateCharText);
+                duplicateStringLink.appendChild(duplicateStringLinkText);
+                duplicateStringLink.setAttribute('href', 'https://support.google.com/merchants/answer/2877578');
+                duplicateCharParagraph.addClassName('error special');
+                element.parentNode.appendChild(duplicateCharParagraph);
+                duplicateCharParagraph.appendChild(duplicateStringLink);
+            }else{
+                if(parentEl.getElementsByClassName("special").length){
+                    var el = parentEl.getElementsByClassName("special");
+                    el[0].parentNode.removeChild(el[0]);
+                }
+            }
+
+            for (var i = 0; i < separators.length; i++) { //Add space after special chars
+                var rg = new RegExp("\\" + separators[i], "g");
+                currentEl = currentEl.replace(rg,separators[i] + " ");
+            }
+            currentEl = currentEl.replace(/\s\s+/g, ' ').trim();
+
+            //Check for string length and add/remove error message
+            if(currentEl.length > 60){
+                if(parentEl.getElementsByClassName("text-length").length){
+                    var el = parentEl.getElementsByClassName("text-length");
+                    el[0].parentNode.removeChild(el[0]);
+                }
+                var lengthParagraph = document.createElement("P");
+                var lengthText = document.createTextNode("Title should be max 60 characters long");
+                var lengthLink = document.createElement('a');
+                var lengthLinkText = document.createTextNode('See Google Editorial Requirements');
+                lengthParagraph.addClassName('error text-length');
+                lengthParagraph.appendChild(lengthText);
+                lengthLink.appendChild(lengthLinkText);
+                lengthLink.setAttribute('href', 'https://support.google.com/merchants/answer/2877578');
+                element.parentNode.appendChild(lengthParagraph);
+                lengthParagraph.appendChild(lengthLink);
+            }else{
+                if(parentEl.getElementsByClassName("text-length").length){
+                    var el = parentEl.getElementsByClassName("text-length");
+                    el[0].parentNode.removeChild(el[0]);
+                }
+            }
+
+            //Check for Exclamation mark and add/remove error message
+            if(currentEl.indexOf('!') !== -1){
+                if(parentEl.getElementsByClassName("exclamation").length){
+                    var el = parentEl.getElementsByClassName("exclamation");
+                    el[0].parentNode.removeChild(el[0]);
+                }
+                var signParagraph = document.createElement("P");
+                var signText = document.createTextNode("This character '!' is not allowed");
+                var signLink = document.createElement('a');
+                var signLinkText = document.createTextNode('See Google Editorial Requirements');
+                signParagraph.appendChild(signText);
+                signLink.appendChild(signLinkText);
+                signParagraph.addClassName('error exclamation');
+                signLink.setAttribute('href', 'https://support.google.com/merchants/answer/2877578');
+                element.parentNode.appendChild(signParagraph);
+                signParagraph.appendChild(signLink);
+            }else{
+                if(parentEl.getElementsByClassName("exclamation").length){
+                    var el = parentEl.getElementsByClassName("exclamation");
+                    el[0].parentNode.removeChild(el[0]);
+                }
+            }
+
+            //Check for consecutive uppercase letters and add/remove error message
+            var patt = /[A-Z]{2,}/;
+            if(patt.test(currentEl)){
+                if(parentEl.getElementsByClassName("uppercase").length){
+                    var el = parentEl.getElementsByClassName("uppercase");
+                    el[0].parentNode.removeChild(el[0]);
+                }
+                var uppercaseParagraph = document.createElement("P");
+                var uppercaseText = document.createTextNode("You can't have two or more consecutive uppercase letters.");
+                var uppercaseLink = document.createElement('a');
+                var uppercaseLinkText = document.createTextNode('See Google Editorial Requirements');
+                uppercaseParagraph.appendChild(uppercaseText);
+                uppercaseLink.appendChild(uppercaseLinkText);
+                uppercaseParagraph.addClassName('error uppercase');
+                uppercaseLink.setAttribute('href', 'https://support.google.com/merchants/answer/2877578');
+                element.parentNode.appendChild(uppercaseParagraph);
+                uppercaseParagraph.appendChild(uppercaseLink);
+            }else{
+                if(parentEl.getElementsByClassName("uppercase").length){
+                    var el = parentEl.getElementsByClassName("uppercase");
+                    el[0].parentNode.removeChild(el[0]);
+                }
+            }
+            element.value = currentEl;
+
+
+            //Check for duplicate consecutive words
+            var wordArray = currentEl.split(" ");
+            for(var a=0; a < wordArray.length; a++){
+                if((a+1) < wordArray.length){
+                    if(wordArray[a].toLowerCase() == wordArray[a+1].toLowerCase()){
+                        if(parentEl.getElementsByClassName("duplicate").length){
+                            var el = parentEl.getElementsByClassName("duplicate");
+                            el[0].parentNode.removeChild(el[0]);
+                        }
+                        var duplicateParagraph = document.createElement("P");
+                        var duplicateText = document.createTextNode("Duplicate words are not allowed.");
+                        var duplicateLink = document.createElement('a');
+                        var duplicateLinkText = document.createTextNode('See Google Editorial Requirements');
+                        duplicateParagraph.appendChild(duplicateText);
+                        duplicateLink.appendChild(duplicateLinkText);
+                        duplicateParagraph.addClassName('error duplicate');
+                        duplicateLink.setAttribute('href', 'https://support.google.com/merchants/answer/2877578');
+                        element.parentNode.appendChild(duplicateParagraph);
+                        duplicateParagraph.appendChild(duplicateLink);
+                        break;
+                    }else{
+                        if(parentEl.getElementsByClassName("duplicate").length){
+                            var el = parentEl.getElementsByClassName("duplicate");
+                            el[0].parentNode.removeChild(el[0]);
+                        }
+                    }
+                }
+            }
+
+            //Camel case testing
+            var sentencesArray = currentEl.split(".");
+            for (var c = 0; c < sentencesArray.length; c++){
+                var wordsFromSenteces = sentencesArray[c].split(" ");
+
+                for(d=0; d<wordsFromSenteces.length;d++){
+                    if(/^[a-zA-Z]+$/.test(wordsFromSenteces[d].charAt(0))){
+
+                    }else{
+                        numCount++;
+                    }
+                    if(wordsFromSenteces[d].charAt(0) == wordsFromSenteces[d].charAt(0).toUpperCase() && /^[a-zA-Z]+$/.test(wordsFromSenteces[d].charAt(0))){
+                        if(wordsFromSenteces[d].charAt(0) == ''){
+                            charCount = 0;
+                        }else{
+                            charCount++;
+                        }
+                    }
+                    if(d == wordsFromSenteces.length-1 && charCount+numCount > 1+numCount && charCount+numCount < wordsFromSenteces.length){
+                        if(parentEl.getElementsByClassName("camelcase").length){
+                            var el = parentEl.getElementsByClassName("camelcase");
+                            el[0].parentNode.removeChild(el[0]);
+                        }
+                        var wordsParagraph = document.createElement("P");
+                        var wordsText = document.createTextNode("The words in a sentence must be all capitalized or only the first word should be capitalized.");
+                        var wordsLink = document.createElement('a');
+                        var wordsLinkText = document.createTextNode('See Google Editorial Requirements');
+                        wordsParagraph.appendChild(wordsText);
+                        wordsLink.appendChild(wordsLinkText);
+                        wordsParagraph.addClassName('error camelcase');
+                        wordsLink.setAttribute('href', 'https://support.google.com/merchants/answer/2877578');
+                        element.parentNode.appendChild(wordsParagraph);
+                        wordsParagraph.appendChild(wordsLink);
+                    }else{
+                        if(parentEl.getElementsByClassName("camelcase").length){
+                            var el = parentEl.getElementsByClassName("camelcase");
+                            el[0].parentNode.removeChild(el[0]);
+                        }
+                    }
+                }
+
+            }
+            var parent = document.getElementById('promotion');
+            var floatingDiv = document.getElementsByClassName('content-header-floating');
+            if(parent.getElementsByClassName('error').length){
+                document.getElementsByClassName('scalable save')[0].disabled=true;
+                floatingDiv[0].getElementsByClassName('scalable save')[0].disabled = true;
+                $('form_tabs_rocketshoppingfeeds_google_promotions').addClassName('error');
+            }else{
+                document.getElementsByClassName('scalable save')[0].disabled=false;
+                floatingDiv[0].getElementsByClassName('scalable save')[0].disabled = false;
+                $('form_tabs_rocketshoppingfeeds_google_promotions').removeClassName('error');
+                $('form_tabs_rocketshoppingfeeds_google_promotions').addClassName('changed');
+            }
+        }
+    };
+
+    var checkDate = function(element){
+        var parent = element.parentNode,
+            startDate = new Date(parent.getElementsByClassName('first')[0].value),
+            endDate = new Date(parent.getElementsByClassName('second')[0].value),
+            dateParents = parent.parentNode.getElementsByClassName('date-cell');
+        if(!parent.parentNode.classList.contains('disabled-check')){
+            if(parent.getElementsByClassName("date-error").length){
+                var el = parent.getElementsByClassName("date-error");
+                el[0].parentNode.removeChild(el[0]);
+                for(var gh = 0; gh< dateParents.length; gh++){
+                    dateParents[gh].removeClassName('has-error');
+                }
+            }
+        }else{
+            if(startDate > endDate){
+                if(parent.getElementsByClassName("date-error").length){
+                    var el = parent.getElementsByClassName("date-error");
+                    el[0].parentNode.removeChild(el[0]);
+                }
+                var dateParagraph = document.createElement("P");
+                var dateText = document.createTextNode("To date should be later then From date.");
+                dateParagraph.appendChild(dateText);
+                dateParagraph.addClassName('error date-error');
+                element.parentNode.appendChild(dateParagraph);
+                $('form_tabs_rocketshoppingfeeds_google_promotions').addClassName('error');
+                for(var gh = 0; gh< dateParents.length; gh++){
+                    dateParents[gh].addClassName('has-error');
+                }
+            }else{
+                if(parent.getElementsByClassName("date-error").length){
+                    var el = parent.getElementsByClassName("date-error");
+                    el[0].parentNode.removeChild(el[0]);
+                }
+                for(var gh = 0; gh< dateParents.length; gh++){
+                    dateParents[gh].removeClassName('has-error');
+                }
+            }
+            var parent = document.getElementById('promotion');
+            if(parent.getElementsByClassName('error').length){
+                document.getElementsByClassName('scalable save')[0].disabled=true;
+            }else{
+                document.getElementsByClassName('scalable save')[0].disabled=false;
+            }
+        }
+
+    }
+
+    var addRowClass = function(el){
+        var parentEl = el.parentNode,
+            titleInput = parentEl.parentNode.querySelector('.promotion-title input[type="text"]'),
+            dateInput = parentEl.parentNode.getElementsByClassName('date-cell');
+        if(parentEl.parentNode.classList.contains('disabled-check')){
+            parentEl.parentNode.removeClassName('disabled-check');
+        }else{
+            parentEl.parentNode.addClassName('disabled-check');
+        }
+        for (var i = 0; i < dateInput.length; i++){
+            var dateInputsList = dateInput[i].getElementsByTagName('input');
+            for(var j = 0 ;j< dateInputsList.length; j++){
+                checkDate(dateInputsList[j]);
+            }
+        }
+        validateText(titleInput);
+    }
+</script>

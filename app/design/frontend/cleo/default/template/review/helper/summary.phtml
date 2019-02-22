@@ -1,0 +1,29 @@
+<?php if ($this->getReviewsCount()): ?>
+    <div class="ratings">
+        <?php if ($this->getRatingSummary()): ?>
+            <div class="rating-box">
+                <div class="rating" style="width:<?php echo $this->getRatingSummary() ?>%"></div>               
+            </div>
+        <?php endif; ?>
+        <ul class="rating-links">
+            <li class="rating-link-info"><a href="<?php echo $this->getProduct()->getProductUrl(); ?>"><?php echo $this->__('%d Review(s)', $this->getReviewsCount()); ?></a></li>
+            <li class="rating-link-add"><a href="<?php echo $this->getProduct()->getProductUrl(); ?>#review-form"><?php echo $this->__('Add Your Review'); ?></a></li>
+        </ul>
+    </div>
+<?php elseif ($this->getDisplayIfEmpty()): ?>
+    <p class="no-rating"><a href="<?php echo $this->getProduct()->getProductUrl(); ?>#review-form"><?php echo $this->__('Be the first to review this product'); ?></a></p>
+<?php endif; ?>
+<script>
+    jQuery(document).ready(function() {        
+        if ( top !== self ) { // we are in the iframe
+            jQuery('.rating-links a, .no-rating a, .wp-add-to-wishlist').each(function() {
+                jQuery(this).attr('target', "_parent");
+            });
+        } else { // not an iframe
+            jQuery('.rating-links a, .no-rating a').on('click', function() {
+                WeltPixel.jumpTo('#product-reviews');
+                return false;
+            });
+        }                
+    });
+</script>

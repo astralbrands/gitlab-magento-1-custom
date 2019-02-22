@@ -1,0 +1,72 @@
+<?php
+$orderDetails = $this->getOrderDetails();
+$ordertempid = $orderDetails->getId();
+if ($ordertempid > 0) {
+    $shipping_address = $orderDetails->getShippingAddress();
+    $total = (float) number_format($orderDetails->getGrandTotal(), 2);
+
+    $orderItems = array();
+    $discounts = array();
+    $discountsArray = array();
+    $orderItemsArray = array();
+    foreach ($orderDetails->getItemsCollection() as $item) {
+        if ($item->getParentItem())
+            continue;
+        $orderItems['product_id'] = preg_replace('/[^A-Za-z0-9\-]/', '', $item->getSku());
+        $orderItems['unit_price'] = $item->getPrice();
+        $orderItems['quantity'] = $item->getQtyOrdered();
+        $orderItemsArray[] = $orderItems;
+        //$d = json_encode($item->getData());
+    }
+    foreach (explode(",", $orderDetails->getAppliedRuleIds()) as $ruleId) {
+        if ($ruleId) {
+            //load shopping cart rules
+            $rule = $this->getRuleDetails($ruleId);
+            //get coupon code, if not found get rule name
+            $discounts['name'] = ($rule->getCouponCode()) ? $rule->getCouponCode() : $rule->getName();
+            //check if rule discount amount is 0
+            $discounts['amount'] = ((int) $rule->getDiscountAmount() == 0) ? $rule->getDiscountAmount() : abs($orderDetails->getDiscountAmount());
+            $discountsArray[] = $discounts;
+        }
+    }
+    $itemsJson = Mage::helper('core')->jsonEncode($orderItemsArray);
+    $discountsJson = Mage::helper('core')->jsonEncode($discountsArray);
+    ?>
+    <script type="text/javascript">
+        var sidebar = sidebar || {};
+        sidecar.transactions = {
+            add: true,
+            data: {
+                order_id: '<?php echo $orderDetails->getIncrementId() ?>',
+                subtotal: '<?php echo $orderDetails->getSubtotal() ?>',
+                tax: '<?php echo $orderDetails->getTaxAmount() ?>',
+                shipping: '<?php echo $orderDetails->getShippingAmount() ?>',
+                discounts: '<?php echo abs($orderDetails->getDiscountAmount()) ?>',
+                total: '<?php echo $orderDetails->getGrandTotal() ?>',
+                zipcode: '<?php echo $shipping_address->getPostcode(); ?>'
+            },
+            items: <?php echo $itemsJson; ?>,
+            discounts: <?php echo $discountsJson; ?>
+        };
+    </script>
+    <!-- Google Code for Order Placed Conversion Page -->
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1063842018;
+        var google_conversion_language = "en";
+        var google_conversion_format = "3";
+        var google_conversion_color = "ffffff";
+        var google_conversion_label = "DDP_CMarygEQ4uGj-wM";
+        var google_conversion_value = <?php echo $total ?>;
+        var google_conversion_currency = "<?php echo $orderDetails->getBaseCurrencyCode() ?>";
+        var google_remarketing_only = false;
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/1063842018/?value=<?php echo $total ?>&amp;currency_code=<?php echo $orderDetails->getBaseCurrencyCode() ?>&amp;label=DDP_CMarygEQ4uGj-wM&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript>
+<?php } ?>

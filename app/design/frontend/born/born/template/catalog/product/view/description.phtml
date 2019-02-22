@@ -1,0 +1,11 @@
+<?php 
+        if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) { 
+        //Mage::log(__METHOD__, false, 'OptionSwatch.log');
+        }
+$_description = $this->getProduct()->getDescription(); 
+?>
+<?php if ($_description): ?>
+    <div class="std">
+        <?php echo $this->helper('catalog/output')->productAttribute($this->getProduct(), $_description, 'description') ?>
+    </div>
+<?php endif; ?>

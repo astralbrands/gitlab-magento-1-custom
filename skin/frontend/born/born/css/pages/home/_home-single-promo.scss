@@ -1,0 +1,185 @@
+.section-4 {
+  padding-top: 112px;
+  .slots {
+    @include display(flex);
+  }
+  .two-third {
+    @include flex-basis(66.66%);
+    position: relative;
+    text-align: center;
+    background-size: cover;
+    .box-outer {
+      padding-top: 50%;
+      position: relative;
+    }
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  .alt-img {
+    img {
+      max-width: 210px;
+      margin: 0 auto;
+    }
+  }
+  .product-image-default {
+    width: 100%;
+    height: auto;
+  }
+  .product-image-hover {
+    opacity: 0;
+    height: 0;
+  }
+  .slot-btn {
+    @include transparentButton(4.4rem, 1.3rem, $white, $black);
+  }
+  .box-inner {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    @include display(flex);
+    @include flex-direction(column);
+    @include justify-content(center);
+    text-align: center;
+  }
+  &__background {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+  .slot-title {
+    text-transform: uppercase;
+    color: $white;
+    font-size: 3.6rem;
+    font-weight: 500;
+    line-height: 4.2rem;
+    margin-bottom: 12px;
+    @include gotham();
+  }
+  .slot-subtitle {
+    font-size: 1.6rem;
+    line-height: 3rem;
+    color: $white;
+    font-weight: 200;
+    margin-bottom: 25px;
+    text-transform: none;
+    @include gotham();
+  }
+  .one-third {
+    @include flex-basis(33.33%);
+    border: 1px solid $block-border-color;
+    position: relative;
+    .box-outer {
+      padding-top: 100%;
+      position: relative;
+    }
+  }
+  .product-image {
+    border: 0;
+    display: table;
+    margin: 0 auto 10px;
+    &:focus {
+      outline: none;
+    }
+    img {
+      margin: 0 auto;
+    }
+  }
+  .product-info {
+    text-align: center;
+  }
+  .product-name {
+    @include gotham;
+    font-size: 1.6rem;
+    font-weight: 200;
+    text-transform: none;
+    a {
+      color: $black;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+  .regular-price {
+    .price {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: $black;
+      @include gotham();
+    }
+  }
+}
+
+@media only screen and (min-width: $tablet-m){
+  .section-4 {
+    .alt-img:hover {
+      .product-image-default {
+        height: 0;
+      }
+      .product-image-hover {
+        opacity: 1;
+        width: 100%;
+        height: auto;
+        -webkit-transition: transform .2s, opacity 0.5s;
+        -o-transition: transform .2s, opacity 0.5s;
+        -moz-transition: transform .2s, opacity 0.5s;
+        transition: transform .2s, opacity 0.5s;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet) {
+
+  .section-4 {
+    .slot-title {
+      font-size: 2.4rem;
+      line-height: 3.6rem;
+      margin-bottom: 10px;
+    }
+    .slot-subtitle {
+      font-size: 1.4rem;
+      line-height: 2.4rem;
+    }
+    .two-third,
+    .one-third {
+      @include flex-basis(50%);
+      .box-outer {
+        padding-top: 100%;
+      }
+    }
+  }
+
+}
+
+@media only screen and (max-width: $mobile) {
+
+  .section-4 {
+    padding-top: 30px;
+  }
+
+}
+
+
+@media only screen and (max-width: $mobile-m) {
+
+  .section-4 {
+    .slots,
+    .two-third,
+    .one-third {
+      display: block;
+    }
+  }
+
+}

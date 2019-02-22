@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Xcoupon
+ */
+-->
+<config>
+    <menu>
+        <promo>
+            <children>
+                <amxcoupon translate="title" module="amxcoupon">
+                    <title>Coupons Usage Report</title>
+                    <action>adminhtml/amxcoupon_report</action>
+                    <sort_order>300</sort_order>
+                </amxcoupon>
+            </children>
+        </promo>
+    </menu>
+
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <promo>
+                        <children>
+                            <amxcoupon translate="title" module="amxcoupon">
+                                <title>Coupons Usage Report</title>
+                            </amxcoupon>
+                            <amxcoupon_coupons translate="title" module="amxcoupon">
+                                <title>Coupons Generate And Import</title>
+                            </amxcoupon_coupons>
+                        </children>
+                    </promo>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <translate>
+        <modules>
+            <Amasty_Xcoupon>
+                <files>
+                    <default>Amasty_Xcoupon.csv</default>
+                </files>
+            </Amasty_Xcoupon>
+        </modules>
+    </translate>
+</config> 

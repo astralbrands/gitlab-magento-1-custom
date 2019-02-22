@@ -1,0 +1,31 @@
+.modal.undertone-guide-modal {
+    height: auto;
+}
+.undertone-guide-modal {
+  padding: 50px;
+  iframe {
+    width: 100%;
+    height: auto;
+    min-width: 700px;
+    min-height: 450px;
+  }
+}
+
+@media only screen and (max-width: $tablet-xs) {
+  .undertone-guide-modal {
+    iframe {
+      min-width: 450px;
+      min-height: 300px;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .undertone-guide-modal {
+    padding: 50px 20px;
+    iframe {
+      min-width: 280px;
+      min-height: 260px;
+    }
+  }
+}

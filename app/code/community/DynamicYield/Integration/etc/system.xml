@@ -1,0 +1,481 @@
+<?xml version="1.0"?>
+<!--
+ * DynamicYield_Integration
+ *
+ * @category     DynamicYield
+ * @package      DynamicYield_Integration
+ * @author       Dynamic Yield Ltd <support@dynamicyield.com.com>
+ * @copyright    Copyright (c) 2017 Dynamic Yield (https://www.dynamicyield.com)
+ -->
+<config>
+    <tabs>
+        <dyi_config_tab translate="label" module="dynamicyield_integration">
+            <label>Dynamic Yield Integration</label>
+            <sort_order>0</sort_order>
+        </dyi_config_tab>
+    </tabs>
+    <sections>
+        <dyi_config translate="label" module="dynamicyield_integration">
+            <label>Configuration</label>
+            <tab>dyi_config_tab</tab>
+            <frontend_type>text</frontend_type>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>Settings</label>
+                    <sort_order>0</sort_order>
+                    <frontend_type>text</frontend_type>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <section_id translate="label">
+                            <label>Site ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Your site ID is listed under <a href="https://adm.dynamicyield.com/a?locale=en#/settings/sections">Sites</a> in your Dynamic Yield account.]]></comment>
+                        </section_id>
+                        <access_key_id translate="label">
+                            <label>Access Key ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Enter the Access Key provided by Dynamic Yield.]]></comment>
+                        </access_key_id>
+                        <access_key_secret translate="label">
+                            <label>Secret Access Key</label>
+                            <frontend_type>obscure</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <comment><![CDATA[Enter the Secret Key provided by Dynamic Yield.]]></comment>
+                        </access_key_secret>
+                    </fields>
+                </general>
+                <product_feed translate="label">
+                    <label>Product Catalog Sync</label>
+                    <sort_order>1</sort_order>
+                    <frontend_type>text</frontend_type>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <feed_enable translate="label comment">
+                            <label>Enable Feed Export</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>dynamicyield_integration/config_backend_enablefeed</backend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Select "No" to disable product feed export.</comment>
+                        </feed_enable>
+                        <additional_attributes translate="label comment">
+                            <label>Product Attributes</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>dynamicyield_integration/config_source_productattribute</source_model>
+                            <backend_model>dynamicyield_integration/config_backend_productattribute</backend_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><feed_enable>1</feed_enable></depends>
+                            <comment><![CDATA[
+                                Enhance your personalization capabilities by syncing up to 10 additional key product attributes (mandatory attributes are already selected). Note, you will not be able to deselect attributes after sync.
+                                <script>
+                                var op = document.getElementById("dyi_config_product_feed_additional_attributes").getElementsByTagName("option");
+                                for (var i = 0; i < op.length; i++) {
+                                (op[i].selected == true)
+                                ? op[i].disabled = true
+                                : op[i].disabled = false;
+                                }
+                                </script>
+                                <style>select option:disabled, select:disabled option{text-shadow: none;}</style>
+                            ]]></comment>
+                        </additional_attributes>
+                        <excluded_categories translate="label comment">
+                            <label>Exclude Categories</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>dynamicyield_integration/config_source_category</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <feed_enable>1</feed_enable>
+                            </depends>
+                            <comment><![CDATA[
+                               Categories to exclude from the product feed. Will be included in the feed as Keywords.
+                            ]]></comment>
+                        </excluded_categories>
+                        <update_rate translate="label comment">
+                            <label>Sync Rate</label>
+                            <frontend_type>select</frontend_type>
+                            <frontend_model>dynamicyield_integration/adminhtml_config_updaterate</frontend_model>
+                            <source_model>dynamicyield_integration/config_source_updaterate</source_model>
+                            <backend_model>dynamicyield_integration/config_backend_updaterate</backend_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><feed_enable>1</feed_enable></depends>
+                        </update_rate>
+                    </fields>
+                </product_feed>
+            </groups>
+        </dyi_config>
+        <dev>
+            <groups>
+                <dyi translate="label">
+                    <label>Dynamic Yield Integration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <heading_custom_options translate="label">
+                            <label>Custom Options</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_custom_options>
+                        <load_jQuery translate="label comment">
+                            <label>Load jQuery Library</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Select "Yes" if you’re using Magento 1.8 or earlier versions.</comment>
+                        </load_jQuery>
+                        <default_store>
+                            <label>Default Store</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>dynamicyield_integration/config_source_store</source_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Select your default store view.</comment>
+                        </default_store>
+                        <custome_locale_enabled translate="label">
+                            <label>Enable Custom Locale</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enable custom locale configuration for current store view.</comment>
+                        </custome_locale_enabled>
+                        <custom_locale_select translate="label">
+                            <label>Set Custom Locale</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><custome_locale_enabled>1</custome_locale_enabled></depends>
+                            <comment>Select "Yes" to enable custom locale. Otherwise choose a locale from the list.</comment>
+                        </custom_locale_select>
+                        <custome_locale translate="label">
+                            <label>Context Store Locale</label>
+                            <label>Available Store Locales</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_locale</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Select from available locales to be used in context.</comment>
+                            <depends><custom_locale_select>0</custom_locale_select></depends>
+                            <depends><custome_locale_enabled>1</custome_locale_enabled></depends>
+                        </custome_locale>
+                        <custome_locale_custom translate="label">
+                            <label>Custom Context Store Locale</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><custom_locale_select>1</custom_locale_select></depends>
+                            <depends><custom_locale_select>1</custom_locale_select></depends>
+                            <comment>This will be used in both the feed and context.</comment>
+                        </custome_locale_custom>
+                        <europe_account translate="label">
+                            <label>Enable Dynamic Yield Europe Account</label>
+                            <frontend_type>select</frontend_type>
+                            <backend_model>dynamicyield_integration/config_backend_accounttype</backend_model>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enable Dynamic Yield Europe Account for current scope.</comment>
+                        </europe_account>
+                        <cdn_integration translate="label">
+                            <label>Enable CDN integration</label>
+                            <frontend_type>select</frontend_type>
+                            <backend_model>dynamicyield_integration/config_backend_accounttype</backend_model>
+                            <source_model>dynamicyield_integration/config_source_integrationtype</source_model>
+                            <sort_order>56</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><europe_account>0</europe_account></depends>
+                            <comment>Enable CDN integration for current scope.</comment>
+                        </cdn_integration>
+                        <cdn_url translate="label">
+                            <label>CDN url</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>57</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enter the new CDN url.</comment>
+                            <depends><europe_account>0</europe_account></depends>
+                            <depends><cdn_integration separator=",">Yes,European</cdn_integration></depends>
+                        </cdn_url>
+                        <heading_category_layered translate="label">
+                            <label>Category Page Layered Navigation Filter</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_category_layered>
+                        <category_page_filters>
+                            <label>Category Page Filters</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Set trigger for layered navigation filter</comment>
+                        </category_page_filters>
+                        <category_page_filters_type>
+                            <label>Filter Type</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Define element structure for filter type</comment>
+                        </category_page_filters_type>
+                        <category_page_filters_regular_value>
+                            <label>Text Filter Value</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Define DOM element structure for regular text type value</comment>
+                        </category_page_filters_regular_value>
+                        <category_page_filters_price_value>
+                            <label>Price Filter Value</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Define DOM element structure for price filter value</comment>
+                        </category_page_filters_price_value>
+                        <category_page_filters_swatch_value>
+                            <label>Swatch Filter Value</label>
+                            <frontend_ty8e>text</frontend_ty8e>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Define DOM element structure for swatch filter value</comment>
+                        </category_page_filters_swatch_value>
+                        <category_page_filters_swatch_image_value>
+                            <label>Swatch Image Filter Value</label>
+                            <frontend_ty8e>text</frontend_ty8e>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Define DOM element structure for swatch image filter value</comment>
+                        </category_page_filters_swatch_image_value>
+                        <heading_category_sort translate="label">
+                            <label>Category Page Sort Filter</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_category_sort>
+                        <category_page_sort_options>
+                            <label>Category Page Sort Options</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Set the trigger selector for sort options</comment>
+                        </category_page_sort_options>
+                        <category_page_sort_order>
+                            <label>Category Page Sort Order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Set the trigger selector for sort</comment>
+                        </category_page_sort_order>
+                        <category_page_sort_order_by>
+                            <label>Sort Order By</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>160</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Define DOM element structure for order by value</comment>
+                        </category_page_sort_order_by>
+                        <category_page_sort_order_direction>
+                            <label>Sort Order Direction</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>170</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Define DOM element structure for order direction value</comment>
+                        </category_page_sort_order_direction>
+                        <category_page_sort_order_switcher>
+                            <label>Sort Order Switcher</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>180</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Define DOM element structure for sort order switcher (if exists)</comment>
+                        </category_page_sort_order_switcher>
+                        <category_page_sort_order_action>
+                            <label>Sort Order Action</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>190</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Define DOM element structure for trigger action (in case not href)</comment>
+                        </category_page_sort_order_action>
+                        <heading_product_swatch translate="label">
+                            <label>Product Page Swatch Filter</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_product_swatch>
+                        <product_page_buttons_swatch>
+                            <label>Product Page Swatch Filters</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>210</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Set a custom trigger for swatch filter</comment>
+                        </product_page_buttons_swatch>
+                        <product_page_swatch_type>
+                            <label>Product Page Swatch Type</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>220</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Define DOM element structure for swatch filter type</comment>
+                        </product_page_swatch_type>
+                        <product_page_swatch_value>
+                            <label>Product Page Swatch Value</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>230</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Define DOM element structure for swatch filter value</comment>
+                        </product_page_swatch_value>
+                        <heading_product_attribute translate="label">
+                            <label>Product Page Attribute Filter</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>240</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_product_attribute>
+                        <product_page_dropdowns>
+                            <label>Product Page Dropdown Filters</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>250</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Set a custom trigger for attribute filter</comment>
+                        </product_page_dropdowns>
+                        <product_page_attribute_type>
+                            <label>Product Page Attribute Type</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>260</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Define DOM element structure for attribute filter type</comment>
+                        </product_page_attribute_type>
+                        <product_page_attribute_value>
+                            <label>Product Page Attribute Value</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>270</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Define DOM element structure for attribute filter value</comment>
+                        </product_page_attribute_value>
+                        <heading_product_feed translate="label">
+                            <label>Product Feed Export</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>280</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_product_feed>
+                        <debug_mode>
+                            <label>Debug Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>290</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>{{base_dir}}/var/log/DynamicyieldIntegration.log</comment>
+                        </debug_mode>
+                        <feed_chunk_size>
+                            <label>Product Feed Chunk Size</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>dynamicyield_integration/config_source_chunksize</source_model>
+                            <sort_order>300</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Select smaller value to use less CPU memory. Adjust only if you are having issues with CPU performance during export.</comment>
+                        </feed_chunk_size>
+                    </fields>
+                </dyi>
+            </groups>
+        </dev>
+    </sections>
+</config>

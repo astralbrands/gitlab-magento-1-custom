@@ -1,0 +1,137 @@
+//  \blog\wp-content\themes\pur\single-press.php
+
+.post-type-archive-press {
+  .modal {
+    overflow: auto;
+  }
+  .close-btn {
+    top: 5px;
+  }
+  .quickveiw-modal-inner {
+    @include flex-direction(column);
+  }
+  .sk-folding-cube {
+    margin: 20vh auto;
+  }
+  .bx-wrapper {
+    height: auto;
+  }
+  .bx-controls {
+    position: relative;
+  }
+  .bx-controls-direction {
+    bottom: 25px;
+    top: inherit;
+  }
+  .bx-next {
+    right: -10px;
+  }
+  .bx-prev {
+    left: -10px;
+  }
+  .bx-pager {
+    position: static;
+    @include gotham;
+    font-size: 1.2rem;
+    margin-bottom: 45px;
+    .bx-pager-item a {
+      border: none;
+    }
+    .bx-pager-item .active {
+      background: transparent;
+    }
+  }
+  .bx-default-pager {
+    @include gotham;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.25rem;
+  }
+
+  @media only screen and (max-width: $mobile){
+    .close-btn {
+      font-size: 1rem;
+      top: 10px;
+      right: 10px;
+    }
+  }
+}
+.press-modal-slider {
+  li {
+    width: 100%;
+    img {
+      max-width: 760px;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+  }
+}
+.press-modal-content {
+  @include display(flex);
+  @include justify-content(center);
+  .left-block {
+    @include flex-basis(33.33%);
+    text-align: right;
+    padding-right: 20px;
+  }
+  .right-block {
+    @include flex-basis(66.66%);
+    text-align: left;
+  }
+  .press_title, .press_date, .press_subtitle, .press_description {
+    color: $black;
+  }
+  .press_title {
+    font-weight: 500;
+  }
+  .press_description {
+    margin-bottom: 0;
+  }
+  .link-article {
+    @include gotham;
+    @include setFont(1.3rem, 3.4rem, 400);
+    color: $light-text-color;
+    text-decoration: underline;
+    &:hover {
+      color: $black;
+    }
+  }
+}
+
+@media only screen and  (max-width: $mobile-s) {
+  .post-type-archive-press {
+    .quickveiw-modal {
+      padding: 20px;
+    }
+  }
+  .press-modal-slider {
+    li img {
+        max-width: 100%;
+    }
+  }
+  .press-modal-content {
+    display: block;
+    .left-block,
+    .right-block {
+      @include flex-basis(100%);
+      padding: 0;
+      text-align: center;
+    }
+    .press_title {
+      font-size: 1.9rem;
+    }
+    .press_date {
+      font-size: 1.9rem;
+      line-height:2.9rem;
+    }
+    .press_subtitle {
+      font-size: 2.1rem;
+      line-height:2.9rem;
+    }
+    .press_description {
+      font-size: 1.6rem;
+    }
+  }
+}
+

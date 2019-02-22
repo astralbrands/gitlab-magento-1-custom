@@ -1,0 +1,61 @@
+<?php 
+
+/*
+Tile Field Attributes
+- sort_order: number
+- type: 1:Text Box Modal, 2:Video Modal, 3:Link
+- image
+- title
+- description
+- cta_link
+- width: one-third: One Third, two-third: Two Third, half:Half
+- modal_text: WYSIWYG
+- modal_video: link
+ */
+$_hooksHelper = Mage::helper('borncmshooks');
+$_tileCollection = $this->getTileObjectCollection();
+$_tileCollection = Mage::helper('borncmshooks/sort')->sortCollection($_tileCollection);
+?>
+<?php $index = 0; ?>
+<?php foreach ($_tileCollection as $_tile): ?>
+	<?php $_width = $_tile->getWidth() ? $_tile->getWidth() : 'one-third'; ?>
+	<?php $_modalType = $this->getTitleModalType($_tile->getType()); //wysiwyg, video, or false ?>
+	<div class="tile tile-id-<?php echo $index ?> <?php echo $_width ?>" data-modal-type="<?php echo $_modalType ? $_modalType : 'false' ?>">
+	<?php $_tileUrl = $this->getTitleCtaLink($_tile, $_modalType) ?>
+	<?php $_newTabHtml = strpos($_tileUrl, 'http') === false ? '' : 'target="_blank"' ?>
+		<div class="tile-outer">
+			<div class="tile-inner">
+				<a <?php echo $_newTabHtml ?> <?php if ($_modalType): ?> data-coherent-modal data-modal-name="education-modal" <?php else: ?> href="<?php echo $_tileUrl ?>" <?php endif ?>>
+					<?php if ($_tile->getImage()): ?>
+						<div class="image" style="background: url('<?php echo $_hooksHelper->getImageUrl($_tile->getImage()); ?>') no-repeat center center; background-size: cover;"></div>
+					<?php endif ?>
+					<div class="tile-content">
+						<?php if ($_tile->getTitle()): ?>
+							<h2 class="title"><?php echo $_tile->getTitle() ?></h2>
+						<?php endif ?>
+
+						<?php if ($_tile->getDescription()): ?>
+							<p class="description"><?php echo $_tile->getDescription() ?></p>
+						<?php endif ?>
+					</div>
+				</a>
+
+				<?php if ($_modalType): ?>
+					<div class="modal-content modal-type-<?php echo $_modalType ?>">
+						<?php if ($_modalType == 'wysiwyg' && $_tile->getModalText()): ?>
+							<div class="wysiwyg-contents">
+								<?php echo $_hooksHelper->wysiwygProcessor($_tile->getModalText()) ?>
+							</div>
+						<?php endif ?>
+						<?php if ($_modalType == 'video' && $_tile->getModalVideo()): ?>
+							<?php //youtube video popup ?>
+							<?php $_youtubeVideoId = Mage::helper('born_package')->getYoutubeId($_tile->getModalVideo()) ?>
+							<iframe src="https://youtube.com/embed/<?php echo $_youtubeVideoId ?>?rel=0&autoplay=0&enablejsapi=1" frameborder="0" autoplay="0" allowfullscreen="" height="430px" width="700px"></iframe>
+						<?php endif ?>
+					</div>
+				<?php endif ?>
+			</div>
+		</div>
+	</div>
+<?php $index++; ?>
+<?php endforeach ?>

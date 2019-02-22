@@ -1,0 +1,227 @@
+// core of html in  app\design\frontend\born\born\template\borncmshooks\cms\contents\homepage.phtml
+
+  // Hero: 1 block
+
+.hero {
+  position: relative;
+}
+
+.hero-background {
+  .background-img {
+    width: 100%;
+  }
+
+  .scroll-down {
+    display: inline-block;
+    position: absolute;
+    bottom: 43px;
+    left: 50%;
+    transform: translateX(-50%);
+    @include setFont(1.3rem, 2rem, 500);
+    color: $black;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    &:hover, &:active, &:focus {
+      text-decoration: none;
+      outline: none;
+    }
+  }
+  .icon-arrow__down_small {
+    font-size: 0;
+    display: block;
+    &:after {
+      position: absolute;
+      content: '';
+      width: 9px;
+      height: 9px;
+      border-left: 3px solid $black;
+      border-bottom: 3px solid $black;
+      transform-origin: center;
+      transform: rotate(-45deg);
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      display: block;
+      @include animation(arrowDown 2s ease-in infinite);
+    }
+    /*animation -arrowUp-*/
+    @include keyframes(arrowDown) {
+      0% { transform: translateY(0) rotate(-45deg); }
+      50%{ transform: translateY(5px) rotate(-45deg); }
+      100% {transform: translateY(0) rotate(-45deg); }
+    }
+
+  }
+}
+.homepage {
+  .hero-title-wrap {
+    &.left {
+      @include position(absolute, 20% null null 9%);
+    }
+    &.right {
+      @include position(absolute, 20% 9% null null);
+    }
+    &.center {
+      @include position(absolute, 20% 9% null 9%);
+      width: initial;
+    }
+
+    &.white {
+      .icon-PUR_logo, .subtitle, .btn-text {
+        color: $white;
+      }
+      .btn {
+        border-color: $white;
+      }
+    }
+
+    &.black {
+      .icon-PUR_logo, .subtitle, .btn-text {
+        color: $black;
+      }
+      .btn {
+        border-color: $black;
+        &:hover {
+          .btn-text {
+            color: $white;
+          }
+        }
+      }
+    }
+    .icon-img {
+      width: 252px;
+      height: auto;
+    }
+    .btn {
+      transition: background-color $fast ease-out, color $fast ease-out;
+    }
+  }
+}
+.hero-title-wrap {
+  @include position(absolute, 20% 9% null null);
+  z-index: 0;
+  width: 17.8%;
+
+  .title {
+    display: none;
+  }
+  .icon-PUR_logo {
+    font-size: 13rem;
+    position: relative;
+    left: -7px;
+  }
+  .subtitle {
+    font-weight: 300;
+    font-size: 3.6rem;
+    line-height: 4.2rem;
+    margin: 3px 0 35px;
+  }
+}
+
+@media only screen and (max-width: $tablet-custom-1) {
+  .homepage {
+    .hero-title-wrap {
+      .icon-PUR_logo {
+        font-size: 11rem;
+        left:-4px;
+      }
+      .icon-img {
+        width: 205px;
+      }
+      .subtitle {
+        font-size: 2.9rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .homepage {
+    .hero-title-wrap {
+      &.left {
+        @include position(relative, 0 0 null null);
+      }
+      &.right {
+        @include position(relative, 0 0 null null);
+      }
+      &.center {
+        @include position(relative, 0 0 null null);
+        width: 100%;
+      }
+      &.white {
+        .icon-PUR_logo, .subtitle, .btn-text {
+          color: $black;
+        }
+        .btn {
+          border-color: $black;
+        }
+      }
+      .icon-img {
+        display: none;
+      }
+    }
+  }
+  .hero {
+    .hero-title-wrap {
+      @include position(relative, 0 0 null null);
+      @include display(flex);
+      @include flex-direction(column);
+      @include justify-content(center);
+      width: 100%;
+      .icon-PUR_logo {
+        display: none;
+      }
+      .subtitle {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 35px;
+        text-align: center;
+        width: 50%;
+      }
+      .btn {
+        width: 152px;
+        margin: 0 auto 38px;
+        .btn-text {
+          line-height: 3.4rem;
+          padding: 0;
+        }
+      }
+    }
+    #home-scroll-down {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-xs) {
+  .hero .hero-title-wrap {
+      .subtitle {
+        width: 90%;
+        margin: 20px auto;
+        font-size: 2rem;
+      }
+  }
+}
+
+@media only screen and (max-width: $mobile-iphone-5) {
+  .hero .hero-title-wrap {
+    .subtitle {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-custom-1) {
+  .hero {
+    .hero-background {
+      overflow: hidden;
+      width: 100%;
+      .background-img {
+        max-height: 400px;
+        width: auto;
+      }
+    }
+  }
+}
+

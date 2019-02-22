@@ -1,0 +1,10 @@
+<?php $_product = $this->getProduct(); ?>
+<?php $_wishlistSubmitUrl = $this->helper('wishlist')->getAddUrl($_product); ?>
+<?php $_bornProductListHelper = Mage::helper('born_package/catalog_product_list'); ?>
+<ul class="add-to-links">
+    <li class="share-link">
+        <a class="share-button">Share</a>
+        <div class="share-buttons share-buttons-panel" data-style="big" data-oauth="true" data-hover="false" data-promo-callout="none" data-buttons="facebook,twitter,pinterest"></div>
+    </li>
+    <?php echo $this->getChildHtml('pdp_wishlist') ?>
+</ul>

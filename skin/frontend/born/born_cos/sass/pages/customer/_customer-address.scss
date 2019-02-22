@@ -1,0 +1,188 @@
+// app\design\frontend\born\born\template\checkout\multishipping\address\select.phtml
+
+body.customer-account .my-account .title-buttons .button {
+  top: 10px;
+}
+.customer-address-index {
+  .title-buttons {
+    .button {
+      border: 0;
+      color: $light-text-color;
+      font-size: 1.3rem;
+      line-height: 1.9rem;
+      font-weight: 300;
+      min-width: inherit;
+      padding: 0;
+      text-decoration: underline;
+      text-transform: none;
+      &:hover {
+        background: transparent;
+        color: $black;
+      }
+    }
+  }
+  .addresses-list {
+    h3 {
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-transform: none;
+    }
+    address {
+      @include gotham;
+      @include setFont(1.4rem, 2.5rem, 200);
+    }
+    .item a {
+      @include gotham;
+      font-size: 1.3rem;
+      color: $light-text-color;
+      text-decoration: underline;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+  .addresses-additional {
+    .empty {
+      font-weight: 300;
+      font-size: 1.6rem;
+    }
+  }
+}
+.customer-address-form {
+  .form-list .control {
+    margin: 0;
+  }
+}
+.addresses-additional .empty {
+  @include gotham;
+}
+#all-cards {
+  .data-table {
+    img {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    a {
+      @include gotham;
+      color: $light-text-color;
+      font-size: 1.3rem;
+      text-decoration: underline;
+      text-transform: none;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+}
+
+@media only screen and  (max-width: $tablet){
+  .aw-recurring-customer-view {
+    .order-info-box {
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+    .col-1, .col-2 {
+      padding: 0;
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and  (max-width: $mobile){
+  .customer-address-index {
+    .addresses-list {
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+  }
+  .customer-account .button {
+    min-width: 144px;
+    line-height: 3.4rem;
+    font-size: 1.2rem;
+  }
+}
+
+
+@media only screen and  (max-width: $mobile-xs){
+  #all-cards {
+    .data-table {
+      img {
+        display: none;
+      }
+      td, th {
+        padding: 10px 5px;
+      }
+    }
+  }
+  body.customer-account .my-account .title-buttons .button {
+    width: initial;
+    position: absolute;
+    top: 45px;
+  }
+}
+
+.aw-recurring-customer-view {
+  .order-info {
+    border-bottom: none;
+  }
+  .button {
+    height: 30px;
+    top: 0;
+    line-height: inherit;
+    font-weight: inherit;
+    padding: 0;
+    text-decoration: underline;
+    color: $light-text-color;
+    border: 0;
+    background: $white;
+    text-transform: none;
+    transition: none;
+  }
+  .button:hover {
+    color: $black;
+    text-decoration: underline;
+    background: $white;
+  }
+  .order-info-box {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+  .info-box {
+    @include clearfix;
+    border: none;
+    border-top: 3px solid $black;
+    .box-title {
+      width: 100%;
+      h2 {
+        @include gotham();
+        font-weight: 700;
+        color: $black;
+        font-size: 1.4rem;
+        text-transform: none;
+        margin-bottom: 20px;
+      }
+    }
+    .info-table {
+      a {
+        color: $light-text-color;
+        font-size: 1.3rem;
+        text-decoration: underline;
+        text-transform: none;
+        @include gotham;
+        &:hover {
+          color: $black;
+        }
+      }
+      th {
+        padding: 0;
+        vertical-align: middle;
+      }
+      th, td {
+        @include gotham();
+      }
+    }
+  }
+}

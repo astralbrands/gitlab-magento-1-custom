@@ -1,0 +1,312 @@
+<?php
+$_helper = $this->helper('weltpixel_layerednavigation');
+$showAttributesCount = $_helper->showProductCountOnAttributes();
+$showCategoryCount = $_helper->showProductCountOnCategories();
+$priceDisplayOption = $_helper->getPriceDisplay();
+$fromToUrl = '';
+
+$prices = explode('-', $this->getRequest()->getParam('price'));
+
+//$collection = Mage::getSingleton('catalog/layer')->getProductCollection();
+$collection = $this->getLayer()->getProductCollection();
+$minPrice = (isset($prices[0]) && ($prices[0])) ? $prices[0] : $collection->getMinPrice();
+$maxPrice = (isset($prices[1]) && ($prices[1])) ? $prices[1] : $collection->getMaxPrice() + 1;
+
+$minPriceWithoutFilter = $collection->getMinPriceWithoutFilter();
+$maxPriceWithoutFilter = $collection->getMaxPriceWithoutFilter() + 1;
+?>
+
+<ol>
+
+    <?php if ($_helper->isMobileOrTablet()) : ?>
+
+        <?php foreach ($this->getItems() as $_item): ?>
+            <?php
+            if ($_item->getLabel() == 'from_to') : $fromToUrl = $_item->getUrl();
+                break;
+            endif;
+            ?>
+        <?php endforeach; ?>
+        <script>
+            jQuery(function() {
+                if (typeof applyMobileSlider == 'function') {
+                    applyMobileSlider(<?php echo $minPrice ?>, <?php echo $maxPrice ?>, <?php echo $minPriceWithoutFilter ?>, <?php echo $maxPriceWithoutFilter ?>);
+                }
+            });
+        </script>
+        <li class="price-row-container"> 
+            <div class="price-slider-container">
+                <input type="hidden" class="force_reload" name="submit_ajax" value="" id="submit_ajax" />
+                <div id="slider2" class="price-slider2" style="clear: both"></div>
+
+                <input type="hidden" id="pr_from"  name="pr_from" value="<?php echo $minPrice ?>" />
+                <input type="hidden" id="pr_to" name="pr_to" value="<?php echo $maxPrice ?>" />
+
+                <a href="javascript:void(0)" class="ignore-ajax" onclick="applyFilter('pr_from', 'pr_to', '<?php echo $fromToUrl ?>')"><?php echo $this->__("apply") ?></a>
+            </div>
+        </li>
+    <?php else: ?>
+
+        <?php
+        switch ($priceDisplayOption) {
+            case 1:
+                ?>
+                <?php foreach ($this->getItems() as $_item): ?>
+                    <?php
+                    if ($_item->getLabel() == 'from_to') : $fromToUrl = $_item->getUrl();
+                        continue;
+                    endif;
+                    ?>
+                    <li>
+                        <?php if ($_item->getCount() > 0): ?>
+                            <a href="<?php echo $this->urlEscape($_item->getUrl()) ?>"><?php echo $_item->getLabel() ?>
+                                <?php if ($showAttributesCount): ?>
+                                    (<?php echo $_item->getCount() ?>)
+                                <?php endif; ?>
+                            </a>
+                        <?php else: echo $_item->getLabel() ?>
+                        <?php endif; ?>
+                        <?php if (($this instanceof Mage_Catalog_Block_Layer_Filter_Category) && !$showCategoryCount): ?>
+                            <?php continue; ?>
+                        <?php endif; ?>                      
+                    </li>
+                <?php endforeach ?>
+                <li class="price-row-container"> 
+                    <input type="hidden" class="force_reload" name="submit_ajax" value="" id="submit_ajax" />
+                    <span id="price_from">
+                        <label for="pr_from"><?php echo $this->__("From") ?>: </label><input type="text" id="pr_from" class="event_reload" name="pr_from" value="<?php echo $minPrice ?>"  /></span>
+                    <span id="price_to">
+                        <input type="text" id="pr_to" class="event_reload" name="pr_to" value="<?php echo $maxPrice ?>" /><label for="pr_to"><?php echo $this->__("To") ?>: </label></span>
+
+                    <a href="javascript:void(0)" class="ignore-ajax" onclick="applyFilter('pr_from', 'pr_to', '<?php echo $fromToUrl ?>')"><?php echo $this->__("apply") ?></a>
+                </li>
+                <?php break; ?>
+
+            <?php case 2:
+                ?>
+                <li class="price-row-container"> 
+                    <select onchange="if (this.value) setLocation(this.value)" class="weltpixel-layered-select">
+                        <option value=""></option>
+                        <?php foreach ($this->getItems() as $_item): ?>
+                            <option  value="<?php echo $this->urlEscape($_item->getUrl()) ?>"><?php echo $_item->getLabel() ?> <?php if ($showCategoryCount) : ?> (<?php echo $_item->getCount() ?>) <?php endif; ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </li>
+                <?php break; ?>
+
+            <?php case 3:
+                ?>
+
+                <?php foreach ($this->getItems() as $_item): ?>
+                    <?php
+                    if ($_item->getLabel() == 'from_to') : $fromToUrl = $_item->getUrl();
+                        break;
+                    endif;
+                    ?>
+                <?php endforeach ?>
+                <li class="price-row-container"> 
+                    <input type="hidden" class="force_reload" name="submit_ajax" value="" id="submit_ajax" />
+                    <div class="price-slider-container">
+                        <div id="slider1" class="price-slider2" style="clear: both"></div>
+                        <div id="slider2" class="price-slider2" style="clear: both"></div>
+
+                    </div>
+
+                    <input type="hidden" id="pr_from"  name="pr_from" value="<?php echo $minPrice ?>" />
+                    <input type="hidden" id="pr_to" name="pr_to" value="<?php echo $maxPrice ?>" />
+
+                    <a href="javascript:void(0)" class="ignore-ajax no-margins" onclick="applyFilter('pr_from', 'pr_to', '<?php echo $fromToUrl ?>')"><?php echo $this->__("apply") ?></a>
+                </li>
+                <script>
+                    jQuery(function() {
+                        if (typeof applyDesktopSlider == 'function') { 
+                            applyDesktopSlider(<?php echo $minPrice ?>, <?php echo $maxPrice ?>, <?php echo $minPriceWithoutFilter ?>, <?php echo $maxPriceWithoutFilter ?>);
+                        }
+                        if (typeof applyMobileSlider == 'function') { 
+                            applyMobileSlider(<?php echo $minPrice ?>, <?php echo $maxPrice ?>, <?php echo $minPriceWithoutFilter ?>, <?php echo $maxPriceWithoutFilter ?>);
+                        }
+                    });
+                </script>
+                <?php break; ?>
+            <?php case 4:
+                ?>
+
+                <?php foreach ($this->getItems() as $_item): ?>
+                    <?php
+                    if ($_item->getLabel() == 'from_to') : $fromToUrl = $_item->getUrl();
+                        break;
+                    endif;
+                    ?>
+                <?php endforeach ?>
+                <li class="price-row-container"> 
+                    <input type="hidden" class="force_reload" name="submit_ajax" value="" id="submit_ajax" />
+                    <div class="price-slider-container">
+                        <div id="slider1" class="price-slider2" style="clear: both"></div>
+                        <div id="slider2" class="price-slider2" style="clear: both"></div>
+                    </div>
+                    <span id="price_from">
+                        <label for="pr_from"><?php echo $this->__("From") ?>: </label><input type="text" id="pr_from" class="event_reload" name="pr_from" value="<?php echo $minPrice ?>" /></span>
+                    <span id="price_to">
+                        <input type="text" id="pr_to" class="event_reload" name="pr_to" value="<?php echo $maxPrice ?>" /><label for="pr_to"><?php echo $this->__("To") ?>: </label></span>
+
+                    <a href="javascript:void(0)" class="ignore-ajax" onclick="applyFilter('pr_from', 'pr_to', '<?php echo $fromToUrl ?>')"><?php echo $this->__("apply") ?></a>
+                </li>
+                <script>
+                    jQuery(function() {
+                        if (typeof applyDesktopSlider == 'function') { 
+                            applyDesktopSlider(<?php echo $minPrice ?>, <?php echo $maxPrice ?>, <?php echo $minPriceWithoutFilter ?>, <?php echo $maxPriceWithoutFilter ?>);
+                        }
+                        if (typeof applyMobileSlider == 'function') {
+                            applyMobileSlider(<?php echo $minPrice ?>, <?php echo $maxPrice ?>, <?php echo $minPriceWithoutFilter ?>, <?php echo $maxPriceWithoutFilter ?>);
+                        }
+                    });
+                </script>
+
+                <?php break; ?>
+            <?php case 5: ?>
+
+                <?php foreach ($this->getItems() as $_item): ?>
+                    <?php
+                    if ($_item->getLabel() == 'from_to') : $fromToUrl = $_item->getUrl();
+                        break;
+                    endif;
+                    ?>
+                <?php endforeach ?>
+                <li class="empty-row"></li>
+                <li class="price-row-container"> 
+                    <span id="price_from">
+                        <label for="pr_from"><?php echo $this->__("From") ?>: </label><input type="text" id="pr_from" class="event_reload" name="pr_from" value="<?php echo $minPrice ?>" /></span>
+                    <span id="price_to">
+                        <input type="text" id="pr_to" class="event_reload" name="pr_to" value="<?php echo $maxPrice ?>" /><label for="pr_to"><?php echo $this->__("To") ?>: </label></span>
+
+
+                    <a href="javascript:void(0)" class="ignore-ajax" onclick="applyFilter('pr_from', 'pr_to', '<?php echo $fromToUrl ?>')"><?php echo $this->__("apply"); ?></a>
+
+                    <input type="hidden" class="force_reload" name="submit_ajax" value="" id="submit_ajax" />
+                </li>
+                <?php break; ?>
+
+            <?php default: ?>
+                <?php foreach ($this->getItems() as $_item): ?>
+                    <li>
+                        <?php if ($_item->getCount() > 0): ?>
+                            <a href="<?php echo $this->urlEscape($_item->getUrl()) ?>"><?php echo $_item->getLabel() ?>
+                                <?php if ($showAttributesCount): ?>
+                                    (<?php echo $_item->getCount() ?>)
+                                <?php endif; ?>
+                            </a>
+                        <?php else: echo $_item->getLabel() ?>
+                        <?php endif; ?>
+                        <?php if (($this instanceof Mage_Catalog_Block_Layer_Filter_Category) && !$showCategoryCount): ?>
+                            <?php continue; ?>
+                        <?php endif; ?>                        
+                    </li>
+                <?php endforeach ?>
+
+                <?php break; ?>
+        <?php } ?>
+
+    <?php endif; ?>
+
+</ol>
+
+<script>
+
+    var curencySymbol = '<?php echo Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol(); ?>';
+
+    function applyDesktopSlider(minPrice, maxPrice, minPriceWithoutFilter, maxPriceWithoutFilter) {
+        jQuery("#slider1").noUiSlider({
+            orientation: 'horizontal',
+            behaviour: 'drag',
+            connect: true,
+            step: 1,
+            height: '100%',
+            start: [minPrice , maxPrice],
+            range: {
+                'min': minPriceWithoutFilter,
+                'max': maxPriceWithoutFilter
+            }
+        });
+        jQuery("#slider1").Link('upper').to('-inline-<div class="tooltip"></div>', function ( value ) {
+            jQuery(this).html(
+            '<span> ' + '<?php echo $this->__("Max") ?>' + ' </span>'+
+                '<strong>'+curencySymbol+'</strong>'+
+                '<strong>' + value + '</strong>'
+
+        );
+        });
+        jQuery("#slider1").Link('lower').to('-inline-<div class="tooltip"></div>', function ( value ) {
+            jQuery(this).html(
+            '<span> ' + '<?php echo $this->__("Min") ?>' + ' </span>'+
+                '<strong>'+curencySymbol+'</strong>'+
+                '<strong>' + value + '</strong>'
+
+        );
+        });
+        jQuery("#slider1").on({
+            slide: function(){
+                jQuery( "#pr_from" ).val( jQuery("#slider1").val()[0] );
+                jQuery( "#pr_to" ).val( jQuery("#slider1").val()[1] );
+            },
+            change: function(){
+                jQuery('#slider2').val(jQuery("#slider1").val());
+            }
+        });
+    }
+
+    function applyMobileSlider(minPrice, maxPrice, minPriceWithoutFilter, maxPriceWithoutFilter){
+        jQuery("#slider2").noUiSlider({
+            orientation: 'vertical',
+            behaviour: 'drag',
+            connect: true,
+            step: 1,
+            height: '100%',
+            start: [minPrice, maxPrice],
+            range: {
+                'min': minPriceWithoutFilter,
+                'max': maxPriceWithoutFilter
+            }
+        });
+        jQuery("#slider2").Link('upper').to('-inline-<div class="tooltip"></div>', function ( value ) {
+            jQuery(this).html(
+            '<span> ' + '<?php echo $this->__("Max") ?>' + ' </span>'+
+                '<strong>'+curencySymbol+'</strong>'+
+                '<strong>' + value + '</strong>'
+
+        );
+        });
+        jQuery("#slider2").Link('lower').to('-inline-<div class="tooltip"></div>', function ( value ) {
+            jQuery(this).html(
+            '<span> ' + '<?php echo $this->__("Min") ?>' + ' </span>'+
+                '<strong>'+curencySymbol+'</strong>'+
+                '<strong>' + value + '</strong>'
+
+        );
+        });
+        jQuery("#slider2").on({
+            slide: function(){
+                jQuery( "#pr_from" ).val( jQuery("#slider2").val()[0] );
+                jQuery( "#pr_to" ).val( jQuery("#slider2").val()[1] );
+            },
+            change: function(){
+                jQuery('#slider1').val(jQuery("#slider2").val());
+            }
+        });
+
+    }
+
+    function applyFilter(from, to, fromToUrl) {
+        var fromValue = ($(from).value);
+        var toValue  = ($(to).value);
+        var redirectTo = fromToUrl.replace('price=price', 'price='+fromValue+'-'+toValue);
+
+        if ((fromValue != '') && (toValue != '')) {
+<?php if ($_helper->isAjaxEnabled()) : ?>
+                $('submit_ajax').value = redirectTo;
+                $('submit_ajax').click();
+<?php else: ?>
+                setLocation(redirectTo);
+<?php endif; ?>
+        }
+    }
+</script>
