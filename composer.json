@@ -5,7 +5,8 @@
 
     },
     "require": {
-        "astral/magento1": "^11440.0"
+        "astral/magento1": "^11440.0",
+		"astral/magento1customcoremods": "^11440.0"
     },
     "authors": [
         {
@@ -25,12 +26,6 @@
             "type": "vcs",
             "url": "git@git.astralbrands.com:AstralBrands/magento-1-custom.git"
         }
-    ],
-	  "extra": {
-    "installer-types": ["library"],
-    "installer-paths": {
-      "special/package/": ["my/package"],
-      "path/to/libraries/{$name}/": ["type:library"]
-    }
+    ]
   }
 }
