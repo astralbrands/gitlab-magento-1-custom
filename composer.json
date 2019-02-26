@@ -2,7 +2,9 @@
     "name": "astral/magento1custom",
     "description": "Magento custom build for Astral Brands",
     "require-dev": {
-
+        "phpunit/phpunit": "^8",
+        "phpunit/phpunit-skeleton-generator": "*",
+        "phpdocumentor/phpdocumentor": "2.*"
     },
     "require": {
         "astral/magento1": "^11440",
