@@ -32,8 +32,6 @@
         }
     ],
 	"scripts": {
-		 "post-package-install": [
-		 "mkdir SUCCESS"
-		 ]
+		 "post-package-install":"mkdir SUCCESS"
 	}
 }
