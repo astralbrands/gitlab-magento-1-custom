@@ -5,8 +5,7 @@
 
     },
     "require": {
-        "astral/magento1": "^11440",
-		"astral/magento1customcore": "^11440"
+
     },
     "authors": [
         {
@@ -17,18 +16,10 @@
     "repositories": [
         {
             "packagist": false
-        }, 	
-        {
-            "type": "vcs",
-            "url": "git@git.astralbrands.com:AstralBrands/magento-1-core.git"
-        }, 	
+        }, 	 	
         {
             "type": "vcs",
             "url": "git@git.astralbrands.com:AstralBrands/magento-1-custom.git"
-        }, 	
-        {
-            "type": "vcs",
-            "url": "git@git.astralbrands.com:AstralBrands/magento-1-custom-core-modifications.git"
         }
     ]
 }
