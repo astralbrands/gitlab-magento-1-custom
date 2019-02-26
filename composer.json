@@ -31,11 +31,5 @@
             "url": "git@git.astralbrands.com:AstralBrands/magento-1-custom-core-modifications.git"
         }
     ],
-	"extra":{
-    "installer-paths":{
-      "./public/": ["astral/magento1"],
-	  "./public/": ["astral/magento1customcore"],
-	  "./public/": ["astral/magento1custom"] 
-    }
-	}
+	"target-dir": "../public"
 }
