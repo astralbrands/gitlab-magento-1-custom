@@ -24,13 +24,10 @@
         {
             "type": "vcs",
             "url": "git@git.astralbrands.com:AstralBrands/magento-1-custom.git"
+        }, 	
+        {
+            "type": "vcs",
+            "url": "git@git.astralbrands.com:AstralBrands/magento-1-custom-core-modifications.git"
         }
-    ],
-	  "extra": {
-    "installer-types": ["library"],
-    "installer-paths": {
-      "special/package/": ["my/package"],
-      "path/to/libraries/{$name}/": ["type:library"]
-    }
-  }
+    ]
 }
