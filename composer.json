@@ -5,7 +5,8 @@
 
     },
     "require": {
-        "astral/magento1": "^11440.0"
+        "astral/magento1": "*",
+		"astral/magento1customcore": "*"
     },
     "authors": [
         {
