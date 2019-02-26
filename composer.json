@@ -37,4 +37,5 @@
 	  "./public/": ["astral/magento1customcore"],
 	  "./public/": ["astral/magento1custom"] 
     }
+	}
 }
