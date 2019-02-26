@@ -33,7 +33,7 @@
     ],
 	"scripts": {
 		 "post-package-install": [
-		 "echo pwd"
+		 "mkdir SUCCESS"
 		 ]
 	}
 }
