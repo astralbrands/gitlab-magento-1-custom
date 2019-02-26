@@ -18,9 +18,6 @@
     ],
     "repositories": [
         {
-            "packagist": false
-        }, 	
-        {
             "type": "vcs",
             "url": "git@git.astralbrands.com:AstralBrands/magento-1-core.git"
         }, 	
