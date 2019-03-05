@@ -1,14 +1,18 @@
 {
     "name": "astral/magento1custom",
-    "description": "Magento custom build for Astral Brands",
+    "description": "Magento EE custom modifications",
+    "type": "magento-core",
+    "license": ["OSL-3.0", "AFL-3.0"],
+    "description": "Magento Custom EE",
     "require-dev": {
         "phpunit/phpunit": "^8",
         "phpunit/phpunit-skeleton-generator": "*",
         "phpdocumentor/phpdocumentor": "2.*"
     },
     "require": {
-        "astral/magento1": "^11440",
-		"astral/magento1customcore": "^11440"
+        "aydin-hassan/magento-core-composer-installer": "^1.5",	
+		"astral/magento1": "^1.14",
+		"astral/magento1customcore": "^1.14"
     },
     "authors": [
         {
@@ -17,20 +21,24 @@
         }
     ],
     "repositories": [
-        {
+		{
+			"type": "vcs",
+			"url": "git@github.com:AydinHassan/magento-community.git"
+		},	
+	    {
             "type": "vcs",
             "url": "git@git.astralbrands.com:AstralBrands/magento-1-core.git"
-        }, 	
-        {
-            "type": "vcs",
-            "url": "git@git.astralbrands.com:AstralBrands/magento-1-custom-core-modifications.git"
-        }, 	
-        {
-            "type": "vcs",
-            "url": "git@git.astralbrands.com:AstralBrands/magento-1-custom.git"
-        }
+        },
+		{
+			"type": "vcs",
+			"url": "git@git.astralbrands.com:AstralBrands/magento-1-custom-core.git"
+		},
+		{
+			"type": "vcs",
+			"url": "git@git.astralbrands.com:AstralBrands/magento-1-custom.git"
+		}
     ],
-	"scripts": {
-		 "post-package-install":"mkdir SUCCESS"
-	}
+    "extra": {
+        "magento-root-dir": "magento"
+    }	
 }
