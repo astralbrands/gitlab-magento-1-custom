@@ -9,7 +9,7 @@
     },
     "require": {
         "astral/magento1customcore": "^1.14"
-    }
+    },
     "repositories": [
 		{
 			"type": "vcs",
