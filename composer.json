@@ -8,32 +8,12 @@
 
     },
     "require": {
-        "aydin-hassan/magento-core-composer-installer": "^1.5",	
-		"astral/magento1": "^1.14",
-		"astral/magento1customcore": "^1.14"
-    },
-    "authors": [
-        {
-            "name": "Ralph Smith",
-            "email": "rsmith@astralbrands.com"
-        }
-    ],
+        "astral/magento1customcore": "^1.14"
+    }
     "repositories": [
 		{
 			"type": "vcs",
-			"url": "git@github.com:AydinHassan/magento-community.git"
-		},	
-	    {
-            "type": "vcs",
-            "url": "git@git.astralbrands.com:AstralBrands/magento-1-core.git"
-        },
-		{
-			"type": "vcs",
 			"url": "git@git.astralbrands.com:AstralBrands/magento-1-custom-core.git"
-		},
-		{
-			"type": "vcs",
-			"url": "git@git.astralbrands.com:AstralBrands/magento-1-custom.git"
 		}
     ]
 }
