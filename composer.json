@@ -1,19 +1,6 @@
 {
     "name": "astral/magento1custom",
-    "description": "Magento EE custom modifications",
     "type": "magento-core",
     "license": ["OSL-3.0", "AFL-3.0"],
-    "description": "Magento Custom EE",
-    "require-dev": {
-
-    },
-    "require": {
-        "astral/magento1customcore": "^1.14"
-    },
-    "repositories": [
-		{
-			"type": "vcs",
-			"url": "git@git.astralbrands.com:AstralBrands/magento-1-custom-core.git"
-		}
-    ]
+    "description": "Magento Custom EE"
 }
