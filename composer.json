@@ -10,6 +10,7 @@
         "aydin-hassan/magento-core-composer-installer": "^1.5",
         "astral/magento1": "^1.14",
         "astral/magento1customcore": "^1.14"
+		"astral/magento1media": "^1.14"
     },
 	"repositories": [
 		{
@@ -23,6 +24,10 @@
 		{
 			"type": "vcs",
 			"url": "git@git.astralbrands.com:AstralBrands/magento-1-custom-core.git"
+		},
+		{
+			"type": "vcs",
+			"url": "git@git.astralbrands.com:AstralBrands/magento-1-media.git"
 		}
 	]	
 }
