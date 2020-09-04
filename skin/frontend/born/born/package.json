@@ -14,7 +14,7 @@
     "grunt-sass": "^1.2.1",
     "grunt-shell-spawn": "^0.3.10",
     "lodash": "^4.0.0",
-    "node-sass": "^3.4.2",
+    "node-sass": "^4.13.1",
     "npmconf": "^2.1.2",
     "rjs-build-analysis": "0.0.3"
   }
